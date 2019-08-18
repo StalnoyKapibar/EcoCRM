@@ -1,10 +1,11 @@
-package main.java.ru.javamentor.EcoCRM.model;
+package ru.javamentor.EcoCRM.model;
 
+import main.java.ru.javamentor.EcoCRM.model.TaskStatus;
 import static main.java.ru.javamentor.EcoCRM.model.TaskStatus.*;
 
-public class Task {
+public class TaskByStep {
     Long id;
     String name;
     String performer; // ответсвенный за таску
-    TaskStatus taskStatus = TODO;
+    TaskStatus stepTask = TODO;
 }

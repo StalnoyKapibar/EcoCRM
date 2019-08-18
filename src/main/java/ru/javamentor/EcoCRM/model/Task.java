@@ -1,6 +1,6 @@
-package main.java.ru.javamentor.model;
+package main.java.ru.javamentor.EcoCRM.model;
 
-import static main.java.ru.javamentor.model.TaskStatus.*;
+import static main.java.ru.javamentor.EcoCRM.model.TaskStatus.*;
 
 public class Task {
     Long id;

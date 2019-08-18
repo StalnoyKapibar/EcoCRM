@@ -1,4 +1,4 @@
-package main.java.ru.javamentor.model;
+package main.java.ru.javamentor.EcoCRM.model;
 
 
 public enum TaskStatus {

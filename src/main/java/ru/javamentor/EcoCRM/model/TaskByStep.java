@@ -14,6 +14,9 @@ public class TaskByStep {
     private String name;
 
     @Column
+    private String description;
+
+    @Column
     private String performer; // ответсвенный за таску
 
     @Column
@@ -50,5 +53,13 @@ public class TaskByStep {
 
     public void setTaskStatus(Status taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

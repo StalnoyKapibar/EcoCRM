@@ -20,7 +20,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private SecurityHandler securityHandler;
+    private FailureHandler failureHandler;
+
+    @Autowired
+    private SuccessRedirectHandler successRedirectHandler;
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -29,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.csrf().disable();
 
 
         http.authorizeRequests()
@@ -38,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/showMyLoginPage")
-                .loginProcessingUrl("/authenticateTheUser")
-                .permitAll().successHandler(securityHandler)//.failureHandler()
+                .loginProcessingUrl("/authenticateTheUser").passwordParameter("password").usernameParameter("email")
+                .permitAll().successHandler(successRedirectHandler).failureHandler(failureHandler)
                 .and()
                 .logout().permitAll()
                 .and()

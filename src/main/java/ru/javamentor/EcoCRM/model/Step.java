@@ -2,6 +2,7 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,10 @@ public class Step implements Serializable {
 
     @OneToMany
     private List<TaskByStep> tasks;
+
+    private LocalDateTime startStep;
+
+    private LocalDateTime endStep;
 
     public Long getId() {
         return id;

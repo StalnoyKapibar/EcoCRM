@@ -1,4 +1,4 @@
-package config;
+package ru.javamentor.EcoCRM.config;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

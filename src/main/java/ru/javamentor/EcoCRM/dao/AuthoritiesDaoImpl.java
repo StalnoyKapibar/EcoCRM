@@ -1,6 +1,6 @@
-package dao;
+package ru.javamentor.EcoCRM.dao;
 
-import entity.Authorities;
+import ru.javamentor.EcoCRM.entity.Authorities;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

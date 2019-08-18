@@ -1,18 +1,15 @@
-package dao;
+package ru.javamentor.EcoCRM.service;
 
-import entity.Authorities;
+
+import ru.javamentor.EcoCRM.entity.Authorities;
 
 import java.util.List;
 
-/**
- * Created by whitenoise on 18.08.19.
- */
-public interface AuthoritiesDao {
+public interface AuthoritiesService {
 
     Authorities getAuthorityByName(String authorityName);
 
     Authorities getAuthority(int id);
 
     List<Authorities> listAllAuthorities();
-
 }

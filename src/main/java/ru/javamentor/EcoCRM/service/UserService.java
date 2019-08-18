@@ -1,7 +1,7 @@
-package service;
+package ru.javamentor.EcoCRM.service;
 
 
-import entity.User;
+import ru.javamentor.EcoCRM.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;

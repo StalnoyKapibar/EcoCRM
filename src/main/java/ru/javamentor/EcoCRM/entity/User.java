@@ -1,4 +1,4 @@
-package entity;
+package ru.javamentor.EcoCRM.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +12,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -28,10 +28,9 @@ public class User implements UserDetails {
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
-            CascadeType.REFRESH, CascadeType.MERGE
-    })
+            CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(
-            name = "user_authorities",
+            name ="users_authorities",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id")
     )

@@ -1,7 +1,7 @@
-package service;
+package ru.javamentor.EcoCRM.service;
 
-import dao.UserDetailsDao;
-import entity.User;
+import ru.javamentor.EcoCRM.dao.UserDetailsDao;
+import ru.javamentor.EcoCRM.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

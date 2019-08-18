@@ -1,10 +1,10 @@
-package controller;
+package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import service.AuthoritiesService;
-import service.UserService;
+import ru.javamentor.EcoCRM.service.AuthoritiesService;
+import ru.javamentor.EcoCRM.service.UserService;
 
 @Controller
 public class ApplicationController {

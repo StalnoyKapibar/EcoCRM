@@ -1,7 +1,6 @@
-package dao;
+package ru.javamentor.EcoCRM.dao;
 
-import entity.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import ru.javamentor.EcoCRM.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

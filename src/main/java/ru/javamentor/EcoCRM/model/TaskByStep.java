@@ -1,6 +1,5 @@
 package ru.javamentor.EcoCRM.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +17,7 @@ public class TaskByStep {
     private String performer; // ответсвенный за таску
 
     @Column
-    private TaskStatus taskStatus = TaskStatus.TODO;
+    private Status taskStatus = Status.TODO;
 
 
     public Long getId() {
@@ -45,11 +44,11 @@ public class TaskByStep {
         this.performer = performer;
     }
 
-    public TaskStatus getTaskStatus() {
+    public Status getTaskStatus() {
         return taskStatus;
     }
 
-    public void setTaskStatus(TaskStatus taskStatus) {
+    public void setTaskStatus(Status taskStatus) {
         this.taskStatus = taskStatus;
     }
 }

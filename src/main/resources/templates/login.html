@@ -19,6 +19,10 @@
 </head>
 <body>
 <style>
+    h2 {
+        font-weight: bold;
+    }
+
     body {
         padding-top: 40px;
         padding-bottom: 40px;
@@ -31,9 +35,18 @@
         margin: 0 auto;
     }
 
-    .form-signin .form-signin-heading,
-    .form-signin .checkbox {
-        margin-bottom: 10px;
+    .green {
+        color: #0bb02b;
+    }
+
+    .head-crm {
+        vertical-align: super;
+        color: #4c40ff;
+        font-size: 18px;
+    }
+
+    .form-signin .form-signin-heading {
+        margin-bottom: 15px;
     }
 
     .form-signin .checkbox {
@@ -67,7 +80,7 @@
 </style>
 <div class="container">
     <form class="form-signin" action="/login" method="POST">
-        <h2 class="form-signin-heading">EcoCRM</h2>
+        <h2 class="form-signin-heading green">Eco<span class="head-crm">CRM</span> </h2>
         <input class="form-control" type="text" name="email" placeholder="Enter your email">
         <input class="form-control" type="password" name="password" placeholder="Enter your password">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

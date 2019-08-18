@@ -5,14 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-
-<div action="#Auth" method="POST">
+<link h>
+<form method="POST">
     <input name="email">
     <input name="password">
-    <button type="submit">OK</button>
-</div>
+    <input type="button" onclick="auth(this.email,this.password)" value="Sign in" />
+</form>
 <script>
-    
+
+    function auth(email, password) {
+        var xhr = new XMLHttpRequest();
+        var url = "localhost:8080/login";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        /*xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var json = JSON.parse(xhr.responseText);
+                console.log(json.email + ", " + json.password);
+            }
+        };
+        */
+        var data = {"email" : email,
+            "password" : password };
+        xhr.send(data);
+    }
 </script>
 </body>
 </html>

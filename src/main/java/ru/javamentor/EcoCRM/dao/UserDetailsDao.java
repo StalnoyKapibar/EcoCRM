@@ -1,6 +1,6 @@
 package ru.javamentor.EcoCRM.dao;
 
-import ru.javamentor.EcoCRM.entity.User;
+import ru.javamentor.EcoCRM.model.User;
 
 import java.util.List;
 

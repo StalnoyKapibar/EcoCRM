@@ -16,6 +16,9 @@ public class Step implements Serializable {
     @Column(nullable = false)
     private StepNumber stepNumber;
 
+    @ManyToOne
+    private Project project;
+
     @Column(nullable = false)
     private String description;
 
@@ -24,6 +27,19 @@ public class Step implements Serializable {
 
     @OneToMany
     private List<TaskByStep> tasks;
+
+    public Step() {
+
+    }
+
+    public Step(StepNumber stepNumber, String description, Status status, List<TaskByStep> tasks, LocalDateTime startStep, LocalDateTime endStep) {
+        this.stepNumber = stepNumber;
+        this.description = description;
+        this.status = status;
+        this.tasks = tasks;
+        this.startStep = startStep;
+        this.endStep = endStep;
+    }
 
     private LocalDateTime startStep;
 
@@ -67,5 +83,29 @@ public class Step implements Serializable {
 
     public void setTasks(List<TaskByStep> tasks) {
         this.tasks = tasks;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public LocalDateTime getStartStep() {
+        return startStep;
+    }
+
+    public void setStartStep(LocalDateTime startStep) {
+        this.startStep = startStep;
+    }
+
+    public LocalDateTime getEndStep() {
+        return endStep;
+    }
+
+    public void setEndStep(LocalDateTime endStep) {
+        this.endStep = endStep;
     }
 }

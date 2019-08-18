@@ -2,7 +2,6 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "management_company")
@@ -24,8 +23,8 @@ public class ManagementCompany {
     @Column(name = "manager_name")
     private String managerName;
 
-    @Column(name = "manager_surename")
-    private String managerSurename;
+    @Column(name = "manager_surname")
+    private String managerSurname;
 
     @Column(name = "manager_patronymic")
     private String managerPatronymic;
@@ -44,6 +43,24 @@ public class ManagementCompany {
 
     @Column(name="next_contact_date")
     private LocalDateTime nextContactDate;
+
+    public ManagementCompany() {
+
+    }
+
+    public ManagementCompany(String name, String inn, String link, String managerName, String managerSurname, String managerPatronymic, String phoneNumber, String email, String clock, String description, LocalDateTime nextContactDate) {
+        this.name = name;
+        this.inn = inn;
+        this.link = link;
+        this.managerName = managerName;
+        this.managerSurname = managerSurname;
+        this.managerPatronymic = managerPatronymic;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.clock = clock;
+        this.description = description;
+        this.nextContactDate = nextContactDate;
+    }
 
     public LocalDateTime getNextContactDate() {
         return nextContactDate;
@@ -93,12 +110,12 @@ public class ManagementCompany {
         this.managerName = managerName;
     }
 
-    public String getManagerSurename() {
-        return managerSurename;
+    public String getManagerSurname() {
+        return managerSurname;
     }
 
-    public void setManagerSurename(String managerSurename) {
-        this.managerSurename = managerSurename;
+    public void setManagerSurname(String managerSurname) {
+        this.managerSurname = managerSurname;
     }
 
     public String getManagerPatronymic() {

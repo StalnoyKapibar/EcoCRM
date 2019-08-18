@@ -1,6 +1,6 @@
 package ru.javamentor.EcoCRM.dao;
 
-import ru.javamentor.EcoCRM.entity.User;
+import ru.javamentor.EcoCRM.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,17 +16,16 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
     private EntityManager entityManager;
 
     @Override
-    public User findUserByUsername(String username) {
+    public User findUserByEmail(String email) {
 
 
-        Query query = entityManager.createQuery("select u FROM User u where u.username=:username", User.class);
+        Query query = entityManager.createQuery("select u FROM User u where u.email=:email", User.class);
 
-        query.setParameter("username", username);
+        query.setParameter("email", email);
 
         User user = (User)query.getSingleResult();
 
-        //diagnostics:
-        System.out.println("Finded user" + user.getUsername().toUpperCase());
+
 
         return user;
     }

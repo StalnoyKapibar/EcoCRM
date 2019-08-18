@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.entity;
+package ru.javamentor.EcoCRM.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

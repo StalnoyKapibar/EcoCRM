@@ -1,6 +1,6 @@
 package ru.javamentor.EcoCRM.dao;
 
-import ru.javamentor.EcoCRM.entity.User;
+import ru.javamentor.EcoCRM.model.User;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by whitenoise on 18.08.19.
  */
 public interface UserDetailsDao {
-    User findUserByUsername(String username);
+    User findUserByEmail(String email);
 
     void insertUser(User user);
 

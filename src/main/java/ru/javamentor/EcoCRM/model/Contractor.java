@@ -3,7 +3,7 @@ package ru.javamentor.EcoCRM.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "contractors")
+@Table(name = "contractor")
 public class Contractor {
 
     @Id
@@ -33,6 +33,21 @@ public class Contractor {
 
     @Column(name = "disposal_conditions")
     private String disposalСonditions;
+
+    public Contractor() {
+
+    }
+
+    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String disposalСonditions) {
+        this.name = name;
+        this.rowType = rowType;
+        this.link = link;
+        this.contactPerson = contactPerson;
+        this.phoneNumber = phoneNumber;
+        this.linkByPerson = linkByPerson;
+        this.collectorType = collectorType;
+        this.disposalСonditions = disposalСonditions;
+    }
 
     public String getCollectorType() {
         return collectorType;

@@ -20,7 +20,7 @@ public class ApplicationController {
 
         System.out.println("Controller ready!");
 
-        return "login";
+        return "login-page";
     }
 
     @GetMapping("/access-denied")
@@ -33,5 +33,11 @@ public class ApplicationController {
     public String showHome() {
 
         return "home";
+    }
+
+    @GetMapping("/admin_page")
+    public String showAdminPage() {
+
+        return "admin_page";
     }
 }

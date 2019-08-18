@@ -85,10 +85,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script>
     function test() {
-
         var d1 = document.getElementById('password-place');
         d1.insertAdjacentHTML('afterend', '<p>Неверный логин или пароль</p>');
-
     }
     function auth() {
         var dataForLogin = {
@@ -96,7 +94,6 @@
             password: $('#password-place').val(),//string
         }
         $.ajax({
-
             type: 'POST',
             url: 'http://localhost:8080/test/',
             data: JSON.stringify(dataForLogin),
@@ -108,9 +105,7 @@
                 alert(error.toString());
             },
             dataType: 'json'
-
         });
     }
-
 </script>
 </html>

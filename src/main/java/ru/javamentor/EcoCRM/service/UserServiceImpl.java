@@ -56,7 +56,7 @@ public class UserServiceImpl  implements  UserService, UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userDetailsDao.findUserByUsername(email);
+        User user = userDetailsDao.findUserByEmail(email);
 
 
         if(user == null)

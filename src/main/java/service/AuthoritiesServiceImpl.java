@@ -4,6 +4,7 @@ import dao.AuthoritiesDao;
 import entity.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,18 +15,21 @@ public class AuthoritiesServiceImpl implements  AuthoritiesService {
     @Autowired
     private AuthoritiesDao authoritiesDao;
 
-    @Override
-    public Authorities getAuthorityByName(String authorityName) {
-        return null;
-    }
-
-    @Override
+    @Transactional
     public Authorities getAuthority(int id) {
-        return null;
+        return authoritiesDao.getAuthority(id);
+
     }
 
-    @Override
+    @Transactional
     public List<Authorities> listAllAuthorities() {
-        return null;
+
+        return authoritiesDao.listAllAuthorities();
+    }
+
+
+    @Transactional
+    public Authorities getAuthorityByName(String authorityName) {
+        return authoritiesDao.getAuthorityByName(authorityName);
     }
 }

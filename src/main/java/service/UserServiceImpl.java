@@ -52,15 +52,16 @@ public class UserServiceImpl  implements  UserService, UserDetailsService{
         userDetailsDao.deleteUser(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
-    public UserDetails loadUserByUsername(String email) {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
         User user = userDetailsDao.findUserByUsername(email);
 
 
         if(user == null)
         {
-            throw new UsernameNotFoundException("User with email " + email + " not found");
+            throw new UsernameNotFoundException("User with name " + email + " not found");
         }
 
         return user;

@@ -10,7 +10,9 @@ function auth(email, password) {
         }
     };
     */
-    var dict = {"email" : email,
-                "password" : password };
+    var data = {"email" : email,
+        "password" : password };
     xhr.send(data);
+
+
 }

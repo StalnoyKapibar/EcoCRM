@@ -20,7 +20,7 @@ public class ApplicationController {
 
         System.out.println("Controller ready!");
 
-        return "login-page";
+        return "login";
     }
 
     @GetMapping("/access-denied")

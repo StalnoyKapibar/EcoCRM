@@ -1,11 +1,11 @@
 package ru.javamentor.EcoCRM.service;
 
-import ru.javamentor.EcoCRM.dao.AbstractDao;
+import ru.javamentor.EcoCRM.dao.AbstractDaoImpl;
 
 import java.util.List;
 
 public abstract class AbstractService<T> {
-    private AbstractDao<T> abstractDao;
+    private AbstractDaoImpl<T> abstractDao;
 
     public void delete(T t) {
         abstractDao.delete(t);

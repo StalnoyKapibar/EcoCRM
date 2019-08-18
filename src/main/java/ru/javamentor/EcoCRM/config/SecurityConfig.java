@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
-                .permitAll().successHandler(securityHandler).failureHandler()
+                .permitAll().successHandler(securityHandler)//.failureHandler()
                 .and()
                 .logout().permitAll()
                 .and()

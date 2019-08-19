@@ -1,6 +1,5 @@
 package ru.javamentor.EcoCRM.model;
 
-import org.hibernate.annotations.Type;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
@@ -26,10 +25,6 @@ public class Project implements Serializable {
     @Column(name = "status")
     private Status status = Status.IN_PROGRESS;
 
-    @Column(name = "photo")
-    @Type(type = "image")
-    private byte[] photo;
-
     @OneToOne
     private Point point;
 
@@ -42,12 +37,11 @@ public class Project implements Serializable {
     @OneToOne
     private Report report;
 
-    public Project(User manager, Petition petition, String title, Status status, byte[] photo, Point point, ManagementCompany company, Contractor contractor, Report report) {
+    public Project(User manager, Petition petition, String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
         this.manager = manager;
         this.petition = petition;
         this.title = title;
         this.status = status;
-        this.photo = photo;
         this.point = point;
         this.company = company;
         this.contractor = contractor;
@@ -132,11 +126,4 @@ public class Project implements Serializable {
         this.petition = petition;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
 }

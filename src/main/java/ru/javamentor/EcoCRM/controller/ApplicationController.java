@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
-import ru.javamentor.EcoCRM.service.AuthoritiesServiceImpl;
 import ru.javamentor.EcoCRM.service.UserService;
 
 @Controller
@@ -20,9 +19,7 @@ public class ApplicationController {
 
     @GetMapping("/showMyLoginPage")
     public String showMyLoginPage() {
-
         System.out.println("Controller ready!");
-
         return "login";
     }
 

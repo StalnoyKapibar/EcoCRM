@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.service;
+package ru.javamentor.EcoCRM.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javamentor.EcoCRM.dao.StepDao;

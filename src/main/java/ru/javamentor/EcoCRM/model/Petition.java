@@ -2,23 +2,21 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name="petition")
+@Table(name="petitions")
 public class Petition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "email")
     private String email;
 
-    //todo naming convention
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name="contactInformation")
+    @Column(name= "contact_information")
     private String contactInformation; // профиль в соцсети или номер телефона
 
     @Column(name ="description")

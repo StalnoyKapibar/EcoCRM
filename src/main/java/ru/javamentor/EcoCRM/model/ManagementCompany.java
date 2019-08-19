@@ -1,18 +1,19 @@
 package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "management_company")
-public class ManagementCompany {
+public class ManagementCompany implements Serializable {  //управляющая компания дома (района) где хотят установить контейнеры
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "inn")
     private String inn;
@@ -48,8 +49,8 @@ public class ManagementCompany {
 
     }
 
-    public ManagementCompany(String name, String inn, String link, String managerName, String managerSurname, String managerPatronymic, String phoneNumber, String email, String clock, String description, LocalDateTime nextContactDate) {
-        this.name = name;
+    public ManagementCompany(String title, String inn, String link, String managerName, String managerSurname, String managerPatronymic, String phoneNumber, String email, String clock, String description, LocalDateTime nextContactDate) {
+        this.title = title;
         this.inn = inn;
         this.link = link;
         this.managerName = managerName;
@@ -62,28 +63,20 @@ public class ManagementCompany {
         this.nextContactDate = nextContactDate;
     }
 
-    public LocalDateTime getNextContactDate() {
-        return nextContactDate;
-    }
-
-    public void setNextContactDate(LocalDateTime nextContactDate) {
-        this.nextContactDate = nextContactDate;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getInn() {
@@ -156,5 +149,13 @@ public class ManagementCompany {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getNextContactDate() {
+        return nextContactDate;
+    }
+
+    public void setNextContactDate(LocalDateTime nextContactDate) {
+        this.nextContactDate = nextContactDate;
     }
 }

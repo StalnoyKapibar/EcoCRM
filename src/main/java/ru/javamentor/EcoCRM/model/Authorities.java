@@ -3,9 +3,10 @@ package ru.javamentor.EcoCRM.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Authorities implements GrantedAuthority {
+public class Authorities implements GrantedAuthority, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

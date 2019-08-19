@@ -10,9 +10,15 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "description")
     private String description;
 
+    @Column(name = "link")
     private String link;
+
+    public Report() {
+
+    }
 
     public Report(String description, String link) {
         this.description = description;

@@ -3,25 +3,30 @@ package ru.javamentor.EcoCRM.model;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name="task")
-public class TaskByStep {
+@Table(name="tasks")
+public class TaskByStep implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-//    todo user
-    @Column
-    private String performer; // ответсвенный за таску
+    @Column(name = "description")
+    private String description;
 
-    @Column
+    @Column(name = "performer")
+    private User performer; // ответсвенный за таску
+
+    @Column(name = "task_status")
     private Status taskStatus = Status.TODO;
 
+    @ManyToOne
+    private Step step;
 
     public Long getId() {
         return id;
@@ -39,11 +44,19 @@ public class TaskByStep {
         this.name = name;
     }
 
-    public String getPerformer() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getPerformer() {
         return performer;
     }
 
-    public void setPerformer(String performer) {
+    public void setPerformer(User performer) {
         this.performer = performer;
     }
 
@@ -53,5 +66,13 @@ public class TaskByStep {
 
     public void setTaskStatus(Status taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public Step getStep() {
+        return step;
+    }
+
+    public void setStep(Step step) {
+        this.step = step;
     }
 }

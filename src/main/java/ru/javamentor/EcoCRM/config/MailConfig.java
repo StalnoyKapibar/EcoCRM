@@ -21,13 +21,13 @@ public class MailConfig {
     String password;
 
     @Value("${spring.mail.port}")
-    int potr;
+    int port;
 
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
-        mailSender.setPort(potr);
+        mailSender.setPort(port);
         mailSender.setUsername(userName);
         mailSender.setPassword(password);
 
@@ -36,7 +36,6 @@ public class MailConfig {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
-
         return mailSender;
     }
 }

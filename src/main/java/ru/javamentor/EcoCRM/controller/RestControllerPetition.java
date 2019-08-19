@@ -22,7 +22,10 @@ public class RestControllerPetition {
     @PostMapping
     public void getSearchUserProfiles(@RequestBody Petition petition){
         petitionService.insert(petition);
-        if(petition.getEmail()!=null)
-        emailServiceimp.sendSimpleMessage(petition.getEmail(),petition.getContactInformation(),petition.getStatusHome());
+        if (petition.getEmail() != null){
+            emailServiceimp.sendSimpleMessage(petition.getEmail(), petition.getContactInformation(), petition.getStatusHome());
+        }
     }
 }
+
+

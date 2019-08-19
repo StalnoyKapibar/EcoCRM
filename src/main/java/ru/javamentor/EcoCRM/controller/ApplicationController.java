@@ -17,9 +17,7 @@ public class ApplicationController {
 
     @GetMapping("/showMyLoginPage")
     public String showMyLoginPage() {
-
         System.out.println("Controller ready!");
-
         return "login";
     }
 

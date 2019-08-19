@@ -1,7 +1,6 @@
 package ru.javamentor.EcoCRM.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
@@ -91,7 +90,7 @@ public class DataInitializer {
 
         Project firstProject = new Project(managerUser, firstPetition, "testTitle1");
         Project secondProject = new Project(rootUser, secondPetition, "testTittle2",
-                                            Status.IN_PROGRESS, null, firstPoint,
+                                            Status.IN_PROGRESS, firstPoint,
                                             firstCompany, firstContractor, firstReport);
 
         authoritiesService.insert(rootAuthority);

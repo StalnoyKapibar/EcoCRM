@@ -1,16 +1,13 @@
 package ru.javamentor.EcoCRM;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import ru.javamentor.EcoCRM.init.DataInitializer;
-import ru.javamentor.EcoCRM.model.Contractor;
 
 import javax.annotation.PostConstruct;
 

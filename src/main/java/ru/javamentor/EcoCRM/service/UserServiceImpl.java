@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Service("userDetailsService")
-public abstract class UserServiceImpl  extends AbstractServiceImpl<User> implements AbstractService<User> ,UserService, UserDetailsService{
+public abstract class UserServiceImpl  extends AbstractServiceImpl<User> implements UserService , UserDetailsService{
 
 
 

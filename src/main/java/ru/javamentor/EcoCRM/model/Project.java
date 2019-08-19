@@ -1,5 +1,7 @@
 package ru.javamentor.EcoCRM.model;
 
+import ru.javamentor.EcoCRM.model.embedded.Status;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -20,6 +22,7 @@ public class Project implements Serializable {
     @Column
     private Status status;
 
+    //todo one-to-one column name
     @OneToOne
     private Point point;
 
@@ -34,7 +37,6 @@ public class Project implements Serializable {
 
 
     public Project() {
-
     }
 
     public Project(String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {

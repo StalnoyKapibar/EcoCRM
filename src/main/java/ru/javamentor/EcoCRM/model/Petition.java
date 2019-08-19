@@ -14,11 +14,12 @@ public class Petition {
     @Column(name = "email")
     private String email;
 
+    //todo naming convention
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name=" contact_information")
-   private String contactInformation; // профиль в соцсети или номер телефона
+    @Column(name="contactInformation")
+    private String contactInformation; // профиль в соцсети или номер телефона
 
    @Column(name ="status_Home")
     private String statusHome;

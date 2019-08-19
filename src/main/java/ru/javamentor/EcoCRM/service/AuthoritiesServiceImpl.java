@@ -10,26 +10,5 @@ import java.util.List;
 
 
 @Service("authoritiesService")
-public class AuthoritiesServiceImpl implements  AuthoritiesService {
-
-    @Autowired
-    private AuthoritiesDao authoritiesDao;
-
-    @Transactional
-    public Authorities getAuthority(int id) {
-        return authoritiesDao.getAuthority(id);
-
-    }
-
-    @Transactional
-    public List<Authorities> listAllAuthorities() {
-
-        return authoritiesDao.listAllAuthorities();
-    }
-
-
-    @Transactional
-    public Authorities getAuthorityByName(String authorityName) {
-        return authoritiesDao.getAuthorityByName(authorityName);
-    }
+public class AuthoritiesServiceImpl extends AbstractServiceImpl<Authorities> implements AuthoritiesService {
 }

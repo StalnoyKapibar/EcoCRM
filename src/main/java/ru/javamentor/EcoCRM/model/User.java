@@ -25,8 +25,6 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled =  true;
 
-
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(

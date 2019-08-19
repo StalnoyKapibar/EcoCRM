@@ -1,5 +1,7 @@
 package ru.javamentor.EcoCRM.model;
 
+import ru.javamentor.EcoCRM.model.embedded.Status;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class TaskByStep {
     @Column
     private String name;
 
+//    todo user
     @Column
     private String performer; // ответсвенный за таску
 

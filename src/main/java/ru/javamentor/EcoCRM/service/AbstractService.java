@@ -1,10 +1,12 @@
 package ru.javamentor.EcoCRM.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.javamentor.EcoCRM.dao.AbstractDao;
 
 import java.util.List;
 
 public abstract class AbstractService<T> {
+
     private AbstractDao<T> abstractDao;
 
     public void delete(T t) {

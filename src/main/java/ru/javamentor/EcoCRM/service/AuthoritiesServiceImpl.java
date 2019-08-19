@@ -18,12 +18,10 @@ public class AuthoritiesServiceImpl implements  AuthoritiesService {
     @Transactional
     public Authorities getAuthority(int id) {
         return authoritiesDao.getAuthority(id);
-
     }
 
     @Transactional
     public List<Authorities> listAllAuthorities() {
-
         return authoritiesDao.listAllAuthorities();
     }
 

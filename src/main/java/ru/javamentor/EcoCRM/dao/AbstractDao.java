@@ -15,6 +15,7 @@ public abstract class AbstractDao<T> {
     @PersistenceContext
     @Autowired
     EntityManager entityManager;
+
     private Class<T> entityBeanType;
 
     public AbstractDao() {

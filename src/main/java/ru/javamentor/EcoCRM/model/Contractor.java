@@ -32,13 +32,13 @@ public class Contractor {
     private String collectorType;
 
     @Column(name = "disposal_conditions")
-    private String disposalСonditions;
+    private String disposalConditions;
 
     public Contractor() {
 
     }
 
-    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String disposalСonditions) {
+    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String disposalConditions) {
         this.name = name;
         this.rowType = rowType;
         this.link = link;
@@ -46,7 +46,7 @@ public class Contractor {
         this.phoneNumber = phoneNumber;
         this.linkByPerson = linkByPerson;
         this.collectorType = collectorType;
-        this.disposalСonditions = disposalСonditions;
+        this.disposalConditions = disposalConditions;
     }
 
     public String getCollectorType() {
@@ -85,7 +85,7 @@ public class Contractor {
         this.collectorType = collectorType;
     }
 
-    public void setDisposalСonditions(String disposalСonditions) {
-        this.disposalСonditions = disposalСonditions;
+    public void setDisposalConditions(String disposalConditions) {
+        this.disposalConditions = disposalConditions;
     }
 }

@@ -12,6 +12,7 @@ public class Point implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //todo naming
     @Column(name = "lat", nullable = false)
     private Float latitudeY;
 

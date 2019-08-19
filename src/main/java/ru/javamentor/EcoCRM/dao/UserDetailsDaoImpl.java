@@ -15,6 +15,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //todo marfall codestyle
     @Override
     public User findUserByEmail(String email) {
 

@@ -18,9 +18,5 @@ public class RestControllerPetition {
     @PostMapping
     public void getSearchUserProfiles(@RequestBody Petition petition){
         petitionService.insert(petition);
-
-
-
-
     }
 }

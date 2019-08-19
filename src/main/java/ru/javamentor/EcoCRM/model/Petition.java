@@ -19,14 +19,14 @@ public class Petition {
     @Column(name= "contact_information")
     private String contactInformation; // профиль в соцсети или номер телефона
 
-   @Column(name ="status_Home")
+    @Column(name ="status_home")
     private String statusHome;
 
-   @Column(name="separate_collection")
-   private String separateCollection;
+    @Column(name="separate_collection")
+    private String separateCollection;
 
-   @Column(name="type_of_raw_material")
-   private String typeOfRawMaterial;
+    @Column(name="type_of_raw_material")
+    private String typeOfRawMaterial;
 
     public long getId() {
         return id;

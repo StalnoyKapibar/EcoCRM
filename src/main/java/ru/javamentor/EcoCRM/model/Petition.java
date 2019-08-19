@@ -3,7 +3,7 @@ package ru.javamentor.EcoCRM.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="petition")
+@Table(name="petitions")
 public class Petition {
 
     @Id

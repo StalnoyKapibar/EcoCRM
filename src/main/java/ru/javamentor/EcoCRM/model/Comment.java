@@ -17,7 +17,6 @@ public class Comment implements Serializable {
     private String message;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "task_by_step")
     private TaskByStep taskByStep;
 
     @Column(name = "time")

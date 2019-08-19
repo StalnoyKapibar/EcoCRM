@@ -15,11 +15,9 @@ public class Project implements Serializable {
     private Long id;
 
     @OneToOne
-    @Column(name = "manager", nullable = false)
     private User manager;
 
     @OneToOne
-    @Column(name = "petition", nullable = false)
     private Petition petition;
 
     @Column(name = "title", nullable = false)
@@ -33,19 +31,15 @@ public class Project implements Serializable {
     private byte[] photo;
 
     @OneToOne
-    @Column(name = "point")
     private Point point;
 
     @OneToOne
-    @Column(name = "company")
     private ManagementCompany company;
 
     @OneToOne
-    @Column(name = "contractor")
     private Contractor contractor;
 
     @OneToOne
-    @Column(name = "report")
     private Report report;
 
     public void setId(Long id) {

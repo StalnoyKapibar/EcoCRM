@@ -26,7 +26,6 @@ public class TaskByStep implements Serializable {
     private Status taskStatus = Status.TODO;
 
     @ManyToOne
-    @Column(name = "step")
     private Step step;
 
     public Long getId() {

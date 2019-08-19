@@ -19,7 +19,6 @@ public class Step implements Serializable {
     private StepNumber stepNumber;
 
     @ManyToOne
-    @Column(name = "project")
     private Project project;
 
     @Column(name = "description")

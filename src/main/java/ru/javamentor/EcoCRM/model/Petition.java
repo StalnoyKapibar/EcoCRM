@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="petitions")
 public class Petition {
-
+//написать доки мне
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

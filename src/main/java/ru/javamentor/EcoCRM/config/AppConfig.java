@@ -15,7 +15,8 @@ import javax.servlet.ServletContext;
 //todo reduce class
 @Configuration
 @PropertySource({"classpath:config/datasource.properties",
-                 "classpath:config/jpa.properties"})
+                 "classpath:config/jpa.properties",
+                 "classpath:config/mail.properties"})
 public class AppConfig {
 
 }

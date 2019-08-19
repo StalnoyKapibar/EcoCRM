@@ -8,7 +8,4 @@ import ru.javamentor.EcoCRM.model.Authorities;
  */
 @Repository
 public class AuthoritiesDaoImpl extends AbstractDaoImpl<Authorities> implements AuthoritiesDao{
-
-
-
 }

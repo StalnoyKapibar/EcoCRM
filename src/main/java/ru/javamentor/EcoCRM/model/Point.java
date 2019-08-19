@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "point")
+@Table(name = "points")
 public class Point implements Serializable {
 
     @Id
@@ -15,7 +15,7 @@ public class Point implements Serializable {
     @Column(name = "lat", nullable = false)
     private Float latitudeY;
 
-    @Column(name = "place", nullable = false)
+    @Column(name = "lng", nullable = false)
     private Float longitudeX;
 
     public Point() {

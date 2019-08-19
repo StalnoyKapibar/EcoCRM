@@ -2,7 +2,6 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name="petition")
 public class Petition {
@@ -14,10 +13,10 @@ public class Petition {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "userName")
+    @Column(name = "user_name")
     private String userName;
 
-    @Column(name= "contactInformation")
+    @Column(name= "contact_information")
     private String contactInformation; // профиль в соцсети или номер телефона
 
     @Column(name ="description")

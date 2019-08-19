@@ -1,43 +1,37 @@
 package ru.javamentor.EcoCRM.model;
 
+import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.embedded.StepNumber;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "step")
+@Table(name = "steps")
 public class Step implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "step_number")
     private StepNumber stepNumber;
 
     @ManyToOne
+    @Column(name = "project")
     private Project project;
 
-    @Column(nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "status")
     private Status status = Status.TODO;
 
-    public Step() {
-
-    }
-
-    public Step(StepNumber stepNumber, String description, Status status, LocalDateTime startStep, LocalDateTime endStep) {
-        this.stepNumber = stepNumber;
-        this.description = description;
-        this.status = status;
-        this.startStep = startStep;
-        this.endStep = endStep;
-    }
-
+    @Column(name = "start_step")
     private LocalDateTime startStep;
 
+    @Column(name = "end_step")
     private LocalDateTime endStep;
 
     public Long getId() {

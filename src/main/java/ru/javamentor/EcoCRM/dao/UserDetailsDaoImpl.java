@@ -10,7 +10,4 @@ import javax.persistence.Query;
 import java.util.List;
 @Repository
 public class UserDetailsDaoImpl extends AbstractDaoImpl<UserDetails> implements UserDetailsDao {
-
-
-
 }

@@ -1,5 +1,8 @@
 package ru.javamentor.EcoCRM.model;
 
+import org.hibernate.annotations.Type;
+import ru.javamentor.EcoCRM.model.embedded.Status;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,38 +15,41 @@ public class Project implements Serializable {
     private Long id;
 
     @OneToOne
+    @Column(name = "manager", nullable = false)
     private User manager;
 
-    @Column
+    @OneToOne
+    @Column(name = "petition", nullable = false)
+    private Petition petition;
+
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column
-    private Status status;
+    @Column(name = "status")
+    private Status status = Status.IN_PROGRESS;
+
+    @Column(name = "photo")
+    @Type(type = "image")
+    private byte[] photo;
 
     @OneToOne
+    @Column(name = "point")
     private Point point;
 
     @OneToOne
+    @Column(name = "company")
     private ManagementCompany company;
 
     @OneToOne
+    @Column(name = "contractor")
     private Contractor contractor;
 
     @OneToOne
+    @Column(name = "report")
     private Report report;
 
-
-    public Project() {
-
-    }
-
-    public Project(String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
-        this.title = title;
-        this.status = status;
-        this.point = point;
-        this.company = company;
-        this.contractor = contractor;
-        this.report = report;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -106,4 +112,19 @@ public class Project implements Serializable {
         this.manager = manager;
     }
 
+    public Petition getPetition() {
+        return petition;
+    }
+
+    public void setPetition(Petition petition) {
+        this.petition = petition;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
 }

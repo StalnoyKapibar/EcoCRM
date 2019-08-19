@@ -1,44 +1,45 @@
 package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "contractors")
-public class Contractor {
+public class Contractor implements Serializable {  //заготовитель (подрядчик изготовления контейнеров)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
-    private String name;
+    private String name;  //компания
 
     @Column (name = "row_type")
-    private String rowType;
+    private String rowType;  //тип сырья
 
     @Column(name = "link")
-    private String link;
+    private String link;  //веб-сайт компании
 
     @Column(name = "contact_person")
-    private String contactPerson;
+    private String contactPerson;  //имя и фамилия представителя компании
 
     @Column(name = "phone_number")
-    private String phoneNumber;
+    private String phoneNumber;  //номер компании
 
     @Column(name = "link_by_person")
-    private String linkByPerson;
+    private String linkByPerson;  //веб-сайт или страница заготовителя
 
     @Column(name = "collector_type")
-    private String collectorType;
+    private String collectorType;  //тип накопителя
 
-    @Column(name = "disposal_conditions")
-    private String disposalСonditions;
+    @Column(name = "description")
+    private String description;  //условия вывоза
 
     public Contractor() {
 
     }
 
-    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String disposalСonditions) {
+    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String description) {
         this.name = name;
         this.rowType = rowType;
         this.link = link;
@@ -46,7 +47,7 @@ public class Contractor {
         this.phoneNumber = phoneNumber;
         this.linkByPerson = linkByPerson;
         this.collectorType = collectorType;
-        this.disposalСonditions = disposalСonditions;
+        this.description = description;
     }
 
     public Long getId() {
@@ -113,11 +114,11 @@ public class Contractor {
         this.collectorType = collectorType;
     }
 
-    public String getDisposalСonditions() {
-        return disposalСonditions;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDisposalСonditions(String disposalСonditions) {
-        this.disposalСonditions = disposalСonditions;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

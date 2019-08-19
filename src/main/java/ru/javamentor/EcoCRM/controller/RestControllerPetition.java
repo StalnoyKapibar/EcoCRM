@@ -15,5 +15,6 @@ public class RestControllerPetition {
         petition.getSeparateCollection();
         petition.getContactInformation();
         String a = petition.getEmail();
+
     }
 }

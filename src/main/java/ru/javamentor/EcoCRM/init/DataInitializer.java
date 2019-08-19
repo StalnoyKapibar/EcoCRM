@@ -102,4 +102,8 @@ public class DataInitializer {
         projectService.insert(firstProject);
         projectService.insert(secondProject);
     }
+
+    private void insertAuthorities() {
+
+    }
 }

@@ -11,6 +11,4 @@ import java.util.List;
 
 @Service("authoritiesService")
 public class AuthoritiesServiceImpl extends AbstractServiceImpl<Authorities> implements AuthoritiesService {
-
-
 }

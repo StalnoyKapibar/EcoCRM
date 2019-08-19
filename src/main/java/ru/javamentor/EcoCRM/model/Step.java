@@ -1,5 +1,8 @@
 package ru.javamentor.EcoCRM.model;
 
+import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.embedded.StepNumber;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;

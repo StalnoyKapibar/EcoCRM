@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.model;
+package ru.javamentor.EcoCRM.model.embedded;
 
 public enum StepNumber {
     STEP_1,

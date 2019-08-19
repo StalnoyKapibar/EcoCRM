@@ -14,7 +14,6 @@ public class Petition {
     @Column(name = "email")
     private String email;
 
-    //todo naming convention
     @Column(name = "user_name")
     private String userName;
 
@@ -29,14 +28,6 @@ public class Petition {
 
    @Column(name="type_of_raw_material")
    private String typeOfRawMaterial;
-
-    public String getTypeOfRawMaterial() {
-        return typeOfRawMaterial;
-    }
-
-    public void setTypeOfRawMaterial(String typeOfRawMaterial) {
-        this.typeOfRawMaterial = typeOfRawMaterial;
-    }
 
     public long getId() {
         return id;
@@ -84,5 +75,13 @@ public class Petition {
 
     public void setSeparateCollection(String separateCollection) {
         this.separateCollection = separateCollection;
+    }
+
+    public String getTypeOfRawMaterial() {
+        return typeOfRawMaterial;
+    }
+
+    public void setTypeOfRawMaterial(String typeOfRawMaterial) {
+        this.typeOfRawMaterial = typeOfRawMaterial;
     }
 }

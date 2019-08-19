@@ -42,6 +42,24 @@ public class Project implements Serializable {
     @OneToOne
     private Report report;
 
+    public Project(User manager, Petition petition, String title, Status status, byte[] photo, Point point, ManagementCompany company, Contractor contractor, Report report) {
+        this.manager = manager;
+        this.petition = petition;
+        this.title = title;
+        this.status = status;
+        this.photo = photo;
+        this.point = point;
+        this.company = company;
+        this.contractor = contractor;
+        this.report = report;
+    }
+
+    public Project(User manager, Petition petition, String title) {
+        this.manager = manager;
+        this.petition = petition;
+        this.title = title;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

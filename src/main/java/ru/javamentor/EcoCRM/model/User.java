@@ -23,7 +23,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "enabled")
-    private boolean enabled =  true;
+    private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -32,8 +32,34 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
-    private List<Authorities> authorities;
+    private List<Authority> authorities;
 
+    public User() {
+    }
+
+    public User(String email, String password, boolean enabled) {
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
+    public User(String email, String password, boolean enabled, List<Authority> authorities) {
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities = authorities;
+    }
+
+    public User(String email, String password, List<Authority> authorities) {
+        this.email = email;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -78,7 +104,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setAuthorities(List<Authorities> authorities) {
+    public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
 

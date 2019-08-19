@@ -27,28 +27,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SuccessRedirectHandler successRedirectHandler;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
 
+    @Bean
+    public BCryptPasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.csrf().disable();
+
         http.authorizeRequests()
-                .antMatchers("/").hasAnyRole("USER","ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser").passwordParameter("password").usernameParameter("email")
                 .permitAll().successHandler(successRedirectHandler).failureHandler(failureHandler)
                 .and()
-                .logout().permitAll()
+                .logout()
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
     }

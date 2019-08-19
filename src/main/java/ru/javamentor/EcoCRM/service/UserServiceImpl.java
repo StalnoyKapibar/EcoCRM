@@ -19,7 +19,7 @@ public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserS
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userDetailsDao.findByFieldNameAndValue("email",email);
+        User user = userDetailsDao.findByFieldNameAndValue("email", email);
         if(user == null)
         {
             throw new UsernameNotFoundException("User with name " + email + " not found");

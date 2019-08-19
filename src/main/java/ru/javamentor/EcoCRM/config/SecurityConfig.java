@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -13,12 +14,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
-@Order(2)
+//@Order(2)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
+    @Qualifier("userServiceImpl")
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -28,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SuccessRedirectHandler successRedirectHandler;
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.inMemoryAuthentication().withUser("root").password(getEncoder().encode("root")).roles("ADMIN");
+        auth.userDetailsService(userDetailsService).passwordEncoder(getEncoder());
     }
 
     @Bean

@@ -13,9 +13,6 @@ public class TaskByStep implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "description")
     private String description;
 
@@ -28,20 +25,22 @@ public class TaskByStep implements Serializable {
     @ManyToOne
     private Step step;
 
+    public TaskByStep() {
+
+    }
+
+    public TaskByStep(String description, User performer, Step step) {
+        this.description = description;
+        this.performer = performer;
+        this.step = step;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {

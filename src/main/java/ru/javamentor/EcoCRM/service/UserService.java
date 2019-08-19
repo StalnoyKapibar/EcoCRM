@@ -6,17 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends AbstractService<User> {
 
-    void insertUser(User user);
 
-    List<User> listAllUsers();
-
-    User getUser(int id);
-
-    void updateUser(User user);
-
-    void deleteUser(int id);
 
     UserDetails loadUserByUsername(String email);
 }

@@ -12,7 +12,7 @@ public class Comment {
     private Long id;
 
     @Column
-    private String massage;
+    private String message;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private TaskByStep taskByStep;
@@ -25,12 +25,12 @@ public class Comment {
         this.id = id;
     }
 
-    public String getMassage() {
-        return massage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMassage(String massage) {
-        this.massage = massage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public TaskByStep getTaskByStep() {

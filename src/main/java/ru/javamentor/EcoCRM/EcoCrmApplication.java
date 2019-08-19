@@ -22,21 +22,6 @@ public class EcoCrmApplication implements WebMvcConfigurer {
 		return new DataInitializer();
 	}
 
-//	@Bean
-//	public ViewResolver viewResolver() {
-//		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-//		templateResolver.setTemplateMode("XHTML");
-//		templateResolver.setPrefix("templates/");
-//		templateResolver.setSuffix(".html");
-//
-//		SpringTemplateEngine engine = new SpringTemplateEngine();
-//		engine.setTemplateResolver(templateResolver);
-//
-//		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//		viewResolver.setTemplateEngine(engine);
-//		return viewResolver;
-//	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(EcoCrmApplication.class, args);
 	}
@@ -44,6 +29,5 @@ public class EcoCrmApplication implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js");
 	}
 }

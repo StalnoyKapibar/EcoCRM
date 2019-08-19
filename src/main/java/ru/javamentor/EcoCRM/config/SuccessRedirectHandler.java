@@ -15,22 +15,22 @@ import java.util.Set;
  * Created by whitenoise on 18.08.19.
  */
 @Component
-public class SecurityHandler implements AuthenticationSuccessHandler {
+public class SuccessRedirectHandler implements AuthenticationSuccessHandler {
+
+    //todo sout
     @Override
-    public void onAuthenticationSuccess(
-            HttpServletRequest httpServletRequest,
-            HttpServletResponse httpServletResponse,
-            Authentication authentication) throws IOException, ServletException
-    {
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
+                                        HttpServletResponse httpServletResponse,
+                                        Authentication authentication) throws IOException, ServletException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        for (String role : roles) {
-            System.out.println("Role is: " + role);
-        }
+//        for (String role : roles) {
+//            System.out.println("Role is: " + role);
+//        }
         if (roles.contains("ROLE_ADMIN")) {
-            System.out.println("role finded");
-            httpServletResponse.sendRedirect("/admin/userlist");
-        } else if(roles.contains("ROLE_USER")) {
-            System.out.println("user role");
+//            System.out.println("role finded");
+            httpServletResponse.sendRedirect("/admin_page");
+        } else if (roles.contains("ROLE_USER")) {
+//            System.out.println("user role");
             httpServletResponse.sendRedirect("/");
         }
     }

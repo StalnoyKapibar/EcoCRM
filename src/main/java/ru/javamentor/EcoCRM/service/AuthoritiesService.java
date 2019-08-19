@@ -1,15 +1,11 @@
 package ru.javamentor.EcoCRM.service;
 
 
-import ru.javamentor.EcoCRM.entity.Authorities;
+import ru.javamentor.EcoCRM.model.Authorities;
 
 import java.util.List;
 
-public interface AuthoritiesService {
+public interface AuthoritiesService extends AbstractService<Authorities> {
 
-    Authorities getAuthorityByName(String authorityName);
 
-    Authorities getAuthority(int id);
-
-    List<Authorities> listAllAuthorities();
 }

@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.entity;
+package ru.javamentor.EcoCRM.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,8 +24,6 @@ public class User implements UserDetails {
 
     @Column(name = "enabled")
     private boolean enabled =  true;
-
-
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})

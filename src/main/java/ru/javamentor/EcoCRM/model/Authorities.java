@@ -1,16 +1,17 @@
-package ru.javamentor.EcoCRM.entity;
+package ru.javamentor.EcoCRM.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Authorities implements GrantedAuthority {
+public class Authorities implements GrantedAuthority, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "authority")
     private String authority;
@@ -24,11 +25,11 @@ public class Authorities implements GrantedAuthority {
         this.authority = authority;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

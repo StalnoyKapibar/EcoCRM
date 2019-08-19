@@ -30,6 +30,8 @@ public class DataInitializer {
     @Autowired
     private ProjectService projectService;
     @Autowired
+    private PetitionService petitionService;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void init() {
@@ -82,8 +84,15 @@ public class DataInitializer {
         Report secondReport = new Report("secondTestDesc", "secondTestDescLink");
         Report thirdReport = new Report("thirdTestDesc", "thirdTestDescLink");
 
-        Project firstProject = new Project("firstProjectTittle", Status.IN_PROGRESS, firstPoint, firstCompany, firstContractor, firstReport);
-        Project secondProject = new Project("secondProjectTittle", Status.DONE, secondPoint, secondCompany, secondContractor, thirdReport);
+        Petition firstPetition = new Petition("testpetition1@test.com", "testPetition1", "testInfo1",
+                                                "testStatus1", "testSeparateCollection1", "testTypeOfRawMat1");
+        Petition secondPetition = new Petition("testpetition2@test.com", "testPetition2", "testInfo2",
+                                                "testStatus2", "testSeparateCollection2", "testTypeOfRawMat2");
+
+        Project firstProject = new Project(managerUser, firstPetition, "testTitle1");
+        Project secondProject = new Project(rootUser, secondPetition, "testTittle2",
+                                            Status.IN_PROGRESS, null, firstPoint,
+                                            firstCompany, firstContractor, firstReport);
 
         authoritiesService.insert(rootAuthority);
         authoritiesService.insert(managerAuthority);
@@ -99,6 +108,8 @@ public class DataInitializer {
         reportService.insert(firstReport);
         reportService.insert(secondReport);
         reportService.insert(thirdReport);
+        petitionService.insert(firstPetition);
+        petitionService.insert(secondPetition);
         projectService.insert(firstProject);
         projectService.insert(secondProject);
     }

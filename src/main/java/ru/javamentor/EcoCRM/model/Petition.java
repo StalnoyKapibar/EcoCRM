@@ -28,6 +28,15 @@ public class Petition {
     @Column(name="type_of_raw_material")
     private String typeOfRawMaterial;
 
+    public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial) {
+        this.email = email;
+        this.userName = userName;
+        this.contactInformation = contactInformation;
+        this.statusHome = statusHome;
+        this.separateCollection = separateCollection;
+        this.typeOfRawMaterial = typeOfRawMaterial;
+    }
+
     public long getId() {
         return id;
     }

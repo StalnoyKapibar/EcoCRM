@@ -1,7 +1,7 @@
 package ru.javamentor.EcoCRM.model;
 
-import main.java.ru.javamentor.EcoCRM.model.TaskStatus;
-import static main.java.ru.javamentor.EcoCRM.model.TaskStatus.*;
+
+import static ru.javamentor.EcoCRM.model.TaskStatus.TODO;
 
 public class TaskByStep {
     Long id;

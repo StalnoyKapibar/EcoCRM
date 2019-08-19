@@ -22,43 +22,35 @@
     h2 {
         font-weight: bold;
     }
-
     body {
         padding-top: 40px;
         padding-bottom: 40px;
         background-color: #eee;
     }
-
     .form-signin {
         max-width: 330px;
         padding: 15px;
         margin: 0 auto;
     }
-
     .green {
         color: #0bb02b;
     }
-
     .head-crm {
         vertical-align: super;
         color: #4c40ff;
         font-size: 18px;
     }
-
     .form-signin .form-signin-heading {
         margin-bottom: 15px;
     }
-
     .form-signin .checkbox {
         font-weight: normal;
     }
-
     .form-signin {
         position: absolute;
         top: 35%;
         left: 40%;
     }
-
     .form-control {
         position: relative;
         height: auto;
@@ -67,17 +59,14 @@
         padding: 10px;
         font-size: 16px;
     }
-
     .form-signin .form-control:focus {
         z-index: 2;
     }
-
     .form-signin input[type="email"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
-
     .form-signin input[type="password"] {
         margin-bottom: 10px;
         border-top-left-radius: 0;
@@ -85,12 +74,37 @@
     }
 </style>
 <div class="container">
-    <form class="form-signin" action="/login" method="POST">
+    <div class="form-signin">
         <h2 class="form-signin-heading green">Eco<span class="head-crm">CRM</span> </h2>
-        <input class="form-control" type="text" name="email" placeholder="Enter your email">
-        <input class="form-control" type="password" name="password" placeholder="Enter your password">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
+        <input id="email-place" class="form-control" type="text" name="email" placeholder="Enter your email">
+        <input id="password-place" class="form-control" type="password" name="password" placeholder="Enter your password">
+        <button class="btn btn-lg btn-primary btn-block"  onclick="auth()">Sign in</button>
+    </div>
 </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script>
+
+    function auth() {
+        var dataForLogin = {
+            email: $('#email-place').val(),//string
+            password: $('#password-place').val(),//string
+        }
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/authenticateTheUser',
+            data: JSON.stringify(dataForLogin),
+            success: function(){
+                alert("Данные отправлены, Спасибо, " + SurnameCoded + "!");
+            },
+            error: function (error) {
+                if(document.getElementById('error-message') === null) {
+                    var d1 = document.getElementById('password-place');
+                    d1.insertAdjacentHTML('afterend', '<p id="error-message">Неверный логин или пароль</p>');
+                }
+            },
+            dataType: 'json'
+        });
+    }
+</script>
 </html>

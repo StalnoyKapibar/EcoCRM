@@ -13,50 +13,14 @@ import java.util.List;
 
 
 @Service("userDetailsService")
-public class UserServiceImpl  implements  UserService, UserDetailsService{
-
-    @Autowired
-    private UserDetailsDao userDetailsDao;
-
-    @Transactional
-    public void insertUser(User user) {
-
-        userDetailsDao.insertUser(user);
-    }
+public abstract class UserServiceImpl  extends AbstractServiceImpl<User> implements UserService , UserDetailsService{
 
 
-    @Transactional
-    public List<User> listAllUsers() {
 
-        return userDetailsDao.listAllUsers();
-    }
-
-
-    @Transactional
-    public User getUser(int id) {
-
-        return userDetailsDao.getUser(id);
-    }
-
-
-    @Transactional
-    public void updateUser(User user) {
-
-        userDetailsDao.updateUser(user);
-    }
-
-
-    @Transactional
-    public void deleteUser(int id) {
-
-        userDetailsDao.deleteUser(id);
-    }
-
-    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = userDetailsDao.findUserByEmail(email);
+        User user = abstractDao.findByFieldNameAndValue("email",email);
 
 
         if(user == null)

@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserDetailsDaoImpl extends AbstractDaoImpl<User> implements UserDetailsDao {
+
 }

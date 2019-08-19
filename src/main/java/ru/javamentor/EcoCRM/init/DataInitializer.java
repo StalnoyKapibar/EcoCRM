@@ -35,8 +35,8 @@ public class DataInitializer {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void init() {
-        Authority rootAuthority = new Authority("ROOT");
-        Authority managerAuthority = new Authority("MANAGER");
+        Authority rootAuthority = new Authority("ROLE_ADMIN");
+        Authority managerAuthority = new Authority("ROLE_USER");
         List<Authority> authorities = new ArrayList<>();
         authorities.add(rootAuthority);
         authorities.add(managerAuthority);

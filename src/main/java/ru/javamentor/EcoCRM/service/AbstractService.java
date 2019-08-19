@@ -1,30 +1,15 @@
 package ru.javamentor.EcoCRM.service;
 
-import ru.javamentor.EcoCRM.dao.AbstractDaoImpl;
-
 import java.util.List;
 
-public abstract class AbstractService<T> {
-    private AbstractDaoImpl<T> abstractDao;
+public interface AbstractService<T> {
+    void delete(T t);
 
-    public void delete(T t) {
-        abstractDao.delete(t);
-    }
+    void insert(T t);
 
-    public void insert(T t) {
-        abstractDao.insert(t);
-    }
+    void update(T t);
 
-    public void update(T t) {
-        abstractDao.update(t);
-    }
+    T get(long id);
 
-    public T get(long id) {
-        return abstractDao.get(id);
-    }
-
-    public List<T> getAll() {
-        return abstractDao.getAll();
-    }
-
+    List<T> getAll();
 }

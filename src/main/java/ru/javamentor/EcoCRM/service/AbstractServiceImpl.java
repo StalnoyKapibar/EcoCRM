@@ -1,13 +1,18 @@
 package ru.javamentor.EcoCRM.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.javamentor.EcoCRM.dao.AbstractDao;
 import ru.javamentor.EcoCRM.dao.AbstractDaoImpl;
 
 import java.util.List;
 
 public abstract class AbstractServiceImpl<T> implements AbstractService<T>{
 
-    protected AbstractDaoImpl<T> abstractDao;
+    private AbstractDao<T> abstractDao;
+
+    public AbstractServiceImpl(AbstractDao<T> abstractDao) {
+        this.abstractDao = abstractDao;
+    }
 
     public void delete(T t) {
         abstractDao.delete(t);

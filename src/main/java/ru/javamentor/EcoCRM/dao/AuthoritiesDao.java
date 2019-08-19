@@ -1,6 +1,6 @@
 package ru.javamentor.EcoCRM.dao;
 
-import ru.javamentor.EcoCRM.model.Authorities;
+import ru.javamentor.EcoCRM.model.Authority;
 
-public interface AuthoritiesDao extends AbstractDao<Authorities> {
+public interface AuthoritiesDao extends AbstractDao<Authority> {
 }

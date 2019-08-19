@@ -3,7 +3,6 @@ package ru.javamentor.EcoCRM.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "step")
@@ -25,18 +24,14 @@ public class Step implements Serializable {
     @Column(nullable = false)
     private Status status = Status.TODO;
 
-    @OneToMany
-    private List<TaskByStep> tasks;
-
     public Step() {
 
     }
 
-    public Step(StepNumber stepNumber, String description, Status status, List<TaskByStep> tasks, LocalDateTime startStep, LocalDateTime endStep) {
+    public Step(StepNumber stepNumber, String description, Status status, LocalDateTime startStep, LocalDateTime endStep) {
         this.stepNumber = stepNumber;
         this.description = description;
         this.status = status;
-        this.tasks = tasks;
         this.startStep = startStep;
         this.endStep = endStep;
     }
@@ -77,13 +72,6 @@ public class Step implements Serializable {
         this.status = status;
     }
 
-    public List<TaskByStep> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<TaskByStep> tasks) {
-        this.tasks = tasks;
-    }
 
     public Project getProject() {
         return project;

@@ -3,25 +3,28 @@ package ru.javamentor.EcoCRM.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="task")
+@Table(name="tasks")
 public class TaskByStep {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
+    @Column(name = "performer")
     private String performer; // ответсвенный за таску
 
-    @Column
+    @Column(name = "taskstatus")
     private Status taskStatus = Status.TODO;
 
+    @ManyToOne
+    @Column(name = "step")
+    private Step step;
 
     public Long getId() {
         return id;
@@ -37,6 +40,14 @@ public class TaskByStep {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPerformer() {
@@ -55,11 +66,11 @@ public class TaskByStep {
         this.taskStatus = taskStatus;
     }
 
-    public String getDescription() {
-        return description;
+    public Step getStep() {
+        return step;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStep(Step step) {
+        this.step = step;
     }
 }

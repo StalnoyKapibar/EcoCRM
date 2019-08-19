@@ -9,18 +9,18 @@ public class Petition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "UserName")
+    @Column(name = "userName")
     private String userName;
 
-    @Column(name=" contactInformation")
-   private String contactInformation; // профиль в соцсети или номер телефона
+    @Column(name= "contactInformation")
+    private String contactInformation; // профиль в соцсети или номер телефона
 
-   @Column(name ="description")
+    @Column(name ="description")
     private String description;
 
     public long getId() {

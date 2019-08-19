@@ -11,7 +11,13 @@ import ru.javamentor.EcoCRM.service.UserService;
 @Controller
 public class ApplicationController {
 
+    @Autowired
+    @Qualifier("userDetailsService")
+    private UserService userService;
 
+    @Autowired
+    @Qualifier("authoritiesService")
+    private AuthoritiesService authoritiesService;
 
     @GetMapping("/showMyLoginPage")
     public String showMyLoginPage() {

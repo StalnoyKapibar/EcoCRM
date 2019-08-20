@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,8 @@ public class DataInitializer {
     @Autowired
     private PetitionService petitionService;
     @Autowired
+    private StepService stepService;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void init() {
@@ -40,7 +43,7 @@ public class DataInitializer {
         authorities.add(rootAuthority);
         authorities.add(managerAuthority);
 
-        User rootUser = new User("root@root.com", bCryptPasswordEncoder.encode("root"),  authorities);
+        User rootUser = new User("root@root.com", bCryptPasswordEncoder.encode("root"), authorities);
         User managerUser = new User("manager@manager.com", bCryptPasswordEncoder.encode("manager"), authorities);
 
         Point firstPoint = new Point(Float.valueOf("55.779184"), Float.valueOf("49.129974"));
@@ -84,14 +87,21 @@ public class DataInitializer {
         Report thirdReport = new Report("thirdTestDesc", "thirdTestDescLink");
 
         Petition firstPetition = new Petition("testpetition1@test.com", "testPetition1", "testInfo1",
-                                                "testStatus1", "testSeparateCollection1", "testTypeOfRawMat1");
+                "testStatus1", "testSeparateCollection1", "testTypeOfRawMat1");
         Petition secondPetition = new Petition("testpetition2@test.com", "testPetition2", "testInfo2",
-                                                "testStatus2", "testSeparateCollection2", "testTypeOfRawMat2");
+                "testStatus2", "testSeparateCollection2", "testTypeOfRawMat2");
 
         Project firstProject = new Project(managerUser, firstPetition, "testTitle1");
         Project secondProject = new Project(rootUser, secondPetition, "testTittle2",
-                                            Status.IN_PROGRESS, firstPoint,
-                                            firstCompany, firstContractor, firstReport);
+                Status.IN_PROGRESS, firstPoint,
+                firstCompany, firstContractor, firstReport);
+
+        Step firstStep = new Step(StepNumber.STEP_1, firstProject, "testDesc1", Status.IN_PROGRESS,
+                LocalDateTime.of(2019, 4, 10, 10, 15),
+                LocalDateTime.of(2019, 6, 20, 20, 0));
+        Step secondStep = new Step(StepNumber.STEP_4, secondProject, "testDesc2", Status.IN_PROGRESS,
+                LocalDateTime.of(2019, 2, 15, 1, 15),
+                LocalDateTime.of(2019, 12, 28, 23, 15));
 
         authoritiesService.insert(rootAuthority);
         authoritiesService.insert(managerAuthority);
@@ -111,6 +121,11 @@ public class DataInitializer {
         petitionService.insert(secondPetition);
         projectService.insert(firstProject);
         projectService.insert(secondProject);
+        stepService.insert(firstStep);
+        stepService.insert(secondStep);
+
+        User test = userService.get(1);
+        System.out.println("123123");
     }
 
     private void insertAuthorities() {

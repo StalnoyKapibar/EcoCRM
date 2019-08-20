@@ -14,7 +14,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Column(name = "email")
     private String email;
@@ -96,7 +96,7 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

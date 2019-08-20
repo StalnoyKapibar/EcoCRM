@@ -1,10 +1,12 @@
 package ru.javamentor.EcoCRM.service;
 
 import ru.javamentor.EcoCRM.model.Project;
-import ru.javamentor.EcoCRM.model.Step;
+import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProjectService extends AbstractService<Project> {
-    List<Project> getProjectsByStep(Step step);
+    Map<Project, StepNumber> getListByStepInProgress(StepNumber stepNumber, Status status);
 }

@@ -6,6 +6,7 @@ import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "steps")
@@ -16,6 +17,7 @@ public class Step implements Serializable {
     private Long id;
 
     @Column(name = "step_number")
+    @Enumerated(value = EnumType.STRING)
     private StepNumber stepNumber;
 
     @ManyToOne
@@ -25,6 +27,7 @@ public class Step implements Serializable {
     private String description;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private Status status = Status.TODO;
 
     @Column(name = "start_step")
@@ -32,6 +35,13 @@ public class Step implements Serializable {
 
     @Column(name = "end_step")
     private LocalDateTime endStep;
+
+    @OneToMany
+    private List<Comment> comments;
+
+    public Step() {
+
+    }
 
     public Long getId() {
         return id;
@@ -65,7 +75,6 @@ public class Step implements Serializable {
         this.status = status;
     }
 
-
     public Project getProject() {
         return project;
     }
@@ -88,5 +97,13 @@ public class Step implements Serializable {
 
     public void setEndStep(LocalDateTime endStep) {
         this.endStep = endStep;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

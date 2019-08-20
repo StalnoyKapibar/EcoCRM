@@ -39,7 +39,8 @@ public class Contractor implements Serializable {  //заготовитель (�
 
     }
 
-    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String description) {
+    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber,
+                      String linkByPerson, String collectorType, String description) {
         this.name = name;
         this.rowType = rowType;
         this.link = link;

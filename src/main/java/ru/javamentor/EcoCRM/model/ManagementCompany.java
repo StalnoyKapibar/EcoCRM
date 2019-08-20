@@ -12,8 +12,8 @@ public class ManagementCompany implements Serializable {  //управляюща
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "inn")
     private String inn;
@@ -49,8 +49,9 @@ public class ManagementCompany implements Serializable {  //управляюща
 
     }
 
-    public ManagementCompany(String title, String inn, String link, String managerName, String managerSurname, String managerPatronymic, String phoneNumber, String email, String clock, String description, LocalDateTime nextContactDate) {
-        this.title = title;
+    public ManagementCompany(String name, String inn, String link, String managerName, String managerSurname, String managerPatronymic,
+                             String phoneNumber, String email, String clock, String description, LocalDateTime nextContactDate) {
+        this.name = name;
         this.inn = inn;
         this.link = link;
         this.managerName = managerName;
@@ -71,12 +72,12 @@ public class ManagementCompany implements Serializable {  //управляюща
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getInn() {

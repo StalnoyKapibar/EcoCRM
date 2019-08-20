@@ -41,8 +41,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
         entityManager.persist(t);
     }
 
-    public T findByFieldNameAndValue(String fieldName,
-                                     String fieldValue) {
+    public T findByFieldNameAndValue(String fieldName, String fieldValue) {
         Query query = entityManager.createQuery("select t from " + entityBeanType.getSimpleName() + " t where t." + fieldName + "=:fieldValue");
         query.setParameter("fieldValue", fieldValue);
         return (T)query.getResultList().get(0);

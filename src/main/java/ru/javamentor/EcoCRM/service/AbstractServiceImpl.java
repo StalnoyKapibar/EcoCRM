@@ -1,8 +1,6 @@
 package ru.javamentor.EcoCRM.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.javamentor.EcoCRM.dao.AbstractDao;
-import ru.javamentor.EcoCRM.dao.AbstractDaoImpl;
 
 import java.util.List;
 

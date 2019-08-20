@@ -23,25 +23,21 @@ public class ApplicationController {
 
     @GetMapping("/access-denied")
     public String showAccessDenied() {
-
         return "access-denied";
     }
 
     @GetMapping("/")
     public String showHome() {
-
         return "home";
     }
 
     @GetMapping("/admin/page")
     public String showAdminPage() {
-
         return "admin_page";
     }
 
     @GetMapping("/user")
     public String showUser() {
-
         return "user";
     }
 }

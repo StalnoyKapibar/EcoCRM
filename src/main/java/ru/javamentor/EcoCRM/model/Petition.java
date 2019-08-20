@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="petitions")
 public class Petition {
-//написать доки мне now
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +27,10 @@ public class Petition {
 
     @Column(name="type_of_raw_material")
     private String typeOfRawMaterial;
+
+    public Petition() {
+
+    }
 
     public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial) {
         this.email = email;

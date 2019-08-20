@@ -7,6 +7,12 @@
 
 <h3>Registration Form For Email</h3>
 
+<form action="#" th:action="@{/processSendForm}"  method="post">
+
+    <p>User Email: <input type="text" th:value="${userEmail}" name="userEmail" placeholder="Email" /></p>
+
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
 
 <br><br>
 

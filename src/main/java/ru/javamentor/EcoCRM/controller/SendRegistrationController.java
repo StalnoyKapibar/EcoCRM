@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 
 @Controller
@@ -22,11 +21,11 @@ public class SendRegistrationController {
         return "sendregform";
     }
     @PostMapping("/processSendForm")
-   // public String processSendForm(@RequestParam(name = "userEmail") String userEmail) {
-    public String   processingSenForm(@ModelAttribute("userEmail") String userEmail) {
-        System.out.println("user email is: " + userEmail);
-        emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", "Hello,Volunteer! Welcome to our Service!");
-        System.out.println("mailsended");
+    public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
+        String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
+                "\nhttp://localhost:8080/registration";
+        emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
+        System.out.println("Send Sucessfull!");
         return "admin_page";
     }
 }

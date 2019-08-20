@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Send Registration Email To User</title>
 </head>
 <body>
-
-<h3>Registration Form For Email</h3>
+<div class="container">
+    <p class="h4 mb-4">Enter User Email</p>
 
 <form action="#" th:action="@{/processSendForm}"  method="post">
 
-    <p>User Email: <input type="text" th:value="${userEmail}" name="userEmail" placeholder="Email" /></p>
+    <p>User Email: <br> <input type="text" th:value="${userEmail}" name="userEmail" class="form-control mb-4 col-4" placeholder="Email" /></p>
 
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 
-<br><br>
+    <hr>
+    <a th:href="@{/admin/page}">Back Admin Page</a>
 
+<br><br>
+</div>
 </body>
 </html>

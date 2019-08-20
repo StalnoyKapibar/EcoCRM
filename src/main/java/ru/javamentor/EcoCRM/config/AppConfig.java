@@ -6,7 +6,8 @@ import org.springframework.context.annotation.PropertySource;
 //todo reduce class
 @Configuration
 @PropertySource({"classpath:config/datasource.properties",
-                 "classpath:config/jpa.properties"})
+                 "classpath:config/jpa.properties",
+                 "classpath:config/mail.properties"})
 public class AppConfig {
 
 }

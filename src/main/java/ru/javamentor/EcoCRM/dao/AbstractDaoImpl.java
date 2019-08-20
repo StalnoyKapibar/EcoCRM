@@ -34,7 +34,9 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
         return (T)entityManager.find(entityBeanType, id);    }
 
     public List<T> getAll() {
-        return entityManager.createQuery("from" + entityBeanType.getClass().getName()).getResultList();
+        return entityManager.createQuery("from User")
+                .getResultList();
+        //return entityManager.createQuery("from" + entityBeanType.getClass().getName()).getResultList();
     }
 
     public void insert(T t) {

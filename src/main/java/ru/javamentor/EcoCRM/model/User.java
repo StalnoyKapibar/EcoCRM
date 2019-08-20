@@ -2,7 +2,6 @@ package ru.javamentor.EcoCRM.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
 
-    //comentary
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,6 +23,9 @@ public class User implements UserDetails {
 
     @Column(name = "enabled")
     private boolean enabled = true;
+
+    @Column(name = "user_status")
+    private UserStatus status = UserStatus.ACTIVE;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -44,11 +45,12 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public User(String email, String password, boolean enabled, List<Authority> authorities) {
+    public User(String email, String password, boolean enabled, List<Authority> authorities, UserStatus status) {
         this.email = email;
         this.password = password;
         this.enabled = enabled;
         this.authorities = authorities;
+        this.status = status;
     }
 
     public User(String email, String password, List<Authority> authorities) {
@@ -121,8 +123,15 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEnabled() {
+        this.enabled = status != UserStatus.BLOCKED;
     }
 
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStstus(UserStatus status) {
+            this.status = status;
+    }
 }

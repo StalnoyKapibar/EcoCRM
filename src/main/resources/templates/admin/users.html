@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         <tr th:each="user: ${usersList}">
-            <td th:text="${user.id}"></td>
+            <td th:text="${user.name} + ${user.surname}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${user.status}"></td>
             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">info</button></td>

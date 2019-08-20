@@ -23,7 +23,7 @@ public class SendRegistrationController {
     @PostMapping("/processSendForm")
     public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
         String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
-                "\nhttp://localhost:8080/registration";
+                "\nhttp://localhost:8080/registration/new";
         emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
         System.out.println("Send Sucessfull!");
         return "admin_page";

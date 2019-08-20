@@ -6,8 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
-import ru.javamentor.EcoCRM.model.embedded.Status;
-import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDateTime;
@@ -73,7 +71,7 @@ public class DataInitializer {
     }
 
     private void initUsers() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 1; i < 50; i++) {
             User user = new User();
             user.setName(faker.name().firstName());
             user.setSurname(faker.name().lastName());
@@ -91,7 +89,7 @@ public class DataInitializer {
     }
 
     private void initContractors() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 1; i < 15; i++) {
             Contractor contractor = new Contractor();
             contractor.setName(faker.company().name());
             contractor.setRowType(faker.commerce().material());
@@ -106,7 +104,7 @@ public class DataInitializer {
     }
 
     private void initManagement() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 1; i < 15; i++) {
             ManagementCompany company = new ManagementCompany();
             company.setName(faker.company().name());
             company.setInn(faker.commerce().promotionCode());
@@ -122,7 +120,7 @@ public class DataInitializer {
     }
 
     private void initPetition() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 1; i < 50; i++) {
             Petition petition = new Petition();
             petition.setEmail(faker.internet().emailAddress());
             petition.setUserName(faker.name().fullName());
@@ -135,7 +133,7 @@ public class DataInitializer {
     }
 
     private void initProject() {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 1; i < 30; i++) {
             Project project = new Project();
             project.setTitle(faker.company().name());
             User user = userService.get((long)random.nextInt(50));

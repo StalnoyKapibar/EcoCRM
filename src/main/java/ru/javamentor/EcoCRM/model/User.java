@@ -41,6 +41,7 @@ public class User implements UserDetails {
     private boolean enabled = true;
 
     @Column(name = "user_status")
+    @Enumerated(value = EnumType.STRING)
     private UserStatus status = UserStatus.ACTIVE;
 
     @Column(name = "not_to_do")
@@ -136,7 +137,8 @@ public class User implements UserDetails {
     }
 
     public void setEnabled() {
-        this.enabled = status != UserStatus.BLOCKED;
+        this.enabled = enabled;
+        //this.enabled = status != UserStatus.BLOCKED;
     }
 
     public UserStatus getStatus() {

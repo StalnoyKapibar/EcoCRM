@@ -1,10 +1,10 @@
 package ru.javamentor.EcoCRM.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.javamentor.EcoCRM.dao.AbstractDao;
 import ru.javamentor.EcoCRM.dao.UserDetailsDao;
 import ru.javamentor.EcoCRM.model.User;
 
@@ -12,6 +12,7 @@ import ru.javamentor.EcoCRM.model.User;
 public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserService , UserDetailsService{
     private UserDetailsDao userDetailsDao;
 
+    @Autowired
     public UserServiceImpl(UserDetailsDao userDetailsDao) {
         super(userDetailsDao);
         this.userDetailsDao = userDetailsDao;

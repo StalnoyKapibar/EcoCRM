@@ -50,12 +50,13 @@ public class DataInitializer {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private Faker faker = new Faker(new Locale("en"));
+    private Faker faker = new Faker(new Locale("ru"));
 
     private Random random = new Random();
 
     public void init() {
         initRoles();
+        initBaseUserAndAdmin();
         initUsers();
         initContractors();
         initManagement();
@@ -69,17 +70,31 @@ public class DataInitializer {
         Authority userAuthority = new Authority("ROLE_USER");
         authoritiesService.insert(userAuthority);
     }
+    private void initBaseUserAndAdmin() {
+        User admin = new User();
+        admin.setEmail("admin");
+        admin.setPassword(bCryptPasswordEncoder.encode("admin"));
+        admin.setAuthorities(authoritiesService.getAll());
+
+        User user = new User();
+        user.setEmail("user");
+        user.setPassword(bCryptPasswordEncoder.encode("user"));
+        List<Authority> roles = new ArrayList<>();
+        roles.add(authoritiesService.get(2));
+        user.setAuthorities(roles);
+        userService.insert(user);
+        userService.insert(admin);
+    }
 
     private void initUsers() {
         for (int i = 1; i < 50; i++) {
             User user = new User();
-            user.setName(faker.name().firstName());
+            user.setName("jksljldk");
             user.setSurname(faker.name().lastName());
             user.setEmail(faker.internet().emailAddress());
             user.setLink(faker.internet().emailAddress());
             user.setProfession(faker.job().position());
             user.setPassword(bCryptPasswordEncoder.encode("1"));
-            user.setEnabled();
             user.setNotToDo(faker.chuckNorris().fact());
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));

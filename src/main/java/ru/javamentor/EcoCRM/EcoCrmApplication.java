@@ -1,5 +1,6 @@
 package ru.javamentor.EcoCRM;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +11,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import ru.javamentor.EcoCRM.init.DataInitializer;
-
-import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class EcoCrmApplication implements WebMvcConfigurer {

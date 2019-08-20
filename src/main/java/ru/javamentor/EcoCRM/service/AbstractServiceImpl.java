@@ -33,5 +33,4 @@ public abstract class AbstractServiceImpl<T> implements AbstractService<T>{
     public List<T> getAll() {
         return abstractDao.getAll();
     }
-
 }

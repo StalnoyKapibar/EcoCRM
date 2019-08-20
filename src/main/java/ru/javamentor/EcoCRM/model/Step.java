@@ -16,15 +16,17 @@ public class Step implements Serializable {
     private Long id;
 
     @Column(name = "step_number")
+    @Enumerated(value = EnumType.STRING)
     private StepNumber stepNumber;
 
-    @ManyToOne
+    @ManyToOne()
     private Project project;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private Status status = Status.TODO;
 
     @Column(name = "start_step")
@@ -32,6 +34,18 @@ public class Step implements Serializable {
 
     @Column(name = "end_step")
     private LocalDateTime endStep;
+
+    public Step() {
+    }
+
+    public Step(StepNumber stepNumber, Project project, String description, Status status, LocalDateTime startStep, LocalDateTime endStep) {
+        this.stepNumber = stepNumber;
+        this.project = project;
+        this.description = description;
+        this.status = status;
+        this.startStep = startStep;
+        this.endStep = endStep;
+    }
 
     public Long getId() {
         return id;

@@ -26,6 +26,4 @@ public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserS
         }
         return user;
     }
-
-
 }

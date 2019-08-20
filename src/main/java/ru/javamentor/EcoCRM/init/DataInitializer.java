@@ -79,7 +79,7 @@ public class DataInitializer {
             user.setLink(faker.internet().emailAddress());
             user.setProfession(faker.job().position());
             user.setPassword(bCryptPasswordEncoder.encode("1"));
-            user.setEnabled(true);
+            user.setEnabled();
             user.setNotToDo(faker.chuckNorris().fact());
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));

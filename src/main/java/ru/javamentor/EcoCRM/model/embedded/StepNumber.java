@@ -1,5 +1,8 @@
 package ru.javamentor.EcoCRM.model.embedded;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 public enum StepNumber {
     STEP_1,
     STEP_2,

@@ -16,11 +16,17 @@ public class Comment implements Serializable {
     @Column(name = "message")
     private String message;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private TaskByStep taskByStep;
-
     @Column(name = "time")
     private LocalDateTime time;
+
+    public Comment() {
+
+    }
+
+    public Comment(String message, LocalDateTime time) {
+        this.message = message;
+        this.time = time;
+    }
 
     public Long getId() {
         return id;
@@ -36,14 +42,6 @@ public class Comment implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public TaskByStep getTaskByStep() {
-        return taskByStep;
-    }
-
-    public void setTaskByStep(TaskByStep taskByStep) {
-        this.taskByStep = taskByStep;
     }
 
     public LocalDateTime getTime() {

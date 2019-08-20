@@ -31,18 +31,18 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
     }
 
     public T get(long id) {
-        return (T)entityManager.find(entityBeanType, id);    }
+        return entityManager.find(entityBeanType, id);
+    }
 
     public List<T> getAll() {
-        return entityManager.createQuery("from" + entityBeanType.getClass().getName()).getResultList();
+        return entityManager.createQuery("from " + entityBeanType.getSimpleName()).getResultList();
     }
 
     public void insert(T t) {
         entityManager.persist(t);
     }
 
-    public T findByFieldNameAndValue(String fieldName,
-                                     String fieldValue) {
+    public T findByFieldNameAndValue(String fieldName, String fieldValue) {
         Query query = entityManager.createQuery("select t from " + entityBeanType.getSimpleName() + " t where t." + fieldName + "=:fieldValue");
         query.setParameter("fieldValue", fieldValue);
         return (T)query.getResultList().get(0);

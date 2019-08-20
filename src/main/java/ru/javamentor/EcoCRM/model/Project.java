@@ -4,6 +4,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -23,10 +24,14 @@ public class Project implements Serializable {
     private String title;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private Status status = Status.IN_PROGRESS;
 
     @OneToOne
     private Point point;
+
+    @OneToMany
+    private List<User> users;
 
     @OneToOne
     private ManagementCompany company;
@@ -36,6 +41,10 @@ public class Project implements Serializable {
 
     @OneToOne
     private Report report;
+
+    public Project() {
+
+    }
 
     public Project(User manager, Petition petition, String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
         this.manager = manager;
@@ -126,4 +135,11 @@ public class Project implements Serializable {
         this.petition = petition;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }

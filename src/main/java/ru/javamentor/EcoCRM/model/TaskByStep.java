@@ -4,6 +4,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="tasks")
@@ -20,18 +21,26 @@ public class TaskByStep implements Serializable {
     private User performer; // ответсвенный за таску
 
     @Column(name = "task_status")
+    @Enumerated(value = EnumType.STRING)
     private Status taskStatus = Status.TODO;
 
     @ManyToOne
+    @JoinColumn(name = "step_id")
     private Step step;
+
+    @OneToMany
+    private List<Comment> comments;
 
     public TaskByStep() {
 
     }
 
-    public TaskByStep(String description, User performer, Step step) {
+    public TaskByStep(String description) {
         this.description = description;
-        this.performer = performer;
+    }
+
+    public TaskByStep(String description, Step step) {
+        this.description = description;
         this.step = step;
     }
 
@@ -73,5 +82,11 @@ public class TaskByStep implements Serializable {
 
     public void setStep(Step step) {
         this.step = step;
+    }
+
+    public List<Comment> getComments() { return comments; }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

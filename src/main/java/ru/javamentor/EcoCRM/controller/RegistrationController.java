@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Authority;
+import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
+import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.io.IOException;
@@ -33,16 +35,38 @@ public class RegistrationController {
     @Autowired
     AuthoritiesService authoritiesService;
 
+    @Autowired
+    TokenService tokenService;
+
     //TODO PROPERTY
     public final String CLIEND_ID = "7104443";
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 
     @GetMapping("/new")
-    public String registrationForm(Model model) {
+    public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
+        System.out.println("EMAIL PARAMETER:" + email);
+        System.out.println("TOKEN PARAMETER:" + token);
         User user = new User();
+        user.setEmail(email);
         model.addAttribute("user", user);
+        Token dbtoken =  tokenService.loadTokenByEmail(email);
+        String tokenFromDB =dbtoken.getToken();
 
-        return "registration/registration-form";
+        //String tokenFromDB = tokenService.f.getToken();
+
+
+        if (tokenFromDB.equals(token)) {
+            System.out.println("RIGHT TOKEN!!!");
+            tokenService.delete(dbtoken);
+
+
+            return "registration/registration-form";
+        }
+        else {
+            System.out.println("WRONG TOKEN!!!");
+
+        }
+        return "access-denied";
     }
 
 

@@ -38,7 +38,9 @@ public class RegistrationController {
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 
     @GetMapping("/new")
-    public String registrationForm(Model model) {
+    public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
+        System.out.println("EMAIL PARAMETER:" + email);
+        System.out.println("TOKEN PARAMETER:" + token);
         User user = new User();
         model.addAttribute("user", user);
 

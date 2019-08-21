@@ -50,7 +50,7 @@ public class SendRegistrationController {
         tokenService.insert(new Token(userEmail, token));
         System.out.println("result String: " + token);
        String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
-                "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "?token=" + token;
+                "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "&token=" + token;
         emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
 
         System.out.println("Send Sucessfull!");

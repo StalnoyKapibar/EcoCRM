@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>steps_2</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--    <link rel = "stylesheet" href="/public/bootstrap/css/bootstrap.css" >-->
+<!--    <link rel = "stylesheet" href="/public/bootstrap/css/bootstrap-grid.css" >-->
+<!--    <link rel = "stylesheet" href="/public/bootstrap/css/bootstrap-reboot.css" >-->
+<!--    <script src="/public/bootstrap/js/bootstrap.bundle.js" type="text/javascript"></script>-->
+<!--    <script src="/public/bootstrap/js/bootstrap.js" type="text/javascript"></script>-->
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<input type="text" th:value="${steps[0].status}">
+<!--<button type="button" onclick="showMes()">show</button>-->
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_1" role="tab" aria-controls="nav-home"
+           aria-selected="true">1. Заявитель</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_2" role="tab" aria-controls="nav-profile"
+           aria-selected="false">2. Управляющая<br>компания</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_3" role="tab" aria-controls="nav-contact"
+           aria-selected="false">3. Заготовители</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_4" role="tab" aria-controls="nav-contact"
+           aria-selected="false">4. Заключение<br>договора</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_5" role="tab" aria-controls="nav-contact"
+           aria-selected="false">5. Установка<br>контейнера</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_6" role="tab" aria-controls="nav-contact"
+           aria-selected="false">6. Работа с<br>жителями</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_7" role="tab" aria-controls="nav-contact"
+           aria-selected="false">7. Описание<br>кейса</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_8" role="tab" aria-controls="nav-contact"
+           aria-selected="false">8. Контроль</a>
+    </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show " th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : null" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_1"></th:block>
+    </div>
+    <div class="tab-pane fade show" id="step_2" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_2"></th:block>
+    </div>
+    <div class="tab-pane fade show" id="step_3" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_3"></th:block>
+    </div>
+    <div class="tab-pane fade show"id="step_4" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_4"></th:block>
+    </div>
+    <div class="tab-pane fade show" id="step_5" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_5"></th:block>
+    </div>
+    <div class="tab-pane fade show" id="step_6" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_6"></th:block>
+    </div>
+    <div class="tab-pane fade show"  id="step_7" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_7"></th:block>
+    </div>
+    <div class="tab-pane fade show" id="step_8" role="tabpanel" aria-labelledby="nav-home-tab">
+        <th:block th:replace="steps/steps :: step_8"></th:block>
+    </div>
+    <th:block th:replace="steps/steps:: add_task_modal"></th:block>
+    <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>
+</div>
+<!--<script th:inline="javascript">-->
+<!--    /*<![CDATA[*/-->
+<!--function showMes() {-->
+<!--    var steps = [[${steps}]];-->
+<!--    for(var i = 0; i<= steps.length; i++){-->
+<!--        if()-->
+<!--    }-->
+
+<!--}-->
+
+
+<!--    /*]]>*/-->
+<!--</script>-->
+</body>
+</html>

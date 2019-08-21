@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.StepDao;
 import ru.javamentor.EcoCRM.model.Step;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import java.util.List;
@@ -13,5 +14,27 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
     @Autowired
     public StepServiceImpl(StepDao stepDao) {
         super(stepDao);
+    }
+
+    @Autowired
+    private StepDao stepDao;
+
+    public Step getProgressStepByProjectId(Long projectId){
+       return stepDao.getProgressStepByProjectId(projectId);
+    }
+
+    //todo Удалить метод когда по умолчанию при создании проекта Step #1 будет in_progress
+    public void putProgressStatusToFirstStep(){
+        List<Step> steps = stepDao.getAll();
+        for(Step step: steps){
+            if(step.getStepNumber() == StepNumber.STEP_1){
+                step.setStatus(Status.IN_PROGRESS);
+                stepDao.update(step);
+            }
+        }
+    }
+
+    public List<Step> getAllByprojectId(Long id){
+        return stepDao.getAllByProjectId(id);
     }
 }

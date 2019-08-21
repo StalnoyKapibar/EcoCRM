@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.Token;
@@ -18,6 +19,7 @@ import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +41,8 @@ public class RegistrationController {
     TokenService tokenService;
 
     //TODO PROPERTY
-    public final String CLIEND_ID = "7104443";
-    public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
+    private final String CLIEND_ID = "7104443";
+    private final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 
     @GetMapping("/new")
     public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
@@ -69,7 +71,7 @@ public class RegistrationController {
         return "access-denied";
     }
 
-
+/*
     @PostMapping("/new")
     public String addUser(@ModelAttribute("user") User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -80,6 +82,8 @@ public class RegistrationController {
 
         return "admin_page";
     }
+
+ */
     @GetMapping("/usercode")
     public String getCode(@RequestParam(name = "code") String code,Model model) throws IOException, JSONException {
         System.out.println(code);

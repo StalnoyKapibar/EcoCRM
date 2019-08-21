@@ -34,8 +34,9 @@ public class VkController {
         JSONObject jsonReq = new JSONObject(response.getBody());
         String accesToken = jsonReq.getString("access_token");
         String userId = jsonReq.getString("user_id");
-
-        String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=bdate&access_token=" + accesToken +"&v=5.101";
+        //account.getProfileInfo
+        String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=fields=id,first_name,last_name,sex,bdate,photo_50&access_token=" + accesToken +"&v=5.101";
+        //String urlForInfo = "https://api.vk.com/method/account.getProfileInfo?accesToken="+accesToken+"&v=5.101";
         System.out.println("token : " + accesToken);
 
         ResponseEntity<String> responseWithInfo = restTemplate.getForEntity(urlForToken, String.class);

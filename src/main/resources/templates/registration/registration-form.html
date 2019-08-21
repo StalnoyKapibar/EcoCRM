@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,60 +9,128 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+    <link href="/public/css/bootstrap-social.css" rel="stylesheet">
     <title>Registration Form</title>
 </head>
 <body>
 <div class="container">
     <div>
-        <h2>Добро пожаловать на форму регистрации!</h2>
-        <a href="https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101">Click me to authorize with VK</a>
+        <h2>Добро пожаловать на форму регистрации MYPAGE</h2>
+        <a href="https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101">Click me to authorize with VK</a>\
+        <a class="btn btn-block btn-social btn-vk" href="https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101">
+            <span class="fa fa-vk"></span>Sign in with VK
+        </a>
     </div>
-    <form action="#" th:action="@{/registration/new}"
-          th:object="${user}" method="POST">
-        <div class="form-group">
-            <label>Имя:</label>
-            <input type="text" th:field="*{name}" class="form-control"  placeholder="Елена">
-        </div>
-        <div class="form-group">
-            <label>Фамилия:</label>
-            <input type="text" th:field="*{surname}" class="form-control"  placeholder="Иванова">
-        </div>
-        <div class="form-group">
-            <label>Адрес электронной почты:</label>
-            <input type="email" th:field="*{email}" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label>Пароль:</label>
-            <input type="password" th:field="*{password}" class="form-control"  placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label>Телефон:</label>
-            <input type="text" th:field="*{phone}" class="form-control"  placeholder="+7978777777">
-        </div>
-        <div class="form-group">
-            <label>Ссылка vk.com:</label>
-            <input type="text" th:field="*{link}" class="form-control"  placeholder="https://vk.com/">
-        </div>
-        <div class="form-group">
-            <label>Основной род деятельности:</label>
-            <input type="text" th:field="*{profession}" class="form-control"  placeholder="инженер">
-        </div>
-        <div class="form-group">
-            <label>Чем я точно не хотел бы заниматься:</label>
-            <input type="text" th:field="*{notToDo}" class="form-control"  placeholder="уборка мусора">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-primary">Reset</button>
+
+    <div class="form-group">
+        <label>Имя:</label>
+        <input id="person-name" type="text" class="form-control"  placeholder="Елена">
+    </div>
+    <div class="form-group">
+        <label>Фамилия:</label>
+        <input id="person-surname" type="text" class="form-control"  placeholder="Иванова">
+    </div>
+    <div class="form-group">
+        <label>Адрес электронной почты:</label>
+        <input type="email"  class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label>Пароль:</label>
+        <input id="password" type="password"  class="form-control"  placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label>Телефон:</label>
+        <input id="phone" type="text"  class="form-control"  placeholder="+7978777777">
+    </div>
+    <div class="form-group">
+        <label>Ссылка vk.com:</label>
+        <input id="vk_link" type="text"  class="form-control"  placeholder="https://vk.com/">
+    </div>
+    <div class="form-group">
+        <label>Основной род деятельности:</label>
+        <input id="job" type="text"  class="form-control"  placeholder="инженер">
+    </div>
+    <div class="form-group">
+        <label>Чем я точно не хотел бы заниматься:</label>
+        <input id="notToDo" type="text"  class="form-control"  placeholder="уборка мусора">
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" name="imageFile" id="uploadimage" enctype="multipart">
+        <label class="custom-file-label" for="uploadimage">Choose file</label>
+    </div>
+    <button  class="btn btn-primary" onclick="send()">Submit</button>
+    <button type="reset" class="btn btn-primary">Reset</button>
 
 
-        <hr>
-        <a th:href="@{/admin/page}">Назад на главную страницу</a>
+    <hr>
+    <a th:href="@{/admin/page}">Назад на главную страницу</a>
 
-        <br><br>
-    </form>
+    <br><br>
 </div>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' th:inline="javascript">
+    /*
+    $(document).ready(function() {
+        var url = [[${urlForInfo}]];
+        $.ajax({
+            type: 'GET',
+            url: url,
+            async: false,
+            jsonpCallback: 'callback',
+            contentType: "application/json",
+            dataType: 'jsonp',
+            success: function(json) {
+                console.log(json.response[0].first_name);
+                document.getElementById("person-name").value = json.response[0].first_name;
+                document.getElementById("person-surname").value = json.response[0].last_name;
+                document.getElementById("vk_link").value = "vk.com/id" + json.response[0].id;
+                console.log(json.response[0].photo_50);
+                //https://sun9-9.userapi.com/c846520/v846520687/bbb78/UNmfV7dzjrI.jpg?ava=1
+            },
+            error: function(e) {
+                console.log(e);
+                //console.log(e.message);
+            }
+        });
 
+    });
+
+     */
+</script>
+<script type="text/javascript">
+    function send(){
+        var person_name = $("#person-name").val();
+        var person_surnam = $("#person-surname")
+
+        var emailHelp =  $("#emailHelp");
+
+        var password = $("#password");
+        var phone = $("#phone");
+        var vk_link = $("#vk_link");
+        var job = $("#job");
+        var notToDo = $("#notToDo");
+        var jsonObj = {'name':person_name,'surname':person_surnam,
+            'phone':phone,'email':emailHelp,'link':vk_link,
+            'profession':job,'password':password,'notToDo':notToDo};
+        $.ajax({
+            type: 'POST',
+            url: "/api/registration/new",
+            data: JSON.stringify(jsonObj),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function(json) {
+                alert(JSON.stringify(json));
+            },
+            error: function(e) {
+                console.log(e.responseText);
+                //console.log(e.message);
+            }
+        });
+    }
+</script>
 </body>
 
 </html>
+
+

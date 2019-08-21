@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,28 +36,17 @@ public class RegistrationController {
     AuthoritiesService authoritiesService;
 
     //TODO PROPERTY
-    public final String CLIEND_ID = "7104443";
-    public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
+    private final String CLIEND_ID = "7104443";
+    private final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 
     @GetMapping("/new")
-    public String registrationForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-
+    public String registrationForm() {
         return "registration/registration-form";
     }
 
 
-    @PostMapping("/new")
-    public String addUser(@ModelAttribute("user") User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        List<Authority> roles = new ArrayList<>();
-        roles.add(authoritiesService.get(2));      //set user_role
-        user.setAuthorities(roles);
-        userService.insert(user);
 
-        return "admin_page";
-    }
+
     @GetMapping("/usercode")
     public String getCode(@RequestParam(name = "code") String code,Model model) throws IOException, JSONException {
         System.out.println(code);
@@ -65,7 +56,7 @@ public class RegistrationController {
         JSONObject jsonReq = new JSONObject(response.getBody());
         String accesToken = jsonReq.getString("access_token");
         String userId = jsonReq.getString("user_id");
-        String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=bdate&access_token=" + accesToken +"&v=5.101";
+        String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=photo_50&access_token=" + accesToken +"&v=5.101";
         User user = new User();
         user.setEmail("bastard_operator");
         model.addAttribute("user", user);

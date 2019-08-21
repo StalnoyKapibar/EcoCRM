@@ -39,9 +39,7 @@ public class RegistrationController {
 
     @GetMapping("/new")
     public String registrationForm(Model model) {
-
         User user = new User();
-        user.setEmail("bastard_operator");
         model.addAttribute("user", user);
 
         return "registration/registration-form";
@@ -51,10 +49,8 @@ public class RegistrationController {
     @PostMapping("/new")
     public String addUser(@ModelAttribute("user") User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
         List<Authority> roles = new ArrayList<>();
         roles.add(authoritiesService.get(2));      //set user_role
-
         user.setAuthorities(roles);
         userService.insert(user);
 

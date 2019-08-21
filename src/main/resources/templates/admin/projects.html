@@ -9,31 +9,61 @@
     <title>Projects</title>
 </head>
 <body>
-<form action="/admin/projects" method="post">
-    <input type="submit" value="blah blah"/>
-</form>
-<div class="container">
-    <div class="row border pt-3 pb-3">
-        <div class="col border ml-2 mr-2">
-            Second
+<div class="row border pt-3 pb-3">
+    <div class="col border ml-2 mr-2">
+        <div class="card m-1">
+            <th:block th:each="project :${firstStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
-        <div class="col border ml-2 mr-2">
-            Third
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${secondStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
-        <div class="col border ml-2 mr-2">
-            Fourth
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${thirdStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
-        <div class="col border ml-2 mr-2">
-            Fifth
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${fourthStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
-        <div class="col border ml-2 mr-2">
-            Sixth
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${fifthStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
-        <div class="col border ml-2 mr-2">
-            Seventh
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${sixthStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
-        <div class="col border ml-2 mr-2">
-            Eighth
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${seventhStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
+        </div>
+    </div>
+    <div class="col border ml-2 mr-2">
+        <div class="card">
+            <th:block th:each="project :${eighthStepProjects}">
+                <label th:text="${project.title}"/>
+            </th:block>
         </div>
     </div>
 </div>

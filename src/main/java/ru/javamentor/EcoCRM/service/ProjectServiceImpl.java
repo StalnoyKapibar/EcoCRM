@@ -3,7 +3,6 @@ package ru.javamentor.EcoCRM.service;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.ProjectDao;
 import ru.javamentor.EcoCRM.model.Project;
-import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import java.util.List;
@@ -18,8 +17,7 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
     }
 
     @Override
-    public Map<Project, StepNumber> getListByStepInProgress(StepNumber stepNumber, Status status) {
-//        Map<Project, StepNumber> projectsMap = projectDao.getListByStepInProgress(stepNumber, status);
-        return null;
+    public Map<StepNumber, List<Project>> getListByStepInProgress() {
+        return projectDao.getListByStepInProgress();
     }
 }

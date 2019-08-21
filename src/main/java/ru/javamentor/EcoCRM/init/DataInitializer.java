@@ -123,12 +123,5 @@ public class DataInitializer {
         projectService.insert(secondProject);
         stepService.insert(firstStep);
         stepService.insert(secondStep);
-
-        User test = userService.get(1);
-        System.out.println("123123");
-    }
-
-    private void insertAuthorities() {
-
     }
 }

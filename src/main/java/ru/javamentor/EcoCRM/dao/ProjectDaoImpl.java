@@ -7,16 +7,23 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import javax.persistence.Query;
-import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectDao {
-    public List<Map<Project, StepNumber>> getListByStepInProgress(StepNumber stepNumber, Status status) {
-        Query query = entityManager.unwrap(Session.class).createQuery("select new map(s.project, s.stepNumber) from Step as s where s.status = :status");
+    public Map<StepNumber, List<Project>> getListByStepInProgress() {
+        Map<StepNumber, List<Project>> projectsBySteps = new HashMap<>();
+        for(StepNumber step : StepNumber.values()) {
+            projectsBySteps.put(step, new ArrayList<>());
+        }
+        Query query = entityManager.unwrap(Session.class).createQuery("select new map(s.stepNumber, s.project) from Step as s where s.status = :status");
         query.setParameter("status", Status.IN_PROGRESS);
-        List<Map<Project, StepNumber>> projects = query.getResultList();
-        return projects;
+        for(Map<Object, Object> map : (List<Map<Object, Object>>)query.getResultList()) {
+            projectsBySteps.get(map.get("0")).add((Project)map.get("1"));
+        }
+        return projectsBySteps;
     }
 }

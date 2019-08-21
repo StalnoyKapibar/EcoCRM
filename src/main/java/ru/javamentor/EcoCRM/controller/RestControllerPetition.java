@@ -3,10 +3,7 @@ package ru.javamentor.EcoCRM.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
@@ -33,7 +30,7 @@ public class RestControllerPetition {
     String pathToLetter;
 
     @PostMapping
-    public void getSearchUserProfiles(@RequestBody Petition petition) throws MessagingException {
+    public void getSearchUserProfiles(@ModelAttribute("petition") Petition petition) throws MessagingException {
         petitionService.insert(petition);
 
         MimeMessage mimeMessage = emailServiceimp.emailSender.createMimeMessage();

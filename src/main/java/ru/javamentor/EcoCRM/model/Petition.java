@@ -28,17 +28,198 @@ public class Petition {
     @Column(name="type_of_raw_material")
     private String typeOfRawMaterial;
 
+    @Column(name = "adres_home")
+    private String adresHome;
+
+    @Column(name = "house_area")
+    private String houseArea;
+
+    @Column(name = "count_of_apartments")
+    private String countOfApartments;
+
+    @Column(name = "home_control_form")
+    private String homeControlForm;
+
+    @Column(name = "house_council")
+    private String houseCouncil;
+
+    @Column (name = "management_organization")
+    private String managementOrganization;
+
+    @Column(name = "board_house_contact_information")
+    private String boardHouseContactInformation;
+
+    @Column(name = "additional_information")
+    private String additionalInformation;
+
+    @Column(name = "container_site")
+    private String containerSite;
+
+    @Column (name = "container_size")
+    private String containerSize;
+
+    @Column (name = "container_owner")
+    private String containerOwner;
+
+    @Column(name = "why_not_container")
+    private String whyNotContainer;
+
+    @Column(name = "garbage")
+    private String garbage;
+
+    @Column(name = "export_garbage")
+    private String exportGarbage;
+
+    @Column(name = "yes")
+    private String yes;
+
+
+
     public Petition() {
 
     }
 
-    public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial) {
+    public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial, String adresHome, String houseArea, String countOfApartments, String homeControlForm,
+    String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage,
+                    String exportGarbage, String yes) {
         this.email = email;
         this.userName = userName;
         this.contactInformation = contactInformation;
         this.statusHome = statusHome;
         this.separateCollection = separateCollection;
         this.typeOfRawMaterial = typeOfRawMaterial;
+        this.adresHome = adresHome;
+        this.houseArea = houseArea;
+        this.countOfApartments = countOfApartments;
+        this.homeControlForm = homeControlForm;
+        this.houseCouncil = houseCouncil;
+        this.managementOrganization = managementOrganization;
+        this.boardHouseContactInformation = boardHouseContactInformation;
+        this.additionalInformation = additionalInformation;
+        this.containerSite = containerSite;
+        this.containerSize  =containerSize;
+        this.containerOwner = containerOwner;
+        this.whyNotContainer  = whyNotContainer;
+        this.garbage = garbage;
+        this.exportGarbage = exportGarbage;
+        this.yes = yes;
+
+    }
+
+    public String getExportGarbage() {
+        return exportGarbage;
+    }
+
+    public void setExportGarbage(String exportGarbage) {
+        this.exportGarbage = exportGarbage;
+    }
+
+    public String getWhyNotContainer() {
+        return whyNotContainer;
+    }
+
+    public void setWhyNotContainer(String whyNotContainer) {
+        this.whyNotContainer = whyNotContainer;
+    }
+
+    public String getGarbage() {
+        return garbage;
+    }
+
+    public void setGarbage(String garbage) {
+        this.garbage = garbage;
+    }
+
+    public String getContainerOwner() {
+        return containerOwner;
+    }
+
+    public void setContainerOwner(String containerOwner) {
+        this.containerOwner = containerOwner;
+    }
+
+    public String getContainerSize() {
+        return containerSize;
+    }
+
+    public void setContainerSize(String containerSize) {
+        this.containerSize = containerSize;
+    }
+
+    public String getContainerSite() {
+        return containerSite;
+    }
+
+    public void setContainerSite(String containerSite) {
+        this.containerSite = containerSite;
+    }
+
+    public String getAdditionalInformation() {
+        return additionalInformation;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
+    public String getBoardHouseContactInformation() {
+        return boardHouseContactInformation;
+    }
+
+    public void setBoardHouseContactInformation(String boardHouseContactInformation) {
+        this.boardHouseContactInformation = boardHouseContactInformation;
+    }
+
+    public String getManagementOrganization() {
+        return managementOrganization;
+    }
+
+    public void setManagementOrganization(String managementOrganization) {
+        this.managementOrganization = managementOrganization;
+    }
+
+    public String getHouseCouncil() {
+        return houseCouncil;
+    }
+
+    public void setHouseCouncil(String houseCouncil) {
+        this.houseCouncil = houseCouncil;
+    }
+
+    public String getHomeControlForm() {
+        return homeControlForm;
+    }
+
+    public void setHomeControlForm(String homeControlForm) {
+        this.homeControlForm = homeControlForm;
+    }
+
+    public String getCountOfApartments() {
+        return countOfApartments;
+    }
+
+    public void setCountOfApartments(String countOfApartments) {
+        this.countOfApartments = countOfApartments;
+    }
+
+    public String getHouseArea() {
+        return houseArea;
+    }
+
+    public void setHouseArea(String houseArea) {
+        this.houseArea = houseArea;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAdresHome() {
+        return adresHome;
+    }
+
+    public void setAdresHome(String adresHome) {
+        this.adresHome = adresHome;
     }
 
     public long getId() {

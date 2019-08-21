@@ -6,13 +6,11 @@ function auth() {
         url: 'http://localhost:8080/authenticateTheUser',
         //url: 'http://localhost:8080/test',
         data: dataForLogin,
-
         complete: function (resp) {
             var goTo = resp.getResponseHeader("redirect");
             if(goTo != null) {
                 window.location.href = goTo;
             }
-
         },
         error: function (error) {
             if(document.getElementById('error-message') === null) {
@@ -20,7 +18,6 @@ function auth() {
                 d1.insertAdjacentHTML('afterend', '<p id="error-message">Неверный логин или пароль</p>');
             }
         },
-
         dataType: 'application/x-www-form-urlencoded'
     });
 }

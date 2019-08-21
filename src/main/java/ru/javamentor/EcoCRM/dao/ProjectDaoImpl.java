@@ -14,6 +14,7 @@ import java.util.Map;
 
 @Repository
 public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectDao {
+
     public Map<StepNumber, List<Project>> getListByStepInProgress() {
         Map<StepNumber, List<Project>> projectsBySteps = new HashMap<>();
         for(StepNumber step : StepNumber.values()) {

@@ -17,6 +17,8 @@ import java.io.IOException;
 @RequestMapping("/registration")
 public class VkController {
 
+
+    //todo
     public final String CLIEND_ID = "7104443";
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
     //https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101

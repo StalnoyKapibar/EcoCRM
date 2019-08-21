@@ -16,9 +16,10 @@ import javax.mail.internet.MimeMessage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.function.Function;
 
 
-
+//todo naming
 @RestController
 @RequestMapping("/api/petition")
 public class RestControllerPetition {
@@ -57,7 +58,7 @@ public class RestControllerPetition {
         helper.setTo(petition.getEmail());
         this.emailServiceimp.emailSender.send(mimeMessage);
 
-
+            //TODO
         // emailServiceimp.sendSimpleMessage(petition.getEmail(),content,content);
 
     }

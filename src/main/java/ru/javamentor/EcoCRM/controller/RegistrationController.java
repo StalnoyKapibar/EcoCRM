@@ -33,6 +33,7 @@ public class RegistrationController {
     @Autowired
     AuthoritiesService authoritiesService;
 
+    //TODO PROPERTY
     public final String CLIEND_ID = "7104443";
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 

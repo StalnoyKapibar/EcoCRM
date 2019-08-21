@@ -9,7 +9,8 @@ import ru.javamentor.EcoCRM.dao.UserDetailsDao;
 import ru.javamentor.EcoCRM.model.User;
 
 @Service
-public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserService , UserDetailsService{
+public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserService , UserDetailsService {
+
     private UserDetailsDao userDetailsDao;
 
     @Autowired
@@ -22,6 +23,7 @@ public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserS
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDetailsDao.findByFieldNameAndValue("email", email);
         if(user == null)
+        //todo
         {
             throw new UsernameNotFoundException("User with name " + email + " not found");
         }

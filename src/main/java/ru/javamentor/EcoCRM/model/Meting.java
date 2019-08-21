@@ -20,6 +20,10 @@ public class Meting {
     @Column(name = "date")
     private LocalDateTime dateTime;
 
+    public Meting() {
+
+    }
+
     public LocalDateTime getDateTime() {
           return dateTime;
     }

@@ -25,10 +25,14 @@ public class Project implements Serializable {
     private String title;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private Status status = Status.IN_PROGRESS;
 
     @OneToOne
     private Point point;
+
+    @OneToMany
+    private List<User> users;
 
     @OneToOne
     private ManagementCompany company;
@@ -40,6 +44,7 @@ public class Project implements Serializable {
     private Report report;
 
     public Project() {
+
     }
 
     public Project(User manager, Petition petition, String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
@@ -150,5 +155,13 @@ public class Project implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, manager, petition, title, status, point, company, contractor, report);
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

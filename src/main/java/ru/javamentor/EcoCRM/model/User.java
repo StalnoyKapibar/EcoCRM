@@ -14,16 +14,38 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "patronymic")
+    private String patronymic;
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "vk_link")
+    private String link;
+
+    @Column(name = "profession")
+    private String profession;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled = true;
+
+    @Column(name = "user_status")
+    @Enumerated(value = EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE;
+
+    @Column(name = "not_to_do")
+    private String notToDo;    //чем волонтер не хочет заниматься
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -43,22 +65,18 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public User(String email, String password, boolean enabled, List<Authority> authorities) {
+    public User(String name, String surname, String patronymic, String email, String link,  String profession, String password, boolean enabled, String notToDo, List<Authority> authorities, UserStatus status) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
         this.email = email;
+        this.link = link;
+        this.profession = profession;
         this.password = password;
         this.enabled = enabled;
+        this.notToDo = notToDo;
         this.authorities = authorities;
-    }
-
-    public User(String email, String password, List<Authority> authorities) {
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
+        this.status = status;
     }
 
     @Override
@@ -96,11 +114,9 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    public long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -120,8 +136,61 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled() {
         this.enabled = enabled;
+        //this.enabled = status != UserStatus.BLOCKED;
     }
 
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStstus(UserStatus status) {
+            this.status = status;
+    }
+    public String getName() { return name; }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getNotToDo() {
+        return notToDo;
+    }
+
+    public void setNotToDo(String notToDo) {
+        this.notToDo = notToDo;
+    }
 }

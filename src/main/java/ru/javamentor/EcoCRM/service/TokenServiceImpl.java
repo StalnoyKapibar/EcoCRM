@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.TokenDao;
 import ru.javamentor.EcoCRM.model.Token;
 
+import java.security.SecureRandom;
+
 
 @Service
 public class TokenServiceImpl extends AbstractServiceImpl<Token> implements TokenService{
@@ -22,6 +24,13 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
         return tokenDao;
     }
 
+    public String encodeToken() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        String gentoken = bytes.toString();
 
+        return gentoken;
+    }
 }
 

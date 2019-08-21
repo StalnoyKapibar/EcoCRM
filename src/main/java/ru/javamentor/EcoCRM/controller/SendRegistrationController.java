@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,9 @@ public class SendRegistrationController {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @GetMapping("/sendReg")
     public String SendReg(Model model) {
         String userEmail = "";
@@ -34,28 +38,22 @@ public class SendRegistrationController {
     @PostMapping("/processSendForm")
     public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
 
+ //       String  token = tokenService.encodeToken();
+//        tokenService.insert(new Token(userEmail, token));
+//        String stringcode = "";
+//        StringBuilder s = new StringBuilder();
+//        for (char c : token.toCharArray()) {
+//            int  code =  c;
+//            stringcode = stringcode + String.valueOf(code);
+//        }
+        String token = bCryptPasswordEncoder.encode(userEmail);
+        tokenService.insert(new Token(userEmail, token));
+        System.out.println("result String: " + token);
+       String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
+                "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "?token=" + token;
+        emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
 
-
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
-        random.nextBytes(bytes);
-        String gentoken = bytes.toString();
-
-        Token token = new Token(userEmail,gentoken);
-
-        System.out.println("Mail is: " + token.getEmail());
-        System.out.println("Generated token is: " + token.getToken() );
-
-        tokenService.insert(token);
-
-
-
-
-
-//        String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
-//                "\nhttp://localhost:8080/registration/new";
-//        emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
-//        System.out.println("Send Sucessfull!");
+        System.out.println("Send Sucessfull!");
 
 
         return "admin_page";

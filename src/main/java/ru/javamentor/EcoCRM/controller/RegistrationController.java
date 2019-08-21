@@ -65,7 +65,6 @@ public class RegistrationController {
         JSONObject jsonReq = new JSONObject(response.getBody());
         String accesToken = jsonReq.getString("access_token");
         String userId = jsonReq.getString("user_id");
-
         String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=bdate&access_token=" + accesToken +"&v=5.101";
         User user = new User();
         user.setEmail("bastard_operator");

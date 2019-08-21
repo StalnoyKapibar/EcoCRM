@@ -75,7 +75,7 @@
             success: function(json) {
                 console.log(json.response[0].first_name);
                 document.getElementById("person-name").value = json.response[0].first_name;
-                document.getElementById("person-surname").value = json.response[0].last_name;                document.getElementById("bdate").value = json.response[0].bdate;
+                document.getElementById("person-surname").value = json.response[0].last_name;
                 document.getElementById("vk_link").value = "vk.com/id" + json.response[0].id;
             },
             error: function(e) {

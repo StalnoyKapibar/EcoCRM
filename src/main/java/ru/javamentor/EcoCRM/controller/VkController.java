@@ -25,7 +25,7 @@ public class VkController {
     public String getPrincipal(){
         return "registration/reg-principal";
     }
-    @GetMapping("/usercode")
+    /*@GetMapping("/usercode")
     public ModelAndView getCode(@RequestParam(name = "code") String code) throws IOException, JSONException {
         System.out.println(code);
         String urlForToken = "https://oauth.vk.com/access_token?client_id="+CLIEND_ID+"&client_secret="+CLIENT_SECRET+"&redirect_uri=http://localhost:8080/registration/usercode&code="+code;
@@ -36,20 +36,11 @@ public class VkController {
         String userId = jsonReq.getString("user_id");
 
         String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=bdate&access_token=" + accesToken +"&v=5.101";
-        System.out.println("token : " + accesToken);
 
-        ResponseEntity<String> responseWithInfo = restTemplate.getForEntity(urlForToken, String.class);
-        jsonReq = new JSONObject(responseWithInfo.getBody());
-
-        String firstName = jsonReq.getString("first_name");
-        System.out.println(firstName);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("registration/reg-form");
-        User newUser = new User();
-        //TODO set fields
-        modelAndView.addObject("user",newUser);
         return modelAndView;
     }
+
+     */
     @GetMapping("/test")
     public String getToken(){
 

@@ -18,8 +18,44 @@
 </head>
 <body>
 
-<button class="btn btn-lg btn-primary btn-block"  onclick="test()">FEEL FROM USER OBJECT with themlyeaf</button>
-
+<button  class="btn btn-lg btn-primary btn-block"  onclick="test()">FEEL FROM USER OBJECT with themlyeaf</button>
+<input type="text" id="first_name"> here should be name</input>
 
 </body>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript'>
+
+    $(document).ready(function() {
+        var url = 'https://api.vk.com/method/users.get?user_ids=44529373&fields=fields=id,first_name,last_name,sex,bdate,photo_50&access_token=1af9b58acb5ef9e040aa7952f26cabe6d09dc1b3eb88563c5638f21c02ba76152a7f9dfa6a4b6b8e1632f&v=5.101';
+        alert("go");
+        $.ajax({
+            type: 'GET',
+            url: url,
+            async: false,
+            jsonpCallback: 'callback',
+            contentType: "application/json",
+            dataType: 'jsonp',
+            success: function(json) {
+                console.log(json.response[0].first_name);
+                document.getElementById("FIO").value = json.response[0].last_name + " " +json.response[0].first_name;
+                document.getElementById("bdate").value = json.response[0].bdate;
+                document.getElementById("vklink").value = "vk.com/id" + json.response[0].id;
+
+                document.getElementById("first_name").value = json.response[0].last_name;
+                console.log(json.response[0].id);
+                //last_name
+                //bdate
+                //photo_50
+                //$("#nav").html('<a href="">'+json.topics+"</a>");
+            },
+            error: function(e) {
+                console.log(e);
+                //console.log(e.message);
+            }
+        });
+
+    });
+
+
+</script>
 </html>

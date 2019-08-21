@@ -22,7 +22,7 @@ import java.util.function.Function;
 //todo naming
 @RestController
 @RequestMapping("/api/petition")
-public class RestControllerPetition {
+public class PetitionRestController {
 
     @Autowired
     private PetitionService petitionService;

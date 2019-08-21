@@ -55,13 +55,13 @@ public class DataInitializer {
     private Random random = new Random();
 
     public void init() {
-//        initRoles();
-//        initBaseUserAndAdmin();
-//        initUsers();
-//        initContractors();
-//        initManagement();
-//        initPetition();
-//        initProject();
+        initRoles();
+        initBaseUserAndAdmin();
+        initUsers();
+        initContractors();
+        initManagement();
+        initPetition();
+        initProject();
     }
 
     private void initRoles() {

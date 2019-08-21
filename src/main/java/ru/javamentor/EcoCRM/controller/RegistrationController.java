@@ -2,7 +2,6 @@ package ru.javamentor.EcoCRM.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +29,7 @@ public class RegistrationController {
 
     @Autowired
     AuthoritiesService authoritiesService;
+
     @GetMapping("/new")
     public String registrationForm(Model model) {
 
@@ -37,36 +37,18 @@ public class RegistrationController {
         user.setEmail("bastard_operator");
         model.addAttribute("user", user);
 
-        return "registration-form";
+        return "registration/registration-form";
     }
 
     @PostMapping("/new")
     public String addUser(@ModelAttribute("user") User user) {
-        user.setEmail("bastard_operator");
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-       user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-       List<Authority> baseauthorities = authoritiesService.getAll();
-        for (Authority role : baseauthorities ) {
-            System.out.println("BASE ROLE : " + role.getAuthority());
-        }
+        List<Authority> roles = new ArrayList<>();
+        roles.add(authoritiesService.get(2));      //set user_role
 
-
-
-
-        System.out.println("Encoded Password" + user.getPassword());
-//        List<Authority> authorities = new ArrayList();
-//        Authority roleadmin = new Authority("ROLE_ADMIN");
-//        Authority roleuser = new Authority("ROLE_USER");
-//        authorities.add(roleadmin);
-//        authorities.add(roleuser);
-
-       // user.setAuthorities(authorities);
-
-
+        user.setAuthorities(roles);
         userService.insert(user);
-        System.out.println("users password: "+ user.getPassword());
-        System.out.println("users email: "  + user.getEmail());
-        System.out.println("USER LOADED TO DATABASE!!!");
 
         return "admin_page";
     }

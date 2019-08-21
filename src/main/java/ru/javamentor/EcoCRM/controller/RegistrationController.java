@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
+import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.io.IOException;
@@ -33,6 +34,9 @@ public class RegistrationController {
     @Autowired
     AuthoritiesService authoritiesService;
 
+    @Autowired
+    TokenService tokenService;
+
     //TODO PROPERTY
     public final String CLIEND_ID = "7104443";
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
@@ -43,8 +47,21 @@ public class RegistrationController {
         System.out.println("TOKEN PARAMETER:" + token);
         User user = new User();
         model.addAttribute("user", user);
+        String tokenFromDB = tokenService.loadTokenByEmail(email).getToken();
+        //String tokenFromDB = tokenService.f.getToken();
 
-        return "registration/registration-form";
+    //$2a$10$QkysWiNFqg2oaXFPV3R39Ok7naErgXm7rhDYnTT3GoNvfNdnCPRbG
+    //$2a$10$cDr6U8iMnq5pmnsyjb1Fcu0PN2yntOeFkSlE8wv5PoqG7rjDkwsjK
+
+        if (tokenFromDB.equals(token)) {
+            System.out.println("RIGHT TOKEN!!!");
+            return "registration/registration-form";
+        }
+        else {
+            System.out.println("WRONG TOKEN!!!");
+
+        }
+        return "access-denied";
     }
 
 

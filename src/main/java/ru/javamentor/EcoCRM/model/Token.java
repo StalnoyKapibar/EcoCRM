@@ -20,10 +20,10 @@ public class Token {
 
     }
 
-//    public Token(String email) {
-//        this.email = email;
-//
-//    }
+    public Token(String email, String token) {
+        this.email = email;
+        this.token = token;
+    }
 
     public String getEmail() {
         return email;

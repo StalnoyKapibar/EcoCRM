@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
+import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.security.SecureRandom;
@@ -21,6 +22,9 @@ public class SendRegistrationController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    TokenService tokenService;
+
     @GetMapping("/sendReg")
     public String SendReg(Model model) {
         String userEmail = "";
@@ -30,9 +34,6 @@ public class SendRegistrationController {
     @PostMapping("/processSendForm")
     public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
 
-        Token token = new Token();
-        token.setEmail(userEmail);
-
 
 
         SecureRandom random = new SecureRandom();
@@ -40,7 +41,14 @@ public class SendRegistrationController {
         random.nextBytes(bytes);
         String gentoken = bytes.toString();
 
-        token.setToken(gentoken);
+        Token token = new Token(userEmail,gentoken);
+
+        System.out.println("Mail is: " + token.getEmail());
+        System.out.println("Generated token is: " + token.getToken() );
+
+        tokenService.insert(token);
+
+
 
 
 

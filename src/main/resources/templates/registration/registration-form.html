@@ -14,6 +14,7 @@
 <div class="container">
     <div>
         <h2>Добро пожаловать на форму регистрации!</h2>
+        <a href="https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101">Click me to authorize with VK</a>
     </div>
     <form action="#" th:action="@{/registration/new}"
           th:object="${user}" method="POST">

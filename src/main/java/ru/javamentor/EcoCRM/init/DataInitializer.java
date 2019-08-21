@@ -187,40 +187,40 @@ public class DataInitializer {
     }
 
     private void addTaskForStep1(Step step) {
-        taskService.insert(new TaskByStep("Заполнить форму заявителя", step));
-        taskService.insert(new TaskByStep("Добавить данные о соседях", step));
-        taskService.insert(new TaskByStep("Добавить фото контейнера", step));
+        taskService.insert(new Task("Заполнить форму заявителя", step));
+        taskService.insert(new Task("Добавить данные о соседях", step));
+        taskService.insert(new Task("Добавить фото контейнера", step));
     }
 
     private void addTaskForStep2(Step step) {
-        taskService.insert(new TaskByStep("Заполнить форму управляющей компании", step));
+        taskService.insert(new Task("Заполнить форму управляющей компании", step));
     }
 
     private void addTaskForStep3(Step step) {
-        taskService.insert(new TaskByStep("Выбрать компанию заготовителя", step));
-        taskService.insert(new TaskByStep("Назначить встречу заготовителя и управляющей компании", step));
+        taskService.insert(new Task("Выбрать компанию заготовителя", step));
+        taskService.insert(new Task("Назначить встречу заготовителя и управляющей компании", step));
     }
 
     private void addTaskForStep4(Step step) {
-        taskService.insert(new TaskByStep("Заключить договор", step));
+        taskService.insert(new Task("Заключить договор", step));
     }
 
     private void addTaskForStep5(Step step) {
-        taskService.insert(new TaskByStep("Установка контейнера", step));
+        taskService.insert(new Task("Установка контейнера", step));
     }
 
     private void addTaskForStep6(Step step) {
-        taskService.insert(new TaskByStep("Разработать макет листовок", step));
-        taskService.insert(new TaskByStep("Печать листовок", step));
-        taskService.insert(new TaskByStep("Публикация листовок на досках информирования", step));
-        taskService.insert(new TaskByStep("Мероприятие  участием жителей", step));
+        taskService.insert(new Task("Разработать макет листовок", step));
+        taskService.insert(new Task("Печать листовок", step));
+        taskService.insert(new Task("Публикация листовок на досках информирования", step));
+        taskService.insert(new Task("Мероприятие  участием жителей", step));
     }
 
     private void addTaskForStep7(Step step) {
-        taskService.insert(new TaskByStep("Заполнить отчет", step));
+        taskService.insert(new Task("Заполнить отчет", step));
     }
 
     private void addTaskForStep8(Step step) {
-        taskService.insert(new TaskByStep("Проверка результата через месяц", step));
+        taskService.insert(new Task("Проверка результата через месяц", step));
     }
 }

@@ -1,6 +1,6 @@
 package ru.javamentor.EcoCRM.service;
 
-import ru.javamentor.EcoCRM.model.TaskByStep;
+import ru.javamentor.EcoCRM.model.Task;
 
-public interface TaskService extends AbstractService<TaskByStep>{
+public interface TaskService extends AbstractService<Task>{
 }

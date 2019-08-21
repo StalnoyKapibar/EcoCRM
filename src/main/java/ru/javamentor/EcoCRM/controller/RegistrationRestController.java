@@ -54,6 +54,7 @@ public class RegistrationRestController {
         }
         return Base64.getEncoder().encodeToString(user.getPhoto());
     }
+    //TODO Перенести в /api/users нормально
     @PostMapping("/new")
     public String addUser(@RequestBody String userJson) throws JSONException {
         JSONObject jsonObject = new JSONObject(userJson);
@@ -66,13 +67,10 @@ public class RegistrationRestController {
         user.setProfession(jsonObject.getString("profession"));
         user.setPassword(bCryptPasswordEncoder.encode(jsonObject.getString("password")));
         user.setNotToDo(jsonObject.getString("notToDo"));
-
-       List<Authority> roles = new ArrayList<>();
-       roles.add(authoritiesService.get(2));      //set user_role
-       user.setAuthorities(roles);
-       userService.insert(user);
-
-        System.out.println(userJson);
+        List<Authority> roles = new ArrayList<>();
+        roles.add(authoritiesService.get(2));      //set user_role
+        user.setAuthorities(roles);
+        userService.insert(user);
         return "ALL IS OK";
     }
 

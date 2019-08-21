@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Authority;
+import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.TokenService;
@@ -46,15 +47,19 @@ public class RegistrationController {
         System.out.println("EMAIL PARAMETER:" + email);
         System.out.println("TOKEN PARAMETER:" + token);
         User user = new User();
+        user.setEmail(email);
         model.addAttribute("user", user);
-        String tokenFromDB = tokenService.loadTokenByEmail(email).getToken();
+        Token dbtoken =  tokenService.loadTokenByEmail(email);
+        String tokenFromDB =dbtoken.getToken();
+
         //String tokenFromDB = tokenService.f.getToken();
 
-    //$2a$10$QkysWiNFqg2oaXFPV3R39Ok7naErgXm7rhDYnTT3GoNvfNdnCPRbG
-    //$2a$10$cDr6U8iMnq5pmnsyjb1Fcu0PN2yntOeFkSlE8wv5PoqG7rjDkwsjK
 
         if (tokenFromDB.equals(token)) {
             System.out.println("RIGHT TOKEN!!!");
+            tokenService.delete(dbtoken);
+
+
             return "registration/registration-form";
         }
         else {

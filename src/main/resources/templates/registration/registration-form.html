@@ -7,58 +7,86 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/public/css/bootstrap-social.css" rel="stylesheet">
+
+
+
 
     <title>Registration Form</title>
 </head>
 <body>
-<div class="container">
-    <div>
-        <h2>Добро пожаловать на форму регистрации!</h2>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <h2 align="center">Добро пожаловать на форму регистрации!</h2>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
     </div>
-    <form action="#" th:action="@{/registration/new}"
-          th:object="${user}" method="POST">
-        <div class="form-group">
-            <label>Имя:</label>
-            <input type="text" th:field="*{name}" class="form-control"  placeholder="Елена">
-        </div>
-        <div class="form-group">
-            <label>Фамилия:</label>
-            <input type="text" th:field="*{surname}" class="form-control"  placeholder="Иванова">
-        </div>
-        <div class="form-group">
-            <label>Адрес электронной почты:</label>
-            <input type="email" th:field="*{email}" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-            <label>Пароль:</label>
-            <input type="password" th:field="*{password}" class="form-control"  placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label>Телефон:</label>
-            <input type="text" th:field="*{phone}" class="form-control"  placeholder="+7978777777">
-        </div>
-        <div class="form-group">
-            <label>Ссылка vk.com:</label>
-            <input type="text" th:field="*{link}" class="form-control"  placeholder="https://vk.com/">
-        </div>
-        <div class="form-group">
-            <label>Основной род деятельности:</label>
-            <input type="text" th:field="*{profession}" class="form-control"  placeholder="инженер">
-        </div>
-        <div class="form-group">
-            <label>Чем я точно не хотел бы заниматься:</label>
-            <input type="text" th:field="*{notToDo}" class="form-control"  placeholder="уборка мусора">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-primary">Reset</button>
 
 
-        <hr>
-        <a th:href="@{/admin/page}">Назад на главную страницу</a>
+    <div class="row">
 
-        <br><br>
-    </form>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+            <a class="btn btn-block btn-social btn-vk">
+                <span class="fa fa-vk"></span>Зарегистрироваться через Вконтакте
+            </a>
+            <p></p>
+            <form action="#" th:action="@{/registration/new}"
+                  th:object="${user}" method="POST">
+                <div class="form-group">
+                    <label>Имя:</label>
+                    <input id="person-name" type="text" th:field="*{name}" class="form-control"  placeholder="Елена">
+                </div>
+                <div class="form-group">
+                    <label>Фамилия:</label>
+                    <input id="person-surname" type="text" th:field="*{surname}" class="form-control"  placeholder="Иванова">
+                </div>
+
+                <div class="form-group">
+                    <label>Адрес электронной почты:</label>
+                    <input type="email" th:field="*{email}" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label>Пароль:</label>
+                    <input type="password" th:field="*{password}" class="form-control"  placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label>Телефон:</label>
+                    <input type="text" th:field="*{phone}" class="form-control"  placeholder="+7978777777">
+                </div>
+                <div class="form-group">
+                    <label>Ссылка vk.com:</label>
+                    <input id="vk_link" type="text" th:field="*{link}" class="form-control"  placeholder="https://vk.com/">
+                </div>
+                <div class="form-group">
+                    <label>Основной род деятельности:</label>
+                    <input type="text" th:field="*{profession}" class="form-control"  placeholder="инженер">
+                </div>
+                <div class="form-group">
+                    <label>Чем я точно не хотел бы заниматься:</label>
+                    <input type="text" th:field="*{notToDo}" class="form-control"  placeholder="уборка мусора">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+
+                <a class="btn btn-primary" href="/admin/page">Назад на главную страницу</a>
+            </form>
+        </div>
+        <div class="col-sm-3">
+            <button type="button"  th:href="@{/admin/page}">Fucking button</button>
+        </div>
+        <div class="col-sm-3">
+        </div>
+
+    </div>
 </div>
 
 </body>

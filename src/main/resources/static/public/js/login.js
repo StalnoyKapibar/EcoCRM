@@ -15,7 +15,7 @@ function auth() {
 
         },
         error: function (error) {
-            if(document.getElementById('error-message') === null) {
+            if(document.getElementById('error-message') === null && error.status != 200) {
                 var d1 = document.getElementById('password-place');
                 d1.insertAdjacentHTML('afterend', '<p id="error-message">Неверный логин или пароль</p>');
             }

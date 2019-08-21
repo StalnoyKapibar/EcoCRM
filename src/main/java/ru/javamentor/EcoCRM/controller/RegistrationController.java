@@ -74,7 +74,7 @@ public class RegistrationController {
         user.setEmail("bastard_operator");
         model.addAttribute("user", user);
         model.addAttribute("urlForInfo",urlForInfo);
-        return "registration/registration-form";
+        return "registration/registration-form-with-vk";
     }
 
 }

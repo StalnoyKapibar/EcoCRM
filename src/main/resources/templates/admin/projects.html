@@ -3,68 +3,127 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/public/css/custom.css">
+    <link rel="stylesheet" href="/private/css/custom.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Projects</title>
 </head>
 <body>
-<div class="row border pt-3 pb-3">
-    <div class="col border ml-2 mr-2">
-        <div class="card m-1">
+
+<div class="row ">
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title">
+                <h6>Шаг 1</h6>
+            </div>
             <th:block th:each="project :${firstStepProjects}">
-                <label th:text="${project.title}"/>
+                <div class="card  eco-project-card">
+                    <div class="card-body">
+                        <div class="card-title eco-card-title">
+                            <p th:text="${project.title}"></p>
+                        </div>
+                    </div>
+                </div>
             </th:block>
         </div>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${secondStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 2</h6></div>
         </div>
+        <th:block th:each="project :${secondStepProjects}">
+            <div class="card  eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${thirdStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 3</h6></div>
         </div>
+        <th:block th:each="project :${thirdStepProjects}">
+            <div class="card  eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${fourthStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 4</h6></div>
         </div>
+        <th:block th:each="project :${fourthStepProjects}">
+            <div class="card eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${fifthStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1  eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 5</h6></div>
         </div>
+        <th:block th:each="project :${fifthStepProjects}">
+            <div class="card  eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${sixthStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 6</h6></div>
         </div>
+        <th:block th:each="project :${sixthStepProjects}">
+            <div class="card  eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${seventhStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 7</h6></div>
         </div>
+        <th:block th:each="project :${seventhStepProjects}">
+            <div class="card  eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
-    <div class="col border ml-2 mr-2">
-        <div class="card">
-            <th:block th:each="project :${eighthStepProjects}">
-                <label th:text="${project.title}"/>
-            </th:block>
+    <div class="col card ml-1 mr-1 eco-project-column" style="width:12%;">
+        <div class="card-body">
+            <div class="card-title"><h6>Шаг 8</h6></div>
         </div>
+        <th:block th:each="project :${eighthStepProjects}">
+            <div class="card eco-project-card">
+                <div class="card-body">
+                    <div class="card-title eco-card-title">
+                        <p th:text="${project.title}"></p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

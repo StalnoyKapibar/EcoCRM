@@ -22,6 +22,9 @@ public class User implements UserDetails {
     @Column(name = "surname")
     private String surname;
 
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "patronymic")
     private String patronymic;
 
@@ -65,7 +68,7 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public User(String name, String surname, String patronymic, String email, String link,  String profession, String password, boolean enabled, String notToDo, List<Authority> authorities, UserStatus status) {
+    public User(String name, String surname, String phone, String patronymic, String email, String link,  String profession, String password, boolean enabled, String notToDo, List<Authority> authorities, UserStatus status) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -193,4 +196,8 @@ public class User implements UserDetails {
     public void setNotToDo(String notToDo) {
         this.notToDo = notToDo;
     }
+
+    public String getPhone() {return phone;}
+
+    public void setPhone(String phone) {this.phone = phone;}
 }

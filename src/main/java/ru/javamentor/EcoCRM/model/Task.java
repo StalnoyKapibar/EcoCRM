@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="tasks")
-public class TaskByStep implements Serializable {
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -16,9 +16,6 @@ public class TaskByStep implements Serializable {
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "performer")
-    private User performer; // ответсвенный за таску
 
     @Column(name = "task_status")
     @Enumerated(value = EnumType.STRING)
@@ -31,15 +28,15 @@ public class TaskByStep implements Serializable {
     @OneToMany
     private List<Comment> comments;
 
-    public TaskByStep() {
+    public Task() {
 
     }
 
-    public TaskByStep(String description) {
+    public Task(String description) {
         this.description = description;
     }
 
-    public TaskByStep(String description, Step step) {
+    public Task(String description, Step step) {
         this.description = description;
         this.step = step;
     }
@@ -58,14 +55,6 @@ public class TaskByStep implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public User getPerformer() {
-        return performer;
-    }
-
-    public void setPerformer(User performer) {
-        this.performer = performer;
     }
 
     public Status getTaskStatus() {

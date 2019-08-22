@@ -5,6 +5,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "projects")
@@ -133,6 +134,27 @@ public class Project implements Serializable {
 
     public void setPetition(Petition petition) {
         this.petition = petition;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(id, project.id) &&
+                Objects.equals(manager, project.manager) &&
+                Objects.equals(petition, project.petition) &&
+                Objects.equals(title, project.title) &&
+                status == project.status &&
+                Objects.equals(point, project.point) &&
+                Objects.equals(company, project.company) &&
+                Objects.equals(contractor, project.contractor) &&
+                Objects.equals(report, project.report);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, manager, petition, title, status, point, company, contractor, report);
     }
 
     public List<User> getUsers() {

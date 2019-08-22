@@ -62,7 +62,7 @@ public class DataInitializer {
 
     private Random random = new Random();
 
-    public void init() {
+    public void init() throws IOException {
         initRoles();
         initBaseUserAndAdmin();
         initUsers();

@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,8 @@ public class SendRegistrationController {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Value("${host.name}")
+    String hostName;
     @GetMapping("/sendReg")
     public String SendReg(Model model) {
         String userEmail = "";
@@ -44,7 +47,7 @@ public class SendRegistrationController {
         System.out.println("result String: " + token);
 
        String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
-                "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "&token=" + token;
+                "\nhttp://"+hostName+"/registration/new/?email=" + userEmail + "&token=" + token;
 
         emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
 

@@ -2,13 +2,18 @@ package ru.javamentor.EcoCRM.init;
 
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDate;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +52,9 @@ public class DataInitializer {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    @Qualifier("imageService")
+    ImageService imageService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -55,7 +63,7 @@ public class DataInitializer {
 
     private Random random = new Random();
 
-    public void init() {
+    public void init() throws IOException {
         initRoles();
         initBaseUserAndAdmin();
         initUsers();
@@ -100,6 +108,7 @@ public class DataInitializer {
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             userService.insert(user);
         }
     }
@@ -162,10 +171,19 @@ public class DataInitializer {
     }
 
     public void initSteps(Project project) {
+        boolean hasStatusInProgress = false;
         for (StepNumber stepNumber : StepNumber.values()) {
             Step step = new Step();
             step.setProject(project);
             step.setStepNumber(stepNumber);
+            if(!hasStatusInProgress) {
+                int randomInt = random.nextInt(2);
+                Status status = Status.values()[randomInt];
+                if (status.equals(Status.IN_PROGRESS)) {
+                    hasStatusInProgress = true;
+                }
+                step.setStatus(status);
+            }
             stepService.insert(step);
             switch (stepNumber) {
                 case STEP_1:addTaskForStep1(step);

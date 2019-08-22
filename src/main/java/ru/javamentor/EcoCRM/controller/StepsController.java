@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.service.ProjectService;
 import ru.javamentor.EcoCRM.service.StepService;
@@ -26,4 +27,5 @@ public class StepsController {
         model.addAttribute("steps", stepService.getAllByprojectId(currentProject.getId()));
         return "steps/steps_h";
     }
+
 }

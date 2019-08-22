@@ -1,6 +1,10 @@
 package ru.javamentor.EcoCRM.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="petitions")
@@ -73,15 +77,34 @@ public class Petition {
     @Column(name = "yes")
     private String yes;
 
+    @Column (name = "data")
+    LocalDate data;
+
 
 
     public Petition() {
 
     }
 
+    public String getYes() {
+        return yes;
+    }
+
+    public void setYes(String yes) {
+        this.yes = yes;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
     public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial, String adresHome, String houseArea, String countOfApartments, String homeControlForm,
-    String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage,
-                    String exportGarbage, String yes) {
+                    String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage,
+                    String exportGarbage, String yes, LocalDate data) {
         this.email = email;
         this.userName = userName;
         this.contactInformation = contactInformation;
@@ -103,6 +126,7 @@ public class Petition {
         this.garbage = garbage;
         this.exportGarbage = exportGarbage;
         this.yes = yes;
+        this.data = data;
 
     }
 

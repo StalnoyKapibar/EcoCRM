@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<!--<div class="container-fluid" h-100 d-flex class="media">-->
-<!--    <div class="row no-gutters h-100 w-100" class="media-body">-->
-<!--        <div class="col-4"></div>-->
-<!--        <div class="col-4 mt-4" class="media-body">-->
 
-<form name="petition" action="/api/petition" method="POST">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4" style="border-color: #2d4373">
+            <form name="petition" action="/api/petition" method="POST">
     <div class="form-group">
         <label for="formGroupExampleInput">Адрес электронной почты*</label>
         <input type="text" class="form-control" name="email" placeholder="Введите адрес электронной почты" required>
@@ -202,13 +210,16 @@
         <label class="form-check-label" for="defaultCheck1" >Да</label><br>
     </div><p></p>
     </select>
-    </div>
     <div class="col-auto my-1">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
-<!--    </div>-->
-<!--</div>-->
+        </div>
+        <div class="col-sm-4">
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

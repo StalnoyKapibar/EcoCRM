@@ -58,12 +58,7 @@ public class PetitionRestController {
         mimeMessage.setContent(content,"text/html; charset=utf-8");
         helper.setTo(petition.getEmail());
         this.emailServiceimp.emailSender.send(mimeMessage);
-
-
-        // emailServiceimp.sendSimpleMessage(petition.getEmail(),content,content);
-
     }
-
 }
 
 

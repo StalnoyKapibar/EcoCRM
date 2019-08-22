@@ -11,5 +11,5 @@ public enum StepNumber {
     STEP_5,
     STEP_6,
     STEP_7,
-    STEP_8;
+    STEP_8
 }

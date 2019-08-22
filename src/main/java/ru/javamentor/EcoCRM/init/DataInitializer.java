@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
@@ -160,10 +161,19 @@ public class DataInitializer {
     }
 
     public void initSteps(Project project) {
+        boolean hasStatusInProgress = false;
         for (StepNumber stepNumber : StepNumber.values()) {
             Step step = new Step();
             step.setProject(project);
             step.setStepNumber(stepNumber);
+            if(!hasStatusInProgress) {
+                int randomInt = random.nextInt(2);
+                Status status = Status.values()[randomInt];
+                if (status.equals(Status.IN_PROGRESS)) {
+                    hasStatusInProgress = true;
+                }
+                step.setStatus(status);
+            }
             stepService.insert(step);
             switch (stepNumber) {
                 case STEP_1:addTaskForStep1(step);

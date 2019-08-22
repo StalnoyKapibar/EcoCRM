@@ -17,9 +17,6 @@ public class TaskByStep implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "performer")
-    private User performer; // ответсвенный за таску
-
     @Column(name = "task_status")
     @Enumerated(value = EnumType.STRING)
     private Status taskStatus = Status.TODO;
@@ -58,14 +55,6 @@ public class TaskByStep implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public User getPerformer() {
-        return performer;
-    }
-
-    public void setPerformer(User performer) {
-        this.performer = performer;
     }
 
     public Status getTaskStatus() {

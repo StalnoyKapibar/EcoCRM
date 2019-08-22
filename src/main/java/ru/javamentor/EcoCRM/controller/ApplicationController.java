@@ -38,6 +38,11 @@ public class ApplicationController {
 
     @GetMapping("/user")
     public String showUser() {
-        return "user";
+        return "person_page";
+    }
+
+    @GetMapping("/person")
+    public String getPersonPage() {
+        return "person_page";
     }
 }

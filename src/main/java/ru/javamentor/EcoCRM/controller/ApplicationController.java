@@ -38,7 +38,7 @@ public class ApplicationController {
 
     @GetMapping("/user")
     public String showUser() {
-        return "person_page";
+        return "user";
     }
 
     @GetMapping("/person")

@@ -8,6 +8,5 @@ public interface AbstractDao<T> {
     T get(long id) ;
     List<T> getAll() ;
     void insert(T t);
-    T findByFieldNameAndValue(String fieldName,
-                                     String fieldValue);
+    T findByFieldNameAndValue(String fieldName, String fieldValue);
 }

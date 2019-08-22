@@ -1,9 +1,12 @@
 package ru.javamentor.EcoCRM.model;
 
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.javamentor.EcoCRM.model.embedded.UserStatus;
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +24,9 @@ public class User implements UserDetails {
 
     @Column(name = "surname")
     private String surname;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "patronymic")
     private String patronymic;
@@ -40,8 +46,16 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled = true;
 
+    @Column(name = "user_status")
+    @Enumerated(value = EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE;
+
     @Column(name = "not_to_do")
     private String notToDo;    //чем волонтер не хочет заниматься
+
+    @Column(name = "logo")
+    @Type(type = "image")
+    private byte[] photo;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -53,10 +67,15 @@ public class User implements UserDetails {
     private List<Authority> authorities;
 
     public User() {
-
     }
 
-    public User(String name, String surname, String patronymic, String email, String link,  String profession, String password, boolean enabled, String notToDo, List<Authority> authorities) {
+    public User(String email, String password, boolean enabled) {
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
+    public User(String name, String surname, String phone, String patronymic, String email, String link,  String profession, String password, boolean enabled, String notToDo, List<Authority> authorities, UserStatus status) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -67,6 +86,7 @@ public class User implements UserDetails {
         this.enabled = enabled;
         this.notToDo = notToDo;
         this.authorities = authorities;
+        this.status = status;
     }
 
     @Override
@@ -126,10 +146,29 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public byte[] getPhoto() {
+        return photo;
     }
 
+    public String getEncoderPhoto() {
+        return Base64.getEncoder().encodeToString(this.getPhoto());
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+    public void setEnabled() {
+        this.enabled = enabled;
+        //this.enabled = status != UserStatus.BLOCKED;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStstus(UserStatus status) {
+            this.status = status;
+    }
     public String getName() { return name; }
 
     public void setName(String name) {
@@ -175,4 +214,8 @@ public class User implements UserDetails {
     public void setNotToDo(String notToDo) {
         this.notToDo = notToDo;
     }
+
+    public String getPhone() {return phone;}
+
+    public void setPhone(String phone) {this.phone = phone;}
 }

@@ -43,6 +43,8 @@ public class Project implements Serializable {
     @OneToOne
     private Report report;
 
+
+
     public Project() {
 
     }

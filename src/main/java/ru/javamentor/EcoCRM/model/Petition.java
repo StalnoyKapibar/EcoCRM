@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="petitions")

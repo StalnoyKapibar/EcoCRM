@@ -28,6 +28,7 @@ public class Petition {
     @Column(name="type_of_raw_material")
     private String typeOfRawMaterial;
 
+
     public Petition() {
 
     }

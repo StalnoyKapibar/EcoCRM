@@ -4,6 +4,7 @@ function getUser(id) {
         type: "GET",
         async: false,
         success: function (user) {
+            $('#photo').attr("src",'"/api/user/photo/" + user.id>');
             $("#name").text(user.name);
             $("#surname").text(user.surname);
             $("#userId").text(user.id);
@@ -18,11 +19,10 @@ function getUser(id) {
             } else {
                 $("#enabled").text("Не доступен");
             }
-
+            //getPhoto(id)
             getProjects(id);
         }
     });
-
 }
 
 

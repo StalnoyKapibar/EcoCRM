@@ -1,13 +1,17 @@
 package ru.javamentor.EcoCRM.model;
 
+import org.springframework.context.annotation.Configuration;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@Configuration
 @Table(name = "token")
 public class Token {
+
 
     @Id
     @Column(name = "email")
@@ -20,7 +24,6 @@ public class Token {
     private long tokenCreateTime = System.currentTimeMillis();
 
     public Token() {
-
     }
 
     public Token(String email, String token) {
@@ -53,9 +56,4 @@ public class Token {
         this.tokenCreateTime = tokenCreateTime;
     }
 
-    public void encodeToken() {
-
-        String origin = "root";
-        int encoded = origin.hashCode();
-    }
 }

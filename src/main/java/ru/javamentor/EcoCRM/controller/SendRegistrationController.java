@@ -13,7 +13,8 @@ import ru.javamentor.EcoCRM.service.SchedulerService;
 import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
-import java.security.SecureRandom;
+import java.util.UUID;
+
 
 @Controller
 public class SendRegistrationController {
@@ -39,25 +40,17 @@ public class SendRegistrationController {
         model.addAttribute("userEmail",userEmail);
         return "sendregform";
     }
+
     @PostMapping("/processSendForm")
     public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
 
-
-        String token = bCryptPasswordEncoder.encode(userEmail);
+        String token = UUID.randomUUID().toString();
         tokenService.insert(new Token(userEmail, token));
-        System.out.println("result String: " + token);
 
-
-
-
-       String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
+        String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
                 "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "&token=" + token;
 
         emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
-
-        System.out.println("Send Sucessfull!");
-
-
         return "admin_page";
     }
 }

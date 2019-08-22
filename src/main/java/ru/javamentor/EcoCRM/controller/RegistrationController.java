@@ -57,7 +57,7 @@ public class RegistrationController {
 
         if (tokenFromDB.equals(token)) {
             System.out.println("RIGHT TOKEN!!!");
-            tokenService.delete(dbtoken);
+           // tokenService.delete(dbtoken);
 
 
             return "registration/registration-form";

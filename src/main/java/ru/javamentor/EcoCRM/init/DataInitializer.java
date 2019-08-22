@@ -2,12 +2,16 @@ package ru.javamentor.EcoCRM.init;
 
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +50,9 @@ public class DataInitializer {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    @Qualifier("imageService")
+    ImageService imageService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -86,7 +93,7 @@ public class DataInitializer {
         userService.insert(admin);
     }
 
-    private void initUsers() {
+    private void initUsers() throws IOException {
         for (int i = 1; i < 50; i++) {
             User user = new User();
             user.setName("jksljldk");
@@ -99,6 +106,7 @@ public class DataInitializer {
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             userService.insert(user);
         }
     }

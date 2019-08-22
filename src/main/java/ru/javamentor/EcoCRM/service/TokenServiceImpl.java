@@ -39,12 +39,17 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
     @Override
     public Token loadTokenByEmail(String email)  throws UsernameNotFoundException{
         Token token = tokenDao.findByFieldNameAndValue("email", email);
-        if(token == null)
-        //todo
-        {
+        if(token == null) {
             throw new UsernameNotFoundException("Token with " + email + " not found");
         }
         return token;
+    }
+    public String loadEmailByToken(String token)  throws UsernameNotFoundException{
+        String email = tokenDao.findByFieldNameAndValue("token", token).getEmail();
+        if(email== null) {
+            throw new UsernameNotFoundException("Token with " + email + " not found");
+        }
+        return email;
     }
 }
 

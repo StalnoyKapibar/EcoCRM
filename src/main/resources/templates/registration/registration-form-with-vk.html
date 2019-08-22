@@ -7,15 +7,21 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+    <link href="/public/css/bootstrap-social.css" rel="stylesheet">
     <title>Registration Form</title>
 </head>
 <body>
-<div class="container">
-    <div>
-        <h2>Добро пожаловать на форму регистрации MYPAGE</h2>
-    </div>
-
+<div class="container-fluid">
+    <p></p>
+    <p></p>
+    <p></p>
+    <h2 align="center">Добро пожаловать на форму регистрации </h2>
+    <p></p>
+    <p></p>
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
         <div class="form-group">
             <label>Имя:</label>
             <input id="person-name" type="text" class="form-control"  placeholder="Елена">
@@ -26,11 +32,11 @@
         </div>
         <div class="form-group">
             <label>Адрес электронной почты:</label>
-            <input id="emailHelp" type="email"  class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
+            <input id="emailHelp" type="email"  class="form-control"  aria-describedby="emailHelp" placeholder="Введите email">
         </div>
         <div class="form-group">
             <label>Пароль:</label>
-            <input id="password" type="password"  class="form-control"  placeholder="Password">
+            <input id="password" type="password"  class="form-control"  placeholder="Пароль">
         </div>
         <div class="form-group">
             <label>Телефон:</label>
@@ -48,22 +54,25 @@
             <label>Чем я точно не хотел бы заниматься:</label>
             <input id="notToDo" type="text"  class="form-control"  placeholder="уборка мусора">
         </div>
-        <form method="POST" enctype="multipart/form-data" id="imageUploadForm"
-              class="col-lg-6">
+        <label>Выберете фото для профиля</label>
+        <form method="POST" enctype="multipart/form-data" id="imageUploadForm">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" name="image" id="customFile">
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </form>
-
+        <p></p>
         <button  class="btn btn-primary" onclick="send()">Submit</button>
-        <button type="reset" class="btn btn-primary">Reset</button>
 
-
-        <hr>
         <a href="admin/page">Назад на главную страницу</a>
+        <p></p>
+        <p></p>
+        <p></p>
+        </div>
+        <div class="col-sm-4">
+        </div>
 
-        <br><br>
+    </div>
 </div>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type='text/javascript' th:inline="javascript">
@@ -94,66 +103,8 @@
 
 
 </script>
-<script type="text/javascript">
-    function send(){
-        var person_name = $("#person-name").val();
-        var person_surnam = $("#person-surname").val();
+<script type="text/javascript" src="/public/js/sendUserPhoto.js">
 
-        var email =  $("#emailHelp").val();
-
-        var password = $("#password").val();
-        var phone = $("#phone").val();
-        var vk_link = $("#vk_link").val();
-        var job = $("#job").val();
-        var notToDo = $("#notToDo").val();
-        var jsonObj = {'name':person_name,'surname':person_surnam,
-            'phone':phone,'email':email,'link':vk_link,
-            'profession':job,'password':password,'notToDo':notToDo};
-        $.ajax({
-            type: 'POST',
-            url: "/api/registration/new",
-            data: JSON.stringify(jsonObj),
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            complete: function(json) {
-
-                alert(JSON.stringify(json));
-                var form = $('#imageUploadForm')[0];
-                var data = new FormData(form);
-                data.append("email", email);
-                $.ajax({
-                    type: "POST",
-                    enctype: 'multipart/form-data',
-                    url: "/api/registration/update_image",
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function (request) {
-                        //request.setRequestHeader(header, token);
-                    },
-                    cache: false,
-                    timeout: 600000,
-                    success: function (image) {
-                        /*
-                        $('#profile_img').html('<img src="data:image/png;base64,' + image + '" class="img-rounded"' +
-
-                            '                                     alt="profile image">');
-
-                        */
-
-                    },
-                    error: function (e) {
-                        console.log("ERROR : ", e.responseText);
-                        $("#btnSubmit").prop("disabled", false);
-                    }
-                });
-            },
-            error: function(e) {
-                console.log(e.responseText);
-                //console.log(e.message);
-            }
-        });
-    }
 </script>
 </body>
 

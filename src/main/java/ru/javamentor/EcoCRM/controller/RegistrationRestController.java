@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,9 +17,9 @@ import ru.javamentor.EcoCRM.service.UserService;
 
 import javax.imageio.ImageIO;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -38,21 +39,28 @@ public class RegistrationRestController {
     @Qualifier("imageService")
     ImageService imageService;
 
+    @Value("${host.name}")
+    String hostName;
 
     @RequestMapping(value = "/update_image", method = RequestMethod.POST)
     public String updateImage(@RequestParam(value = "email") String email,
                               @RequestParam(value = "image") MultipartFile img) {
-
         User user = (User) userService.loadUserByUsername(email);
-        if (img != null) {
+        if (img.getSize() != 0) {
             try {
                 user.setPhoto(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(img.getBytes())),150,150));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            userService.update(user);
+        } else{
+            try {
+                user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return Base64.getEncoder().encodeToString(user.getPhoto());
+        userService.update(user);
+        return "/admin";
     }
     //TODO Перенести в /api/users нормально
     @PostMapping("/new")
@@ -71,7 +79,7 @@ public class RegistrationRestController {
         roles.add(authoritiesService.get(2));      //set user_role
         user.setAuthorities(roles);
         userService.insert(user);
-        return "ALL IS OK";
+        return "/admin";
     }
 
 

@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/private/js/person_page_projects" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/private/css/common_style.css" rel="stylesheet">
 </head>
@@ -44,32 +45,10 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="row" style="margin: 3%">
                 <div class="col-sm-4">
-                    <div class="card shadow bg-white rounded">
-                        <div class="card-header">
-                            Мои проекты
+                    <div class="card shadow bg-white rounded" style="margin-top: 20px" th:each="progect : ${projects}">
+                        <div class="card-header" th:value="${progect.}">
                         </div>
-                        <div class="card-body">
-                            Список ...
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card shadow bg-white rounded">
-                        <div class="card-header">
-                            Мои проекты
-                        </div>
-                        <div class="card-body">
-                            Список ...
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card shadow bg-white rounded">
-                        <div class="card-header">
-                            Мои проекты
-                        </div>
-                        <div class="card-body">
-                            Список ...
+                        <div class="card-body" th:value="${progect.}">
                         </div>
                     </div>
                 </div>

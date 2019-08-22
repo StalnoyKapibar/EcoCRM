@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.controller;
+package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,12 +58,6 @@ public class PetitionRestController {
             //TODO
         // emailServiceimp.sendSimpleMessage(petition.getEmail(),content,content);
 
-    }
-
-    @RequestMapping (value = "/test", method = RequestMethod.POST)
-    public String testMethod(@RequestBody String str){
-        String dfgas = str;
-        return str;
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
-public class ProjectsController {
+public class ProjectController {
     @Autowired
     private ProjectService projectService;
 

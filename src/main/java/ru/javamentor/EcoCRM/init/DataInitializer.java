@@ -60,8 +60,8 @@ public class DataInitializer {
         initUsers();
         initContractors();
         initManagement();
-        initPetition();
-        initProject();
+//        initPetition();
+//        initProject();
     }
 
     private void initRoles() {

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/private/css/common_style.css" rel="stylesheet">
+    <script src="/private/js/petitionsAddUsers.js" type="text/javascript"></script>
 </head>
 <body>
 <nav class="navbar fixed-top flex-md-nowrap p-0 shadow">
@@ -55,7 +56,8 @@
                             Дата поступления заявки:<h5 th:text="${petition.data}"></h5>
                             Адрес:<h5 th:text="${petition.adress}"></h5>
                             Район:<h5 th:text="${petition.area}"></h5>
-                            <button class="btn btn-info" type="button" data-toggle="modal" style="float: right;">Взять в обработку</button>
+<!--                            <a th:href="@{/api/petition/addPetitionUser/{id}(id=${petition.id})}" methods="get" class="btn">Подать зявку</a>-->
+                            <button id="1" th:onclick="'addUserToPetition('+${petition.id}+')'">Подать заявку</button>
                         </div>
                     </div>
                 </div>
@@ -64,5 +66,6 @@
 
     </div>
 </div>
+
 </body>
 </html>

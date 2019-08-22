@@ -8,6 +8,7 @@ import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,8 @@ public class DataInitializer {
         initUsers();
         initContractors();
         initManagement();
-//        initPetition();
-//        initProject();
+        initPetition();
+        initProject();
     }
 
     private void initRoles() {
@@ -89,12 +90,12 @@ public class DataInitializer {
     private void initUsers() {
         for (int i = 1; i < 50; i++) {
             User user = new User();
-            user.setName("jksljldk");
+            user.setName(faker.name().firstName());
             user.setSurname(faker.name().lastName());
-            user.setEmail(faker.internet().emailAddress());
+            user.setEmail(2 + i + "@mail.ru");
             user.setLink(faker.internet().emailAddress());
             user.setProfession(faker.job().position());
-            user.setPassword(bCryptPasswordEncoder.encode("1"));
+            user.setPassword(bCryptPasswordEncoder.encode(2 + i + ""));
             user.setNotToDo(faker.chuckNorris().fact());
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
@@ -141,6 +142,7 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
+            petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
             petitionService.insert(petition);

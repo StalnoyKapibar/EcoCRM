@@ -10,4 +10,5 @@ public class PointServiceImpl extends AbstractServiceImpl<Point> implements Poin
     public PointServiceImpl(PointDao pointDao) {
         super(pointDao);
     }
+
 }

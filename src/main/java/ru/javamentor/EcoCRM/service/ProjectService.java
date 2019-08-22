@@ -9,4 +9,5 @@ import java.util.Map;
 
 public interface ProjectService extends AbstractService<Project> {
     Map<Project, StepNumber> getListByStepInProgress(StepNumber stepNumber, Status status);
+    List<Project> getProjectsByUserId(Long id);
 }

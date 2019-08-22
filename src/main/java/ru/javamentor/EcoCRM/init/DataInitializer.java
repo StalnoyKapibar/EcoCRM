@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
+import ru.javamentor.EcoCRM.model.embedded.TaskType;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDateTime;
@@ -60,8 +62,8 @@ public class DataInitializer {
         initUsers();
         initContractors();
         initManagement();
-//        initPetition();
-//        initProject();
+        initPetition();
+        initProject();
     }
 
     private void initRoles() {
@@ -166,7 +168,10 @@ public class DataInitializer {
             step.setStepNumber(stepNumber);
             stepService.insert(step);
             switch (stepNumber) {
-                case STEP_1:addTaskForStep1(step);
+                case STEP_1:{
+                    addTaskForStep1(step);
+                    step.setStatus(Status.IN_PROGRESS);
+                }
                     break;
                 case STEP_2:addTaskForStep2(step);
                     break;
@@ -187,40 +192,38 @@ public class DataInitializer {
     }
 
     private void addTaskForStep1(Step step) {
-        taskService.insert(new Task("Заполнить форму заявителя", step));
-        taskService.insert(new Task("Добавить данные о соседях", step));
-        taskService.insert(new Task("Добавить фото контейнера", step));
+        taskService.insert(new Task("Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
+        taskService.insert(new Task("Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
+        taskService.insert(new Task("Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
     }
 
     private void addTaskForStep2(Step step) {
-        taskService.insert(new Task("Заполнить форму управляющей компании", step));
+        taskService.insert(new Task("Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
     }
 
     private void addTaskForStep3(Step step) {
-        taskService.insert(new Task("Выбрать компанию заготовителя", step));
-        taskService.insert(new Task("Назначить встречу заготовителя и управляющей компании", step));
-    }
+        taskService.insert(new Task("Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
 
     private void addTaskForStep4(Step step) {
-        taskService.insert(new Task("Заключить договор", step));
+        taskService.insert(new Task("Заключить договор", step, TaskType.OFFER));
     }
 
     private void addTaskForStep5(Step step) {
-        taskService.insert(new Task("Установка контейнера", step));
+        taskService.insert(new Task("Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
     }
 
     private void addTaskForStep6(Step step) {
-        taskService.insert(new Task("Разработать макет листовок", step));
-        taskService.insert(new Task("Печать листовок", step));
-        taskService.insert(new Task("Публикация листовок на досках информирования", step));
-        taskService.insert(new Task("Мероприятие  участием жителей", step));
+        taskService.insert(new Task("Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
+        taskService.insert(new Task("Печать листовок", step, TaskType.LEAFLETS_PRINT));
+        taskService.insert(new Task("Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
+        taskService.insert(new Task("Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
     }
 
     private void addTaskForStep7(Step step) {
-        taskService.insert(new Task("Заполнить отчет", step));
+        taskService.insert(new Task("Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
     }
 
     private void addTaskForStep8(Step step) {
-        taskService.insert(new Task("Проверка результата через месяц", step));
+        taskService.insert(new Task("Проверка результата через месяц", step, TaskType.CUSTOM));
     }
 }

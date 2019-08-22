@@ -8,32 +8,20 @@ function getProjects() {
             let docVar = '';
             $.each(projects, function (key, value) {
                 count++;
-                // docVar+='<div class="col card ml-1 mr-1 eco-column">' +
-                //     '            <div class="card-body eco-column-body">' +
-                //     '                <div class="card-title">' +
-                //     '                    <h6>Шаг ' + count + '</h6>' +
-                //     '                </div>'
-                docVar+='<div class="eco eco-column">' +
-                    '            <div class="eco eco-column-body">' +
-                    '                <div class="eco-card-title">' +
+                docVar += '<div class="col-2">' +
+                    '                <div class="eco-column-header-extras">' +
                     '                    <h6>Шаг ' + count + '</h6>' +
-                    '                </div>';
+                    '                </div>' +
+                    '            <div class="card" style="height:47rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
-                    // docVar+='<div class="card eco-card">' +
-                    //     '                        <div class="card-body">' +
-                    //     '                            <div class="card-title eco-card-title">' +
-                    //     '                                <p>' + project.title +'</p>' +
-                    //     '                            </div>' +
-                    //     '                        </div>' +
-                    //     '     </div>'
-                    docVar+='<div class="eco eco-card">' +
-                        '                            <div class="eco-card-title">' +
-                        '                                <p>' + project.title +'</p>' +
+                    docVar += '<div class="eco-card card m-2" style="height: 20%;box-shadow: 0px 5px 9px -8px #000000;">' +
+                        '                            <div class="card-header" style="font-size: small">' + project.title + '</div>' +
+                        '                            <div class="card-body">' +
                         '                            </div>' +
                         '     </div>'
                 });
-                docVar+='</div> </div>';
-        });
+                docVar += '</div> </div>';
+            });
             $("#projectsTable").html(docVar);
         }
     });

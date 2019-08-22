@@ -68,8 +68,8 @@ public class DataInitializer {
         initUsers();
         initContractors();
         initManagement();
-//        initPetition();
-//        initProject();
+        initPetition();
+        initProject();
     }
 
     private void initRoles() {
@@ -78,13 +78,15 @@ public class DataInitializer {
         Authority userAuthority = new Authority("ROLE_USER");
         authoritiesService.insert(userAuthority);
     }
-    private void initBaseUserAndAdmin() {
+    private void initBaseUserAndAdmin() throws IOException {
         User admin = new User();
+        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setAuthorities(authoritiesService.getAll());
 
         User user = new User();
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
         user.setEmail("user");
         user.setPassword(bCryptPasswordEncoder.encode("user"));
         List<Authority> roles = new ArrayList<>();
@@ -97,7 +99,7 @@ public class DataInitializer {
     private void initUsers() throws IOException {
         for (int i = 1; i < 50; i++) {
             User user = new User();
-            user.setName("jksljldk");
+            user.setName(faker.name().firstName());
             user.setSurname(faker.name().lastName());
             user.setEmail(faker.internet().emailAddress());
             user.setLink(faker.internet().emailAddress());

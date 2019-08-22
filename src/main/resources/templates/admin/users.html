@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <script type="text/javascript" src="/private/js/userInfoModal.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Волонтер</th>
+            <th>Почта</th>
+            <th>Статус</th>
+            <th>Информация</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${usersList}">
+            <td th:text="${user.name} +' '+ ${user.surname}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.status}" th:id = "${user.id}+'_td_user_stat'"></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><span class="glyphicon glyphicon-user"></span></button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" id="block-btn">BLOCK</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal1" id="unblock-btn">UNBLOCK</button>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5> Имя: </h5><h6 id="name"></h6>
+                <h5> Фамилия: </h5><h6 id="surname"></h6>
+                <h5> Отчество: </h5><h6 id="patronymic"></h6>
+                <h5> ID: </h5><h6 id="userId"></h6>
+                <h5> Почта: </h5><h6 id="email"></h6>
+                <h5> Ссылка VK: </h5><a><h6 id="vk"></h6></a>
+                <h5> Профессия: </h5><h6 id="profession"></h6>
+                <h5> Статус аккаунта: </h5><h6 id="enabled"></h6>
+                <h5> Статус пользователя: </h5><h6 id="status"></h6>
+                <h5> Не хочет заниматься: </h5><h6 id="notToDo"></h6>
+                <h5> Проекты: </h5><h6 id="projects"></h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Submit block-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Подтвердите действие</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите заблокировать пользователя?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="blockUser()">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Submit unblock-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Подтвердите действия</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите разблокировать пользовавтеля?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="unblockUser()">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

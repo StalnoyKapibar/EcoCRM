@@ -2,6 +2,7 @@ package ru.javamentor.EcoCRM.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.javamentor.EcoCRM.dao.AbstractDao;
 import ru.javamentor.EcoCRM.dao.StepDao;
 import ru.javamentor.EcoCRM.model.Step;
 import ru.javamentor.EcoCRM.model.embedded.Status;
@@ -13,7 +14,7 @@ import java.util.List;
 public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepService {
     @Autowired
     public StepServiceImpl(StepDao stepDao) {
-        super(stepDao);
+        this.stepDao = stepDao;
     }
 
     @Autowired
@@ -37,4 +38,9 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
     public List<Step> getAllByprojectId(Long id){
         return stepDao.getAllByProjectId(id);
     }
+
+    public StepDao getDao() {
+        return stepDao;
+    }
+
 }

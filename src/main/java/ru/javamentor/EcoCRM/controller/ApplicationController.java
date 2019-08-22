@@ -40,4 +40,9 @@ public class ApplicationController {
     public String showUser() {
         return "user";
     }
+
+    @GetMapping("/person")
+    public String getPersonPage() {
+        return "person_page";
+    }
 }

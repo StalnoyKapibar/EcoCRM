@@ -1,13 +1,22 @@
 package ru.javamentor.EcoCRM.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.AbstractDao;
-import ru.javamentor.EcoCRM.model.TaskByStep;
+import ru.javamentor.EcoCRM.dao.TaskDao;
+import ru.javamentor.EcoCRM.model.Task;
 
 @Service
-public class TaskServiceImpl extends AbstractServiceImpl<TaskByStep> implements TaskService{
+public class TaskServiceImpl extends AbstractServiceImpl<Task> implements TaskService{
+    private TaskDao taskDao;
 
-    public TaskServiceImpl(AbstractDao<TaskByStep> abstractDao) {
-        super(abstractDao);
+    @Autowired
+    public TaskServiceImpl(TaskDao taskDao) {
+        this.taskDao = taskDao;
+    }
+
+    @Override
+    public TaskDao getDao() {
+        return taskDao;
     }
 }

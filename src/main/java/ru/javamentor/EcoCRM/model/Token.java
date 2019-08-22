@@ -16,6 +16,9 @@ public class Token {
     @Column(name = "token")
     private String token;
 
+    @Column(name = "token_create_time")
+    private long tokenCreateTime = System.currentTimeMillis();
+
     public Token() {
 
     }
@@ -23,6 +26,7 @@ public class Token {
     public Token(String email, String token) {
         this.email = email;
         this.token = token;
+
     }
 
     public String getEmail() {
@@ -39,6 +43,14 @@ public class Token {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public long getTokenCreateTime() {
+        return tokenCreateTime;
+    }
+
+    public void setTokenCreateTime(long tokenCreateTime) {
+        this.tokenCreateTime = tokenCreateTime;
     }
 
     public void encodeToken() {

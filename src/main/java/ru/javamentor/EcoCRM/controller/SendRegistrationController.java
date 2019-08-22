@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
+import ru.javamentor.EcoCRM.service.SchedulerService;
 import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
@@ -29,6 +30,9 @@ public class SendRegistrationController {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    SchedulerService schedulerService;
+
     @GetMapping("/sendReg")
     public String SendReg(Model model) {
         String userEmail = "";
@@ -42,6 +46,9 @@ public class SendRegistrationController {
         String token = bCryptPasswordEncoder.encode(userEmail);
         tokenService.insert(new Token(userEmail, token));
         System.out.println("result String: " + token);
+
+
+
 
        String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
                 "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "&token=" + token;

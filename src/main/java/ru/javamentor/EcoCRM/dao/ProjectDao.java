@@ -8,4 +8,5 @@ import java.util.Map;
 
 public interface ProjectDao extends AbstractDao<Project> {
     Map<StepNumber, List<Project>> getListByStepInProgress();
+    List<Project> getProjectsByUserId(Long id);
 }

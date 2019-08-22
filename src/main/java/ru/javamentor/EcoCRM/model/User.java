@@ -44,7 +44,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @Column(name = "user_status")
     @Enumerated(value = EnumType.STRING)
@@ -166,7 +166,7 @@ public class User implements UserDetails {
         return status;
     }
 
-    public void setStstus(UserStatus status) {
+    public void setStatus(UserStatus status) {
             this.status = status;
     }
     public String getName() { return name; }

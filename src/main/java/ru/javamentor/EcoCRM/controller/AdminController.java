@@ -11,18 +11,15 @@ import ru.javamentor.EcoCRM.service.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/usersList")
-public class UsersListController {
+public class AdminController {
 
     @Autowired
     private UserService userService;
 
-    //todo
-    @GetMapping("/")
+    @GetMapping("/admin/usersList")
     public String showAllUsers(Model model) {
-          List<User> usersList = userService.getAll();
-          System.out.println(usersList.toString());
-          model.addAttribute("usersList", usersList);
+        List<User> usersList = userService.getAll();
+        model.addAttribute("usersList", usersList);
         return "/admin/users";
     }
 }

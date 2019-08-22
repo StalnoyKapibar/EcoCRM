@@ -1,39 +1,78 @@
-//todo
+function getUser(id) {
+    $.ajax({
+        url: "/api/user/" + id,
+        type: "GET",
+        async: false,
+        success: function (user) {
+            $("#name").text(user.name);
+            $("#surname").text(user.surname);
+            $("#userId").text(user.id);
+            $("#patronymic").text(user.patronymic);
+            $("#email").text(user.email);
+            $("#vk").text(user.link);
+            $("#profession").text(user.profession);
+            $("#status").text(user.status);
+            $("#notToDo").text(user.notToDo);
+            if (user.enabled) {
+                $("#enabled").text("Доступен");
+            } else {
+                $("#enabled").text("Не доступен");
+            }
 
-// var modal = document.getElementById('myModal');
-// var btn = document.getElementById("myBtn");
-// var span = document.getElementsByClassName("close")[0];
-//
-// btn.onclick = function() {
-//     modal.style.display = "block";
-// }
-//
-// span.onclick = function() {
-//     modal.style.display = "none";
-// }
-//
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+            getProjects(id);
+        }
+    });
 
-document.addEventListener('DOMContentLoaded', function() {
-    var modalButtons = document.querySelectorAll('.js-open-modal'),
-        overlay      = document.querySelector('#overlay-modal'),
-        closeButtons = document.querySelector('.js-modal-close');
+}
 
 
-    modalButtons.forEach(function(item){
+function getProjects(id) {
+    $.ajax({
+        url: "/api/user/projects/" + id,
+        type: "GET",
+        async: false,
+        success: function (projects) {
+            $("#projects").html("");
+            $.each(projects, function(index) {
+                //$("#projects").text(value.title);
+                $('#projects').append("<p><a>" + projects[index].title + "</a></p>");
+                console.log(index.title);
+            });
+        }
+    });
+}
 
-        item.addEventListener('click', function(e) {
+function blockUser() {
+    var userId = $('#userId').text();
+    //var bt = document.getElementById('exampleModal');
+    $.ajax({
+        url: "/api/user/block?id=" + userId,
+        type: "POST",
+        async: false,
+        success: function (address) {
+            window.location.href = address;
+            //$("#unblock-btn").prop('disabled', false);
+            //$("#block-btn").prop('disabled', true);
+        },
+        error: function(error) {
+            console.error('problem with blocking', error);
+        }
+    });
+}
 
-            e.preventDefault();
-            var modalId = this.getAttribute('data-modal'),
-                modalElem = document.querySelector('.modal[data-modal="' + modalId + '"]');
-
-            modalElem.classList.add('active');
-            overlay.classList.add('active');
-        }); // end click
-    }); // end foreach
-}); // end ready
+function unblockUser() {
+    var userId = $('#userId').text();
+    $.ajax({
+        url: "/api/user/unblock?id=" + userId,
+        type: "POST",
+        async: false,
+        success: function (address) {
+            window.location.href = address;
+            //$('#block-btn').prop('disabled', false);
+            //$('#unblock-btn').prop('disabled', true);
+        },
+        error: function(error) {
+            console.error('problem with unblocking', error);
+        }
+    });
+}

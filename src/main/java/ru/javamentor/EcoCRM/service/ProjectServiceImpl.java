@@ -28,4 +28,9 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
     public Map<StepNumber, List<Project>> getListByStepInProgress() {
         return projectDao.getListByStepInProgress();
     }
+
+    @Override
+    public List<Project> getProjectsByUserId(Long id) {
+        return projectDao.getProjectsByUserId(id);
+    }
 }

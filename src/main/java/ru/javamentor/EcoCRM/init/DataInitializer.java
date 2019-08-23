@@ -166,11 +166,13 @@ public class DataInitializer {
             Step step = new Step();
             step.setProject(project);
             step.setStepNumber(stepNumber);
+            if(step.getStepNumber()==StepNumber.STEP_1){
+                step.setStatus(Status.IN_PROGRESS);
+            }
             stepService.insert(step);
             switch (stepNumber) {
                 case STEP_1:{
                     addTaskForStep1(step);
-                    step.setStatus(Status.IN_PROGRESS);
                 }
                     break;
                 case STEP_2:addTaskForStep2(step);

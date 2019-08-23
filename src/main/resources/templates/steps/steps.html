@@ -44,63 +44,61 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">ФИО</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="ФИО заявителя">
+                                        <input type="text" class="form-control" th:value="${petition.userName}"  placeholder="ФИО заявителя">
                                     </div>
 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">email</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="email">
+                                        <input type="text" class="form-control" th:value="${petition.email}" placeholder="email">
                                     </div>
 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Тел.</span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="контакная информация">
+                                        <input type="text" class="form-control" th:value="${petition.contactInformation}" placeholder="контакная информация">
                                     </div>
                                     <div class="h6">Статус</div>
-
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" id="resident" name="status">
+                                        <input type="radio" class="form-check-input" id="resident" name="status" th:attrappend="checked =${petition.statusHome.equals('Житель, собственник жилья')}? checked : null">
                                         <label class="form-check-label">Житель, собственник жилья</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" id="manage_representative"
+                                        <input type="radio" class="form-check-input" id="manage_representative" th:attrappend="checked =${petition.statusHome.equals('Представитель управляющей организации (УК, ТСЖ и т.п.)')}? checked : null"
                                                name="status">
-                                        <label class="form-check-label">Представитель управляющей организации (УК, ТСЖ и
-                                            т.п.)</label>
+                                        <label class="form-check-label">Представитель управляющей организации (УК, ТСЖ и т.п.)</label>
                                     </div>
                                     <br>
                                     <div class="h6">Участвует в деятельности движения "Раздельный сбор"</div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="monthly"
+                                        <input type="radio" class="form-check-input activity" id="monthly" th:attrappend="checked =${petition.separateCollection.equals('Участвую в ежемесячных акциях и сдаю своё вторсырьё')}? checked : null"
                                                name="activity">
                                         <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё
                                             вторсырьё</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="volunteer"
+                                        <input type="radio" class="form-check-input activity" id="volunteer" th:attrappend="checked =${petition.separateCollection.equals('Волонтер на акциях')}? checked : null"
                                                name="activity">
                                         <label class="form-check-label">Волонтер на акциях</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="corrdinator"
+                                        <input type="radio" class="form-check-input activity" id="corrdinator" th:attrappend="checked =${petition.separateCollection.equals('Координатор на акциях')}? checked : null"
                                                name="activity">
                                         <label class="form-check-label">Координатор на акциях</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="participant"
+                                        <input type="radio" class="form-check-input activity" id="participant" th:attrappend="checked =${petition.separateCollection.equals('Участник рабочих групп движения')}? checked : null"
                                                name="activity">
                                         <label class="form-check-label" for="participant">Участник рабочих групп
                                             движения</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="no_participate"
+                                        <input type="radio" class="form-check-input activity" id="no_participate" th:attrappend="checked =${petition.separateCollection.equals('Не принимаю участия в деятельности движения')}? checked : null"
                                                name="activity">
                                         <label class="form-check-label" for="participant">Не принимаю участия в
                                             деятельности движения</label>
@@ -115,35 +113,35 @@
                                     <br>
                                     <div class="h6">Накопление какого хотелось бы организовать?</div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="paper">
+                                        <input type="checkbox" class="form-check-input" id="paper" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Бумага/картон')}? checked : null" >
                                         <label class="form-check-label">Бумага/картон</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="glass">
+                                        <input type="checkbox" class="form-check-input" id="glass" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Стекло')}? checked : null">
                                         <label class="form-check-label">Стекло</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="metal">
+                                        <input type="checkbox" class="form-check-input" id="metal" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Металл')}? checked : null">
                                         <label class="form-check-label">Металл</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="hard_plastic">
+                                        <input type="checkbox" class="form-check-input" id="hard_plastic" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Твёрдый пластик')}? checked : null">
                                         <label class="form-check-label">Твёрдый пластик</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="soft_plastic">
+                                        <input type="checkbox" class="form-check-input" id="soft_plastic" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Мягкий пластик')}? checked : null">
                                         <label class="form-check-label">Мягкий пластик</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="tetra_pak">
+                                        <input type="checkbox" class="form-check-input" id="tetra_pak" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Тетрапак')}? checked : null">
                                         <label class="form-check-label">Тетрапак</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="organic_waste">
+                                        <input type="checkbox" class="form-check-input" id="organic_waste" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Органические отходы')}? checked : null">
                                         <label class="form-check-label">Органические отходы</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="hazardous_waste">
+                                        <input type="checkbox" class="form-check-input" id="hazardous_waste" th:attrappend="checked =${petition.typeOfRawMaterial.contains('Опасные отходы (батарейки, лампочки и т.п.)')}? checked : null">
                                         <label class="form-check-label">Опасные отходы (батарейки, лампочки и
                                             т.п.)</label>
                                     </div>
@@ -217,7 +215,7 @@
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_2_1">
                                     <label><h6>Навзвание организации</h6></label>
-                                    <input type="text" class="form-control" placeholder="Название" id="management_org_name">
+                                    <input type="text" class="form-control" placeholder="Название" th:value="${mencompany.name}" id="management_org_name">
                                     <br>
                                     <label><h6>Инн</h6></label>
                                     <input type="text" class="form-control" placeholder="Инн" id="management_org_inn">
@@ -678,7 +676,10 @@
     </div>
 </div>
 
-<script>
+<script th:inline="javascript">
+
+
+
     $("#another_active").change(function () {
         if (this.checked) {
             $("#another_active_input").attr('disabled', false)
@@ -729,6 +730,7 @@
             '<input type="text" class="form-control" placeholder="Ссылка" aria-label="Username" aria-describedby="basic-addon1">' +
             '</div>');
     }
+
 
 </script>
 </body>

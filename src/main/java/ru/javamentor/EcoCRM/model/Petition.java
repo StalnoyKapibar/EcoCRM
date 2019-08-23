@@ -29,7 +29,6 @@ public class Petition {
     @Column(name="type_of_raw_material")
     private String typeOfRawMaterial;
 
-
     @Column(name = "adres_home")
     private String adresHome;
 

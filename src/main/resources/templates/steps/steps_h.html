@@ -28,8 +28,9 @@
 
     </style>
 </head>
-<body>
-<input type="text" th:value="${steps[0].status}">
+<body th:inline="text">
+<button type="button" onclick="f()">showTasks</button>
+
 <!--<button type="button" onclick="showMes()">show</button>-->
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -60,35 +61,83 @@
     </div>
 </nav>
 
-<div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show " th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : null" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
+<div class="tab-content" id="nav-tabContent" th:switch="${stepnumber.name()}">
+<div th:case="'STEP_1'">
+    <div class="tab-pane fade show active"  id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_1"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[1].status.name().equals('IN_PROGRESS')} ? active : null" id="step_2" role="tabpanel" aria-labelledby="nav-home-tab">
+</div>
+    <div th:case="'STEP_2'">
+    <div class="tab-pane fade show active"  id="step_2" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_2"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : null" id="step_3" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div th:case="'STEP_3'">
+    <div class="tab-pane fade show active" th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : null" id="step_3" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_3"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[3].status.name().equals('IN_PROGRESS')} ? active : null" id="step_4" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div th:case="'STEP_4'">
+    <div class="tab-pane fade show active"  id="step_4" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_4"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[4].status.name().equals('IN_PROGRESS')} ? active : null" id="step_5" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div th:case="'STEP_5'">
+    <div class="tab-pane fade show active" id="step_5" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_5"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[5].status.name().equals('IN_PROGRESS')} ? active : null" id="step_6" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div th:case="'STEP_6'">
+    <div class="tab-pane fade show active" id="step_6" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_6"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[6].status.name().equals('IN_PROGRESS')} ? active : null"  id="step_7" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div th:case="'STEP_7'">
+    <div class="tab-pane fade show active" id="step_7" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_7"></th:block>
     </div>
-    <div class="tab-pane fade show" th:classappend="${steps[7].status.name().equals('IN_PROGRESS')} ? active : null" id="step_8" role="tabpanel" aria-labelledby="nav-home-tab">
+    </div>
+    <div th:case="'STEP_8'">
+    <div class="tab-pane fade show active" id="step_8" role="tabpanel" aria-labelledby="nav-home-tab">
         <th:block th:replace="steps/steps :: step_8"></th:block>
+    </div>
     </div>
     <th:block th:replace="steps/steps:: add_task_modal"></th:block>
     <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>
 </div>
-<script>
+
+<!--<div class="tab-content" id="nav-tabContent">-->
+<!--    <div class="tab-pane fade show " th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : null" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_1"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[1].status.name().equals('IN_PROGRESS')} ? active : null" id="step_2" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_2"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : null" id="step_3" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_3"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[3].status.name().equals('IN_PROGRESS')} ? active : null" id="step_4" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_4"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[4].status.name().equals('IN_PROGRESS')} ? active : null" id="step_5" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_5"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[5].status.name().equals('IN_PROGRESS')} ? active : null" id="step_6" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_6"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[6].status.name().equals('IN_PROGRESS')} ? active : null"  id="step_7" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_7"></th:block>-->
+<!--    </div>-->
+<!--    <div class="tab-pane fade show" th:classappend="${steps[7].status.name().equals('IN_PROGRESS')} ? active : null" id="step_8" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_8"></th:block>-->
+<!--    </div>-->
+<!--    <th:block th:replace="steps/steps:: add_task_modal"></th:block>-->
+<!--    <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>-->
+<!--</div>-->
+<script th:inline="text" >
+
+
+
     (function(){
         var originalAddClassMethod = jQuery.fn.addClass;
         var originalRemoveClassMethod = jQuery.fn.removeClass;
@@ -105,10 +154,9 @@
         }
     })();
 
-
-    $('#step_2_link').bind('classChanged', function(){
-        if($('#step_2_link').hasClass('active')){
-
+    $('#step_1_link').bind('classChanged', function(){
+        if($('#step_1_link').hasClass('active')){
+            alert("isasdfas")
         }
     });
 

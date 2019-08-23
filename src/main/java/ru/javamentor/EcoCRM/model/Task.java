@@ -31,7 +31,7 @@ public class Task implements Serializable {
 
     @Column(name = "task_type")
     @Enumerated(value = EnumType.STRING)
-    private TaskType taskType;
+    private TaskType type;
 
     public Task() {
 
@@ -44,15 +44,15 @@ public class Task implements Serializable {
     public Task(String description, Step step, TaskType taskType) {
         this.description = description;
         this.step = step;
-        this.taskType = taskType;
+        this.type = taskType;
     }
 
     public TaskType getType() {
-        return taskType;
+        return type;
     }
 
     public void setType(TaskType taskType) {
-        this.taskType = taskType;
+        this.type = taskType;
     }
 
     public Long getId() {

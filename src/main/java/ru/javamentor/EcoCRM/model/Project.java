@@ -98,11 +98,11 @@ public class Project implements Serializable {
         this.point = point;
     }
 
-    public ManagementCompany getCompany() {
+    public ManagementCompany getManagementCompany() {
         return company;
     }
 
-    public void setCompany(ManagementCompany company) {
+    public void setManagementCompany(ManagementCompany company) {
         this.company = company;
     }
 

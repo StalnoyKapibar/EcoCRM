@@ -13,5 +13,5 @@ public enum TaskType {
     LEAFLETS_PUBLICATION,
     RESIDENTS_ACTIVITIES,
     CASE_DESCRIPTION,
-    CUSTOM;
+    CUSTOM
 }

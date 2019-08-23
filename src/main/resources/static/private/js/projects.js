@@ -16,6 +16,7 @@ function fillContent() {
                     docVar += '<div class="eco-card card m-2" style="height: 20%;box-shadow: 0px 5px 9px -8px #000000;">' +
                         '                            <div class="card-header" style="font-size: small">' + project.title + '</div>' +
                         '                            <div class="card-body">' +
+                        '                            <div class="house-area">' + project.petition.houseArea + '</div>' +
                         '                            </div>' +
                         '     </div>'
                 });
@@ -26,10 +27,3 @@ function fillContent() {
         }
     });
 }
-$(document).ready(function () {
-    $("#col_0, #col_1, #col_2, #col_3, #col_4, #col_5, #col_6, #col_7").sortable({
-        opacity: 0.5,
-        connectWith: "#col_0, #col_1, #col_2, #col_3, #col_4, #col_5, #col_6, #col_7",
-    });
-    $("#col_0, #col_1, #col_2, #col_3, #col_4, #col_5, #col_6, #col_7").disableSelection();
-});

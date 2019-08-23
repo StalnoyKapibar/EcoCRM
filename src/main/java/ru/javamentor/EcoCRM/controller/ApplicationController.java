@@ -1,23 +1,18 @@
 package ru.javamentor.EcoCRM.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.javamentor.EcoCRM.service.AuthoritiesService;
-import ru.javamentor.EcoCRM.service.UserService;
+import ru.javamentor.EcoCRM.model.Authority;
+
+import java.util.List;
 
 @Controller
 public class ApplicationController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private AuthoritiesService authoritiesService;
-
     @GetMapping("/showMyLoginPage")
     public String showMyLoginPage() {
-        System.out.println("Controller ready!");
         return "login";
     }
 
@@ -27,8 +22,17 @@ public class ApplicationController {
     }
 
     @GetMapping("/")
-    public String showHome() {
-        return "home";
+    public String startPageRedirectRoleDepending() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = auth.getName();
+        List<Authority> roles = (List<Authority>) auth.getAuthorities();
+        for (Authority role : roles) {
+            if (role.getAuthority().contains("ROLE_ADMIN")) {
+                return "/admin/admin_page";
+            }
+        }
+        return "user";
     }
 
     @GetMapping("/admin/page")

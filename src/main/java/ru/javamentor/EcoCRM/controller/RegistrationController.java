@@ -43,25 +43,20 @@ public class RegistrationController {
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 
     @GetMapping("/new")
-    public String registrationForm(@RequestParam("code")String code, Model model) {
-
+    public String registrationForm(@RequestParam("code") String code, Model model) {
 
         Token dbtoken = tokenService.loadTokenByCode(code);
 
         if (dbtoken == null) {
-            System.out.println("FUCKING TOKEN NOT FOUND");
+            System.out.println("Token not exists in database");
             return "redirect:/admin/page";
         } else {
-
-
             User user = new User();
             user.setEmail(dbtoken.getEmail());
             model.addAttribute("user", user);
 
             return "registration/registration-form";
-            }
-
-
+        }
 
     }
     @PostMapping("/new")

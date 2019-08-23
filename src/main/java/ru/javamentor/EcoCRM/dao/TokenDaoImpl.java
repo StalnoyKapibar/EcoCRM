@@ -17,8 +17,6 @@ public class TokenDaoImpl extends AbstractDaoImpl<Token>  implements TokenDao {
     @Override
     public void deleteOldTokens() {
 
-        System.out.println("TOKEN TTL FROM PROPERTIES: " +  tokenTTL);
-
         Query query = entityManager.createQuery("DELETE FROM Token t WHERE :currentTime - t.tokenCreateTime > :tokenTTL");
         query.setParameter("currentTime", System.currentTimeMillis());
         query.setParameter("tokenTTL", tokenTTL);

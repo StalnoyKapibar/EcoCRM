@@ -30,4 +30,9 @@ public class PetitonViewController {
         modelAndView.addObject("petitionList", petitionDTOList);
         return modelAndView;
     }
+
+    @GetMapping("/getAllAdminPetitionWithUser")
+    public String getAllPetitonWithUser() {
+        return "petitionWithUserForAdmin";
+    }
 }

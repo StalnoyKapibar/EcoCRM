@@ -95,7 +95,7 @@ public class DataInitializer {
         userService.insert(admin);
     }
 
-    private void initUsers() {
+    private void initUsers() throws IOException {
         for (int i = 1; i < 50; i++) {
             User user = new User();
             user.setName(faker.name().firstName());
@@ -108,7 +108,7 @@ public class DataInitializer {
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
-           // user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             userService.insert(user);
         }
     }

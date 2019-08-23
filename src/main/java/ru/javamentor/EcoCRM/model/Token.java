@@ -12,13 +12,12 @@ import javax.persistence.Table;
 @Table(name = "token")
 public class Token {
 
-
     @Id
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "email")
     private String email;
-
-    @Column(name = "token")
-    private String token;
 
     @Column(name = "token_create_time")
     private long tokenCreateTime = System.currentTimeMillis();
@@ -26,9 +25,9 @@ public class Token {
     public Token() {
     }
 
-    public Token(String email, String token) {
+    public Token(String email, String code) {
         this.email = email;
-        this.token = token;
+        this.code = code;
 
     }
 
@@ -41,11 +40,15 @@ public class Token {
     }
 
     public String getToken() {
-        return token;
+        return code;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public long getTokenCreateTime() {
@@ -55,5 +58,4 @@ public class Token {
     public void setTokenCreateTime(long tokenCreateTime) {
         this.tokenCreateTime = tokenCreateTime;
     }
-
 }

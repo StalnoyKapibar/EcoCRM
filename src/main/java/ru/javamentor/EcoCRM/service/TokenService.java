@@ -5,7 +5,7 @@ import ru.javamentor.EcoCRM.model.Token;
 
 public interface TokenService extends AbstractService<Token> {
 
-    Token loadTokenByEmail(String email);
+    Token loadTokenByCode(String code);
 
     void deleteOldTokens();
 }

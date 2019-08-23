@@ -43,15 +43,17 @@ public class RegistrationController {
     public final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
 
     @GetMapping("/new")
-    public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
-        User user = new User();
-        user.setEmail(email);
-        model.addAttribute("user", user);
+    public String registrationForm(@RequestParam("code")String code, Model model) {
 
         try {
-            Token dbtoken = tokenService.loadTokenByEmail(email);
+            Token dbtoken = tokenService.loadTokenByCode(code);
+
             String tokenFromDB =dbtoken.getToken();
-            if (token.equals(tokenFromDB)) {
+            if (code.equals(tokenFromDB)) {
+                User user = new User();
+                user.setEmail(dbtoken.getEmail());
+                model.addAttribute("user",user);
+
                 return "registration/registration-form";
             } else {
                 return "redirect:/admin/page";
@@ -59,7 +61,6 @@ public class RegistrationController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("WRONG TOKEN!!!");
         return "redirect:/admin/page";
     }
 

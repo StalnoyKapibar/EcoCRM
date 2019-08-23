@@ -40,11 +40,11 @@ public class SendRegistrationController {
     @PostMapping("/admin/processSendForm")
     public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
 
-        String token = UUID.randomUUID().toString();
-        tokenService.insert(new Token(userEmail, token));
+        String code = UUID.randomUUID().toString();
+        tokenService.insert(new Token(userEmail, code));
 
         String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
-                "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "&token=" + token;
+                "\nhttp://localhost:8080/registration/new/?code=" + code;
 
         emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
         return "/admin/admin_page";

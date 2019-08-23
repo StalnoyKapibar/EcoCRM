@@ -21,16 +21,8 @@ public class ProjectsController {
 
     @GetMapping("/projects")
     public ModelAndView showProjects(ModelAndView modelAndView) {
-        Map<StepNumber, List<Project>> allProjects = projectService.getListByStepInProgress();
-        //TODO
-        modelAndView.addObject("firstStepProjects", allProjects.get(StepNumber.STEP_1));
-        modelAndView.addObject("secondStepProjects", allProjects.get(StepNumber.STEP_2));
-        modelAndView.addObject("thirdStepProjects", allProjects.get(StepNumber.STEP_3));
-        modelAndView.addObject("fourthStepProjects", allProjects.get(StepNumber.STEP_4));
-        modelAndView.addObject("fifthStepProjects", allProjects.get(StepNumber.STEP_5));
-        modelAndView.addObject("sixthStepProjects", allProjects.get(StepNumber.STEP_6));
-        modelAndView.addObject("seventhStepProjects", allProjects.get(StepNumber.STEP_7));
-        modelAndView.addObject("eighthStepProjects", allProjects.get(StepNumber.STEP_8));
+        modelAndView.addObject("stepNumber", StepNumber.values());
+        modelAndView.addObject("projects", projectService.getListByStepInProgress());
         modelAndView.setViewName("admin/projects");
         return modelAndView;
     }

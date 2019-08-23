@@ -1,7 +1,10 @@
 package ru.javamentor.EcoCRM.dao;
 
+import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Step;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
+
+import java.util.List;
 
 import java.util.List;
 

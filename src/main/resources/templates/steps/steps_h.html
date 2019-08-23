@@ -34,7 +34,7 @@
 <!--<button type="button" onclick="showMes()">show</button>-->
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_1"
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_1" th:onclick="'get_tasks_by_step_1('+${projectid}+')'"
            th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : (${steps[0].status.name().equals('DONE')}? done-step: null)"
            role="tab"  aria-controls="nav-home" aria-selected="true" id = "step_1_link">1. Заявитель</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#step_2"
@@ -134,8 +134,9 @@
 <!--    <th:block th:replace="steps/steps:: add_task_modal"></th:block>-->
 <!--    <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>-->
 <!--</div>-->
-<script th:inline="text" >
-
+<script>
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
 
 
     (function(){
@@ -154,11 +155,11 @@
         }
     })();
 
-    $('#step_1_link').bind('classChanged', function(){
-        if($('#step_1_link').hasClass('active')){
-            alert("isasdfas")
-        }
-    });
+    // $('#step_1_link').bind('classChanged', function(){
+    //     if($('#step_1_link').hasClass('active')){
+    //         alert("isasdfas")
+    //     }
+    // });
 
     $('#step_3_link').bind('classChanged', function(){
         if($('#step_3_link').hasClass('active')){
@@ -166,20 +167,19 @@
         }
     });
 
-    function getStepData(stepNumber) {
+    function get_tasks_by_step_1(projecId) {
+
+        var projid = projecId;
             $.ajax({
                 type: 'post',
-                url: "/api/portfolios/delete?" +
-                    "profileId=" + $('#profile_id').val() +
-                    "&portfolioId=" + portfolioId,
+                url: "/api/steps/step_1?" +
+                    "project_id="+ projid,
                 contentType: 'application/json; charset=utf-8',
-                beforeSend: function (request) {
-                    request.setRequestHeader(header, token);
-                },
-                success: function (portfolio) {
-                    $('#'+portfolioId+'_portf').remove();
-                    $('#prtf_id_to_update').val('');
-                    $('#portfolioModal').modal('hide');
+                // beforeSend: function (request) {
+                //     request.setRequestHeader(header, token);
+                // },
+                success: function (tasks) {
+                    alert(tasks);
                 },
                 error: function (error) {
                     console.log(error);
@@ -187,6 +187,8 @@
                 }
             })
     }
+
+
 
 </script>
 </body>

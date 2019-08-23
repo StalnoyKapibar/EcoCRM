@@ -43,4 +43,8 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
         return stepDao;
     }
 
+    @Override
+    public Step getStepByProjectIdAndStepNumber(Long projectId, StepNumber stepNumber) {
+        return stepDao.getStepByProjectIdAndStepNumber(projectId, stepNumber);
+    }
 }

@@ -9,4 +9,5 @@ public interface StepService extends AbstractService<Step> {
     Step getProgressStepByProjectId(Long projectId);
     void putProgressStatusToFirstStep();
     List<Step> getAllByprojectId(Long id);
+    Step getStepByProjectIdAndStepNumber(Long projectId, StepNumber stepNumber);
 }

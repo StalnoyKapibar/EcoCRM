@@ -31,4 +31,11 @@ public class StepDaoImpl extends AbstractDaoImpl<Step> implements StepDao {
         return query.getResultList();
     }
 
+    @Override
+    public Step getStepByProjectIdAndStepNumber(Long projectId, StepNumber stepNumber) {
+        Query query = entityManager.unwrap(Session.class).createQuery("from Step as s where s.project = :project and s.stepNumber = :stepnumber");
+        query.setParameter("project", projectService.get(projectId));
+        query.setParameter("stepnumber", stepNumber);
+        return (Step) query.getSingleResult();
+    }
 }

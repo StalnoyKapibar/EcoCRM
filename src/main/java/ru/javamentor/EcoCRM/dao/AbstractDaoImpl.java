@@ -52,7 +52,7 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
 
             result =  (T) query.getSingleResult();
         } catch (NoResultException exc) {
-            System.out.println("NO SUCH CODE IN DATABASE");
+            throw new NullPointerException("Field with value " + fieldValue + " not ounf in database");
         }
 
         return result;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.SchedulerService;
-import ru.javamentor.EcoCRM.service.TokenService;
+import ru.javamentor.EcoCRM.service.token.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.util.UUID;

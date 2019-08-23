@@ -10,12 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
-import ru.javamentor.EcoCRM.service.TokenService;
+import ru.javamentor.EcoCRM.service.token.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.io.IOException;
@@ -45,18 +44,31 @@ public class RegistrationController {
     @GetMapping("/new")
     public String registrationForm(@RequestParam("code") String code, Model model) {
 
-        Token dbtoken = tokenService.loadTokenByCode(code);
+//        Token dbtoken = tokenService.loadTokenByCode(code);
+//
+//        if (dbtoken == null) {
+//            System.out.println("Token not exists in database");
+//            return "redirect:/admin/page";
+//        } else {
+//            User user = new User();
+//            user.setEmail(dbtoken.getEmail());
+//            model.addAttribute("user", user);
+//
+//            return "registration/registration-form";
+//        }
 
-        if (dbtoken == null) {
-            System.out.println("Token not exists in database");
-            return "redirect:/admin/page";
-        } else {
+        try {
+            Token dbtoken = tokenService.loadTokenByCode(code);
             User user = new User();
             user.setEmail(dbtoken.getEmail());
             model.addAttribute("user", user);
-
             return "registration/registration-form";
+
+        } catch (NullPointerException e) {
+
+            return "wrong-token";
         }
+
 
     }
     @PostMapping("/new")

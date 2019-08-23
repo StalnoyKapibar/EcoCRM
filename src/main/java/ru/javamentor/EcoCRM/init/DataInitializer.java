@@ -10,6 +10,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
+import java.time.LocalDate;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -96,20 +97,20 @@ public class DataInitializer {
         userService.insert(admin);
     }
 
-    private void initUsers() throws IOException {
+    private void initUsers() {
         for (int i = 1; i < 50; i++) {
             User user = new User();
             user.setName(faker.name().firstName());
             user.setSurname(faker.name().lastName());
-            user.setEmail(faker.internet().emailAddress());
+            user.setEmail(2 + i + "@mail.ru");
             user.setLink(faker.internet().emailAddress());
             user.setProfession(faker.job().position());
-            user.setPassword(bCryptPasswordEncoder.encode("1"));
+            user.setPassword(bCryptPasswordEncoder.encode(2 + i + ""));
             user.setNotToDo(faker.chuckNorris().fact());
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
-            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+           // user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             userService.insert(user);
         }
     }
@@ -152,6 +153,7 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
+            petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
             petitionService.insert(petition);

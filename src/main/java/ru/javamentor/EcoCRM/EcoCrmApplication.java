@@ -10,11 +10,12 @@ import ru.javamentor.EcoCRM.init.DataInitializer;
 
 import javax.annotation.PostConstruct;
 
+
 @SpringBootApplication
 public class EcoCrmApplication implements WebMvcConfigurer {
 
-	@PostConstruct
-	@Bean(initMethod = "init")
+//	@PostConstruct
+//	@Bean(initMethod = "init")
 	public DataInitializer init() {
 		return new DataInitializer();
 	}

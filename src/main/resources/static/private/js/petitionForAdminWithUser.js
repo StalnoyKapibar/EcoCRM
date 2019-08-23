@@ -20,11 +20,9 @@ function f() {
                      surname = user.surname;
                      email = user.email;
                      phone = user.phone;
-
-
                 });
 
-               template+='<div class="col-sm-4">' +
+                template+='<div class="col-sm-4">' +
                    '<div class="card shadow bg-white rounded" style="margin-top: 15px">' +
                    '<div class="card-header">Заявка</div>' +
                    '<div class="card-body">Дата поступления заявки:' +
@@ -35,7 +33,7 @@ function f() {
                    '</h5>Фамилия<h5 id="6">' + surname + '' +
                    '</h5>Емаил<h5 id="7">' + email + ''+
                    '</h5>Номер телефона<h5 id="8">' + phone + ''+ '</h5>'+
-                   '<button>Одобрить заявку</button> </div></div></div>'
+                   '<button style="float: right">Одобрить заявку</button> </div></div></div>'
                 $("#cardes").html(template);
             });
         }

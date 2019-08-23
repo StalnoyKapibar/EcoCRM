@@ -13,7 +13,7 @@ $(document).ready(function () {
                     '                </div>' +
                     '            <div class="eco-col card" id="col_' + count + '" style="height:47rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
-                    docVar += '<div class="eco-card card m-2" style="height: 20%;box-shadow: 0px 5px 9px -8px #000000;">' + project.manager.id + '_' + project.id +
+                    docVar += '<div class="eco-card card m-2" style="height: 20%;box-shadow: 0px 5px 9px -8px #000000; id="' + project.manager.id + '_' + project.id +'">'+
                         '                            <div class="card-header" style="font-size: small">' + project.title + '</div>' +
                         '                            <div class="card-body">' +
                             '                            </div>' +

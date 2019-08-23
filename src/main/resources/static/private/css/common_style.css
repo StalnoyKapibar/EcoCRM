@@ -9,6 +9,23 @@ body {
     vertical-align: text-bottom;
 }
 
+.orng-btn {
+    background-color: #ffbb19;
+    border-color: #ffbb19;
+}
+
+.orng-btn:hover {
+    background-color: #ff8e00;
+}
+
+ul.fio {
+    margin: 0;
+    padding: 4px;
+}
+ul.fio li{
+    display: inline;
+    margin-right: 5px;
+}
 /*
  * Sidebar
  */

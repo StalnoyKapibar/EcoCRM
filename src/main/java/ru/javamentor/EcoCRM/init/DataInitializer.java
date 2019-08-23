@@ -70,7 +70,17 @@ public class DataInitializer {
         initManagement();
 //        initPetition();
 //        initProject();
+//        initPhoto();
     }
+
+    //вспомагательный метод для изменения автарки пользователю 1
+    private void initPhoto() throws IOException {
+        User user = userService.get(1);
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        userService.update(user);
+    }
+
+
 
     private void initRoles() {
         Authority adminAuthority = new Authority("ROLE_ADMIN");

@@ -2,6 +2,7 @@ package ru.javamentor.EcoCRM.dao;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
@@ -29,11 +30,26 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
     }
 
     @Override
-    public List<Project> getProjectsByUserId(Long id) {
+    public List<Petition> getProjManagerByUserId(Long id) {
 
         Query query = entityManager.createQuery("select p from Project p where p.manager.id = :id");
+        return getPetitions(id, query);
+    }
+
+    @Override
+    public List<Petition> getProjVolunteerByUserId(Long id) {
+
+        Query query = entityManager.createQuery("SELECT DISTINCT p FROM Project p LEFT JOIN p.users AS u WHERE u.id = :id");
+        return getPetitions(id, query);
+    }
+
+    private List<Petition> getPetitions(Long id, Query query) {
         query.setParameter("id", id);
         List<Project> projects = query.getResultList();
-        return projects;
+        List<Petition> petitions = new ArrayList<>();
+        for(Project p : projects) {
+            petitions.add(p.getPetition());
+        }
+        return petitions;
     }
 }

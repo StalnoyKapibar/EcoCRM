@@ -9,31 +9,68 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="/private/css/common_style.css" rel="stylesheet"><link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
 <body>
-<div>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <button type="button" class="btn orng-btn" data-toggle="modal" data-target="#exampleModalCenter"><b style="color: white;">Пригласить</b></button>
+    <div class="row" style="margin: 3%">
+
     <table class="table">
         <thead>
         <tr>
             <th>Волонтер</th>
             <th>Почта</th>
+            <th>Телефон</th>
             <th>Статус</th>
-            <th>Информация</th>
+            <th>Инфо</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user: ${usersList}">
             <td th:text="${user.name} +' '+ ${user.surname}"></td>
             <td th:text="${user.email}"></td>
+            <td th:text="${user.phone}"></td>
             <td th:text="${user.status}" th:id = "${user.id}+'_td_user_stat'"></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><span class="glyphicon glyphicon-user"></span></button></td>
+            <td><button type="button" class="btn orng-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><span class="glyphicon glyphicon-user" style="color: white;"></span></button></td>
         </tr>
         </tbody>
     </table>
+    </div>
+</main>
+
+<!-- Modal for registration user by e-mail-->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle1">Введите эл. почту добровольца</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Почта:<br>
+                    <input type="text" id="email_input" class="form-control mb-4 col-4" placeholder="Email"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="sendReg()">Отправить</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal with user info -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -47,17 +84,50 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5> Имя: </h5><h6 id="name"></h6>
-                <h5> Фамилия: </h5><h6 id="surname"></h6>
-                <h5> Отчество: </h5><h6 id="patronymic"></h6>
-                <h5> ID: </h5><h6 id="userId"></h6>
-                <h5> Почта: </h5><h6 id="email"></h6>
-                <h5> Ссылка VK: </h5><a><h6 id="vk"></h6></a>
-                <h5> Профессия: </h5><h6 id="profession"></h6>
-                <h5> Статус аккаунта: </h5><h6 id="enabled"></h6>
-                <h5> Статус пользователя: </h5><h6 id="status"></h6>
-                <h5> Не хочет заниматься: </h5><h6 id="notToDo"></h6>
-                <h5> Проекты: </h5><h6 id="projects"></h6>
+                <div id="photo" class="text-center"></div>
+                <br>
+                <table class="table">
+                <tr>
+                    <td><h6> ФИО: </h6></td>
+                    <td><ul class="fio">
+                        <li id="surname"></li>
+                        <li id="name"></li>
+                        <li id="patronymic"></li>
+                    </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h6> ID: </h6></td><td><h5 id="userId"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Почта: </h6></td><td><h5 id="email"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Телефон: </h6></td><td><h5 id="phone"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Ссылка VK: </h6></td><td><a href="#"><h5 id="vk"></h5></a></td>
+                </tr>
+                <tr>
+                    <td><h6> Профессия: </h6></td><td><h5 id="profession"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Статус: </h6></td><td><h5 id="status"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Не хочет заниматься: </h6></td><td><h5 id="notToDo"></h5></td>
+                </tr>
+
+                </table>
+                <h4 align="center" style="color: #002bff;">Проекты</h4>
+                <table class="table table-sm">
+                    <tr>
+                        <td><h6> Менеджер: </h6></td><td><a><h5 id="projManager" ></h5></a></td>
+                    </tr>
+                    <tr>
+                        <td><h6> Волонтер: </h6></td><td><h5 id="projVolunteer"></h5></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

@@ -57,7 +57,7 @@
                             Адрес:<h5 th:text="${petition.adress}"></h5>
                             Район:<h5 th:text="${petition.area}"></h5>
 <!--                            <a th:href="@{/api/petition/addPetitionUser/{id}(id=${petition.id})}" methods="get" class="btn">Подать зявку</a>-->
-                            <button id="1" th:onclick="'addUserToPetition('+${petition.id}+')'">Подать заявку</button>
+                            <button th:id="${petition.id}+'_remove_btn'" th:onclick="'addUserToPetition('+${petition.id}+')'">Подать заявку</button>
                         </div>
                     </div>
                 </div>

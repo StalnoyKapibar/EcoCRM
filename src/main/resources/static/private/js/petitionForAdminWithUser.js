@@ -9,7 +9,8 @@ function f() {
         async: false,
         success: function (petition) {
             var template = '';
-            var name = '';
+            var name;
+            
             petition.forEach(petition => {
                 petition.userList.forEach(user=>{
                      name = user.name;

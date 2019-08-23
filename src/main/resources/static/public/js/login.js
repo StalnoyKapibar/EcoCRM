@@ -1,6 +1,8 @@
 function auth() {
+    var email = $('#email-place').val();
+    var pass = $('#password-place').val();
     var dataForLogin =
-        "email"  +"="+$('#email-place').val() +"&" + "password" + "=" +$('#password-place').val();
+        "email"  +"="+email +"&" + "password" + "=" + pass;
     var response = $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/authenticateTheUser',

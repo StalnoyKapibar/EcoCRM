@@ -32,7 +32,8 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
         if(token == null)
         //todo
         {
-            throw new UsernameNotFoundException("Token with " + token + " not found");
+            System.out.println("Token Not Found");
+            //throw new UsernameNotFoundException("Token with " + token + " not found");
         }
         return token;
     }

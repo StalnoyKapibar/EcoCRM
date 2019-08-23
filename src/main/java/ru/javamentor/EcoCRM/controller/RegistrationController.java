@@ -45,26 +45,25 @@ public class RegistrationController {
     @GetMapping("/new")
     public String registrationForm(@RequestParam("code")String code, Model model) {
 
-        try {
-            Token dbtoken = tokenService.loadTokenByCode(code);
 
-            String tokenFromDB =dbtoken.getToken();
-            if (code.equals(tokenFromDB)) {
-                User user = new User();
-                user.setEmail(dbtoken.getEmail());
-                model.addAttribute("user",user);
+        Token dbtoken = tokenService.loadTokenByCode(code);
 
-                return "registration/registration-form";
-            } else {
-                return "redirect:/admin/page";
+        if (dbtoken == null) {
+            System.out.println("FUCKING TOKEN NOT FOUND");
+            return "redirect:/admin/page";
+        } else {
+
+
+            User user = new User();
+            user.setEmail(dbtoken.getEmail());
+            model.addAttribute("user", user);
+
+            return "registration/registration-form";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:/admin/page";
+
+
+
     }
-
-
     @PostMapping("/new")
     public String addUser(@ModelAttribute("user") User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

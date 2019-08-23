@@ -34,10 +34,11 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
     public List<PetitionDTO> getAllPetition() {
         List<Petition> petitionList = new ArrayList<>();
         List<PetitionDTO> petitionDTOList = new ArrayList<>();
-        petitionList = petitionDao.getAll();
+        petitionList = petitionDao.getAllPetitionWithStatusTodo();
 
         for (Petition petiton : petitionList) {
             LocalDate data = petiton.getData();
+            long id = petiton.getId();
             String adress = petiton.getAdresHome();
             if(adress == null){
                 adress = "данных нет";
@@ -46,7 +47,7 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
             if(area == null){
                 area = "данных нет";
             }
-            PetitionDTO petitionDTO = new PetitionDTO(data, adress, area);
+            PetitionDTO petitionDTO = new PetitionDTO(data, adress, area, id);
             petitionDTOList.add(petitionDTO);
         }
         petitionDTOList.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.javamentor.EcoCRM.init.DataInitializer;
 import javax.annotation.PostConstruct;
 
+
 @SpringBootApplication
 public class EcoCrmApplication implements WebMvcConfigurer {
 

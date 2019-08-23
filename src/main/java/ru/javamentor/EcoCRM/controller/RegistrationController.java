@@ -44,29 +44,23 @@ public class RegistrationController {
 
     @GetMapping("/new")
     public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
-        System.out.println("EMAIL PARAMETER:" + email);
-        System.out.println("TOKEN PARAMETER:" + token);
         User user = new User();
         user.setEmail(email);
         model.addAttribute("user", user);
-        Token dbtoken =  tokenService.loadTokenByEmail(email);
-        String tokenFromDB =dbtoken.getToken();
 
-        //String tokenFromDB = tokenService.f.getToken();
-
-
-        if (tokenFromDB.equals(token)) {
-            System.out.println("RIGHT TOKEN!!!");
-           // tokenService.delete(dbtoken);
-
-
-            return "registration/registration-form";
+        try {
+            Token dbtoken = tokenService.loadTokenByEmail(email);
+            String tokenFromDB =dbtoken.getToken();
+            if (token.equals(tokenFromDB)) {
+                return "registration/registration-form";
+            } else {
+                return "redirect:/admin/page";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println("WRONG TOKEN!!!");
-
-        }
-        return "access-denied";
+        System.out.println("WRONG TOKEN!!!");
+        return "redirect:/admin/page";
     }
 
 

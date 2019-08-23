@@ -1,7 +1,6 @@
 package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,19 +28,16 @@ public class SendRegistrationController {
     TokenService tokenService;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     SchedulerService schedulerService;
 
-    @GetMapping("/sendReg")
+    @GetMapping("/admin/sendReg")
     public String SendReg(Model model) {
         String userEmail = "";
         model.addAttribute("userEmail",userEmail);
-        return "sendregform";
+        return "/admin/sendregform";
     }
 
-    @PostMapping("/processSendForm")
+    @PostMapping("/admin/processSendForm")
     public String   processingSendForm(@ModelAttribute("userEmail") String userEmail) {
 
         String token = UUID.randomUUID().toString();
@@ -51,6 +47,6 @@ public class SendRegistrationController {
                 "\nhttp://localhost:8080/registration/new/?email=" + userEmail + "&token=" + token;
 
         emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
-        return "admin_page";
+        return "/admin/admin_page";
     }
 }

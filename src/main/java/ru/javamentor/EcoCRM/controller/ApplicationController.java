@@ -33,7 +33,7 @@ public class ApplicationController {
 
     @GetMapping("/admin/page")
     public String showAdminPage() {
-        return "admin_page";
+        return "/admin/admin_page";
     }
 
     @GetMapping("/user")

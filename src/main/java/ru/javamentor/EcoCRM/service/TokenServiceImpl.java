@@ -2,15 +2,10 @@ package ru.javamentor.EcoCRM.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.TokenDao;
 import ru.javamentor.EcoCRM.model.Token;
-import ru.javamentor.EcoCRM.model.User;
-
-import java.security.SecureRandom;
 
 
 @Service
@@ -41,12 +36,9 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
         }
         return token;
     }
-
     @Override
     public void deleteOldTokens() {
         tokenDao.deleteOldTokens();
     }
-
-
 }
 

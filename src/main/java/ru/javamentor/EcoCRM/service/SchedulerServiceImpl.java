@@ -3,9 +3,6 @@ package ru.javamentor.EcoCRM.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import ru.javamentor.EcoCRM.model.Token;
-
-import java.util.List;
 
 @Service
 public class SchedulerServiceImpl implements  SchedulerService{
@@ -13,21 +10,15 @@ public class SchedulerServiceImpl implements  SchedulerService{
     @Autowired
     TokenService tokenService;
 
+    private static long beginTime = System.currentTimeMillis();
+    long ServerUptime = 0;
+
     @Override
-    @Scheduled(initialDelayString = "10000", fixedDelayString = "10000")
+    @Scheduled(initialDelayString = "0", fixedDelayString = "${tokenCleanInterval}")
     public void tokenLifeCycle() {
-
-        System.out.println("SHEDULED TASK WORKING!!!");
-        //List<Token> allTokens =  tokenService.getAll();
-//        long currentTime = System.currentTimeMillis();
-//        for (Token token : allTokens) {
-//            if (currentTime - token.getTokenCreateTime()  > 60000) {
-//                tokenService.delete(token);
-//                System.out.println("Token Deleted");
-//            }
-//        }
-
+        System.out.println("Token cleaning run...");
+        ServerUptime = System.currentTimeMillis() - beginTime;
+        System.out.println("Server UpTime is : " + ServerUptime/1000 + " seconds ");
         tokenService.deleteOldTokens();
-
     }
 }

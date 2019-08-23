@@ -160,7 +160,11 @@ public class DataInitializer {
             petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
-            petition.setHouseArea("Другой район");
+            if(new Random().nextInt() % 2 == 0){
+                petition.setHouseArea("Другой район");
+            } else {
+                petition.setHouseArea("Адмиралтейский район");
+            }
             petitionService.insert(petition);
         }
     }

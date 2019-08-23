@@ -3,10 +3,9 @@ package ru.javamentor.EcoCRM.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import ru.javamentor.EcoCRM.model.ManagementCompany;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Step;
 import ru.javamentor.EcoCRM.model.Task;
@@ -37,8 +36,14 @@ public class StepsRestController {
     PetitionService petitionService;
 
     @RequestMapping(value = "/step_1", method = RequestMethod.POST)
-    public List<Task> getStep (@RequestParam("project_id") Long projectId){
+    public String getStep (@RequestParam("project_id") Long projectId){
         Step currentStep = stepService.getStepByProjectIdAndStepNumber(projectId, StepNumber.STEP_1);
-        return taskService.getAllByStepId(currentStep.getId());
+        List <Task> tasks = taskService.getAllByStepId(currentStep.getId());
+        return "ok";
+    }
+    @RequestMapping(value = "/getTasksInProgress/{projectid}", method = RequestMethod.GET)
+    public String adminPageEmployerToEdit(@PathVariable Long projectid) {
+
+        return projectid.toString();
     }
 }

@@ -26,85 +26,329 @@
             color: #89a987;
         }
 
+        .done-task{
+            background: #cbf8c7;
+            color: #89a987;
+        }
+
     </style>
 </head>
-<body th:inline="text">
-<button type="button" onclick="f()">showTasks</button>
+<body >
 
 <!--<button type="button" onclick="showMes()">show</button>-->
-<nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_1" th:onclick="'get_tasks_by_step_1('+${projectid}+')'"
-           th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : (${steps[0].status.name().equals('DONE')}? done-step: null)"
-           role="tab"  aria-controls="nav-home" aria-selected="true" id = "step_1_link">1. Заявитель</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_2"
-           th:classappend="${steps[1].status.name().equals('IN_PROGRESS')} ? active : (${steps[1].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-profile" aria-selected="false" id = "step_2_link">2. Управляющая<br>компания</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_3"
-           th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : (${steps[2].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_3_link">3. Заготовители</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_4"
-           th:classappend="${steps[3].status.name().equals('IN_PROGRESS')} ? active : (${steps[3].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_4_link">4. Заключение<br>договора</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_5"
-           th:classappend="${steps[4].status.name().equals('IN_PROGRESS')} ? active : (${steps[4].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_5_link">5. Установка<br>контейнера</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_6"
-           th:classappend="${steps[5].status.name().equals('IN_PROGRESS')} ? active : (${steps[5].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_6_link">6. Работа с<br>жителями</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_7"
-           th:classappend="${steps[6].status.name().equals('IN_PROGRESS')} ? active : (${steps[6].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_7_link">7. Описание<br>кейса</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#step_8"
-           th:classappend="${steps[7].status.name().equals('IN_PROGRESS')} ? active : (${steps[7].status.name().equals('DONE')}? done-step: null)"
-           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_8_link">8. Контроль</a>
-    </div>
-</nav>
+<!--<nav>-->
+<!--    <div class="nav nav-tabs" id="nav-tab" role="tablist">-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_1" th:onclick="'get_tasks_by_step_1('+${projectid}+')'"-->
+<!--           th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : (${steps[0].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab"  aria-controls="nav-home" aria-selected="true" id = "step_1_link">1. Заявитель</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_2"-->
+<!--           th:classappend="${steps[1].status.name().equals('IN_PROGRESS')} ? active : (${steps[1].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-profile" aria-selected="false" id = "step_2_link">2. Управляющая<br>компания</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_3"-->
+<!--           th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : (${steps[2].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_3_link">3. Заготовители</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_4"-->
+<!--           th:classappend="${steps[3].status.name().equals('IN_PROGRESS')} ? active : (${steps[3].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_4_link">4. Заключение<br>договора</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_5"-->
+<!--           th:classappend="${steps[4].status.name().equals('IN_PROGRESS')} ? active : (${steps[4].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_5_link">5. Установка<br>контейнера</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_6"-->
+<!--           th:classappend="${steps[5].status.name().equals('IN_PROGRESS')} ? active : (${steps[5].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_6_link">6. Работа с<br>жителями</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_7"-->
+<!--           th:classappend="${steps[6].status.name().equals('IN_PROGRESS')} ? active : (${steps[6].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_7_link">7. Описание<br>кейса</a>-->
+<!--        <a class="nav-item nav-link" data-toggle="tab" href="#step_8"-->
+<!--           th:classappend="${steps[7].status.name().equals('IN_PROGRESS')} ? active : (${steps[7].status.name().equals('DONE')}? done-step: null)"-->
+<!--           role="tab" aria-controls="nav-contact" aria-selected="false" id = "step_8_link">8. Контроль</a>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--&lt;!&ndash;начало 1 степа&ndash;&gt;-->
+<!--    <div class="tab-pane fade show active"  id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <div class="card">-->
+<!--            <div class="card-header">-->
+<!--                <h3>Уточнить информацию о заявителе</h3>-->
+<!--            </div>-->
+<!--            <div class="card-body">-->
+<!--                <div class="row">-->
+<!--                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"-->
+<!--                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">-->
+<!--                        <a class="nav-link active" id="petitioner_info_pil" data-toggle="pill" href="#v-pills-home"-->
+<!--                           role="tab" aria-controls="v-pills-home" aria-selected="true">-->
+<!--                            Информация о заявителе-->
+<!--                        </a>-->
+<!--                        <a class="nav-link" id="neighbourhood_info_pil" data-toggle="pill" href="#neighbourhood_inf"-->
+<!--                           role="tab" aria-controls="v-pills-profile" aria-selected="false">-->
+<!--                            Информация о соседях-->
+<!--                        </a>-->
+<!--                        <a class="nav-link" data-toggle="pill" href="#container_photo" role="tab" id="old_container_pil"-->
+<!--                           aria-controls="v-pills-profile" aria-selected="false">-->
+<!--                            Фото контейнера-->
+<!--                        </a>-->
+<!--                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача-->
+<!--                            +</a>-->
+<!--                    </div>-->
+<!--                    <div class="tab-content" id="v-pills-tabContent" style="width: 70%">-->
+<!--                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"-->
+<!--                             aria-labelledby="v-pills-home-tab">-->
+<!--                            <div id="task_1">-->
+<!--                                <div class="input-group mb-3">-->
+<!--                                    <div class="input-group-prepend">-->
+<!--                                        <span class="input-group-text">ФИО</span>-->
+<!--                                    </div>-->
+<!--                                    <input type="text" class="form-control" th:value="${petition.userName}"  placeholder="ФИО заявителя">-->
+<!--                                </div>-->
 
-<div class="tab-content" id="nav-tabContent" th:switch="${stepnumber.name()}">
-<div th:case="'STEP_1'">
-    <div class="tab-pane fade show active"  id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_1"></th:block>
-    </div>
-</div>
-    <div th:case="'STEP_2'">
-    <div class="tab-pane fade show active"  id="step_2" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_2"></th:block>
-    </div>
-    </div>
-    <div th:case="'STEP_3'">
-    <div class="tab-pane fade show active" th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : null" id="step_3" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_3"></th:block>
-    </div>
-    </div>
-    <div th:case="'STEP_4'">
-    <div class="tab-pane fade show active"  id="step_4" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_4"></th:block>
-    </div>
-    </div>
-    <div th:case="'STEP_5'">
-    <div class="tab-pane fade show active" id="step_5" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_5"></th:block>
-    </div>
-    </div>
-    <div th:case="'STEP_6'">
-    <div class="tab-pane fade show active" id="step_6" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_6"></th:block>
-    </div>
-    </div>
-    <div th:case="'STEP_7'">
-    <div class="tab-pane fade show active" id="step_7" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_7"></th:block>
-    </div>
-    </div>
-    <div th:case="'STEP_8'">
-    <div class="tab-pane fade show active" id="step_8" role="tabpanel" aria-labelledby="nav-home-tab">
-        <th:block th:replace="steps/steps :: step_8"></th:block>
-    </div>
-    </div>
-    <th:block th:replace="steps/steps:: add_task_modal"></th:block>
-    <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>
-</div>
+<!--                                <div class="input-group mb-3">-->
+<!--                                    <div class="input-group-prepend">-->
+<!--                                        <span class="input-group-text">email</span>-->
+<!--                                    </div>-->
+<!--                                    <input type="text" class="form-control" th:value="${petition.email}" placeholder="email">-->
+<!--                                </div>-->
+
+<!--                                <div class="input-group mb-3">-->
+<!--                                    <div class="input-group-prepend">-->
+<!--                                        <span class="input-group-text">Тел.</span>-->
+<!--                                    </div>-->
+<!--                                    <input type="text" class="form-control" th:value="${petition.contactInformation}" placeholder="контакная информация">-->
+<!--                                </div>-->
+<!--                                <div class="h6">Статус</div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input" id="resident" name="status" th:attrappend="checked =${petition.statusHome.equals('Житель, собственник жилья')}? checked : null">-->
+<!--                                    <label class="form-check-label">Житель, собственник жилья</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input" id="manage_representative" th:attrappend="checked =${petition.statusHome.equals('Представитель управляющей организации (УК, ТСЖ и т.п.)')}? checked : null"-->
+<!--                                           name="status">-->
+<!--                                    <label class="form-check-label">Представитель управляющей организации (УК, ТСЖ и т.п.)</label>-->
+<!--                                </div>-->
+<!--                                <br>-->
+<!--                                <div class="h6">Участвует в деятельности движения "Раздельный сбор"</div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input activity" id="monthly" th:attrappend="checked =${petition.separateCollection.equals('Участвую в ежемесячных акциях и сдаю своё вторсырьё')}? checked : null"-->
+<!--                                           name="activity">-->
+<!--                                    <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё-->
+<!--                                        вторсырьё</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input activity" id="volunteer" th:attrappend="checked =${petition.separateCollection.equals('Волонтер на акциях')}? checked : null"-->
+<!--                                           name="activity">-->
+<!--                                    <label class="form-check-label">Волонтер на акциях</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input activity" id="corrdinator" th:attrappend="checked =${petition.separateCollection.equals('Координатор на акциях')}? checked : null"-->
+<!--                                           name="activity">-->
+<!--                                    <label class="form-check-label">Координатор на акциях</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input activity" id="participant" th:attrappend="checked =${petition.separateCollection.equals('Участник рабочих групп движения')}? checked : null"-->
+<!--                                           name="activity">-->
+<!--                                    <label class="form-check-label" for="participant">Участник рабочих групп-->
+<!--                                        движения</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input activity" id="no_participate" th:attrappend="checked =${petition.separateCollection.equals('Не принимаю участия в деятельности движения')}? checked : null"-->
+<!--                                           name="activity">-->
+<!--                                    <label class="form-check-label" for="participant">Не принимаю участия в-->
+<!--                                        деятельности движения</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input" id="another_active"-->
+<!--                                           name="activity">-->
+<!--                                    <label class="form-check-label" for="participant">другое</label>-->
+<!--                                </div>-->
+<!--                                <input type="text" class="form-control" id="another_active_input" disabled>-->
+<!--                                <br>-->
+<!--                                <div class="h6">Накопление какого хотелось бы организовать?</div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="paper" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Бумага/картон')}? checked : null" >-->
+<!--                                    <label class="form-check-label">Бумага/картон</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="glass" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Стекло')}? checked : null">-->
+<!--                                    <label class="form-check-label">Стекло</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="metal" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Металл')}? checked : null">-->
+<!--                                    <label class="form-check-label">Металл</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="hard_plastic" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Твёрдый пластик')}? checked : null">-->
+<!--                                    <label class="form-check-label">Твёрдый пластик</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="soft_plastic" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Мягкий пластик')}? checked : null">-->
+<!--                                    <label class="form-check-label">Мягкий пластик</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="tetra_pak" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Тетрапак')}? checked : null">-->
+<!--                                    <label class="form-check-label">Тетрапак</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="organic_waste" th:attrappend="checked =${petition.typeOfRawMaterial.equals('Органические отходы')}? checked : null">-->
+<!--                                    <label class="form-check-label">Органические отходы</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="hazardous_waste" th:attrappend="checked =${petition.typeOfRawMaterial.contains('Опасные отходы (батарейки, лампочки и т.п.)')}? checked : null">-->
+<!--                                    <label class="form-check-label">Опасные отходы (батарейки, лампочки и-->
+<!--                                        т.п.)</label>-->
+<!--                                </div>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="checkbox" class="form-check-input" id="another_waste">-->
+<!--                                    <label class="form-check-label">другое</label>-->
+<!--                                </div>-->
+<!--                                <input type="text" class="form-control" id="another_waste_input" disabled>-->
+<!--                                <br>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="tab-pane fade" id="neighbourhood_inf" role="tabpanel"-->
+<!--                             aria-labelledby="v-pills-profile-tab">-->
+<!--                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d511638.0496814032!2d29.530301548695494!3d59.93900943041817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696378cc74a65ed%3A0x6dc7673fab848eff!2z0KHQsNC90LrRgi3Qn9C10YLQtdGA0LHRg9GA0LM!5e0!3m2!1sru!2sru!4v1566243087100!5m2!1sru!2sru"-->
+<!--                                    width="600" height="450" frameborder="0" style="border:0"-->
+<!--                                    allowfullscreen></iframe>-->
+<!--                        </div>-->
+<!--                        <div class="tab-pane fade" id="container_photo" role="tabpanel"-->
+<!--                             aria-labelledby="v-pills-profile-tab">-->
+
+<!--                            <div class="input-group">-->
+<!--                                <div class="input-group-prepend">-->
+<!--                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>-->
+<!--                                </div>-->
+<!--                                <div class="custom-file">-->
+<!--                                    <input type="file" class="custom-file-input" id="inputGroupFile01"-->
+<!--                                           aria-describedby="inputGroupFileAddon01">-->
+<!--                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <th:block th:replace="steps/steps :: step_1"></th:block>&ndash;&gt;-->
+<!--    </div>-->
+<!--&lt;!&ndash;end of step 1&ndash;&gt;-->
+
+<!--&lt;!&ndash;start of step 2&ndash;&gt;-->
+<!--    <div class="tab-pane fade show active"  id="step_2" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <div class="card">-->
+<!--            <div class="card-header">-->
+<!--                <h1>-->
+<!--                    Управляющая орагизация-->
+<!--                </h1>-->
+<!--            </div>-->
+<!--            <div class="card-body">-->
+
+<!--                <div class="row">-->
+<!--                    <div class="nav flex-column nav-pills" role="tablist"-->
+<!--                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">-->
+<!--                        <a class="nav-link active" data-toggle="pill" href="#manage_org_pil"-->
+<!--                           role="tab" aria-controls="v-pills-home" aria-selected="true">-->
+<!--                            Информация о управляющей компании-->
+<!--                        </a>-->
+
+<!--                        <a class="nav-link" data-toggle="pill" href="#next_task"-->
+<!--                           role="tab" aria-controls="v-pills-home" aria-selected="true">-->
+<!--                            Следующая таска-->
+<!--                        </a>-->
+<!--                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача-->
+<!--                            +</a>-->
+<!--                    </div>-->
+<!--                    <div class="tab-content" style="width: 70%">-->
+<!--                        <div class="tab-pane fade show active" id="manage_org_pil" role="tabpanel"-->
+<!--                             aria-labelledby="v-pills-home-tab">-->
+<!--                            <div id="task_2_1">-->
+<!--                                <label><h6>Навзвание организации</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="Название" th:value="${mencompany.name}" id="management_org_name">-->
+<!--                                <br>-->
+<!--                                <label><h6>Инн</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="Инн" id="management_org_inn">-->
+<!--                                <br>-->
+<!--                                <label><h6>ФИО руковолителя</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_fio">-->
+<!--                                <br>-->
+<!--                                <label><h6>Телефон организации</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_tel">-->
+<!--                                <br>-->
+<!--                                <label><h6>email</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_email">-->
+<!--                                <br>-->
+<!--                                <label><h6>Часы приема</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_clock">-->
+<!--                                <br>-->
+<!--                                <label><h6>Отношение к РНО</h6></label>-->
+<!--                                <input type="text" class="form-control" placeholder="ФИО руковолителя"-->
+<!--                                       id="management_org_attitude_to_rno">-->
+<!--                                <br>-->
+<!--                                <label><h6>Дата следующего контакта</h6></label>-->
+<!--                                <input id="datepicker" width="276"/>-->
+
+<!--                                <label><h6>Комментарий</h6></label>-->
+<!--                                <textarea class="form-control" rows="5" id="comment"></textarea>-->
+<!--                                <button type="button" class="btn btn-primary">Сохранить</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="tab-pane fade show active" id="next_task" role="tabpanel"-->
+<!--                             aria-labelledby="v-pills-home-tab">-->
+<!--                            <div id="task_2_2">-->
+<!--                                <h1>Next task</h1>-->
+<!--                            </div>-->
+
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <th:block th:replace="steps/steps :: step_2"></th:block>&ndash;&gt;-->
+<!--    </div>-->
+<!--&lt;!&ndash;end of step 2&ndash;&gt;-->
+
+<!--&lt;!&ndash;start of step_3&ndash;&gt;-->
+<!--    <div class="tab-pane fade show active" th:classappend="${steps[2].status.name().equals('IN_PROGRESS')} ? active : null" id="step_3" role="tabpanel" aria-labelledby="nav-home-tab">-->
+
+<!--&lt;!&ndash;        <th:block th:replace="steps/steps :: step_3"></th:block>&ndash;&gt;-->
+<!--    </div>-->
+<!--&lt;!&ndash;end step 3&ndash;&gt;-->
+
+<!--    <div class="tab-pane fade show active"  id="step_4" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_4"></th:block>-->
+<!--    </div>-->
+
+
+<!--    <div class="tab-pane fade show active" id="step_5" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_5"></th:block>-->
+<!--    </div>-->
+
+
+<!--    <div class="tab-pane fade show active" id="step_6" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_6"></th:block>-->
+<!--    </div>-->
+
+
+<!--    <div class="tab-pane fade show active" id="step_7" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_7"></th:block>-->
+<!--    </div>-->
+
+
+<!--    <div class="tab-pane fade show active" id="step_8" role="tabpanel" aria-labelledby="nav-home-tab">-->
+<!--        <th:block th:replace="steps/steps :: step_8"></th:block>-->
+<!--    </div>-->
+
+<!--    <th:block th:replace="steps/steps:: add_task_modal"></th:block>-->
+<!--    <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>-->
+
 
 <!--<div class="tab-content" id="nav-tabContent">-->
 <!--    <div class="tab-pane fade show " th:classappend="${steps[0].status.name().equals('IN_PROGRESS')} ? active : null" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">-->
@@ -134,59 +378,84 @@
 <!--    <th:block th:replace="steps/steps:: add_task_modal"></th:block>-->
 <!--    <th:block th:replace="steps/steps:: contaractor_information_modal"></th:block>-->
 <!--</div>-->
-<script>
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
+<script th:inline="text">
+    $( document ).ready(function () {
+        $.ajax({
+            url: "/api/steps/getTasksInProgress/" + [[${projectid}]],
+            type: "GET",
+            async: false,
+            success: function (tasks) {
 
-
-    (function(){
-        var originalAddClassMethod = jQuery.fn.addClass;
-        var originalRemoveClassMethod = jQuery.fn.removeClass;
-
-        jQuery.fn.addClass = function(){
-            var result = originalAddClassMethod.apply( this, arguments );
-            jQuery(this).trigger('classChanged');
-            return result;
-        }
-        jQuery.fn.removeClass = function(){
-            var result = originalRemoveClassMethod.apply( this, arguments );
-            jQuery(this).trigger('classChanged');
-            return result;
-        }
-    })();
-
-    // $('#step_1_link').bind('classChanged', function(){
-    //     if($('#step_1_link').hasClass('active')){
-    //         alert("isasdfas")
-    //     }
-    // });
-
-    $('#step_3_link').bind('classChanged', function(){
-        if($('#step_3_link').hasClass('active')){
-            alert('step_3_changed');
-        }
+            },
+            error: function (e) {
+                alert(e.responseText);
+            }
+        })
     });
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
 
-    function get_tasks_by_step_1(projecId) {
 
-        var projid = projecId;
+        (function () {
+            var originalAddClassMethod = jQuery.fn.addClass;
+            var originalRemoveClassMethod = jQuery.fn.removeClass;
+
+            jQuery.fn.addClass = function () {
+                var result = originalAddClassMethod.apply(this, arguments);
+                jQuery(this).trigger('classChanged');
+                return result;
+            }
+            jQuery.fn.removeClass = function () {
+                var result = originalRemoveClassMethod.apply(this, arguments);
+                jQuery(this).trigger('classChanged');
+                return result;
+            }
+        })();
+
+        // $('#step_1_link').bind('classChanged', function(){
+        //     if($('#step_1_link').hasClass('active')){
+        //         alert("isasdfas")
+        //     }
+        // });
+
+        // $('#step_3_link').bind('classChanged', function () {
+        //     if ($('#step_3_link').hasClass('active')) {
+        //         alert('step_3_changed');
+        //     }
+        // });
+
+        function get_tasks_by_step_1(projecId) {
+
+            var projid = projecId;
             $.ajax({
                 type: 'post',
                 url: "/api/steps/step_1?" +
-                    "project_id="+ projid,
+                    "project_id=" + projid,
                 contentType: 'application/json; charset=utf-8',
                 // beforeSend: function (request) {
                 //     request.setRequestHeader(header, token);
                 // },
                 success: function (tasks) {
-                    alert(tasks);
+
+                    for (var i = 0; i < tasks.length; i++) {
+                        if (tasks[i].type == 'PETITIONER_INFO') {
+                            if (tasks[i].taskStatus == 'DONE') {
+                                $('#petitioner_info_pil').addClass('done-task');
+                            }
+                            if (tasks[i].taskStatus == 'IN_PROGRESS') {
+                                $('#petitioner_info_pil').addClass('active');
+                                $('#')
+                            }
+
+                        }
+                    }
                 },
                 error: function (error) {
                     console.log(error);
                     alert(error.responseText);
                 }
             })
-    }
+        }
 
 
 

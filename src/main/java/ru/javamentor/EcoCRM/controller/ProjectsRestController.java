@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.javamentor.EcoCRM.model.Project;
+import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.ProjectService;
+import ru.javamentor.EcoCRM.service.UserService;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,8 @@ import java.util.Map;
 public class ProjectsRestController {
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private UserService userService;
     @GetMapping
     public Map<StepNumber, List<Project>> getProjectsBySteps() {
         Map<StepNumber, List<Project>> r = projectService.getListByStepInProgress();
@@ -30,13 +35,10 @@ public class ProjectsRestController {
     public Map<StepNumber, List<Project>> getProjectsByStepsSelfOnly() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = ((UserDetails)principal).getUsername();
-        userService.getUserByEmail(email);
-        return userService.getUserByEmail(email).getId();
+        User currentUser = userService.getUserByEmail(email);
         Map<StepNumber, List<Project>> r = projectService.getListByStepInProgress();
         for (Map.Entry<StepNumber,List<Project>> entry : r.entrySet()) {
-            for(Project x : entry.getValue()){
-                x.getManager();
-            }
+            entry.getValue().removeIf(project -> project.getManager().equals(currentUser));
         }
         return r;
     }

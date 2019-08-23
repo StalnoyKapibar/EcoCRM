@@ -27,3 +27,19 @@ function fillContent() {
         }
     });
 }
+
+function sortByArea(areaName) {
+    var list = document.getElementsByClassName('house-area');
+    Array.prototype.forEach.call(list, function (el) {
+        el.parentElement.parentElement.style.display='none';
+        if(el.textContent === areaName){
+            el.parentElement.parentElement.style.display='inline';
+        }
+    });
+
+}
+
+
+
+
+

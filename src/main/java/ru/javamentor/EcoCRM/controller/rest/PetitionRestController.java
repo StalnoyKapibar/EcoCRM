@@ -13,8 +13,9 @@ import javax.mail.internet.MimeMessage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.function.Function;
 
+import java.time.LocalDate;
+import java.util.List;
 
 //todo naming
 @RestController
@@ -31,7 +32,10 @@ public class PetitionRestController {
     String pathToLetter;
 
     @PostMapping
-    public void getSearchUserProfiles(@RequestBody Petition petition) throws MessagingException {
+    public void getSearchUserProfiles(@ModelAttribute("petition") Petition petition) throws MessagingException {
+
+        LocalDate data = LocalDate.now();
+        petition.setData(data);
         petitionService.insert(petition);
 
         MimeMessage mimeMessage = emailServiceimp.emailSender.createMimeMessage();
@@ -54,9 +58,6 @@ public class PetitionRestController {
         mimeMessage.setContent(content,"text/html; charset=utf-8");
         helper.setTo(petition.getEmail());
         this.emailServiceimp.emailSender.send(mimeMessage);
-
-            //TODO
-        // emailServiceimp.sendSimpleMessage(petition.getEmail(),content,content);
 
     }
 

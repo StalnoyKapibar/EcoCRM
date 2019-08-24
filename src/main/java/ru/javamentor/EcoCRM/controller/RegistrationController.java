@@ -44,19 +44,6 @@ public class RegistrationController {
     @GetMapping("/new")
     public String registrationForm(@RequestParam("code") String code, Model model) {
 
-//        Token dbtoken = tokenService.loadTokenByCode(code);
-//
-//        if (dbtoken == null) {
-//            System.out.println("Token not exists in database");
-//            return "redirect:/admin/page";
-//        } else {
-//            User user = new User();
-//            user.setEmail(dbtoken.getEmail());
-//            model.addAttribute("user", user);
-//
-//            return "registration/registration-form";
-//        }
-
         try {
             Token dbtoken = tokenService.loadTokenByCode(code);
             User user = new User();
@@ -68,8 +55,6 @@ public class RegistrationController {
 
             return "wrong-token";
         }
-
-
     }
     @PostMapping("/new")
     public String addUser(@ModelAttribute("user") User user) {

@@ -18,6 +18,17 @@ public class Task implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "name")
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Column(name = "task_status")
     @Enumerated(value = EnumType.STRING)
     private Status taskStatus = Status.TODO;
@@ -45,6 +56,13 @@ public class Task implements Serializable {
         this.description = description;
         this.step = step;
         this.type = taskType;
+    }
+
+    public Task(String name, String description, Step step, TaskType taskType) {
+        this.description = description;
+        this.step = step;
+        this.type = taskType;
+        this.name = name;
     }
 
     public TaskType getType() {

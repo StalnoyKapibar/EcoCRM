@@ -41,9 +41,12 @@ public class StepsRestController {
         List <Task> tasks = taskService.getAllByStepId(currentStep.getId());
         return "ok";
     }
-    @RequestMapping(value = "/getTasksInProgress/{projectid}", method = RequestMethod.GET)
-    public String adminPageEmployerToEdit(@PathVariable Long projectid) {
 
-        return projectid.toString();
+
+    @RequestMapping(value = "/get_by_project_id/{projectid}", method = RequestMethod.GET)
+    public List<Step> adminPageEmployerToEdit(@PathVariable Long projectid) {
+        long id = projectid;
+        List <Step> steps = stepService.getAllByprojectId(projectid);
+        return stepService.getAllByprojectId(projectid);
     }
 }

@@ -1,7 +1,9 @@
-package ru.javamentor.EcoCRM.controller;
+package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
+import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.UserStatus;
@@ -13,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-public class UsersRestController {
+public class UserRestController {
 
     @Autowired
     private UserService userService;
@@ -26,9 +28,24 @@ public class UsersRestController {
         return userService.get(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/photo/{id}")
+    public String getUserPhoto(@PathVariable(required = false) Long id) {
+        return userService.get(id).getEncoderPhoto();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/projects/manager/{id}")
+    public List<Project> getUserProjManager(@PathVariable(required = false) Long id) {
+        return projectService.getProjManagerByUserId(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/projects/volunteer/{id}")
+    public List<Project> getUserProjVolunteer(@PathVariable(required = false) Long id) {
+        return projectService.getProjVolunteerByUserId(id);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/projects/{id}")
-    public List<Project> getUserProjects(@PathVariable(required = false) Long id) {
-        return projectService.getProjectsByUserId(id);
+    public List<PersonProjectDTO> getProject(@PathVariable(required = false) Long id) {
+        return projectService.getPersonProjectDto(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/block")

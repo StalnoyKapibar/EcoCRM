@@ -28,10 +28,10 @@ public class Petition {
     @Column(name ="status_home")
     private String statusHome;
 
-    @Column(name="separate_collection")
+    @Column(name = "separate_collection")
     private String separateCollection;
 
-    @Column(name="type_of_raw_material")
+    @Column(name = "type_of_raw_material")
     private String typeOfRawMaterial;
 
     @Column(name = "adres_home")

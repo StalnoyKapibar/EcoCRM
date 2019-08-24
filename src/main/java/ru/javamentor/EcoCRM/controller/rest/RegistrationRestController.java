@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.controller;
+package ru.javamentor.EcoCRM.controller.rest;
 
 
 import org.json.JSONException;

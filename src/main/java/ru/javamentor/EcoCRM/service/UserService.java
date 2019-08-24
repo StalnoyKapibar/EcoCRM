@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface UserService extends AbstractService<User> {
     UserDetails loadUserByUsername(String email);
+    User getUserByEmail(String email);
 }

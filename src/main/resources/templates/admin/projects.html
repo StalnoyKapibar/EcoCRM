@@ -3,26 +3,107 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/private/css/custom.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/private/css/projects_table.css">
+    <link href="/private/css/common_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="/private/js/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
+    <!--            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
+    <!--            crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
     <script src="/private/js/projects.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Projects</title>
 </head>
 <body>
+<main role="main" class="container-fluid">
 
-<div class="eco-row" id="projectsTable">
+<div class="dropdown dropright">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Выбрать по району
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button class="dropdown-item " onclick="sortByArea(this.textContent)">Адмиралтейский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Василеостровский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Выборгский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Калинский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Колпинский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Красногвардейский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Красносельский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Кронштадский район</button>
+        <button class="dropdown-item" onclick="sortByArea(this.textContent)">Курортный район</button>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Московский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Невский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Петроградский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Выборгский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Приморский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Пушкинский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Фрунзенский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Центральный район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Всеволожский район ЛО</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Гатчинский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Кировский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Сосновоборский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Тосненский район</a>
+        <a class="dropdown-item" onclick="sortByArea(this.textContent)">Другой район</a>
+    </div>
 </div>
-<script>getProjects()</script>
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
+    <a class="navbar-brand" href="#" style="white-space: pre"><span class="fa fa-leaf"></span> Eco CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/user" style="color: white;">Мои проекты <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="color: white;">Все проекты <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Уведомления</a>
+                    <a class="dropdown-item" href="#">Моя страница</a>
+                    <a class="dropdown-item" href="/logout">Выйти</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+            <h3 style="margin-left: 4%">Мои проекты :</h3>
+
+                <div class="row row-flex flex-nowrap" id="projectsTable">
+                </div>
+                <script>
+                    fillContent()
+                </script>
+
+        </main>
+
 </body>
 </html>

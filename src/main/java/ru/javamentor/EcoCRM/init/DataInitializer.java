@@ -72,7 +72,17 @@ public class DataInitializer {
         initManagement();
         initPetition();
         initProject();
+        initPhoto();
     }
+
+    //вспомагательный метод для изменения автарки пользователю 1
+    private void initPhoto() throws IOException {
+        User user = userService.get(1);
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        userService.update(user);
+    }
+
+
 
     private void initRoles() {
         Authority adminAuthority = new Authority("ROLE_ADMIN");
@@ -80,13 +90,17 @@ public class DataInitializer {
         Authority userAuthority = new Authority("ROLE_USER");
         authoritiesService.insert(userAuthority);
     }
-    private void initBaseUserAndAdmin() {
+    private void initBaseUserAndAdmin() throws IOException {
         User admin = new User();
+        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setAuthorities(authoritiesService.getAll());
 
         User user = new User();
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         user.setEmail("user");
         user.setPassword(bCryptPasswordEncoder.encode("user"));
         List<Authority> roles = new ArrayList<>();
@@ -97,11 +111,12 @@ public class DataInitializer {
     }
 
     private void initUsers() throws IOException {
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i < 10; i++) {
             User user = new User();
             user.setName(faker.name().firstName());
             user.setSurname(faker.name().lastName());
             user.setEmail(2 + i + "@mail.ru");
+            user.setPhone(faker.phoneNumber().phoneNumber());
             user.setLink(faker.internet().emailAddress());
             user.setProfession(faker.job().position());
             user.setPassword(bCryptPasswordEncoder.encode(2 + i + ""));
@@ -110,6 +125,8 @@ public class DataInitializer {
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
             user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
         }
     }
@@ -155,16 +172,22 @@ public class DataInitializer {
             petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
+            if(new Random().nextInt() % 2 == 0){
+                petition.setHouseArea("Другой район");
+            } else {
+                petition.setHouseArea("Адмиралтейский район");
+            }
             petitionService.insert(petition);
         }
     }
 
     private void initProject() {
-        for (int i = 1; i < 30; i++) {
+        for (int i = 1; i < 50; i++) {
             Project project = new Project();
             project.setTitle(faker.company().name());
-            User user = userService.get((long)random.nextInt(50));
+            User user = userService.get((long)random.nextInt(10));
             project.setManager(user);
+            project.setStartStep(LocalDate.now());
             project.setPetition(petitionService.get(i));
             projectService.insert(project);
             initSteps(project);

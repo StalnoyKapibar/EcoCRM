@@ -1,0 +1,19 @@
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-track {  background-color: #999;}
+::-webkit-scrollbar-track-piece { background-color: #F5F5F5;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #999;}
+::-webkit-resizer { background-color: #666;}
+
+.eco-card:hover {
+    background-color: #dfe6f6;
+}
+
+.eco-col {
+
+}
+
+.eco-card {
+
+}
+

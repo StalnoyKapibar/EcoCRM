@@ -6,11 +6,21 @@ public class PetitionDTO {
     private LocalDate data;
     private String adress;
     private String area;
+    private long id;
 
-    public PetitionDTO(LocalDate data, String adress, String area) {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public PetitionDTO(LocalDate data, String adress, String area, long id) {
         this.data = data;
         this.adress = adress;
         this.area = area;
+        this.id = id;
     }
 
     public LocalDate getData() {

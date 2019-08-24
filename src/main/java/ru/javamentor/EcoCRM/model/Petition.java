@@ -1,10 +1,12 @@
 package ru.javamentor.EcoCRM.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="petitions")
@@ -26,10 +28,10 @@ public class Petition {
     @Column(name ="status_home")
     private String statusHome;
 
-    @Column(name="separate_collection")
+    @Column(name = "separate_collection")
     private String separateCollection;
 
-    @Column(name="type_of_raw_material")
+    @Column(name = "type_of_raw_material")
     private String typeOfRawMaterial;
 
     @Column(name = "adres_home")
@@ -80,31 +82,50 @@ public class Petition {
     @Column (name = "data")
     LocalDate data;
 
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private Status status = Status.TODO;
 
 
-    public Petition() {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
+            CascadeType.REFRESH,CascadeType.MERGE})
+    @JoinTable(
+            name ="petitions_users",
+            joinColumns = @JoinColumn(name = "petition_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_number")
+    )
+    private Set<User> userPetition;
 
-    }
-
-    public String getYes() {
-        return yes;
-    }
-
-    public void setYes(String yes) {
+    public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial, String adresHome, String houseArea, String countOfApartments, String homeControlForm, String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage, String exportGarbage, String yes, LocalDate data, Status status, Set<User> userPetition) {
+        this.email = email;
+        this.userName = userName;
+        this.contactInformation = contactInformation;
+        this.statusHome = statusHome;
+        this.separateCollection = separateCollection;
+        this.typeOfRawMaterial = typeOfRawMaterial;
+        this.adresHome = adresHome;
+        this.houseArea = houseArea;
+        this.countOfApartments = countOfApartments;
+        this.homeControlForm = homeControlForm;
+        this.houseCouncil = houseCouncil;
+        this.managementOrganization = managementOrganization;
+        this.boardHouseContactInformation = boardHouseContactInformation;
+        this.additionalInformation = additionalInformation;
+        this.containerSite = containerSite;
+        this.containerSize = containerSize;
+        this.containerOwner = containerOwner;
+        this.whyNotContainer = whyNotContainer;
+        this.garbage = garbage;
+        this.exportGarbage = exportGarbage;
         this.yes = yes;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
         this.data = data;
+        this.status = status;
+        this.userPetition = userPetition;
     }
 
     public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial, String adresHome, String houseArea, String countOfApartments, String homeControlForm,
                     String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage,
-                    String exportGarbage, String yes, LocalDate data) {
+                    String exportGarbage, String yes, LocalDate data, Status status) {
         this.email = email;
         this.userName = userName;
         this.contactInformation = contactInformation;
@@ -127,7 +148,43 @@ public class Petition {
         this.exportGarbage = exportGarbage;
         this.yes = yes;
         this.data = data;
+        this.status = status;
+//        this.userPetition = userPetition;
 
+    }
+
+    public Petition() {}
+
+    public Set<User> getUserPetition() {
+        return userPetition;
+    }
+
+    public void setUserPetition(Set<User> userPetition) {
+        this.userPetition = userPetition;
+    }
+
+    public String getYes() {
+        return yes;
+    }
+
+    public void setYes(String yes) {
+        this.yes = yes;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getExportGarbage() {

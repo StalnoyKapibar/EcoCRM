@@ -1,10 +1,13 @@
-package ru.javamentor.EcoCRM.controller;
+package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.model.Petition;
+import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
 
@@ -17,7 +20,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-//todo naming
+
 @RestController
 @RequestMapping("/api/petition")
 public class PetitionRestController {
@@ -59,11 +62,15 @@ public class PetitionRestController {
         helper.setTo(petition.getEmail());
         this.emailServiceimp.emailSender.send(mimeMessage);
 
-
-        // emailServiceimp.sendSimpleMessage(petition.getEmail(),content,content);
-
     }
 
+    @PutMapping(value = "/addPetitionUser")
+    public void addUserPetition(@RequestParam(value = "id") long id, Authentication authentication){
+        Petition petition = petitionService.get(id);
+        User user = (User) authentication.getPrincipal();
+        petition.getUserPetition().add(user);
+        petitionService.update(petition);
+    }
 }
 
 

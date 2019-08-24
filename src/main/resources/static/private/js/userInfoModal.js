@@ -29,9 +29,6 @@ function getPhoto(id) {
         async: false,
 
         success: function (photo) {
-            // $("#photo").text(photo);
-            //('#photo').html('<img src="data:image/png;base64,' + photo + '" class="img-rounded"' + ' alt="profile image">');
-           // $("#photo").html("");
             $("#profile_avatar").remove();
             var helpTag = document.getElementById('photo');
             helpTag.insertAdjacentHTML('afterbegin','<img src="data:image/png;base64,' + photo + '" class="img-rounded" alt="profile image" id = "profile_avatar" >');
@@ -47,12 +44,13 @@ function getProjectsManager(id) {
         url: "/api/user/projects/manager/" + id,
         type: "GET",
         async: false,
-        success: function (petitions) {
+        success: function (project) {
             $("#projManager").html("");
-            $.each(petitions, function(index) {
-                $('#projManager').append("<p><a>" + petitions[index].adresHome + "</a></p>");
+            $.each(project, function(index) {
+                $('#projManager').append("<p><a href='/steps/" + project[index].id + "'>" + project[index].petition.adresHome + "</a></p>");
                 console.log(index.title);
             });
+
         }
     });
 }
@@ -62,10 +60,10 @@ function getProjectsVolunteer(id) {
         url: "/api/user/projects/volunteer/" + id,
         type: "GET",
         async: false,
-        success: function (petitions) {
+        success: function (project) {
             $("#projVolunteer").html("");
-            $.each(petitions, function(index) {
-                $('#projVolunteer').append("<p><a>" + petitions[index].adresHome + "</a></p>");
+            $.each(project, function(index) {
+                $('#projVolunteer').append("<p><a href='/steps/" + project[index].id + "'>" + project[index].petition.adresHome + "</a></p>");
                 console.log(index.title);
             });
         }

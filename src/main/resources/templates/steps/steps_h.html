@@ -59,6 +59,7 @@
                <div class="card-body">
                    <div class="row">
                        <div class="nav flex-column nav-pills" id = "1_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                           <div id = "tasks_step_1_nav_pils">
                            <a class="nav-link" id="petitioner_info_pil" data-toggle="pill" href="#v-pills-home"
                               role="tab" aria-controls="v-pills-home" aria-selected="true">
                                Информация о заявителе
@@ -73,10 +74,10 @@
                            </a>
                            <a href="#" class="text-primary" onclick="show_add_task_modal(1)">Задача
                                +</a>
+                           </div>
                        </div>
                        <div class="tab-content" style="width: 70%" id = "step_1_task_work_space">
-                           <div class="tab-pane fade show" id="v-pills-home" role="tabpanel"
-                                aria-labelledby="v-pills-home-tab">
+                           <div class="tab-pane fade show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                <div id="task_1">
                                    <div class="input-group mb-3">
                                        <div class="input-group-prepend">
@@ -235,11 +236,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "2_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                <div id = "tasks_step_2_nav_pils">
                     <a class="nav-link active" data-toggle="pill" href="#manage_org_pil"
                        role="tab" aria-controls="v-pills-home" aria-selected="true">
                         Информация о управляющей компании
                     </a>
-
+                </div>
                     <a href="#" class="text-primary" onclick="show_add_task_modal(2)">Задача
                         +</a>
                 </div>
@@ -291,7 +293,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "3_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                    <div id = "tasks_step_3_nav_pils">
                     <!--                           поле для кнопок тасок 3 шага-->
+                    </div>
                 </div>
                 <div class="tab-content" style="width: 70%" id = "step_3_task_work_space">
                     <!--                                поле карточек тасок 3 шага-->
@@ -309,7 +313,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "4_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                    <div id = "tasks_step_4_nav_pils">
                     <!--                           поле для кнопок тасок 4 шага-->
+                    </div>
                 </div>
                 <div class="tab-content" style="width: 70%" id = "step_4_task_work_space">
                     <!--                                поле карточек тасок 4 шага-->
@@ -327,7 +333,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "5_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                    <div id = "tasks_step_5_nav_pils">
                     <!--                           поле для кнопок тасок 5 шага-->
+                    </div>
                 </div>
                 <div class="tab-content" style="width: 70%" id = "step_5_task_work_space">
                     <!--                                поле карточек тасок 5 шага-->
@@ -345,7 +353,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "6_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                    <div id = "tasks_step_6_nav_pils">
                     <!--                           поле для кнопок тасок 6 шага-->
+                    </div>
                 </div>
                 <div class="tab-content" style="width: 70%" id = "step_6_task_work_space">
                     <!--                                поле карточек тасок 6 шага-->
@@ -363,7 +373,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "7_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                    <div id = "tasks_step_7_nav_pils">
                     <!--                           поле для кнопок тасок 7 шага-->
+                    </div>
                 </div>
                 <div class="tab-content" style="width: 70%" id = "step_7_task_work_space">
                     <!--                                поле карточек тасок 7 шага-->
@@ -381,7 +393,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="nav flex-column nav-pills" id = "8_step_task_pil" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%" >
+                    <div id = "tasks_step_8_nav_pils">
                     <!--                           поле для кнопок тасок 8 шага-->
+                    </div>
                 </div>
                 <div class="tab-content" style="width: 70%" id = "step_8_task_work_space">
                     <!--                                поле карточек тасок 8 шага-->
@@ -442,25 +456,24 @@
     }
 
     function add_task(stepnumber){
-        let taskname = $('#taskName').val();
-        let descr = $('#description_of_task').val();
         $.ajax({
             type: 'post',
             url: "/api/tasks/add?" +
                 "project_id=" + projectId+
                 "&step_number="+stepnumber+
-                "&taskName="+taskname+
-                "&description="+descr,
+                "&taskName="+$('#name_of_task').val()+
+                "&description="+$('#description_of_task').val(),
             contentType: 'application/json; charset=utf-8',
-            // beforeSend: function (request) {
-            //     request.setRequestHeader(header, token);
-            // },
             success: function (task) {
-                $('#step_'+stepNumber+'_task_work_space').append(
-                    '<div class="tab-pane fade show active" id="'+task.id+'_custom_task" role="tabpanel"\n' +
-                    'aria-labelledby="v-pills-home-tab"><h3>'+task.name+'</h3><br><br><h5>Описание:</h5><div>'+task.description+'</div>');
+                $('#step_'+stepnumber+'_task_work_space').append(
+                    '<div class="tab-pane fade" id="'+task.id+'_custom_task" role="tabpanel" aria-labelledby="v-pills-home-tab">' +
+                    '<h3>'+task.name+'</h3>' +
+                    '<br><br>' +
+                    '<h5>Описание:</h5>' +
+                    '<div>'+task.description+'</div>' +
+                    '</div>');
 
-                $('#'+stepNumber+'_step_task_pil').append('<a class="nav-link active" data-toggle="pill" href="#'+task.id+'_custom_task"' +
+                $('#tasks_step_'+stepnumber+'_nav_pils').append('<a class="nav-link" data-toggle="pill" href="#'+task.id+'_custom_task"' +
                     'role="tab" aria-controls="v-pills-home" aria-selected="true">'+task.name+'</a>');
                 $('#add_task_modal').modal('hide');
 
@@ -521,7 +534,6 @@
                         taskBodyCalssActive ='active';
                         taskBodyClassShow = 'show';
                     }
-
                     if(tasks[i].type == 'PETITIONER_INFO'){
                         $('#petitioner_info_pil').addClass(taskLinkStatusClass);
                         $('#v-pills-home').addClass(taskBodyCalssActive);
@@ -532,13 +544,15 @@
                         $('#neighbourhood_info_pil').addClass(taskLinkStatusClass);
                         $('#neighbourhood_inf').addClass(taskBodyCalssActive);
                         $('#neighbourhood_inf').addClass(taskBodyClassShow);
+                        //todo
                     }
                     if(tasks[tasks[i].type == 'OLD_CONTAINER_PHOTO']){
                         $('#old_container_pil').addClass(taskLinkStatusClass);
                         $('#container_photo').addClass(taskBodyCalssActive);
                         $('#container_photo').addClass(taskBodyClassShow);
+                        //todo
                     }
-
+                    //todo custom tasks
                 }
             },
             error: function (e) {
@@ -601,52 +615,6 @@ function getPetition(projectId) {
                 return result;
             }
         })();
-
-        // $('#step_1_link').bind('classChanged', function(){
-        //     if($('#step_1_link').hasClass('active')){
-        //         alert("isasdfas")
-        //     }
-        // });
-
-        // $('#step_3_link').bind('classChanged', function () {
-        //     if ($('#step_3_link').hasClass('active')) {
-        //         alert('step_3_changed');
-        //     }
-        // });
-
-        // function get_step_st(projecId) {
-
-            // var projid = projecId;
-            // $.ajax({
-            //     type: 'post',
-            //     url: "/api/steps/step_1?" +
-            //         "project_id=" + projid,
-            //     contentType: 'application/json; charset=utf-8',
-            //     // beforeSend: function (request) {
-            //     //     request.setRequestHeader(header, token);
-            //     // },
-            //     success: function (tasks) {
-            //
-            //         for (var i = 0; i < tasks.length; i++) {
-            //             if (tasks[i].type == 'PETITIONER_INFO') {
-            //                 if (tasks[i].taskStatus == 'DONE') {
-            //                     $('#petitioner_info_pil').addClass('done-task');
-            //                 }
-            //                 if (tasks[i].taskStatus == 'IN_PROGRESS') {
-            //                     $('#petitioner_info_pil').addClass('active');
-            //                     $('#')
-            //                 }
-            //
-            //             }
-            //         }
-            //     },
-            //     error: function (error) {
-            //         console.log(error);
-            //         alert(error.responseText);
-            //     }
-            // })
-
-
 
 
 </script>

@@ -36,7 +36,7 @@ public class TaskRestController {
                         @RequestParam(value = "step_number")Integer number,
                         @RequestParam(value = "taskName")String taskName,
                         @RequestParam(value = "description")String description){
-        StepNumber stepNumber = StepNumber.STEP_1;
+         StepNumber stepNumber = StepNumber.STEP_1;
         switch (number) {
             case  (1):
                 stepNumber = StepNumber.STEP_1;

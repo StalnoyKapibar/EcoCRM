@@ -33,7 +33,7 @@ public class Project implements Serializable {
     @OneToOne
     private Point point;
 
-    @OneToMany
+    @ManyToMany
     private List<User> users;
 
     @OneToOne

@@ -25,7 +25,7 @@ public class ApplicationController {
 
     @GetMapping("/showMyLoginPage")
     public String showMyLoginPage() {
-        return "login";
+        return "login_user_page";
     }
 
     @GetMapping("/access-denied")
@@ -48,6 +48,11 @@ public class ApplicationController {
         Long id = ((User)authentication.getPrincipal()).getId();
         model.addAttribute("projects", projectService.getPersonProjectDto(id));
         return "person_page_projects";
+    }
+
+    @GetMapping("/get_petition")
+    public String getPetitionPage() {
+        return "petition_page";
     }
 
 }

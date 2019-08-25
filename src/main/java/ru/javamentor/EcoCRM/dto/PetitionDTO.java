@@ -1,12 +1,33 @@
 package ru.javamentor.EcoCRM.dto;
 
+import ru.javamentor.EcoCRM.model.User;
+
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 public class PetitionDTO {
     private LocalDate data;
     private String adress;
     private String area;
     private long id;
+    private List<User> userList;
+
+    public PetitionDTO(LocalDate data, String adress, String area, long id, List<User> userList) {
+        this.data = data;
+        this.adress = adress;
+        this.area = area;
+        this.id = id;
+        this.userList = userList;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     public long getId() {
         return id;

@@ -71,7 +71,17 @@ public class DataInitializer {
         initManagement();
         initPetition();
         initProject();
+        initPhoto();
     }
+
+    //вспомагательный метод для изменения автарки пользователю 1
+    private void initPhoto() throws IOException {
+        User user = userService.get(1);
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        userService.update(user);
+    }
+
+
 
     private void initRoles() {
         Authority adminAuthority = new Authority("ROLE_ADMIN");
@@ -174,10 +184,10 @@ public class DataInitializer {
     }
 
     private void initProject() {
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i < 30; i++) {
             Project project = new Project();
             project.setTitle(faker.company().name());
-            User user = userService.get((long)random.nextInt(10));
+            User user = userService.get((long)random.nextInt(50));
             project.setManager(user);
             project.setStartStep(LocalDate.now());
             project.setPetition(petitionService.get(i));

@@ -6,12 +6,14 @@ import ru.javamentor.EcoCRM.dao.PetitionDao;
 import ru.javamentor.EcoCRM.dao.PetitionDaoImpl;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
+import ru.javamentor.EcoCRM.model.User;
 
 import java.util.List;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implements PetitionService {
@@ -51,6 +53,30 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
             petitionDTOList.add(petitionDTO);
         }
         petitionDTOList.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
+        return petitionDTOList;
+    }
+
+    public List<PetitionDTO> getAllPetitionForAdmin(){
+        List<Petition> petitionList = petitionDao.getAllPetitionForAdmin();
+        List<PetitionDTO> petitionDTOList = new ArrayList<>();
+        long id;
+        for (Petition petition : petitionList){
+            LocalDate date = petition.getData();
+             id = petition.getId();
+            String adress = petition.getAdresHome();
+            if(adress == null){
+                adress = "Нет данных";
+            }
+            String area = petition.getHouseArea();
+            if(area == null){
+                area = "Нет данных";
+            }
+            Set<User> users = petitionDao.getAllUserForAdmin(id);
+            List<User> usersOne = new ArrayList<>();
+            usersOne.addAll(users);
+            PetitionDTO petitionDTO = new PetitionDTO(date,adress,area, id, usersOne);
+            petitionDTOList.add(petitionDTO);
+        }
         return petitionDTOList;
     }
 }

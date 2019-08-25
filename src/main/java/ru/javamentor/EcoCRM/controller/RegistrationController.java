@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import ru.javamentor.EcoCRM.dao.TokenNotFoundException;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.model.User;
@@ -51,8 +52,8 @@ public class RegistrationController {
             model.addAttribute("user", user);
             return "registration/registration-form";
 
-        } catch (NullPointerException e) {
-
+        } catch (TokenNotFoundException e) {
+            System.out.println(e.getMessage());
             return "wrong-token";
         }
     }

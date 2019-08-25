@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.TokenDao;
+import ru.javamentor.EcoCRM.dao.TokenNotFoundException;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.service.AbstractServiceImpl;
 import ru.javamentor.EcoCRM.service.token.service.TokenService;
@@ -29,14 +30,13 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
     }
 
     @Override
-    public Token loadTokenByCode(String code)  throws UsernameNotFoundException{
+    public Token loadTokenByCode(String code)  throws TokenNotFoundException{
 
         try {
             Token token = tokenDao.findByFieldNameAndValue("code", code);
             return token;
-        } catch (NullPointerException e) {
-
-            throw new NullPointerException("Token with " + code + " not found");
+        } catch(NullPointerException e) {
+            throw new TokenNotFoundException("token with code " + code  + "not found");
         }
 
     }

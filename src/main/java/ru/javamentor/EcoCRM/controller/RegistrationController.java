@@ -10,21 +10,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("registration")

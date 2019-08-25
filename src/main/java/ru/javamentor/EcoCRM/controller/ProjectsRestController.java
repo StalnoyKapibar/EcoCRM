@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
@@ -41,5 +43,10 @@ public class ProjectsRestController {
             entry.getValue().removeIf(project -> project.getManager().equals(currentUser));
         }
         return r;
+    }
+
+    @RequestMapping(value = "/{projectid}", method = RequestMethod.GET)
+    public Project getProject(@PathVariable Long projectid, Model model) {
+        return projectService.get(projectid);
     }
 }

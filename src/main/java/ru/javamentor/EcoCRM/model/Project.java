@@ -5,7 +5,6 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -104,11 +103,11 @@ public class Project implements Serializable {
         this.point = point;
     }
 
-    public ManagementCompany getCompany() {
+    public ManagementCompany getManagementCompany() {
         return company;
     }
 
-    public void setCompany(ManagementCompany company) {
+    public void setManagementCompany(ManagementCompany company) {
         this.company = company;
     }
 

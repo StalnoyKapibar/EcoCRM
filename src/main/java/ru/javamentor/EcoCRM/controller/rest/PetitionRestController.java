@@ -3,15 +3,19 @@ package ru.javamentor.EcoCRM.controller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
+import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
+import ru.javamentor.EcoCRM.service.ProjectService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -32,6 +36,9 @@ public class PetitionRestController {
 
     @Autowired
     private EmailServiceImpl emailServiceimp;
+
+    @Autowired
+    private ProjectService projectService;
 
     @Value("${path.to.mail}")
     String pathToLetter;
@@ -73,6 +80,12 @@ public class PetitionRestController {
         petition.setStatus(Status.IN_PROGRESS);
         petition.getUserPetition().add(user);
         petitionService.update(petition);
+    }
+
+    @RequestMapping(value = "/get_by_project_id/{projectid}", method = RequestMethod.GET)
+    public Petition getPetitionByProjectId(@PathVariable Long projectid, Model model) {
+        Project project = projectService.get(projectid);
+        return project.getPetition();
     }
 
     @GetMapping("/getAllAdminPetitionWithUserRest")

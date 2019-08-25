@@ -20,6 +20,11 @@ import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.token.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 @Controller
 @RequestMapping("registration")
 public class RegistrationController {
@@ -66,7 +71,7 @@ public class RegistrationController {
         user.setAuthorities(roles);
         userService.insert(user);
 
-        return "admin_page";
+        return "redirect:/admin/manage";
     }
     @GetMapping("/usercode")
     public ModelAndView getCode(@RequestParam(name = "code") String code) throws JSONException {

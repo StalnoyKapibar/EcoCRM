@@ -2,18 +2,16 @@ package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.SchedulerService;
-import ru.javamentor.EcoCRM.service.token.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
+import ru.javamentor.EcoCRM.service.token.service.TokenService;
 
 import java.util.UUID;
 
@@ -33,9 +31,11 @@ public class SendRegistrationController {
     @Autowired
     SchedulerService schedulerService;
 
+    @Autowired
+    EmailServiceImpl getEmailServiceImpl;
+
     @Value("${host.name}")
     String hostName;
-    @GetMapping("/sendReg")
     @GetMapping("/admin/sendReg")
     public String SendReg(Model model) {
         String userEmail = "";
@@ -52,7 +52,7 @@ public class SendRegistrationController {
         String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
                 "\nhttp://"+hostName+"/registration/new/?code=" + code;
 
-        emailServiceimp.sendSimpleMessage(userEmail,"To target mail from form", message);
-        return "/admin/admin_page";
+        getEmailServiceImpl.sendSimpleMessage(userEmail,"To target mail from form", message);
+        return "redirect:/admin/manage";
     }
 }

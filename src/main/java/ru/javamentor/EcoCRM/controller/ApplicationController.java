@@ -46,15 +46,17 @@ public class ApplicationController {
         List<Authority> roles = (List<Authority>) auth.getAuthorities();
         for (Authority role : roles) {
             if (role.getAuthority().contains("ROLE_ADMIN")) {
-                return "/admin/admin_page";
+                return "redirect:/admin/manage";
             }
         }
         return "user";
     }
 
-    @GetMapping("/admin/page")
-    public String showAdminPage() {
-        return "/admin/admin_page";
+    @GetMapping("/admin/manage")
+    public String showAllUsers(Model model) {
+        List<User> usersList = userService.getAll();
+        model.addAttribute("usersList", usersList);
+        return "/admin/manage";
     }
 
     @GetMapping("/user")

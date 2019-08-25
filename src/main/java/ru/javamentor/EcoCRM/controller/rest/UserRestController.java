@@ -54,7 +54,7 @@ public class UserRestController {
         user.setStatus(UserStatus.BLOCKED);
         user.setEnabled();
         userService.update(user);
-        return "/admin/usersList";
+        return "/admin/manage";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/unblock")
@@ -63,6 +63,6 @@ public class UserRestController {
         user.setStatus(UserStatus.ACTIVE);
         user.setEnabled();
         userService.update(user);
-        return "/admin/usersList";
+        return "/admin/manage";
     }
 }

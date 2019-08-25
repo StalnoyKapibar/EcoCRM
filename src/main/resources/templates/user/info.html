@@ -15,6 +15,7 @@
 
     <script src="/private/js/person_page_projects.js" type="text/javascript"></script>
 </head>
+
 <body>
 
 <!--Начало хидера-->
@@ -37,7 +38,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Уведомления</a>
-                    <a class="dropdown-item" href="/user/info">Моя страница</a>
+                    <a class="dropdown-item" href="#">Моя страница</a>
                     <a class="dropdown-item" href="/logout">Выйти</a>
                 </div>
             </li>
@@ -46,23 +47,5 @@
 </nav>
 
 <!--конец хидера-->
-
-<main role="main" class="container">
-    <h3 style="margin-left: 4%">Мои проекты :</h3>
-    <div class="row" style="margin: 3%">
-        <div class="col-sm-4" th:each="project : ${projects}">
-            <div class="card shadow bg-white rounded" style="margin-top: 15px">
-                <div class="card-header" th:text="${project.area}" style="font-size: small">
-                </div>
-                <div class="card-body">
-                    <div>Проект на этапе: <span th:text="${project.number}" class="badge badge-pill text-light" style="font-size: small; background-color: #500a6f"></span></div>
-                    <div>Начало проекта: <span th:text="${project.time}" style="font-size: small"></span></div>
-                    <a th:href="@{/steps/{id}(id=${project.id})}" class="btn btn-warning" style="float:right; margin-top: 15px">Перейти</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-
 </body>
 </html>

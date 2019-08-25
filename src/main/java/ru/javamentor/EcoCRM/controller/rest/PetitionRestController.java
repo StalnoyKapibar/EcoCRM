@@ -6,8 +6,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.User;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
 
@@ -68,8 +70,16 @@ public class PetitionRestController {
     public void addUserPetition(@RequestParam(value = "id") long id, Authentication authentication){
         Petition petition = petitionService.get(id);
         User user = (User) authentication.getPrincipal();
+        petition.setStatus(Status.IN_PROGRESS);
         petition.getUserPetition().add(user);
         petitionService.update(petition);
+    }
+
+    @GetMapping("/getAllAdminPetitionWithUserRest")
+    public List<PetitionDTO> getAllPetitonWithUser(){
+        List<PetitionDTO> petitionDTOList = petitionService.getAllPetitionForAdmin();
+        return petitionDTOList;
+
     }
 }
 

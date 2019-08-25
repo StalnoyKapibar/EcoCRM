@@ -91,8 +91,6 @@ public class DataInitializer {
     }
     private void initBaseUserAndAdmin() throws IOException {
         User admin = new User();
-        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setAuthorities(authoritiesService.getAll());
@@ -180,10 +178,10 @@ public class DataInitializer {
     }
 
     private void initProject() {
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i < 30; i++) {
             Project project = new Project();
             project.setTitle(faker.company().name());
-            User user = userService.get((long)random.nextInt(10));
+            User user = userService.get((long)random.nextInt(50));
             project.setManager(user);
             project.setStartStep(LocalDate.now());
             project.setPetition(petitionService.get(i));

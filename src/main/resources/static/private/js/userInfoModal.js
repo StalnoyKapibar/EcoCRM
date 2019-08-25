@@ -1,3 +1,28 @@
+$(document).ready(function () {
+    $.ajax({
+        url: "/api/user/get_current_user",
+        type: "POST",
+        async: false,
+        success: function (user) {
+            //$('#photo').attr("src","/api/user/photo/" + user.id);
+            $("#name").text(user.name);
+            $("#surname").text(user.surname);
+            $("#userId").text(user.id);
+            $("#patronymic").text(user.patronymic);
+            $("#email").text(user.email);
+            $("#phone").text(user.phone);
+            $("#vk").text(user.link);
+            $("#profession").text(user.profession);
+            $("#status").text(user.status);
+            $("#notToDo").text(user.notToDo);
+            getProjectsManager(id);
+            getProjectsVolunteer(id);
+            getPhoto(id);
+        }
+    });
+});
+
+
 function getUser(id) {
     $.ajax({
         url: "/api/user/" + id,

@@ -15,6 +15,7 @@
 
     <script src="/private/js/person_page_projects.js" type="text/javascript"></script>
 </head>
+
 <body>
 
 <!--Начало хидера-->
@@ -37,7 +38,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Уведомления</a>
-                    <a class="dropdown-item" href="/userinfo">Моя страница</a>
+                    <a class="dropdown-item" href="#">Моя страница</a>
                     <a class="dropdown-item" href="/logout">Выйти</a>
                 </div>
             </li>
@@ -47,22 +48,69 @@
 
 <!--конец хидера-->
 
-<main role="main" class="container">
-    <h3 style="margin-left: 4%">Мои проекты :</h3>
-    <div class="row" style="margin: 3%">
-        <div class="col-sm-4" th:each="project : ${projects}">
-            <div class="card shadow bg-white rounded" style="margin-top: 15px">
-                <div class="card-header" th:text="${project.area}" style="font-size: small">
-                </div>
-                <div class="card-body">
-                    <div>Проект на этапе: <span th:text="${project.number}" class="badge badge-pill text-light" style="font-size: small; background-color: #500a6f"></span></div>
-                    <div>Начало проекта: <span th:text="${project.time}" style="font-size: small"></span></div>
-                    <a th:href="@{/steps/{id}(id=${project.id})}" class="btn btn-warning" style="float:right; margin-top: 15px">Перейти</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+<div class="row" style="margin: 3%">
+    <div class="card" style="width: 100%">
+        <table class="table">
+            <td><h6> ФИО: </h6></td>
+            <td><ul class="fio">
+                <li id="surname"></li>
+                <li id="name"></li>
+                <li id="patronymic"></li>
+            </ul>
+            </td>
+            </tr>
+            <tr>
+                <td><h6> ID: </h6></td><td><h5 id="userId"></h5></td>
+            </tr>
+            <tr>
+                <td><h6> Почта: </h6></td><td><h5 id="email"></h5></td>
+            </tr>
+            <tr>
+                <td><h6> Телефон: </h6></td><td><h5 id="phone"></h5></td>
+            </tr>
+            <tr>
+                <td><h6> Ссылка VK: </h6></td><td><a href="#"><h5 id="vk"></h5></a></td>
+            </tr>
+            <tr>
+                <td><h6> Профессия: </h6></td><td><h5 id="profession"></h5></td>
+            </tr>
+            <tr>
+                <td><h6> Статус: </h6></td><td><h5 id="status"></h5></td>
+            </tr>
+            <tr>
+                <td><h6> Не хочет заниматься: </h6></td><td><h5 id="notToDo"></h5></td>
+            </tr>
 
+        </table>
+    </div>
+</div>
+<!--<script th:inline = "text">-->
+    <!--var global_id= [[${id}]];-->
+<!--</script>-->
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/api/user/get_current_user",
+            type: "POST",
+            async: false,
+            success: function (user) {
+                //$('#photo').attr("src","/api/user/photo/" + user.id);
+                $("#name").text(user.name);
+                $("#surname").text(user.surname);
+                $("#userId").text(user.id);
+                $("#patronymic").text(user.patronymic);
+                $("#email").text(user.email);
+                $("#phone").text(user.phone);
+                $("#vk").text(user.link);
+                $("#profession").text(user.profession);
+                $("#status").text(user.status);
+                $("#notToDo").text(user.notToDo);
+                getProjectsManager(id);
+                getProjectsVolunteer(id);
+                getPhoto(id);
+            }
+        });
+    });
+</script>
 </body>
 </html>

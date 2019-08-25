@@ -2,17 +2,15 @@ package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.ProjectService;
 import ru.javamentor.EcoCRM.service.UserService;
-import ru.javamentor.EcoCRM.model.Authority;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class ApplicationController {
     public String startPageRedirectRoleDepending() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = auth.getName();
+        //String currentUserName = auth.getName();
         List<Authority> roles = (List<Authority>) auth.getAuthorities();
         for (Authority role : roles) {
             if (role.getAuthority().contains("ROLE_ADMIN")) {
@@ -64,6 +62,16 @@ public class ApplicationController {
         Long id = ((User)authentication.getPrincipal()).getId();
         model.addAttribute("projects", projectService.getPersonProjectDto(id));
         return "person_page_projects";
+    }
+    @GetMapping("/userinfo")
+    public String showUserInfo(Model model) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String currentUserName = auth.getName();
+//       User user = ((User)userService.loadUserByUsername(currentUserName));
+////        System.out.println("USER ID IS:  " + id);
+//        model.addAttribute("user", user);
+
+        return "userinfo";
     }
 
     @GetMapping("/get_petition")

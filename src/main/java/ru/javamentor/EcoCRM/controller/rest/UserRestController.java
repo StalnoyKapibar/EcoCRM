@@ -11,6 +11,7 @@ import ru.javamentor.EcoCRM.service.ProjectService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -64,5 +65,12 @@ public class UserRestController {
         user.setEnabled();
         userService.update(user);
         return "/admin/manage";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/get_current_user")
+    public User getCurrentUser(Principal principal){
+        User user = (User) userService.loadUserByUsername(principal.getName());
+        System.out.println("Current USER ID IS: " + user.getId());
+        return user;
     }
 }

@@ -188,8 +188,9 @@ public class DataInitializer {
     private void initProject() {
         for (int i = 1; i < 30; i++) {
             Project project = new Project();
+
             project.setTitle(faker.company().name());
-            User user = userService.get((long)random.nextInt(50));
+            User user = userService.get((long)random.nextInt(11));
             project.setManager(user);
             project.setStartStep(LocalDate.now());
             project.setPetition(petitionService.get(i));

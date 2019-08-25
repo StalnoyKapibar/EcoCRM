@@ -4,6 +4,8 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +33,7 @@ public class Project implements Serializable {
     @OneToOne
     private Point point;
 
-    @OneToMany
+    @ManyToMany
     private List<User> users;
 
     @OneToOne
@@ -42,6 +44,12 @@ public class Project implements Serializable {
 
     @OneToOne
     private Report report;
+
+    @Column(name = "start_step")
+    private LocalDate startStep;
+
+    @Column(name = "end_step")
+    private LocalDate endStep;
 
     public Project() {
 
@@ -134,6 +142,22 @@ public class Project implements Serializable {
 
     public void setPetition(Petition petition) {
         this.petition = petition;
+    }
+
+    public LocalDate getStartStep() {
+        return startStep;
+    }
+
+    public void setStartStep(LocalDate startStep) {
+        this.startStep = startStep;
+    }
+
+    public LocalDate getEndStep() {
+        return endStep;
+    }
+
+    public void setEndStep(LocalDate endStep) {
+        this.endStep = endStep;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.controller;
+package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,6 +63,7 @@ public class PetitionRestController {
         mimeMessage.setContent(content,"text/html; charset=utf-8");
         helper.setTo(petition.getEmail());
         this.emailServiceimp.emailSender.send(mimeMessage);
+
     }
 
     @PutMapping(value = "/addPetitionUser")

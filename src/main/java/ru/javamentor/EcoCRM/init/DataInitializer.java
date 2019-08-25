@@ -81,6 +81,8 @@ public class DataInitializer {
     }
     private void initBaseUserAndAdmin() throws IOException {
         User admin = new User();
+        admin.setName("admin");
+        admin.setSurname("admin");
         admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
         //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         admin.setEmail("admin");
@@ -88,6 +90,8 @@ public class DataInitializer {
         admin.setAuthorities(authoritiesService.getAll());
 
         User user = new User();
+        user.setName("name");
+        user.setSurname("surname");
         user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
         //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         user.setEmail("user");

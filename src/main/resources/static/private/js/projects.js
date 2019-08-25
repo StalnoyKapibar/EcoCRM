@@ -26,8 +26,7 @@ $(document).ready(function () {
                 docVar += '</div> </div>';
                 count++;
             });
-            $("#projectsTable").html(docVar);
-        }
+            $("#projectsTable").html(docVar);        }
     });
 });
 

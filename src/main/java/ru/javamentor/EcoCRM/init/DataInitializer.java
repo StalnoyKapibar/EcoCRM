@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
+import ru.javamentor.EcoCRM.model.embedded.TaskType;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDate;
@@ -128,6 +129,7 @@ public class DataInitializer {
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
             user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
         }
@@ -233,40 +235,38 @@ public class DataInitializer {
     }
 
     private void addTaskForStep1(Step step) {
-        taskService.insert(new Task("Заполнить форму заявителя", step));
-        taskService.insert(new Task("Добавить данные о соседях", step));
-        taskService.insert(new Task("Добавить фото контейнера", step));
+        taskService.insert(new Task("Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
+        taskService.insert(new Task("Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
+        taskService.insert(new Task("Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
     }
 
     private void addTaskForStep2(Step step) {
-        taskService.insert(new Task("Заполнить форму управляющей компании", step));
+        taskService.insert(new Task("Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
     }
 
     private void addTaskForStep3(Step step) {
-        taskService.insert(new Task("Выбрать компанию заготовителя", step));
-        taskService.insert(new Task("Назначить встречу заготовителя и управляющей компании", step));
-    }
+        taskService.insert(new Task("Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
 
     private void addTaskForStep4(Step step) {
-        taskService.insert(new Task("Заключить договор", step));
+        taskService.insert(new Task("Заключить договор", step, TaskType.OFFER));
     }
 
     private void addTaskForStep5(Step step) {
-        taskService.insert(new Task("Установка контейнера", step));
+        taskService.insert(new Task("Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
     }
 
     private void addTaskForStep6(Step step) {
-        taskService.insert(new Task("Разработать макет листовок", step));
-        taskService.insert(new Task("Печать листовок", step));
-        taskService.insert(new Task("Публикация листовок на досках информирования", step));
-        taskService.insert(new Task("Мероприятие  участием жителей", step));
+        taskService.insert(new Task("Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
+        taskService.insert(new Task("Печать листовок", step, TaskType.LEAFLETS_PRINT));
+        taskService.insert(new Task("Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
+        taskService.insert(new Task("Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
     }
 
     private void addTaskForStep7(Step step) {
-        taskService.insert(new Task("Заполнить отчет", step));
+        taskService.insert(new Task("Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
     }
 
     private void addTaskForStep8(Step step) {
-        taskService.insert(new Task("Проверка результата через месяц", step));
+        taskService.insert(new Task("Проверка результата через месяц", step, TaskType.CUSTOM));
     }
 }

@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.model;
 
 import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.embedded.TaskType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,6 +18,17 @@ public class Task implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "name")
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Column(name = "task_status")
     @Enumerated(value = EnumType.STRING)
     private Status taskStatus = Status.TODO;
@@ -28,6 +40,10 @@ public class Task implements Serializable {
     @OneToMany
     private List<Comment> comments;
 
+    @Column(name = "task_type")
+    @Enumerated(value = EnumType.STRING)
+    private TaskType type;
+
     public Task() {
 
     }
@@ -36,9 +52,25 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public Task(String description, Step step) {
+    public Task(String description, Step step, TaskType taskType) {
         this.description = description;
         this.step = step;
+        this.type = taskType;
+    }
+
+    public Task(String name, String description, Step step, TaskType taskType) {
+        this.description = description;
+        this.step = step;
+        this.type = taskType;
+        this.name = name;
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType taskType) {
+        this.type = taskType;
     }
 
     public Long getId() {

@@ -2,12 +2,19 @@ package ru.javamentor.EcoCRM.init;
 
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.javamentor.EcoCRM.model.*;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
+import ru.javamentor.EcoCRM.model.embedded.TaskType;
 import ru.javamentor.EcoCRM.service.*;
 
+import java.time.LocalDate;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +53,9 @@ public class DataInitializer {
 
     @Autowired
     private TaskService taskService;
+    @Autowired
+    @Qualifier("imageService")
+    ImageService imageService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -54,7 +64,7 @@ public class DataInitializer {
 
     private Random random = new Random();
 
-    public void init() {
+    public void init() throws IOException {
         initRoles();
         initBaseUserAndAdmin();
         initUsers();
@@ -62,7 +72,17 @@ public class DataInitializer {
         initManagement();
         initPetition();
         initProject();
+        initPhoto();
     }
+
+    //вспомагательный метод для изменения автарки пользователю 1
+    private void initPhoto() throws IOException {
+        User user = userService.get(1);
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        userService.update(user);
+    }
+
+
 
     private void initRoles() {
         Authority adminAuthority = new Authority("ROLE_ADMIN");
@@ -70,13 +90,21 @@ public class DataInitializer {
         Authority userAuthority = new Authority("ROLE_USER");
         authoritiesService.insert(userAuthority);
     }
-    private void initBaseUserAndAdmin() {
+    private void initBaseUserAndAdmin() throws IOException {
         User admin = new User();
+        admin.setName("admin");
+        admin.setSurname("admin");
+        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setAuthorities(authoritiesService.getAll());
 
         User user = new User();
+        user.setName("name");
+        user.setSurname("surname");
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         user.setEmail("user");
         user.setPassword(bCryptPasswordEncoder.encode("user"));
         List<Authority> roles = new ArrayList<>();
@@ -86,19 +114,23 @@ public class DataInitializer {
         userService.insert(admin);
     }
 
-    private void initUsers() {
-        for (int i = 1; i < 50; i++) {
+    private void initUsers() throws IOException {
+        for (int i = 1; i < 10; i++) {
             User user = new User();
-            user.setName("jksljldk");
+            user.setName(faker.name().firstName());
             user.setSurname(faker.name().lastName());
-            user.setEmail(faker.internet().emailAddress());
+            user.setEmail(2 + i + "@mail.ru");
+            user.setPhone(faker.phoneNumber().phoneNumber());
             user.setLink(faker.internet().emailAddress());
             user.setProfession(faker.job().position());
-            user.setPassword(bCryptPasswordEncoder.encode("1"));
+            user.setPassword(bCryptPasswordEncoder.encode(2 + i + ""));
             user.setNotToDo(faker.chuckNorris().fact());
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
         }
     }
@@ -141,8 +173,14 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
+            petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
+            if(new Random().nextInt() % 2 == 0){
+                petition.setHouseArea("Другой район");
+            } else {
+                petition.setHouseArea("Адмиралтейский район");
+            }
             petitionService.insert(petition);
         }
     }
@@ -153,6 +191,7 @@ public class DataInitializer {
             project.setTitle(faker.company().name());
             User user = userService.get((long)random.nextInt(50));
             project.setManager(user);
+            project.setStartStep(LocalDate.now());
             project.setPetition(petitionService.get(i));
             projectService.insert(project);
             initSteps(project);
@@ -160,10 +199,19 @@ public class DataInitializer {
     }
 
     public void initSteps(Project project) {
+        boolean hasStatusInProgress = false;
         for (StepNumber stepNumber : StepNumber.values()) {
             Step step = new Step();
             step.setProject(project);
             step.setStepNumber(stepNumber);
+            if(!hasStatusInProgress) {
+                int randomInt = random.nextInt(2);
+                Status status = Status.values()[randomInt];
+                if (status.equals(Status.IN_PROGRESS)) {
+                    hasStatusInProgress = true;
+                }
+                step.setStatus(status);
+            }
             stepService.insert(step);
             switch (stepNumber) {
                 case STEP_1:addTaskForStep1(step);
@@ -187,40 +235,38 @@ public class DataInitializer {
     }
 
     private void addTaskForStep1(Step step) {
-        taskService.insert(new Task("Заполнить форму заявителя", step));
-        taskService.insert(new Task("Добавить данные о соседях", step));
-        taskService.insert(new Task("Добавить фото контейнера", step));
+        taskService.insert(new Task("Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
+        taskService.insert(new Task("Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
+        taskService.insert(new Task("Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
     }
 
     private void addTaskForStep2(Step step) {
-        taskService.insert(new Task("Заполнить форму управляющей компании", step));
+        taskService.insert(new Task("Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
     }
 
     private void addTaskForStep3(Step step) {
-        taskService.insert(new Task("Выбрать компанию заготовителя", step));
-        taskService.insert(new Task("Назначить встречу заготовителя и управляющей компании", step));
-    }
+        taskService.insert(new Task("Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
 
     private void addTaskForStep4(Step step) {
-        taskService.insert(new Task("Заключить договор", step));
+        taskService.insert(new Task("Заключить договор", step, TaskType.OFFER));
     }
 
     private void addTaskForStep5(Step step) {
-        taskService.insert(new Task("Установка контейнера", step));
+        taskService.insert(new Task("Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
     }
 
     private void addTaskForStep6(Step step) {
-        taskService.insert(new Task("Разработать макет листовок", step));
-        taskService.insert(new Task("Печать листовок", step));
-        taskService.insert(new Task("Публикация листовок на досках информирования", step));
-        taskService.insert(new Task("Мероприятие  участием жителей", step));
+        taskService.insert(new Task("Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
+        taskService.insert(new Task("Печать листовок", step, TaskType.LEAFLETS_PRINT));
+        taskService.insert(new Task("Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
+        taskService.insert(new Task("Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
     }
 
     private void addTaskForStep7(Step step) {
-        taskService.insert(new Task("Заполнить отчет", step));
+        taskService.insert(new Task("Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
     }
 
     private void addTaskForStep8(Step step) {
-        taskService.insert(new Task("Проверка результата через месяц", step));
+        taskService.insert(new Task("Проверка результата через месяц", step, TaskType.CUSTOM));
     }
 }

@@ -20,7 +20,7 @@ public class Step implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private StepNumber stepNumber;
 
-    @ManyToOne()
+    @ManyToOne
     private Project project;
 
     @Column(name = "description")

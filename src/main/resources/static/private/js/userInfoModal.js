@@ -1,39 +1,120 @@
-//todo
+function getUser(id) {
+    $.ajax({
+        url: "/api/user/" + id,
+        type: "GET",
+        async: false,
+        success: function (user) {
+            //$('#photo').attr("src","/api/user/photo/" + user.id);
+            $("#name").text(user.name);
+            $("#surname").text(user.surname);
+            $("#userId").text(user.id);
+            $("#patronymic").text(user.patronymic);
+            $("#email").text(user.email);
+            $("#phone").text(user.phone);
+            $("#vk").text(user.link);
+            $("#profession").text(user.profession);
+            $("#status").text(user.status);
+            $("#notToDo").text(user.notToDo);
+            getProjectsManager(id);
+            getProjectsVolunteer(id);
+            getPhoto(id);
+        }
+    });
+}
 
-// var modal = document.getElementById('myModal');
-// var btn = document.getElementById("myBtn");
-// var span = document.getElementsByClassName("close")[0];
-//
-// btn.onclick = function() {
-//     modal.style.display = "block";
-// }
-//
-// span.onclick = function() {
-//     modal.style.display = "none";
-// }
-//
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+function getPhoto(id) {
+    $.ajax({
+        url: "/api/user/photo/" + id,
+        type: "GET",
+        async: false,
 
-document.addEventListener('DOMContentLoaded', function() {
-    var modalButtons = document.querySelectorAll('.js-open-modal'),
-        overlay      = document.querySelector('#overlay-modal'),
-        closeButtons = document.querySelector('.js-modal-close');
+        success: function (photo) {
+            $("#profile_avatar").remove();
+            var helpTag = document.getElementById('photo');
+            helpTag.insertAdjacentHTML('afterbegin','<img src="data:image/png;base64,' + photo + '" class="img-rounded" alt="profile image" id = "profile_avatar" >');
+        },
+        error: function(error) {
+            console.error('problem with load photo', error);
+        }
+    });
+}
 
+function getProjectsManager(id) {
+    $.ajax({
+        url: "/api/user/projects/manager/" + id,
+        type: "GET",
+        async: false,
+        success: function (project) {
+            $("#projManager").html("");
+            $.each(project, function(index) {
+                $('#projManager').append("<p><a href='/steps/" + project[index].id + "'>" + project[index].petition.adresHome + "</a></p>");
+                console.log(index.title);
+            });
 
-    modalButtons.forEach(function(item){
+        }
+    });
+}
 
-        item.addEventListener('click', function(e) {
+function getProjectsVolunteer(id) {
+    $.ajax({
+        url: "/api/user/projects/volunteer/" + id,
+        type: "GET",
+        async: false,
+        success: function (project) {
+            $("#projVolunteer").html("");
+            $.each(project, function(index) {
+                $('#projVolunteer').append("<p><a href='/steps/" + project[index].id + "'>" + project[index].petition.adresHome + "</a></p>");
+                console.log(index.title);
+            });
+        }
+    });
+}
 
-            e.preventDefault();
-            var modalId = this.getAttribute('data-modal'),
-                modalElem = document.querySelector('.modal[data-modal="' + modalId + '"]');
+function blockUser() {
+    var userId = $('#userId').text();
+    $.ajax({
+        url: "/api/user/block?id=" + userId,
+        type: "POST",
+        async: false,
+        success: function (address) {
+            window.location.href = address;
+            //$("#unblock-btn").prop('disabled', false);
+            //$("#block-btn").prop('disabled', true);
+        },
+        error: function(error) {
+            console.error('problem with blocking', error);
+        }
+    });
+}
 
-            modalElem.classList.add('active');
-            overlay.classList.add('active');
-        }); // end click
-    }); // end foreach
-}); // end ready
+function unblockUser() {
+    var userId = $('#userId').text();
+    $.ajax({
+        url: "/api/user/unblock?id=" + userId,
+        type: "POST",
+        async: false,
+        success: function (address) {
+            window.location.href = address;
+            //$('#block-btn').prop('disabled', false);
+            //$('#unblock-btn').prop('disabled', true);
+        },
+        error: function(error) {
+            console.error('problem with unblocking', error);
+        }
+    });
+}
+
+function sendReg() {
+    var email = $('#email_input').val();
+    $.ajax({
+        url: "/processSendForm?userEmail=" + email,
+        type: "GET",
+        async: false,
+        success: function() {
+            console.log("Mail was sent.");
+        },
+        error: function() {
+            console.error("Error: mail wasn't sent!");
+        }
+});
+}

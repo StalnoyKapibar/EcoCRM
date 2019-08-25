@@ -18,4 +18,5 @@ public class PointServiceImpl extends AbstractServiceImpl<Point> implements Poin
     public PointDao getDao() {
         return pointDao;
     }
+
 }

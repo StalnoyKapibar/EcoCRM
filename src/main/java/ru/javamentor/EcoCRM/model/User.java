@@ -1,10 +1,12 @@
 package ru.javamentor.EcoCRM.model;
 
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.javamentor.EcoCRM.model.embedded.UserStatus;
 
 import javax.persistence.*;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,6 +52,10 @@ public class User implements UserDetails {
 
     @Column(name = "not_to_do")
     private String notToDo;    //чем волонтер не хочет заниматься
+
+    @Column(name = "logo")
+    @Type(type = "image")
+    private byte[] photo;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -140,6 +146,17 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public String getEncoderPhoto() {
+        return Base64.getEncoder().encodeToString(this.getPhoto());
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
     public void setEnabled() {
         this.enabled = enabled;
         //this.enabled = status != UserStatus.BLOCKED;
@@ -149,7 +166,7 @@ public class User implements UserDetails {
         return status;
     }
 
-    public void setStstus(UserStatus status) {
+    public void setStatus(UserStatus status) {
             this.status = status;
     }
     public String getName() { return name; }

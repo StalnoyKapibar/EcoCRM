@@ -3,53 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
+    <script type="text/javascript" src="/private/js/userInfoModal.js"></script>
+    <script type="text/javascript" src="/private/js/search.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="/private/css/common_style.css" rel="stylesheet">
+    <link href="/private/css/searching_style.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
 <body>
-<div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>User</th>
-            <th>E-mail</th>
-            <th>Status</th>
-            <th>More</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${usersList}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.status}"></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">info</button></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
+    <a class="navbar-brand" href="#" style="white-space: pre"><span class="fa fa-leaf"></span>   Eco CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">User info</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/user" style="color: white;">Мои проекты <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="color: white;">Все проекты <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Уведомления</a>
+                    <a class="dropdown-item" href="#">Моя страница</a>
+                    <a class="dropdown-item" href="/logout">Выйти</a>
                 </div>
-                <div class="modal-body">
-                    ...
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container">
+    <table class="grid-table">
+        <tr>
+            <td>
+                <h3><strong>Все пользователи: </strong></h3>
+                <!--search-->
+                <div class="dropdown">
+<!--                    <button onclick="myFunction()" class="btn orng-btn btn-lg" style="margin-left: 40%">Поиск</button>-->
+                    <input class="form-control" type="text" placeholder="Поиск..." id="myInput" onkeyup="filterFunction()" onclick="myFunction()">
+                    <div id="myDropdown" class="dropdown-content" >
+                        <th:block th:each="user, userStat: ${usersList}">
+                            <p><button class="for-name-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\'); myFunction();'" >
+                                <a th:text="${user.name} + ' ' + ${user.surname}"></a>
+                            </button></p>
+                        </th:block>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <!--   *   -->
+            </td>
+            <td style="width: 100px;">
+                <button type="button" class="btn orng-btn btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                    <b style="color: white;">Пригласить</b>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <div class="row" style="margin: 3%">
+        <div class="card" style="width: 100%">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Волонтер</th>
+                    <th>Почта</th>
+                    <th>Телефон</th>
+                    <th>Статус</th>
+                    <th>Инфо</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${usersList}">
+                    <td th:text="${user.name} + ' ' + ${user.surname}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phone}"></td>
+                    <td th:text="${user.status}" th:id = "${user.id}+'_td_user_stat'"></td>
+                    <td><button type="button" class="btn orng-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><span class="glyphicon glyphicon-user" style="color: white;"></span></button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- Modal for registration user by e-mail-->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle1">Введите эл. почту добровольца</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Почта:<br>
+                    <input type="text" id="email_input" class="form-control mb-4 col-4" placeholder="Email"/>
+                </p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn orng-btn" onclick="sendReg()">Отправить</button>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal with user info -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" id="block-btn">BLOCK</button>
+                    <button type="button" class="btn orng-btn btn-sm" data-toggle="modal" data-target="#exampleModal1" id="unblock-btn">UNBLOCK</button>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="photo" class="text-center"></div>
+                <br>
+                <table class="table">
+                <tr>
+                    <td><h6> ФИО: </h6></td>
+                    <td><ul class="fio">
+                        <li id="surname"></li>
+                        <li id="name"></li>
+                        <li id="patronymic"></li>
+                    </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><h6> ID: </h6></td><td><h5 id="userId"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Почта: </h6></td><td><h5 id="email"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Телефон: </h6></td><td><h5 id="phone"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Ссылка VK: </h6></td><td><a href="#"><h5 id="vk"></h5></a></td>
+                </tr>
+                <tr>
+                    <td><h6> Профессия: </h6></td><td><h5 id="profession"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Статус: </h6></td><td><h5 id="status"></h5></td>
+                </tr>
+                <tr>
+                    <td><h6> Не хочет заниматься: </h6></td><td><h5 id="notToDo"></h5></td>
+                </tr>
+
+                </table>
+                <h4 align="center" style="color: #002bff;">Проекты</h4>
+                <table class="table table-sm">
+                    <tr>
+                        <td><h6> Менеджер: </h6></td><td><h5 id="projManager" ></h5></td>
+                    </tr>
+                    <tr>
+                        <td><h6> Волонтер: </h6></td><td><h5 id="projVolunteer"></h5></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Submit block-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Подтвердите действие</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите заблокировать пользователя?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="blockUser()">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Submit unblock-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Подтвердите действия</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите разблокировать пользовавтеля?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="unblockUser()">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.*;
+import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
 import ru.javamentor.EcoCRM.service.ProjectService;
@@ -75,6 +77,7 @@ public class PetitionRestController {
     public void addUserPetition(@RequestParam(value = "id") long id, Authentication authentication){
         Petition petition = petitionService.get(id);
         User user = (User) authentication.getPrincipal();
+        petition.setStatus(Status.IN_PROGRESS);
         petition.getUserPetition().add(user);
         petitionService.update(petition);
     }
@@ -83,6 +86,13 @@ public class PetitionRestController {
     public Petition getPetitionByProjectId(@PathVariable Long projectid, Model model) {
         Project project = projectService.get(projectid);
         return project.getPetition();
+    }
+
+    @GetMapping("/getAllAdminPetitionWithUserRest")
+    public List<PetitionDTO> getAllPetitonWithUser(){
+        List<PetitionDTO> petitionDTOList = petitionService.getAllPetitionForAdmin();
+        return petitionDTOList;
+
     }
 }
 

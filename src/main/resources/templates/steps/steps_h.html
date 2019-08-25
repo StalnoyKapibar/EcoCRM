@@ -44,7 +44,7 @@
                aria-selected="false">5. Установка<br>контейнера</a>
             <a class="nav-item nav-link" data-toggle="tab" id="step_6_link" href="#step_6" role="tab" aria-controls="nav-contact"
                aria-selected="false">6. Работа с<br>жителями</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_7_link" href="#step_7" role="tab" aria-controls="nav-contact"
+            <a onclick="allReport()" class="nav-item nav-link" data-toggle="tab" id="step_7_link" href="#step_7" role="tab" aria-controls="nav-contact"
                aria-selected="false">7. Описание<br>кейса</a>
             <a class="nav-item nav-link" data-toggle="tab" id="step_8_link" href="#step_8" role="tab" aria-controls="nav-contact"
                aria-selected="false">8. Контроль</a>
@@ -583,8 +583,9 @@
         <div class="tab-pane fade" id="step_7" role="tabpanel" aria-labelledby="nav-contact-tab">
             <div class="card">
                 <div class="card-header">
-                    <h4>Описание кейса</h4>
-                </div>
+
+                        <h4>Описание кейса</h4>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="nav flex-column nav-pills"  role="tablist"
@@ -602,7 +603,7 @@
                                 <div id="task_7_1">
                                     <h6>Описание кейса</h6>
                                     <br/>
-                                    <textarea class="form-control rounded-0"></textarea>
+                                    <textarea class="form-control rounded-0" id="description" name="description"></textarea>
                                     <br/>
                                     <h6>Ссылки на ресурсы</h6>
                                     <div id = "case_link_list">
@@ -610,18 +611,19 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">@</span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" id="link" name="link" placeholder="link" aria-label="link" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                     <a href="#" class="text-primary" onclick="addlink()">Ссылка +</a>
+                                    <a onclick="saveReport()" class="btn btn-primary">Сохранить</a>
+
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row">
-                        <button type="button" class="btn btn-primary">Сохранить</button>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -650,8 +652,10 @@
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_8_1">
                                     <label><h6>Комментарий</h6></label>
-                                    <textarea class="form-control" rows="5"></textarea>
+                                    <textarea class="form-control" id="case_description_textarea" rows="5"></textarea>
                                 </div>
+                                <button type="button" onclick="saveReport()" class="btn btn-primary">Сохранить</button>
+
                             </div>
 
                         </div>
@@ -722,7 +726,7 @@
 
 <script th:inline="text">
 
-    var projectId = [[${projectid}]]
+    var projectId = [[${projectid}]];
     $( document ).ready(function () {
         $.ajax({
             url: "/api/projects/" + projectId,
@@ -736,19 +740,9 @@
             }
         });
 
-        // $('.nav-pills a').on('click', function (e) {
-        //     e.preventDefault();
-        //     $(this).tab('show')
-        // })
     });
 
 
-
-
-    // function show_task(pil) {
-    //     $('#'+pil.id+'').tab('show');
-    //     $('#'+$('#'+pil.id+'').href()+'').tab('show');
-    // }
     function show_add_task_modal(stepnumber) {
         $('#step_number_create_task').val("");
         $('#step_number_create_task').val(stepnumber);
@@ -930,6 +924,73 @@ function getPetition(projectId) {
                 return result;
             }
         })();
+
+    function saveReport() {
+        var links = [];
+        $('#case_link_list input').each(function () {
+            links.push(this.value);
+        });
+        var report = {
+            'description':$('#description').val(),
+            'link':links
+        };
+        $.ajax({
+            url: "/report/add/" + projectId,
+            type:"POST",
+            async: false,
+            data: JSON.stringify(report),
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+                console.log("");
+            },
+            error: function(e) {
+                console.error(e);
+            }
+        });
+    }
+    function addlink() {
+        $('#case_link_list').append('<div class="input-group mb-3">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text" id="basic-addon1">@</span>' +
+            '</div>' +
+            '<input type="text" class="form-control" name="link" placeholder="link" aria-label="link" aria-describedby="basic-addon1">' +
+            '</div>');
+    }
+
+    // function getLinks() {
+    //     var links = {};
+    //     $('#case_link_list input').each(function () {
+    //         links.put(this.value);
+    //     })
+    // }
+    
+    function allReport() {
+        $.ajax({
+            url: "/report/all/" + projectId,
+            type: "GET",
+            async: false,
+            success: function (report) {
+                $("#description").val(report.link);
+                $('#case_link_list').html('');
+                for(var i = 0; i<report.link.length ; i++){
+                    $('#case_link_list').append('<div class="input-group mb-3">' +
+                        '<div class="input-group-prepend">' +
+                        '            <span class="input-group-text" id="basic-addon1">@</span>' +
+                        '            </div>' +
+                        '            <input type="text" class="form-control" name="link" placeholder="link" value='+report.link[i]+' aria-label="link" aria-describedby="basic-addon1">' +
+                        '            </div>');
+                }
+                  report.for(link =>{
+                      report.link.forEach(link =>{
+                          $("#link").val(link.val())
+                      })
+                  })
+
+            }})
+        
+    }
+    
+    
 </script>
 </body>
 </html>

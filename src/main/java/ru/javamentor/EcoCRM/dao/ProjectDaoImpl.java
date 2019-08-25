@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Project;
+import ru.javamentor.EcoCRM.model.Report;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import javax.persistence.Query;
@@ -87,6 +88,19 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
         }
         return projects;
     }
+
+    public Report getReportByWithIdProject(Long id){
+        String select = "select p.report from Project p where p.id =:id";
+        Query query = entityManager.createQuery(select);
+        query.setParameter("id",id);
+        if(query.getResultList().isEmpty()){
+            return new Report();
+        } else {
+            Report report = (Report) query.getResultList().get(0);
+            return report;
+        }
+    }
+
 
 //    @Override
 //    public List<PersonProjectDTO> getProjectDtoByVolunteerId(Long id) {

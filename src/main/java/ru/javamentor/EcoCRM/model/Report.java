@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -13,14 +14,16 @@ public class Report {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "link")
-    private String link;
+
+    @ElementCollection
+    @CollectionTable(name="link", joinColumns=@JoinColumn(name="report_id"))
+    private List<String> link;
 
     public Report() {
 
     }
 
-    public Report(String description, String link) {
+    public Report(String description, List <String>link) {
         this.description = description;
         this.link = link;
     }
@@ -41,11 +44,11 @@ public class Report {
         this.description = description;
     }
 
-    public String getLink() {
+    public List<String> getLink() {
         return link;
     }
 
-    public void setLink(String link) {
+    public void setLink(List link) {
         this.link = link;
     }
 }

@@ -33,8 +33,9 @@ function f() {
                    '</h5>Фамилия<h5 id="6">' + surname + '' +
                    '</h5>Емаил<h5 id="7">' + email + ''+
                    '</h5>Номер телефона<h5 id="8">' + phone + ''+ '</h5>'+
-                   '<button style="float: right">Одобрить заявку</button> </div></div></div>'
+                   '<button class="button_b" style="float: right">Одобрить заявку</button> </div></div></div>'
                 $("#cardes").html(template);
             });
         }
     })};
+

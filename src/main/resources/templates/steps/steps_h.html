@@ -68,9 +68,6 @@
                             <a class="nav-link" href="#container_photo">
                                 Фото контейнера
                             </a>
-                            <div id = "1_step_custom_tasks">
-
-                            </div>
                             <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal" onclick="show_add_task_modal(1)">Задача
                                 +</a>
                         </div>
@@ -738,38 +735,12 @@
             }
         });
 
-        $("body").on("click", ".nav-link", function(e){
-            if(!$(this).hasClass('custom_pil')){
-                $('.custom_pil').attr('class','nav-link custom_pil');
-            }
-            $(this).tab('show');
-
-        });
-
     });
 
     function show_add_task_modal(stepnumber) {
         $('#step_number_create_task').val("");
         $('#step_number_create_task').val(stepnumber);
         $('#add_task_modal').modal('show');
-    }
-
-    function add_task_tab(number, id, name) {
-        var a_nav = document.createElement('a');
-        a_nav.classList.add("nav-link");
-        a_nav.href = "#"+name+"_custom_task";
-        a_nav.setAttribute('aria-selected', 'false');
-        a_nav.setAttribute('data-toggle', 'pill');
-        a_nav.setAttribute('role', 'tab');
-        a_nav.innerText = name;
-        document.getElementById(number+'_step_custom_tasks').appendChild(a_nav);
-        var div_tab = document.createElement('div');
-        div_tab.classList.add('tab-pane');
-        div_tab.classList.add('fade');
-        div_tab.id = ''+name+'_custom_task';
-        div_tab.setAttribute('role', 'tabpanel');
-        div_tab.innerHTML = '<h3>'+name+'</h3>';
-        document.getElementById('step_'+number+'_task_work_space').appendChild(div_tab);
     }
 
     function add_task(stepnumber){

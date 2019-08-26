@@ -69,6 +69,11 @@ public class Project implements Serializable {
         this.report = report;
     }
 
+    public Project(User manager, Petition petition) {
+        this.manager = manager;
+        this.petition = petition;
+    }
+
     public Project(User manager, Petition petition, String title) {
         this.manager = manager;
         this.petition = petition;

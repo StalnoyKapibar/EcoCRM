@@ -49,6 +49,7 @@ function approvedByAdministrator(id,idp) {
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         success: function (){
+            alert('Заявка одобрена')
 
         },
         error: function (e) {

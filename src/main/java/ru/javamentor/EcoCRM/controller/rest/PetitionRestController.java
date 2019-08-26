@@ -17,6 +17,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
 import ru.javamentor.EcoCRM.service.ProjectService;
+import ru.javamentor.EcoCRM.service.UserService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -40,6 +41,9 @@ public class PetitionRestController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private UserService userService;
 
     @Value("${path.to.mail}")
     String pathToLetter;
@@ -98,9 +102,12 @@ public class PetitionRestController {
 
     @PostMapping("/approvedByAdministrator")
     public void approvedByAdministrator(@RequestParam(value = "id") Long id, @RequestParam(value = "idp") long idp){
-        Long idd = id;
-        Long iddd = idp;
-
+        User manager = userService.get(id);
+        Petition petition = petitionService.get(idp);
+        petition.setStatus(Status.DONE);
+        petitionService.update(petition);
+        Project project = new Project(manager,petition, "ПРОЕКТ НОМЕР КАКОЙ-ТО ТАМ");
+        projectService.insert(project);
     }
 }
 

@@ -1,6 +1,7 @@
 body {
     font-size: .875rem;
     background-color: white;
+    /*background: url(../../public/images/card.jpg)no-repeat 0px 0px;*/
 }
 
 .feather {
@@ -76,4 +77,9 @@ body {
 .dropdown-menu {
     left: auto;
     right: 0;
+}
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+    border-radius: 20rem;
+    float: right;
 }

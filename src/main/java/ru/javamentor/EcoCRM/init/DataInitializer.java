@@ -16,10 +16,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class DataInitializer {
@@ -79,6 +76,7 @@ public class DataInitializer {
     private void initPhoto() throws IOException {
         User user = userService.get(1);
         user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         userService.update(user);
     }
 
@@ -128,7 +126,7 @@ public class DataInitializer {
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
-            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
@@ -161,7 +159,7 @@ public class DataInitializer {
             company.setEmail(faker.internet().emailAddress());
             company.setClock("13:00-19:00");
             company.setDescription(faker.harryPotter().quote());
-            company.setNextContactDate(LocalDateTime.of(2019, 6, 25, 11, 0));
+            company.setNextContactDate(new Date(2019, 6, 25));
             managementCompanyService.insert(company);
         }
     }
@@ -173,6 +171,7 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
+            petition.setAdresHome(faker.address().streetName());
             petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
@@ -236,38 +235,38 @@ public class DataInitializer {
     }
 
     private void addTaskForStep1(Step step) {
-        taskService.insert(new Task("Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
-        taskService.insert(new Task("Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
-        taskService.insert(new Task("Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
+        taskService.insert(new Task("Заполнить форму заявителя","Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
+        taskService.insert(new Task("Добавить данные о соседях","Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
+        taskService.insert(new Task("Добавить фото контейнера","Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
     }
 
     private void addTaskForStep2(Step step) {
-        taskService.insert(new Task("Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
+        taskService.insert(new Task("Заполнить форму управляющей компании","Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
     }
 
     private void addTaskForStep3(Step step) {
-        taskService.insert(new Task("Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
+        taskService.insert(new Task("Выбрать компанию заготовителя","Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
 
     private void addTaskForStep4(Step step) {
-        taskService.insert(new Task("Заключить договор", step, TaskType.OFFER));
+        taskService.insert(new Task("Заключить договор","Заключить договор", step, TaskType.OFFER));
     }
 
     private void addTaskForStep5(Step step) {
-        taskService.insert(new Task("Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
+        taskService.insert(new Task("Установка контейнера","Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
     }
 
     private void addTaskForStep6(Step step) {
-        taskService.insert(new Task("Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
-        taskService.insert(new Task("Печать листовок", step, TaskType.LEAFLETS_PRINT));
-        taskService.insert(new Task("Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
-        taskService.insert(new Task("Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
+        taskService.insert(new Task("Разработать макет листовок", "Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
+        taskService.insert(new Task("Печать листовок","Печать листовок", step, TaskType.LEAFLETS_PRINT));
+        taskService.insert(new Task("Публикация листовок на досках информирования","Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
+        taskService.insert(new Task("Мероприятие  участием жителей","Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
     }
 
     private void addTaskForStep7(Step step) {
-        taskService.insert(new Task("Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
+        taskService.insert(new Task("Заполнить отчет", "Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
     }
 
     private void addTaskForStep8(Step step) {
-        taskService.insert(new Task("Проверка результата через месяц", step, TaskType.CUSTOM));
+        taskService.insert(new Task("Проверка результата через месяц","Проверка результата через месяц", step, TaskType.CUSTOM));
     }
 }

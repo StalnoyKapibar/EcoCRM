@@ -1,5 +1,6 @@
 package ru.javamentor.EcoCRM.controller.rest;
 
+import org.apache.el.lang.ELArithmetic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -16,6 +17,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.PetitionService;
 import ru.javamentor.EcoCRM.service.ProjectService;
+import ru.javamentor.EcoCRM.service.UserService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -39,6 +41,9 @@ public class PetitionRestController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private UserService userService;
 
     @Value("${path.to.mail}")
     String pathToLetter;
@@ -93,6 +98,16 @@ public class PetitionRestController {
         List<PetitionDTO> petitionDTOList = petitionService.getAllPetitionForAdmin();
         return petitionDTOList;
 
+    }
+
+    @PostMapping("/approvedByAdministrator")
+    public void approvedByAdministrator(@RequestParam(value = "id") Long id, @RequestParam(value = "idp") long idp){
+        User manager = userService.get(id);
+        Petition petition = petitionService.get(idp);
+        petition.setStatus(Status.DONE);
+        petitionService.update(petition);
+        Project project = new Project(manager,petition, "ПРОЕКТ НОМЕР КАКОЙ-ТО ТАМ");
+        projectService.insert(project);
     }
 }
 

@@ -30,14 +30,15 @@ function getStepType(stepNumber, stepDto) {
     $.each(stepDto.tasks, function (key, value) {
         if (value.name !== null) {
             tabList.append(
-                '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
-                value.name + '<input type="checkbox" id="t_toggle_"' + value.id + '\n' +
+                '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '_" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
+                value.name + '<input type="checkbox" id="t_toggle_"' + value.id +
                 '                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "\n' +
                 '                                       data-onstyle="success" data-offstyle="light" data-style="ios"></a>');
 
             tabContent.append(
-                ' <div class="tab-pane fade" id="task3_' + value.id + '" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
-                '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
+                '<div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
+                '<h5>Что делать:</h5><h6>\n' + value.description + '</h6><br></div>');
+
             if(stepNumber =='STEP_1'){
 
             }
@@ -62,11 +63,17 @@ function getStepType(stepNumber, stepDto) {
             if(stepNumber =='STEP_8'){
 
             }
+
+            $('#task3_' + value.id + '_').append(
+                '<label for="comment" id="commentId" data-comment="' + value.id + '" class="h6">Комментарий:</label>\n' +
+                '<textarea class="form-control" id="commentArea' + value.id + '" rows="5"></textarea>' +
+                '<a class="btn btn-warning" onclick="saveComment()">Отправить</a>'
+            );
         }
-    }
-)
-    $('#tabListStep3').append(
-        '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
+    })
+
+    tabList.append(
+        '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>')
 }
 
 function show_add_task_modal() {
@@ -94,8 +101,8 @@ function add_task() {
             $('#tabListStep3').append(
                 '<a class="nav-link" data-toggle="pill" href="#task3_' + task.id + '" role="tab" aria-controls="v-pills-home" aria-selected="false">\n' +
                 task.name + '<input type="checkbox" id="t_toggle_"' + value.id +
-                '                                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "' +
-                '                                                       data-onstyle="success" data-offstyle="light" data-style="ios"</a>');
+                'data-toggle="toggle" data-size="xs" data-on=" " data-off=" "' +
+                'data-onstyle="success" data-offstyle="light" data-style="ios"</a>');
 
             $('#tabListStep3').append(
                 '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
@@ -106,6 +113,21 @@ function add_task() {
         },
         error: function () {
             alert("Задача не добавлена");
+        }
+    });
+}
+
+function saveComment() {
+    let com = document.getElementById('commentId');
+    let comId = com.dataset.comment;
+    let comment = document.getElementById('commentArea' + com).value;
+    $.ajax({
+        type: 'POST',
+        url: "/api/tasks/" + comId + "/comment",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(comment),
+        success: function (task) {
+
         }
     });
 }

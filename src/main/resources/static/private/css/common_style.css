@@ -78,3 +78,8 @@ body {
     left: auto;
     right: 0;
 }
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+    border-radius: 20rem;
+    float: right;
+}

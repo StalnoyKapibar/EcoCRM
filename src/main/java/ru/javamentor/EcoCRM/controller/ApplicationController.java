@@ -11,6 +11,8 @@ import ru.javamentor.EcoCRM.service.AuthoritiesService;
 import ru.javamentor.EcoCRM.service.ProjectService;
 import ru.javamentor.EcoCRM.service.UserService;
 
+import java.util.List;
+
 @Controller
 public class ApplicationController {
 
@@ -54,5 +56,4 @@ public class ApplicationController {
     public String getPetitionPage() {
         return "petition_page";
     }
-
 }

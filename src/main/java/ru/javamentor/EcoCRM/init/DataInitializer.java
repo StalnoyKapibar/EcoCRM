@@ -16,10 +16,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class DataInitializer {
@@ -161,7 +158,7 @@ public class DataInitializer {
             company.setEmail(faker.internet().emailAddress());
             company.setClock("13:00-19:00");
             company.setDescription(faker.harryPotter().quote());
-            company.setNextContactDate(LocalDateTime.of(2019, 6, 25, 11, 0));
+            company.setNextContactDate(new Date(2019, 6, 25));
             managementCompanyService.insert(company);
         }
     }

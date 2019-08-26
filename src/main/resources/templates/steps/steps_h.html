@@ -250,33 +250,37 @@
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_2_1">
                                     <label><h6>Навзвание организации</h6></label>
-                                    <input type="text" class="form-control" placeholder="Название" id="management_org_name">
+                                    <input type="text" class="form-control" placeholder="Название" id="management_org_title" th:value="${company.name}">
                                     <br>
-                                    <label><h6>Инн</h6></label>
-                                    <input type="text" class="form-control" placeholder="Инн" id="management_org_inn">
+                                    <label><h6>ИНН</h6></label>
+                                    <input type="text" class="form-control" placeholder="ИНН" id="management_org_inn" th:value="${company.inn}">
                                     <br>
-                                    <label><h6>ФИО руковолителя</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_fio">
+                                    <label><h6>Ссылка на сайт/социальную сеть</h6></label>
+                                    <input type="text" class="form-control" placeholder="Ссылка" id="management_org_link" th:value="${company.link}">
+                                    <br>
+                                    <label><h6>ФИО руководителя</h6></label>
+                                    <input type="text" class="form-control" placeholder="Фамилия" id="management_org_surname" th:value="${company.managerSurname}">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Имя" id="management_org_name" th:value="${company.managerName}">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Отчество" id="management_org_patronymic" th:value="${company.managerPatronymic}">
                                     <br>
                                     <label><h6>Телефон организации</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_tel">
+                                    <input type="text" class="form-control" placeholder="Телефон" id="management_org_tel" th:value="${company.phoneNumber}">
                                     <br>
-                                    <label><h6>email</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_email">
+                                    <label><h6>E-mail</h6></label>
+                                    <input type="text" class="form-control" placeholder="E-mail" id="management_org_email" th:value="${company.email}">
                                     <br>
                                     <label><h6>Часы приема</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_clock">
-                                    <br>
-                                    <label><h6>Отношение к РНО</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя"
-                                           id="management_org_attitude_to_rno">
+                                    <input type="text" class="form-control" placeholder="Часы приема" id="management_org_clock" th:value="${company.clock}">
                                     <br>
                                     <label><h6>Дата следующего контакта</h6></label>
-                                    <input id="datepicker" width="276"/>
-
+                                    <input id="datepicker" width="276" placeholder="Дата" th:value="${company.nextContactDate}">
+                                    <br>
                                     <label><h6>Комментарий</h6></label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
-                                    <button type="button" class="btn btn-primary">Сохранить</button>
+                                    <textarea class="form-control" rows="5" id="comment" th:value="${company.description}"></textarea>
+                                    <br>
+                                    <button id="save-btn" type="button" class="btn btn-primary" onclick="saveManagCompInfo()">Сохранить</button>
                                 </div>
                             </div>
 
@@ -722,8 +726,12 @@
 
 <script th:inline="text">
 
-    var projectId = [[${projectid}]]
+    var projectId = [[${projectid}]];
     $( document ).ready(function () {
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
         $.ajax({
             url: "/api/projects/" + projectId,
             type: "GET",
@@ -930,6 +938,36 @@ function getPetition(projectId) {
                 return result;
             }
         })();
+
+    function saveManagCompInfo() {
+        var managComp ={
+            'name': $('#management_org_title').val(),
+            'inn': $('#management_org_inn').val(),
+            'link': $('#management_org_link').val(),
+            'managerName': $('#management_org_surname').val(),
+            'managerSurname': $('#management_org_name').val(),
+            'managerPatronymic': $('#management_org_patronymic').val(),
+            'phoneNumber': $('#management_org_tel').val(),
+            'email': $('#management_org_email').val(),
+            'clock': $('#management_org_clock').val(),
+            'nextContactDate': $('#datepicker').val(),
+            'description': $('#comment').val()
+        };
+        $.ajax({
+            url: "/manage_company/add?projectid=" + projectId,
+            type: "POST",
+            data: JSON.stringify(managComp),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (id) {
+                console.log("information about " + id + " company insert");
+            },
+            error: function(e) {
+                // console.error("insert information about " + id + " company FAILED!");
+                alert(e.responseText);
+            }
+        });
+    }
 </script>
 </body>
 </html>

@@ -18,6 +18,6 @@ public interface ProjectService extends AbstractService<Project> {
 
     List<PersonProjectDTO> getPersonProjectDto(Long id);
 
-    Report getReportByWithIdProject(Long id);
+    public Report getReportByWithIdProject(Long id);
 
 }

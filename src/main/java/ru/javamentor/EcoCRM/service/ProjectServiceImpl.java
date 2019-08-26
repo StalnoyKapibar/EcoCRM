@@ -3,6 +3,7 @@ package ru.javamentor.EcoCRM.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.ProjectDao;
+import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
@@ -10,6 +11,7 @@ import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements ProjectService {
@@ -46,8 +48,9 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
         return projectDao.getProjectDtoByUserId(id);
     }
 
-    @Override
+ @Override
     public Report getReportByWithIdProject(Long id){
         return projectDao.getReportByWithIdProject(id);
     }
+
 }

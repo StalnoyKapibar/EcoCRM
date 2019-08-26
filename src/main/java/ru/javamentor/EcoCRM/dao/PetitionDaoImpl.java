@@ -4,9 +4,9 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.javamentor.EcoCRM.model.Petition;
+import ru.javamentor.EcoCRM.model.Report;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.Status;
-
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,5 +42,4 @@ public class PetitionDaoImpl extends AbstractDaoImpl<Petition> implements Petiti
         users.addAll(query.getResultList() );
         return users;
     }
-
 }

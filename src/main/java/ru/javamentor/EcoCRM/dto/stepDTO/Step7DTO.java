@@ -40,4 +40,11 @@ public class Step7DTO implements StepDTO {
         this.tasks = tasks;
     }
 
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
 }

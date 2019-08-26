@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.dao;
 
 import ru.javamentor.EcoCRM.model.Task;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.model.embedded.TaskType;
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.javamentor.EcoCRM.model.Step;
 import ru.javamentor.EcoCRM.model.Task;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.model.embedded.TaskType;
 import ru.javamentor.EcoCRM.service.StepService;

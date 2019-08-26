@@ -14,9 +14,7 @@ function getStep(stepNumber) {
             $('#' + stepNumber+'_link').addClass('active');
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
-
             getStepType(stepNumber, stepDto);
-
         }
     });
 };
@@ -39,7 +37,7 @@ function getStepType(stepNumber, stepDto) {
                 ' <div class="tab-pane fade" id="task3_' + value.id + '" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
                 '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
             if(stepNumber =='STEP_1'){
-
+                step1(stepDto);
             }
             if(stepNumber =='STEP_2'){
                 step2(stepDto);
@@ -71,21 +69,9 @@ function getStepType(stepNumber, stepDto) {
         '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
 }
 function step3(stepDto) {
-    // $('#tabListStep3').html('');
-    // $('#tabContentStep3').html('');
     stepId = stepDto.id;
     $.each(stepDto.tasks, function (key, value) {
         if (value.name !== null) {
-            // $('#tabListStep3').append(
-            //     '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
-            //     value.name + '<input type="checkbox" id="t_toggle_"' + value.id + '\n' +
-            //     '                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "\n' +
-            //     '                                       data-onstyle="success" data-offstyle="light" data-style="ios"></a>');
-            //
-            // $('#tabContentStep3').append(
-            //     ' <div class="tab-pane fade show active" id="task3_' + value.id + '" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
-            //     '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
-
             if (value.type === 'CONTRACTOR_INFO') {
                 $('#task3_' + value.id).append(
                     '<div id="task_3_1"><table class="table table-hover">\n' +

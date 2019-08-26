@@ -3,13 +3,6 @@ function initToggles() {
 }
 
 function fillToggles() {
-    $('[id ^= "t_toggle_"]').each(function (i, el) {
-        let task = getTaskById(el.id.substring(el.id.lastIndexOf("_") + 1));
-        if(task.taskStatus == 'DONE') {
-            $('#'+el.id).bootstrapToggle('on');
-        }
-    });
-
     $('[id ^= \"t_toggle_\"]').change(function (e) {
         let prefix = 't_toggle_';
         let taskId = e.target.id.substr(e.target.id.lastIndexOf('_') + 1);

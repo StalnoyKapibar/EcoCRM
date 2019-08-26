@@ -1,4 +1,4 @@
-let projectId;
+var projectId;
 $(document).ready(function () {
     projectId = $('#projectId').val();
     $('#datepicker').datepicker({

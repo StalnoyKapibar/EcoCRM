@@ -32,11 +32,12 @@ public class ProjectRestController {
     @Autowired
     private StepServiceImpl stepService;
 
-    @GetMapping
+    @GetMapping("/all")
     public Map<StepNumber, List<Project>> getProjectsBySteps() {
         Map<StepNumber, List<Project>> r = projectService.getListByStepInProgress();
         return r;
     }
+
     //todo
     @GetMapping("/selfOnly")
     public Map<StepNumber, List<Project>> getProjectsByStepsSelfOnly() {

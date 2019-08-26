@@ -41,7 +41,7 @@ public class Project implements Serializable {
     @OneToOne
     private Contractor contractor;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Report report;
 
     @Column(name = "start_step")

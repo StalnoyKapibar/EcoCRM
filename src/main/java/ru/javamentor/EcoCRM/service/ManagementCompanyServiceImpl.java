@@ -8,6 +8,7 @@ import ru.javamentor.EcoCRM.model.ManagementCompany;
 
 @Service
 public class ManagementCompanyServiceImpl extends AbstractServiceImpl<ManagementCompany> implements ManagementCompanyService {
+
     private ManagementCompanyDao managementCompanyDao;
 
     @Autowired

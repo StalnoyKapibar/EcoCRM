@@ -16,10 +16,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class DataInitializer {
@@ -79,6 +76,7 @@ public class DataInitializer {
     private void initPhoto() throws IOException {
         User user = userService.get(1);
         user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         userService.update(user);
     }
 
@@ -128,7 +126,7 @@ public class DataInitializer {
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
-            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
@@ -161,7 +159,7 @@ public class DataInitializer {
             company.setEmail(faker.internet().emailAddress());
             company.setClock("13:00-19:00");
             company.setDescription(faker.harryPotter().quote());
-            company.setNextContactDate(LocalDateTime.of(2019, 6, 25, 11, 0));
+            company.setNextContactDate(new Date(2019, 6, 25));
             managementCompanyService.insert(company);
         }
     }
@@ -173,6 +171,7 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
+            petition.setAdresHome(faker.address().streetName());
             petition.setData(LocalDate.now());
             petition.setSeparateCollection(faker.commerce().material());
             petition.setTypeOfRawMaterial(faker.commerce().material());
@@ -188,8 +187,9 @@ public class DataInitializer {
     private void initProject() {
         for (int i = 1; i < 30; i++) {
             Project project = new Project();
+
             project.setTitle(faker.company().name());
-            User user = userService.get((long)random.nextInt(50));
+            User user = userService.get((long)random.nextInt(11));
             project.setManager(user);
             project.setStartStep(LocalDate.now());
             project.setPetition(petitionService.get(i));

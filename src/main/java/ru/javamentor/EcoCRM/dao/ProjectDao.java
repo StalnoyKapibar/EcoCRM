@@ -1,7 +1,5 @@
 package ru.javamentor.EcoCRM.dao;
 
-
-import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;

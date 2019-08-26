@@ -14,8 +14,8 @@ $(document).ready(function () {
                     '                </div>' +
                     '            <div class="eco-col card" id="col_' + count + '" style="height:47rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
-                    docVar += '<div class="eco-card card m-2" style="min-height:210px%;box-shadow:0px 5px 9px -8px #000000;">' +
-                        '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.title + '</div>' +
+                    docVar += '<div class="eco-card card m-2" style="min-height:210px;box-shadow:0px 5px 9px -8px #000000;">' +
+                        '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.petition.adresHome + '</div>' +
                         '                            <div class="card-body">' +
                         '                            <div class="card-text house-area">' + project.petition.houseArea + '</div>' +
                         '                            </div>' +
@@ -31,10 +31,10 @@ $(document).ready(function () {
 });
 
 function sortByArea(areaName) {
-    var list = document.getElementsByClassName('house-area');
+    let list = document.getElementsByClassName('house-area');
     Array.prototype.forEach.call(list, function (el) {
         el.parentElement.parentElement.style.display='none';
-        if(el.textContent === areaName){
+        if(el.textContent === areaName || areaName === "Все районы") {
             el.parentElement.parentElement.style.display='inline';
         }
     });

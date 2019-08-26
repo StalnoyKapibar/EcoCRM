@@ -89,6 +89,7 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
         return projects;
     }
 
+    @Override
     public Report getReportByWithIdProject(Long id){
         String select = "select p.report from Project p where p.id =:id";
         Query query = entityManager.createQuery(select);
@@ -100,40 +101,4 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
             return report;
         }
     }
-
-
-//    @Override
-//    public List<PersonProjectDTO> getProjectDtoByVolunteerId(Long id) {
-//        List<PersonProjectDTO> projects = new ArrayList<>();
-//        List petitions = entityManager
-//                .createNativeQuery("select uprs.proj_id as id, uprs.step_number as number, uprs.start_time_project as time, pe.house_area as area from\n" +
-//                        "(select * from \n" +
-//                        "(select pr.id as proj_id, pr.start_step as start_time_project, pr.petition_id\n" +
-//                        "from users as u \n" +
-//                        "inner join projects as pr on u.id=pr.manager_id where u.id=:id) as upr \n" +
-//                        "inner join steps as s on upr.proj_id=s.project_id where s.status='IN_PROGRESS') as uprs\n" +
-//                        "inner join petitions as pe on uprs.petition_id=pe.id;")
-//                //select p from Project p where p.manager.id = :id
-//                //SELECT DISTINCT p FROM Project p LEFT JOIN p.users AS u WHERE u.id = :id
-//                .setParameter("id", id).getResultList();
-//        if (!petitions.isEmpty()) {
-//            for (Object project : petitions) {
-//                PersonProjectDTO dto = new PersonProjectDTO();
-//                if (((Object[]) project)[0] != null) {
-//                    dto.setId(((Object[]) project)[0].toString());
-//                }
-//                if (((Object[]) project)[1] != null) {
-//                    dto.setNumber(((Object[]) project)[1].toString());
-//                }
-//                if (((Object[]) project)[2] != null) {
-//                    dto.setTime(((Object[]) project)[2].toString());
-//                }
-//                if (((Object[]) project)[3] != null) {
-//                    dto.setArea(((Object[]) project)[3].toString());
-//                }
-//                projects.add(dto);
-//            }
-//        }
-//        return projects;
-//    }
 }

@@ -91,3 +91,20 @@ body {
 #error-message {
     color : #FFF;
 }
+#succes-message {
+    color : #FFF;
+}
+#enter-button {
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #ffffff;
+    padding: 14px 40px;
+    outline: none;
+    color: #ffffff;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    width: 100px;
+}

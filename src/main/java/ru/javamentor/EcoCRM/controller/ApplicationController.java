@@ -22,10 +22,14 @@ public class ApplicationController {
 
     @Autowired
     ProjectService projectService;
+    @GetMapping("/recovery")
+    public String recoveryPage() {
+        return "login/recovery";
+    }
 
     @GetMapping("/showMyLoginPage")
     public String showMyLoginPage() {
-        return "login_user_page";
+        return "login/login_user_page";
     }
 
     @GetMapping("/access-denied")

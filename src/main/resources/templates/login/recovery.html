@@ -7,17 +7,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="/public/css/login_page.css" rel="stylesheet"></head>
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-<script src="/public/js/login.js" type="text/javascript"></script>
+<script src="/public/js/recovery.js" type="text/javascript"></script>
 </head>
 <body>x
 <div class="header-w3l">
     <h1 class="form-signin-heading">Eco<span class="head-crm">CRM</span> </h1>
 </div>
-<form class="box" action="#" method="post">
-    <h3>Вход</h3>
-    <input id="email-place" placeholder="Логин" name="mail" type="email" required="">
-    <input id="password-place" placeholder="Пароль" name="Password" type="password" required="">
-    <input type="submit" name="" value="Войти" onclick="auth()">
-</form>
+<div class="box">
+    <h3>Восстановление</h3>
+    <p>Введите адрес электронной почты</p>
+    <input id="email-place" placeholder="yourmail@mail.com" name="mail" type="email" required="">
+    <input  id="accept-button" type="submit" name="" value="Получить новый пароль" onclick="recovery()">
+</div>
 </body>
 </html>

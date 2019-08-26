@@ -1,5 +1,6 @@
 package ru.javamentor.EcoCRM.controller.rest;
 
+import org.apache.el.lang.ELArithmetic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -92,6 +93,13 @@ public class PetitionRestController {
     public List<PetitionDTO> getAllPetitonWithUser(){
         List<PetitionDTO> petitionDTOList = petitionService.getAllPetitionForAdmin();
         return petitionDTOList;
+
+    }
+
+    @PostMapping("/approvedByAdministrator")
+    public void approvedByAdministrator(@RequestParam(value = "id") Long id, @RequestParam(value = "idp") long idp){
+        Long idd = id;
+        Long iddd = idp;
 
     }
 }

@@ -67,10 +67,11 @@ public class UserRestController {
         return "/admin/manage";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/get_current_user")
+    @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
     public User getCurrentUser(Principal principal){
         User user = (User) userService.loadUserByUsername(principal.getName());
         System.out.println("Current USER ID IS: " + user.getId());
+        System.out.println("CURRENT USERNAME IS " + user.getUsername());
         return user;
     }
 }

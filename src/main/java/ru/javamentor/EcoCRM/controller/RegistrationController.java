@@ -17,9 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Token;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.service.AuthoritiesService;
+import ru.javamentor.EcoCRM.service.ImageService;
 import ru.javamentor.EcoCRM.service.token.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,9 @@ public class RegistrationController {
 
     @Autowired
     TokenService tokenService;
+
+    @Autowired
+    ImageService imageService;
 
     @Value("${host.name}")
     String hostName;
@@ -64,13 +71,16 @@ public class RegistrationController {
         }
     }
     @PostMapping("/new")
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") User user) throws IOException {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         List<Authority> roles = new ArrayList<>();
         roles.add(authoritiesService.get(2));      //set user_role
         user.setAuthorities(roles);
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
         userService.insert(user);
-
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         return "redirect:/admin/manage";
     }
     @GetMapping("/usercode")

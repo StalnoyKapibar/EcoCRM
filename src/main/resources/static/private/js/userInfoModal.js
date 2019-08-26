@@ -132,8 +132,8 @@ function unblockUser() {
 function sendReg() {
     var email = $('#email_input').val();
     $.ajax({
-        url: "/processSendForm?userEmail=" + email,
-        type: "GET",
+        url: "/admin/processSendForm?userEmail=" + email,
+        type: "POST",
         async: false,
         success: function() {
             console.log("Mail was sent.");

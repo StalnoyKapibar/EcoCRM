@@ -65,13 +65,12 @@ public class ApplicationController {
     }
     @GetMapping("/userinfo")
     public String showUserInfo(Model model) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUserName = auth.getName();
-//       User user = ((User)userService.loadUserByUsername(currentUserName));
-////        System.out.println("USER ID IS:  " + id);
-//        model.addAttribute("user", user);
 
         return "userinfo";
+    }
+    @GetMapping("/useredit")
+    public String userEdit() {
+        return "edituserform";
     }
 
     @GetMapping("/get_petition")

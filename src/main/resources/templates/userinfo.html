@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="/private/css/common_style.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
-
+    <link href="/public/css/userinfo.css" rel="stylesheet"></head>
     <script src="/private/js/person_page_projects.js" type="text/javascript"></script>
+    <script src="/private/js/userinfo.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -47,17 +48,18 @@
 </nav>
 
 <!--конец хидера-->
-
+<div class="col-xs-12 col-md-8">
+    <h1>Мои данные</h1>
 <div class="row" style="margin: 3%">
     <div class="card" style="width: 100%">
         <table class="table">
-            <td><h6> ФИО: </h6></td>
-            <td><ul class="fio">
-                <li id="surname"></li>
-                <li id="name"></li>
-                <li id="patronymic"></li>
-            </ul>
-            </td>
+
+            </tr>
+            <tr>
+                <td><h6> Имя: </h6></td><td><h5 id="name"></h5></td>
+            </tr>
+            <tr>
+                <td><h6> Фамилия: </h6></td><td><h5 id="surname"></h5></td>
             </tr>
             <tr>
                 <td><h6> ID: </h6></td><td><h5 id="userId"></h5></td>
@@ -80,37 +82,12 @@
             <tr>
                 <td><h6> Не хочет заниматься: </h6></td><td><h5 id="notToDo"></h5></td>
             </tr>
-
         </table>
+
+        <!--<button class="btn btn-primary btn-lg" type="button" onclick="appoint(1)">Редактировать данные</button>-->
     </div>
+    <button class="btn btn-primary btn-lg" type="button" onclick="location.href = '/useredit'">Редактировать данные</button>
 </div>
-<!--<script th:inline = "text">-->
-    <!--var global_id= [[${id}]];-->
-<!--</script>-->
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "/api/user/get_current_user",
-            type: "POST",
-            async: false,
-            success: function (user) {
-                //$('#photo').attr("src","/api/user/photo/" + user.id);
-                $("#name").text(user.name);
-                $("#surname").text(user.surname);
-                $("#userId").text(user.id);
-                $("#patronymic").text(user.patronymic);
-                $("#email").text(user.email);
-                $("#phone").text(user.phone);
-                $("#vk").text(user.link);
-                $("#profession").text(user.profession);
-                $("#status").text(user.status);
-                $("#notToDo").text(user.notToDo);
-                getProjectsManager(id);
-                getProjectsVolunteer(id);
-                getPhoto(id);
-            }
-        });
-    });
-</script>
+</div>
 </body>
 </html>

@@ -48,6 +48,7 @@ public class SendRegistrationController {
 
         String code = UUID.randomUUID().toString();
         tokenService.insert(new Token(userEmail, code));
+        System.out.println("SENDING BEGIN...");
 
         String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
                 "\nhttp://"+hostName+"/registration/new/?code=" + code;

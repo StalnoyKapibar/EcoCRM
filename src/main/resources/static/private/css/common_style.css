@@ -77,3 +77,10 @@ body {
     left: auto;
     right: 0;
 }
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Roboto Black Italic";
+
+}
+h5{
+    font-size: 1.7rem;
+}

@@ -2,12 +2,8 @@ package ru.javamentor.EcoCRM.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.javamentor.EcoCRM.dao.AbstractDao;
 import ru.javamentor.EcoCRM.dao.StepDao;
-import ru.javamentor.EcoCRM.dto.Step2DTO;
-import ru.javamentor.EcoCRM.dto.Step3DTO;
-import ru.javamentor.EcoCRM.dto.Step7DTO;
-import ru.javamentor.EcoCRM.dto.StepDTO;
+import ru.javamentor.EcoCRM.dto.stepDTO.*;
 import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
@@ -76,44 +72,54 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
     }
 
     private StepDTO getStep1(Long id, StepNumber stepNumber) {
-        return null;
+        Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        List<Task> tasks = taskService.getAllByStepId(stepId);
+        return new Step1DTO(stepId, tasks);
     }
 
     private StepDTO getStep2(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        List<Task> tasks = taskService.getAllByStepId(stepId);
         ManagementCompany company = projectService.get(id).getManagementCompany();
-        return new Step2DTO(stepId, company);
+        return new Step2DTO(company, stepId, tasks);
     }
 
     private StepDTO getStep3(Long id, StepNumber stepNumber) {
         List<Contractor> contractors = contractorService.getAll();
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
         List<Task> tasks = taskService.getAllByStepId(stepId);
-        return new Step3DTO(stepId, contractors, tasks);
+        return new Step3DTO(contractors, stepId, tasks);
     }
 
     private StepDTO getStep4(Long id, StepNumber stepNumber) {
-        return null;
+        Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        List<Task> tasks = taskService.getAllByStepId(stepId);
+        return new Step4DTO(stepId, tasks);
     }
 
     private StepDTO getStep5(Long id, StepNumber stepNumber) {
-        return null;
+        Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        List<Task> tasks = taskService.getAllByStepId(stepId);
+        return new Step5DTO(stepId, tasks);
     }
 
     private StepDTO getStep6(Long id, StepNumber stepNumber) {
-
-        return null;
+        Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        List<Task> tasks = taskService.getAllByStepId(stepId);
+        return new Step6DTO(stepId, tasks);
     }
 
     private StepDTO getStep7(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
         List<Task> tasks = taskService.getAllByStepId(stepId);
         Report report = projectService.getReportByWithIdProject(id);
-        return new Step7DTO(stepId, tasks, report);
+        return new Step7DTO(report, stepId, tasks);
     }
 
     private StepDTO getStep8(Long id, StepNumber stepNumber) {
-        return null;
+        Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        List<Task> tasks = taskService.getAllByStepId(stepId);
+        return new Step8DTO(stepId, tasks);
     }
 
 }

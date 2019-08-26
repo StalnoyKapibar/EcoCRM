@@ -1,6 +1,6 @@
 package ru.javamentor.EcoCRM.service;
 
-import ru.javamentor.EcoCRM.dto.StepDTO;
+import ru.javamentor.EcoCRM.dto.stepDTO.StepDTO;
 import ru.javamentor.EcoCRM.model.Step;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 

@@ -1,27 +1,21 @@
 package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.javamentor.EcoCRM.dto.StepDTO;
+import ru.javamentor.EcoCRM.dto.stepDTO.StepDTO;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.ProjectService;
-import ru.javamentor.EcoCRM.service.StepService;
 import ru.javamentor.EcoCRM.service.StepServiceImpl;
 import ru.javamentor.EcoCRM.service.UserService;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

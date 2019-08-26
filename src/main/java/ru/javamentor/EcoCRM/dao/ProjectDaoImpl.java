@@ -32,7 +32,15 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
     }
 
     @Override
-    public List<Project> getProjectManagerByUserId(Long id) {
+    public List<Project> getProjectsByUserId(Long id) {
+        Query query = entityManager.createQuery("select p from Project p where p.manager.id = :id");
+        query.setParameter("id", id);
+        List<Project> projects = query.getResultList();
+        return projects;
+    }
+
+    @Override
+    public List<Project> getProjManagerByUserId(Long id) {
         Query query = entityManager.createQuery("select p from Project p where p.manager.id = :id");
         query.setParameter("id", id);
         List<Project> projects = query.getResultList();

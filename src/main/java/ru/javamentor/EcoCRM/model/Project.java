@@ -54,6 +54,10 @@ public class Project implements Serializable {
 
     }
 
+    public Project(Report report) {
+        this.report = report;
+    }
+
     public Project(User manager, Petition petition, String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
         this.manager = manager;
         this.petition = petition;
@@ -63,6 +67,11 @@ public class Project implements Serializable {
         this.company = company;
         this.contractor = contractor;
         this.report = report;
+    }
+
+    public Project(User manager, Petition petition) {
+        this.manager = manager;
+        this.petition = petition;
     }
 
     public Project(User manager, Petition petition, String title) {

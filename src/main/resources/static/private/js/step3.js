@@ -1,17 +1,7 @@
 function step3(stepDto) {
-    $('#tabListStep3').html('');
-    $('#tabContentStep3').html('');
     stepId = stepDto.id;
     $.each(stepDto.tasks, function (key, value) {
         if (value.name !== null) {
-            $('#tabListStep3').append(
-                '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
-                value.name + '</a>');
-
-            $('#tabContentStep3').append(
-                ' <div class="tab-pane fade show active" id="task3_' + value.id + '" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
-                '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
-
             if (value.type === 'CONTRACTOR_INFO') {
                 $('#task3_' + value.id).append(
                     '<div id="task_3_1"><table class="table table-hover">\n' +
@@ -33,11 +23,4 @@ function step3(stepDto) {
             '</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><input id="1_datapiker" placeholder="назначить встречу">' +
             '<button class="btn btn-success" type="button" onclick="appoint(1)">назначить</button></div></div></td></tr>');
     });
-
-    $('#tabListStep3').append(
-        '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
-}
-
-function show_add_task_modal() {
-    $('#add_task_modal').modal('show');
 }

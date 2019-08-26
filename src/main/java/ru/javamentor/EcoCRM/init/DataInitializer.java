@@ -235,38 +235,38 @@ public class DataInitializer {
     }
 
     private void addTaskForStep1(Step step) {
-        taskService.insert(new Task("Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
-        taskService.insert(new Task("Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
-        taskService.insert(new Task("Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
+        taskService.insert(new Task("Заполнить форму заявителя","Заполнить форму заявителя", step, TaskType.PETITIONER_INFO));
+        taskService.insert(new Task("Добавить данные о соседях","Добавить данные о соседях", step, TaskType.NEIGHBOURHOODS_INFO));
+        taskService.insert(new Task("Добавить фото контейнера","Добавить фото контейнера", step, TaskType.OLD_CONTAINER_PHOTO));
     }
 
     private void addTaskForStep2(Step step) {
-        taskService.insert(new Task("Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
+        taskService.insert(new Task("Заполнить форму управляющей компании","Заполнить форму управляющей компании", step, TaskType.MANAGING_ORGANIZATION_INFO));
     }
 
     private void addTaskForStep3(Step step) {
-        taskService.insert(new Task("Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
+        taskService.insert(new Task("Выбрать компанию заготовителя","Выбрать компанию заготовителя", step, TaskType.CONTRACTOR_INFO)); }
 
     private void addTaskForStep4(Step step) {
-        taskService.insert(new Task("Заключить договор", step, TaskType.OFFER));
+        taskService.insert(new Task("Заключить договор","Заключить договор", step, TaskType.OFFER));
     }
 
     private void addTaskForStep5(Step step) {
-        taskService.insert(new Task("Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
+        taskService.insert(new Task("Установка контейнера","Установка контейнера", step, TaskType.NEW_CONTAINER_INFO));
     }
 
     private void addTaskForStep6(Step step) {
-        taskService.insert(new Task("Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
-        taskService.insert(new Task("Печать листовок", step, TaskType.LEAFLETS_PRINT));
-        taskService.insert(new Task("Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
-        taskService.insert(new Task("Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
+        taskService.insert(new Task("Разработать макет листовок", "Разработать макет листовок", step, TaskType.LEAFLETS_DESIGN));
+        taskService.insert(new Task("Печать листовок","Печать листовок", step, TaskType.LEAFLETS_PRINT));
+        taskService.insert(new Task("Публикация листовок на досках информирования","Публикация листовок на досках информирования", step, TaskType.LEAFLETS_PUBLICATION));
+        taskService.insert(new Task("Мероприятие  участием жителей","Мероприятие  участием жителей", step, TaskType.RESIDENTS_ACTIVITIES));
     }
 
     private void addTaskForStep7(Step step) {
-        taskService.insert(new Task("Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
+        taskService.insert(new Task("Заполнить отчет", "Заполнить отчет", step, TaskType.CASE_DESCRIPTION));
     }
 
     private void addTaskForStep8(Step step) {
-        taskService.insert(new Task("Проверка результата через месяц", step, TaskType.CUSTOM));
+        taskService.insert(new Task("Проверка результата через месяц","Проверка результата через месяц", step, TaskType.CUSTOM));
     }
 }

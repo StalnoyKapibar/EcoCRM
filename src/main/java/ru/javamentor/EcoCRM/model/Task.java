@@ -16,10 +16,10 @@ public class Task implements Serializable {
     private Long id;
 
     @Column(name = "description")
-    private String description;
+    private String description = "Нет описания";
 
     @Column(name = "name")
-    private String name;
+    private String name = "Нет названия";
 
     public String getName() {
         return name;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="step8">
+    <div class="tab-pane fade" id="STEP_8" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Контроль</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#check_point_control_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Точка контроля
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="check_point_control_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_8_1">
+                                <label><h6>Комментарий</h6></label>
+                                <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+
+</body>
+</html>

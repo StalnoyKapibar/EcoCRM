@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>steps_2</title>
@@ -9,19 +9,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/public/css/steps.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
     <style>
-        .nav-item.nav-link.active{
+        .nav-item.nav-link.active {
             background: #4c40ff;
             color: #eeeeee;
         }
-        .done-step{
+
+        .done-step {
             background: #cbf8c7;
             color: #89a987;
         }
 
-        .done-task{
+        .done-task {
             background: #cbf8c7;
             color: #89a987;
         }
@@ -32,21 +37,29 @@
 <div class="container">
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link" data-toggle="tab" id="step_1_link" href="#step_1" role="tab" aria-controls="nav-home"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_1_link" href="#step_1" role="tab"
+               aria-controls="nav-home"
                aria-selected="true">1. Заявитель</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_2_link" href="#step_2" role="tab" aria-controls="nav-profile"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_2_link" href="#step_2" role="tab"
+               aria-controls="nav-profile"
                aria-selected="false">2. Управляющая<br>компания</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_3_link" href="#step_3" role="tab" aria-controls="nav-contact"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_3_link" href="#step_3" role="tab"
+               aria-controls="nav-contact"
                aria-selected="false">3. Заготовители</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_4_link" href="#step_4" role="tab" aria-controls="nav-contact"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_4_link" href="#step_4" role="tab"
+               aria-controls="nav-contact"
                aria-selected="false">4. Заключение<br>договора</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_5_link" href="#step_5" role="tab" aria-controls="nav-contact"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_5_link" href="#step_5" role="tab"
+               aria-controls="nav-contact"
                aria-selected="false">5. Установка<br>контейнера</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_6_link" href="#step_6" role="tab" aria-controls="nav-contact"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_6_link" href="#step_6" role="tab"
+               aria-controls="nav-contact"
                aria-selected="false">6. Работа с<br>жителями</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_7_link" href="#step_7" role="tab" aria-controls="nav-contact"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_7_link" href="#step_7" role="tab"
+               aria-controls="nav-contact"
                aria-selected="false">7. Описание<br>кейса</a>
-            <a class="nav-item nav-link" data-toggle="tab" id="step_8_link" href="#step_8" role="tab" aria-controls="nav-contact"
+            <a class="nav-item nav-link" data-toggle="tab" id="step_8_link" href="#step_8" role="tab"
+               aria-controls="nav-contact"
                aria-selected="false">8. Контроль</a>
         </div>
     </nav>
@@ -62,16 +75,22 @@
                     <div class="row">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
-                            <a class="nav-link" href="#v-pills-home">
+                            <a class="nav-link active" data-toggle="pill" href="#v-pills-home" role="tab"
+                               aria-controls="v-pills-home" aria-selected="true">
                                 Информация о заявителе
                             </a>
-                            <a class="nav-link" href="#container_photo">
+                            <a class="nav-link" data-toggle="pill" href="#neighbourhood_inf" role="tab"
+                               aria-controls="v-pills-home" aria-selected="false">
+                                Информация о соседях
+                            </a>
+                            <a class="nav-link" href="#container_photo" aria-selected="false" data-toggle="pill"
+                               role="tab" aria-controls="v-pills-home">
                                 Фото контейнера
                             </a>
-                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal" onclick="show_add_task_modal(1)">Задача
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
                                 +</a>
                         </div>
-                        <div class="tab-content" id="step_1_task_work_space" style="width: 70%">
+                        <div class="tab-content" id="v-pills-tabContent" style="width: 70%">
                             <div class="tab-pane fade" id="v-pills-home" role="tabpanel">
                                 <div id="task_1">
                                     <div class="input-group mb-3">
@@ -109,29 +128,35 @@
                                     <br>
                                     <div class="h6">Участвует в деятельности движения "Раздельный сбор"</div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="monthly" name="activity">
+                                        <input type="radio" class="form-check-input activity" id="monthly"
+                                               name="activity">
                                         <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё
                                             вторсырьё</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="volunteer" name="activity">
+                                        <input type="radio" class="form-check-input activity" id="volunteer"
+                                               name="activity">
                                         <label class="form-check-label">Волонтер на акциях</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="corrdinator" name="activity">
+                                        <input type="radio" class="form-check-input activity" id="corrdinator"
+                                               name="activity">
                                         <label class="form-check-label">Координатор на акциях</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="participant" name="activity">
+                                        <input type="radio" class="form-check-input activity" id="participant"
+                                               name="activity">
                                         <label class="form-check-label" for="participant">Участник рабочих групп
                                             движения</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="no_participate" name="activity">
-                                        <label class="form-check-label" for="participant">Не принимаю участия в деятельности движения</label>
+                                        <input type="radio" class="form-check-input activity" id="no_participate"
+                                               name="activity">
+                                        <label class="form-check-label" for="participant">Не принимаю участия в
+                                            деятельности движения</label>
                                     </div>
 
                                     <div class="form-check">
@@ -150,6 +175,10 @@
                                         <input type="checkbox" class="form-check-input" id="glass">
                                         <label class="form-check-label">Стекло</label>
                                     </div>
+                                    <!--<div class="form-check">-->
+                                    <!--<input type="checkbox" class="form-check-input" id="metal">-->
+                                    <!--<label class="form-check-label">Металл</label>-->
+                                    <!--</div>-->
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="hard_plastic">
                                         <label class="form-check-label">Твёрдый пластик</label>
@@ -168,7 +197,8 @@
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="hazardous_waste">
-                                        <label class="form-check-label">Опасные отходы (батарейки, лампочки и т.п.)</label>
+                                        <label class="form-check-label">Опасные отходы (батарейки, лампочки и
+                                            т.п.)</label>
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="another_waste">
@@ -177,24 +207,14 @@
                                     <input type="text" class="form-control" id="another_waste_input" disabled>
                                     <br>
 
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Адресс</span>
-                                        </div>
-                                        <input type="text" class="form-control" id = "adres_petitioner_input" placeholder="адресс">
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Адресс</span>
-                                        </div>
-                                        <input type="text" class="form-control" id = "district_petitioner" placeholder="район">
-                                    </div>
-
-
                                 </div>
-                            </div>
 
+                            </div>
+                            <div class="tab-pane fade" id="neighbourhood_inf" role="tabpanel">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d511638.0496814032!2d29.530301548695494!3d59.93900943041817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696378cc74a65ed%3A0x6dc7673fab848eff!2z0KHQsNC90LrRgi3Qn9C10YLQtdGA0LHRg9GA0LM!5e0!3m2!1sru!2sru!4v1566243087100!5m2!1sru!2sru"
+                                        width="600" height="450" frameborder="0" style="border:0"
+                                        allowfullscreen></iframe>
+                            </div>
                             <div class="tab-pane fade" id="container_photo" role="tabpanel">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -230,7 +250,8 @@
                     <div class="row">
                         <div class="nav flex-column nav-pills" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
-                            <a class="nav-link active" data-toggle="pill" href="#manage_org_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <a class="nav-link active" data-toggle="pill" href="#manage_org_pil" role="tab"
+                               aria-controls="v-pills-home" aria-selected="true">
                                 Информация о управляющей компании
                             </a>
 
@@ -238,10 +259,7 @@
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
                                 Следующая таска
                             </a>
-                            <div id = "2_step_custom_tasks">
-
-                            </div>
-                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal" onclick="add_task(2)">Задача
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
                                 +</a>
                         </div>
                         <div class="tab-content" style="width: 70%">
@@ -249,22 +267,27 @@
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_2_1">
                                     <label><h6>Навзвание организации</h6></label>
-                                    <input type="text" class="form-control" placeholder="Название" id="management_org_name">
+                                    <input type="text" class="form-control" placeholder="Название"
+                                           id="management_org_name">
                                     <br>
                                     <label><h6>Инн</h6></label>
                                     <input type="text" class="form-control" placeholder="Инн" id="management_org_inn">
                                     <br>
                                     <label><h6>ФИО руковолителя</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_fio">
+                                    <input type="text" class="form-control" placeholder="ФИО руковолителя"
+                                           id="management_org_fio">
                                     <br>
                                     <label><h6>Телефон организации</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_tel">
+                                    <input type="text" class="form-control" placeholder="ФИО руковолителя"
+                                           id="management_org_tel">
                                     <br>
                                     <label><h6>email</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_email">
+                                    <input type="text" class="form-control" placeholder="ФИО руковолителя"
+                                           id="management_org_email">
                                     <br>
                                     <label><h6>Часы приема</h6></label>
-                                    <input type="text" class="form-control" placeholder="ФИО руковолителя" id="management_org_clock">
+                                    <input type="text" class="form-control" placeholder="ФИО руковолителя"
+                                           id="management_org_clock">
                                     <br>
                                     <label><h6>Отношение к РНО</h6></label>
                                     <input type="text" class="form-control" placeholder="ФИО руковолителя"
@@ -279,7 +302,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="next_task" role="tabpanel"
+                            <div class="tab-pane fade show active" id="next_task" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_2_2">
                                     <h1>Next task</h1>
@@ -303,9 +326,10 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills"  role="tablist"
+                        <div class="nav flex-column nav-pills" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
-                            <a class="nav-link active" data-toggle="pill" href="#contractor_list_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <a class="nav-link active" data-toggle="pill" href="#contractor_list_pil" role="tab"
+                               aria-controls="v-pills-home" aria-selected="true">
                                 Список заготовителей
                             </a>
                             <a class="nav-link" data-toggle="pill" href="#check_point_pil"
@@ -326,47 +350,65 @@
                                     <table class="table table-hover">
                                         <tbody>
                                         <tr>
-                                            <th scope="row" >1</th>
-                                            <td data-toggle="modal" data-target="#contractor_modal">ООО "Рога и Копыта"</td>
-                                            <td><div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Коментарий
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <textarea class="form-control rounded-0"></textarea>
-                                                </div>
-                                            </div></td>
+                                            <th scope="row">1</th>
+                                            <td data-toggle="modal" data-target="#contractor_modal">ООО "Рога и
+                                                Копыта"
+                                            </td>
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "1" onclick="getData(this.id)">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                        Коментарий
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <textarea class="form-control rounded-0"></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false" id="1" onclick="getData(this.id)">
                                                         Назначить встречу
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <input id = "1_datapiker" placeholder="назначить встречу">
-                                                        <button class="btn btn-success" type="button" onclick="appoint(1)">назначить</button>
+                                                        <input id="1_datapiker" placeholder="назначить встречу">
+                                                        <button class="btn btn-success" type="button"
+                                                                onclick="appoint(1)">назначить
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
-                                            <td data-toggle="modal" data-target="#contractor_modal"> ООО "Ромашка" </td>
-                                            <td><div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Коментарий
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <textarea class="form-control rounded-0"></textarea>
-                                                </div>
-                                            </div></td>
+                                            <td data-toggle="modal" data-target="#contractor_modal"> ООО "Ромашка"</td>
                                             <td>
                                                 <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "2" onclick="getData(this.id)">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                        Коментарий
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <textarea class="form-control rounded-0"></textarea>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false" id="2" onclick="getData(this.id)">
                                                         Назначить встречу
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <input id = "2_datapiker" placeholder="назначить встречу">
-                                                        <button class="btn btn-success" onclick="appoint(2)" type="button">назначить</button>
+                                                        <input id="2_datapiker" placeholder="назначить встречу">
+                                                        <button class="btn btn-success" onclick="appoint(2)"
+                                                                type="button">назначить
+                                                        </button>
                                                     </div>
 
                                                 </div>
@@ -374,7 +416,8 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-outline-primary">Добавить заготовителя +</button>
+                                    <button type="button" class="btn btn-outline-primary">Добавить заготовителя +
+                                    </button>
                                 </div>
                             </div>
 
@@ -409,7 +452,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills"  role="tablist"
+                        <div class="nav flex-column nav-pills" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
                             <a class="nav-link active" data-toggle="pill" href="#offer_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
@@ -423,10 +466,24 @@
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_4_1">
                                     <h5>Название договора</h5>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor. Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut lacus ut, interdum tincidunt turpis. Proin et mollis libero.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor.
+                                    Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit
+                                    metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae
+                                    consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta
+                                    erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas
+                                    pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue
+                                    felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut
+                                    lacus ut, interdum tincidunt turpis. Proin et mollis libero.
                                     <br>
                                     <h5>Название договора</h5>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor. Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut lacus ut, interdum tincidunt turpis. Proin et mollis libero.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor.
+                                    Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit
+                                    metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae
+                                    consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta
+                                    erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas
+                                    pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue
+                                    felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut
+                                    lacus ut, interdum tincidunt turpis. Proin et mollis libero.
                                     <br>
                                     <label for="comment" class="h6">Комментарий:</label>
                                     <textarea class="form-control" rows="5"></textarea>
@@ -452,7 +509,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills"  role="tablist"
+                        <div class="nav flex-column nav-pills" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
                             <a class="nav-link active" data-toggle="pill" href="#container_report_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
@@ -491,8 +548,10 @@
                                     <label for="comment" class="h6">Комментарий:</label>
                                     <textarea class="form-control" rows="5"></textarea>
                                     <br>
-                                    <input id = "container_installation_date" placeholder="дата установки">
-                                    <button class="btn btn-success" type="button" onclick="get_cont_instal_date()">Установить дату</button>
+                                    <input id="container_installation_date" placeholder="дата установки">
+                                    <button class="btn btn-success" type="button" onclick="get_cont_instal_date()">
+                                        Установить дату
+                                    </button>
                                 </div>
                             </div>
 
@@ -515,9 +574,14 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills"  role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%">
-                            <a class="nav-link active" data-toggle="pill" href="#leaflets_layout_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical"
+                             style="width: 27%; margin-right: 3%">
+                            <a class="nav-link active" data-toggle="pill" href="#leaflets_layout_pil" role="tab"
+                               aria-controls="v-pills-home" aria-selected="true">
                                 Разработка макета листовок
+                                <input type="checkbox" id="flyerTemplateTaskToggle" checked
+                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                       data-onstyle="success" data-offstyle="light" data-style="ios">
                             </a>
 
                             <a class="nav-link" data-toggle="pill" href="#print_leaflets_pil"
@@ -538,12 +602,21 @@
                                 +</a>
                         </div>
                         <div class="tab-content" style="width: 70%">
-                            <div class="tab-pane fade show active" id="leaflets_layout_pil" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div class="tab-pane fade show active" id="leaflets_layout_pil" role="tabpanel"
+                                 aria-labelledby="v-pills-home-tab">
                                 <div id="task_6_1">
-                                    <h5>Разработка макета листовок</h5>
+                                    <form class="form" action="#">
+                                        <div class="form-group">
+                                            <h5>Разработка макета листовок</h5>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5"
+                                                      placeholder="Введите детали задачи"></textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+                                    </form>
                                 </div>
                             </div>
-
                             <div class="tab-pane fade show " id="print_leaflets_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_6_2">
@@ -586,7 +659,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills"  role="tablist"
+                        <div class="nav flex-column nav-pills" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
                             <a class="nav-link active" data-toggle="pill" href="#case_description_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
@@ -604,12 +677,13 @@
                                     <textarea class="form-control rounded-0"></textarea>
                                     <br/>
                                     <h6>Ссылки на ресурсы</h6>
-                                    <div id = "case_link_list">
+                                    <div id="case_link_list">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">@</span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                   aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                     <a href="#" class="text-primary" onclick="addlink()">Ссылка +</a>
@@ -635,7 +709,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills"  role="tablist"
+                        <div class="nav flex-column nav-pills" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
                             <a class="nav-link active" data-toggle="pill" href="#check_point_control_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
@@ -652,7 +726,6 @@
                                     <textarea class="form-control" rows="5"></textarea>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row">
@@ -687,17 +760,18 @@
                         <label><h6>Описание задачи:</h6></label>
                         <textarea class="form-control" rows="5" id="description_of_task"></textarea>
                     </div>
-                    <input type = "hidden" id = "step_number_create_task">
+                    <input type="hidden" id="step_number_create_task">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id = "add_task_btn" onclick="add_task($('#step_number_create_task').val())">Добавить задачу</button>
+                        <button type="button" class="btn btn-primary" id="add_task_btn">Добавить задачу</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Модальное окно информации о заготовителе -->
-        <div class="modal fade" id="contractor_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="contractor_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -720,9 +794,9 @@
 </div>
 
 <script th:inline="text">
-    var projectId = [[${projectid}]];
 
-    $( document ).ready(function () {
+    var projectId = [[${projectid}]]
+    $(document).ready(function () {
         $.ajax({
             url: "/api/projects/" + projectId,
             type: "GET",
@@ -735,31 +809,37 @@
             }
         });
 
+        // $('.nav-pills a').on('click', function (e) {
+        //     e.preventDefault();
+        //     $(this).tab('show')
+        // })
     });
 
+
+    // function show_task(pil) {
+    //     $('#'+pil.id+'').tab('show');
+    //     $('#'+$('#'+pil.id+'').href()+'').tab('show');
+    // }
     function show_add_task_modal(stepnumber) {
         $('#step_number_create_task').val("");
         $('#step_number_create_task').val(stepnumber);
         $('#add_task_modal').modal('show');
     }
 
-    function add_task(stepnumber){
+    function add_task(stepnumber) {
         $.ajax({
             type: 'post',
             url: "/api/tasks/add?" +
-                "project_id=" + projectId+
-                "&step_number="+stepnumber+
-                "&taskName="+$('#name_of_task').val()+
-                "&description="+$('#description_of_task').val(),
+                "project_id=" + projectId +
+                "&step_number=" + stepnumber +
+                "&taskName=" + $('#name_of_task').val() +
+                "&description=" + $('#description_of_task').val(),
             contentType: 'application/json; charset=utf-8',
             success: function (task) {
+                $('#' + stepnumber + '_step_custom_tasks').append('<a class="nav-link" href="#' + task.id + '_custom_task" id = "' + task.id + '" >Фото контейнера </a>');
 
-                // add_task_tab(stepnumber, task.id, task.name);
-                var id = task.id+'';
-                $('#'+stepnumber+'_step_custom_tasks').append('<a class="nav-link custom_pil" href="#custom_'+id+'_task" id = "'+task.id+'" aria-selected="false"  data-toggle="pill" role="tab"  >'+task.name+'</a>');
-
-                $('#step_'+stepnumber+'_task_work_space').append('<div class="tab-pane fade" id="custom_'+id+'_task" role="tabpanel"><h3>'+task.name+'</h3>' +
-                    '<br><br>Описание:'+task.description+'</div>');
+                $('#step_' + stepnumber + '_task_work_space').append('<div class="tab-pane fade" id="' + task.id + '_custom_task"><h3>' + task.name + '</h3>' +
+                    '<br><br>Описание:' + task.description + '</div>');
 
                 $('#add_task_modal').modal('hide');
             },
@@ -770,45 +850,45 @@
         })
     }
 
-    function get_steps(project){
+    function get_steps(project) {
         $.ajax({
             url: "/api/steps/get_by_project_id/" + project.id,
             type: "GET",
             async: false,
             success: function (steps) {
                 let b;
-                for(let i = 0; i<steps.length; i++){
-                    if(steps[i].status=='DONE'){
-                        b = i+1;
-                        $('#step_'+b+'_link').addClass('done-step');
-                    }
-                    if(steps[i].status=='IN_PROGRESS'){
+                for (let i = 0; i < steps.length; i++) {
+                    if (steps[i].status == 'DONE') {
                         b = i + 1;
-                        $('#step_'+b+'_link').addClass('active');
-                        $('#step_'+b).addClass('show');
-                        $('#step_'+b).addClass('active');
-                        if(steps[i].stepNumber =='STEP_1'){
+                        $('#step_' + b + '_link').addClass('done-step');
+                    }
+                    if (steps[i].status == 'IN_PROGRESS') {
+                        b = i + 1;
+                        $('#step_' + b + '_link').addClass('active');
+                        $('#step_' + b).addClass('show');
+                        $('#step_' + b).addClass('active');
+                        if (steps[i].stepNumber == 'STEP_1') {
                             get_tasks_step_1(steps[i].id)
                         }
-                        if(steps[i].stepNumber =='STEP_2'){
+                        if (steps[i].stepNumber == 'STEP_2') {
                             //todo получить таски по 2му шагу
                         }
-                        if(steps[i].stepNumber =='STEP_3'){
+                        if (steps[i].stepNumber == 'STEP_3') {
                             //todo получить таски по 3му шагу
                         }
-                        if(steps[i].stepNumber =='STEP_4'){
+                        if (steps[i].stepNumber == 'STEP_4') {
                             //todo получить таски по 4му шагу
                         }
-                        if(steps[i].stepNumber =='STEP_5'){
+                        if (steps[i].stepNumber == 'STEP_5') {
                             //todo получить таски по 5му шагу
                         }
-                        if(steps[i].stepNumber =='STEP_6'){
+                        if (steps[i].stepNumber == 'STEP_6') {
                             //todo получить таски по 6му шагу
                         }
-                        if(steps[i].stepNumber =='STEP_7'){
+                        if (steps[i].stepNumber == 'STEP_7') {
                             //todo получить таски по 7му шагу
                         }
-                        if(steps[i].stepNumber =='STEP_8'){
+                        if (steps[i].stepNumber == 'STEP_8') {
                             //todo получить таски по 8му шагу
                         }
                     }
@@ -820,39 +900,39 @@
         })
     }
 
-    function get_tasks_step_1(stepId){
+    function get_tasks_step_1(stepId) {
         $.ajax({
             url: "/api/tasks/get_1_step/" + stepId,
             type: "GET",
             async: false,
             success: function (tasks) {
                 let b;
-                for(let i = 0; i<tasks.length; i++){
+                for (let i = 0; i < tasks.length; i++) {
                     let taskLinkStatusClass = " ";
-                    let taskBodyCalssActive =" ";
+                    let taskBodyCalssActive = " ";
                     let taskBodyClassShow = " ";
 
-                    if(tasks[i].taskStatus == 'DONE'){
-                        taskLinkStatusClass ='done-task';
+                    if (tasks[i].taskStatus == 'DONE') {
+                        taskLinkStatusClass = 'done-task';
                     }
-                    if(tasks[i].taskStatus == 'IN_PROGRESS'){
-                        taskLinkStatusClass ='active';
-                        taskBodyCalssActive ='active';
+                    if (tasks[i].taskStatus == 'IN_PROGRESS') {
+                        taskLinkStatusClass = 'active';
+                        taskBodyCalssActive = 'active';
                         taskBodyClassShow = 'show';
                     }
-                    if(tasks[i].type == 'PETITIONER_INFO'){
+                    if (tasks[i].type == 'PETITIONER_INFO') {
                         $('#petitioner_info_pil').addClass(taskLinkStatusClass);
                         $('#v-pills-home').addClass(taskBodyCalssActive);
                         $('#v-pills-home').addClass(taskBodyClassShow);
                         getPetition(tasks[i].step.project.id);
                     }
-                    if(tasks[i].type == 'NEIGHBOURHOODS_INFO'){
+                    if (tasks[i].type == 'NEIGHBOURHOODS_INFO') {
                         $('#neighbourhood_info_pil').addClass(taskLinkStatusClass);
                         $('#neighbourhood_inf').addClass(taskBodyCalssActive);
                         $('#neighbourhood_inf').addClass(taskBodyClassShow);
                         //todo
                     }
-                    if(tasks[tasks[i].type == 'OLD_CONTAINER_PHOTO']){
+                    if (tasks[tasks[i].type == 'OLD_CONTAINER_PHOTO']) {
                         $('#old_container_pil').addClass(taskLinkStatusClass);
                         $('#container_photo').addClass(taskBodyCalssActive);
                         $('#container_photo').addClass(taskBodyClassShow);
@@ -867,60 +947,60 @@
         })
     }
 
-function getPetition(projectId) {
-    $.ajax({
-        url: "/api/petition/get_by_project_id/" + projectId,
-        type: "GET",
-        async: false,
-        success: function (petition) {
-            //todo распарсить петицию по полям
-            $('#petitioner_name').val(petition.userName);
-            $('#petitioner_email').val(petition.email);
-            $('#petitioner_contacts').val(petition.contactInformation);
-            if(petition.statusHome=='Житель, собственник жилья'){
-                $("#resident").prop('checked', true);
-            }
-            if(petition.statusHome == 'Представитель управляющей организации (УК, ТСЖ и т.п.)'){
-                $("#manage_representative").prop('checked', true);
-            }
-            $('#get_activity input').each(function () {
-                if(this.value==petition.separateCollection){//todo сделать проверку на вариант "другое"
-                    this.setAttribute('checked', true);
+    function getPetition(projectId) {
+        $.ajax({
+            url: "/api/petition/get_by_project_id/" + projectId,
+            type: "GET",
+            async: false,
+            success: function (petition) {
+                //todo распарсить петицию по полям
+                $('#petitioner_name').val(petition.userName);
+                $('#petitioner_email').val(petition.email);
+                $('#petitioner_contacts').val(petition.contactInformation);
+                if (petition.statusHome == 'Житель, собственник жилья') {
+                    $("#resident").prop('checked', true);
                 }
-            });
-
-            $('#row_type_input_list input').each(function () {//todo сделать проверку на вариант "другое"
-                if(this.value==petition.typeOfRawMaterial){
-                    this.setAttribute('checked', true);
+                if (petition.statusHome == 'Представитель управляющей организации (УК, ТСЖ и т.п.)') {
+                    $("#manage_representative").prop('checked', true);
                 }
-            });
+                $('#get_activity input').each(function () {
+                    if (this.value == petition.separateCollection) {//todo сделать проверку на вариант "другое"
+                        this.setAttribute('checked', true);
+                    }
+                });
 
-        }, error: function (e) {
-            alert(e.responseText)
+                $('#row_type_input_list input').each(function () {//todo сделать проверку на вариант "другое"
+                    if (this.value == petition.typeOfRawMaterial) {
+                        this.setAttribute('checked', true);
+                    }
+                });
+
+            }, error: function (e) {
+                alert(e.responseText)
+            }
+        })
+    }
+
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+
+    (function () {
+        var originalAddClassMethod = jQuery.fn.addClass;
+        var originalRemoveClassMethod = jQuery.fn.removeClass;
+
+        jQuery.fn.addClass = function () {
+            var result = originalAddClassMethod.apply(this, arguments);
+            jQuery(this).trigger('classChanged');
+            return result;
         }
-    })
-}
-
-
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-
-
-        (function () {
-            var originalAddClassMethod = jQuery.fn.addClass;
-            var originalRemoveClassMethod = jQuery.fn.removeClass;
-
-            jQuery.fn.addClass = function () {
-                var result = originalAddClassMethod.apply(this, arguments);
-                jQuery(this).trigger('classChanged');
-                return result;
-            }
-            jQuery.fn.removeClass = function () {
-                var result = originalRemoveClassMethod.apply(this, arguments);
-                jQuery(this).trigger('classChanged');
-                return result;
-            }
-        })();
+        jQuery.fn.removeClass = function () {
+            var result = originalRemoveClassMethod.apply(this, arguments);
+            jQuery(this).trigger('classChanged');
+            return result;
+        }
+    })();
 </script>
 </body>
 </html>

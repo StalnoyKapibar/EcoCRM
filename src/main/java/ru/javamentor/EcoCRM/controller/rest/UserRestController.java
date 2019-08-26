@@ -35,7 +35,7 @@ public class UserRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/projects/manager/{id}")
     public List<Project> getUserProjManager(@PathVariable(required = false) Long id) {
-        return projectService.getProjManagerByUserId(id);
+        return projectService.getProjectsByUserId(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/projects/volunteer/{id}")

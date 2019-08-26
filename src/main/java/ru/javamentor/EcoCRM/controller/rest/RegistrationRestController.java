@@ -60,7 +60,8 @@ public class RegistrationRestController {
             }
         }
         userService.update(user);
-        return "/admin";
+        return "/admin/page";
+        //TODO перевести в личный кабинет
     }
     //TODO Перенести в /api/users нормально
     @PostMapping("/new")

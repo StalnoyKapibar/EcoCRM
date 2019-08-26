@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="step5">
+    <div class="tab-pane fade" id="STEP_5" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Установка контейнера</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#container_report_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Отчет о установке контейнера
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="container_report_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_5_1">
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Фото</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"
+                                               aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Видео</span>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input"
+                                               aria-describedby="inputGroupFileAddon01">
+                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <label for="comment" class="h6">Комментарий:</label>
+                                <textarea class="form-control" rows="5"></textarea>
+                                <br>
+                                <input id = "container_installation_date" placeholder="дата установки">
+                                <button class="btn btn-success" type="button" onclick="get_cont_instal_date()">Установить дату</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

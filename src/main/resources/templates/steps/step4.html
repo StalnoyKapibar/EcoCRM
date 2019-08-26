@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="step4">
+    <div class="tab-pane fade" id="STEP_4" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Взаимодействие с заготовителями</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#offer_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Договор
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="offer_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_4_1">
+                                <h5>Название договора</h5>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor. Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut lacus ut, interdum tincidunt turpis. Proin et mollis libero.
+                                <br>
+                                <h5>Название договора</h5>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor. Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut lacus ut, interdum tincidunt turpis. Proin et mollis libero.
+                                <br>
+                                <label for="comment" class="h6">Комментарий:</label>
+                                <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

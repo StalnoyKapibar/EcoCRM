@@ -49,7 +49,6 @@ public class RegistrationController {
         Token dbtoken =  tokenService.loadTokenByEmail(email);
         String tokenFromDB =dbtoken.getToken();
         if (tokenFromDB.equals(token)) {
-            //tokenService.delete(dbtoken); TODO продлить время жизни и не удалять сразу
             return "registration/registration-form";
         }
         return "access-denied";

@@ -1,23 +1,17 @@
 package ru.javamentor.EcoCRM.controller.rest;
 
-import org.apache.el.lang.ELArithmetic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.Status;
-import ru.javamentor.EcoCRM.service.EmailServiceImpl;
-import ru.javamentor.EcoCRM.service.PetitionService;
-import ru.javamentor.EcoCRM.service.ProjectService;
-import ru.javamentor.EcoCRM.service.UserService;
+import ru.javamentor.EcoCRM.service.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -37,7 +31,7 @@ public class PetitionRestController {
     private PetitionService petitionService;
 
     @Autowired
-    private EmailServiceImpl emailServiceimp;
+    private EmailService emailService;
 
     @Autowired
     private ProjectService projectService;
@@ -55,7 +49,7 @@ public class PetitionRestController {
         petition.setData(data);
         petitionService.insert(petition);
 
-        MimeMessage mimeMessage = emailServiceimp.emailSender.createMimeMessage();
+        MimeMessage mimeMessage = emailService.getEmailSender().createMimeMessage();
         boolean multipart = true;
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, multipart,"utf-8");
 
@@ -74,7 +68,7 @@ public class PetitionRestController {
         content = stringBuilder.toString();
         mimeMessage.setContent(content,"text/html; charset=utf-8");
         helper.setTo(petition.getEmail());
-        this.emailServiceimp.emailSender.send(mimeMessage);
+        this.emailService.getEmailSender().send(mimeMessage);
 
     }
 

@@ -6,21 +6,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.javamentor.EcoCRM.model.Token;
-import ru.javamentor.EcoCRM.service.EmailServiceImpl;
+import ru.javamentor.EcoCRM.service.EmailService;
 import ru.javamentor.EcoCRM.service.TokenService;
 import ru.javamentor.EcoCRM.service.UserService;
-
-import java.security.SecureRandom;
 
 @Controller
 public class SendRegistrationController {
 
     @Autowired
-    private EmailServiceImpl emailServiceImpl;
+    private EmailService emailService;
 
     @Autowired
     UserService userService;
@@ -47,7 +43,7 @@ public class SendRegistrationController {
         System.out.println("result String: " + token);
         String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
                 "\nhttp://"+hostName+"/registration/new/?email=" + userEmail + "&token=" + token;
-        emailServiceImpl.sendSimpleMessage(userEmail,"To target mail from form", message);
+        emailService.sendSimpleMessage(userEmail,"To target mail from form", message);
         System.out.println("Send Successful!");
         return "admin_page";
     }

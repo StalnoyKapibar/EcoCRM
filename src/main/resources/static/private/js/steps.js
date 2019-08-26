@@ -1,12 +1,6 @@
-function fillPage() {
+function initToggles() {
     initSixthStep();
-    refreshPage();
 }
-
-var refreshPage = function() {
-    fillToggles();
-    fillDesc();
-};
 
 function fillToggles() {
     $('[id ^= "t_toggle_"]').each(function (i, el) {
@@ -30,20 +24,8 @@ function fillToggles() {
     });
 }
 
-function fillDesc() {
-    $('[id ^= "t_desc_"]').each(function (i, el) {
-        let task = getTaskById(el.id.substring(el.id.lastIndexOf("_") + 1));
-        $('#' + el.id).children('.form').children('.form-group').children('textarea').text(task.description);
-    });
-
-    $('[id ^= \"t_desc_\"]').children('form').submit(function (el) {
-        // alert(el);
-    });
-}
-
 function initSixthStep() {
     let prefixToggle = 't_toggle_';
-    let prefixDesc = 't_desc_';
     let t_6_1 = getStaticTask(projectId, 'STEP_6', 'LEAFLETS_DESIGN');
     let t_6_2 = getStaticTask(projectId, 'STEP_6', 'LEAFLETS_PRINT');
     let t_6_3 = getStaticTask(projectId, 'STEP_6', 'LEAFLETS_PUBLICATION');
@@ -53,11 +35,6 @@ function initSixthStep() {
     $("#task_6_2_toggle").attr('id', prefixToggle + t_6_2.id);
     $("#task_6_3_toggle").attr('id', prefixToggle + t_6_3.id);
     $("#task_6_4_toggle").attr('id', prefixToggle + t_6_4.id);
-
-    $("#task_6_1_desc").attr('id', prefixDesc + t_6_1.id);
-    $("#task_6_2_desc").attr('id', prefixDesc + t_6_2.id);
-    $("#task_6_3_desc").attr('id', prefixDesc + t_6_3.id);
-    $("#task_6_4_desc").attr('id', prefixDesc + t_6_4.id);
 }
 
 function getTaskById(id) {

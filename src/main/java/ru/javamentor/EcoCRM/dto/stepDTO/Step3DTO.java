@@ -1,16 +1,17 @@
-package ru.javamentor.EcoCRM.dto;
+package ru.javamentor.EcoCRM.dto.stepDTO;
 
 import ru.javamentor.EcoCRM.model.Contractor;
+import ru.javamentor.EcoCRM.model.ManagementCompany;
 import ru.javamentor.EcoCRM.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Step3DTO implements StepDTO{
-
-    private Long id;
+public class Step3DTO implements StepDTO {
 
     private List<Contractor> contractors = new ArrayList<>();
+
+    private Long id;
 
     private List<Task> tasks = new ArrayList<>();
 
@@ -18,18 +19,10 @@ public class Step3DTO implements StepDTO{
 
     }
 
-    public Step3DTO(Long id, List<Contractor> contractors, List<Task> tasks) {
-        this.id = id;
+    public Step3DTO(List<Contractor> contractors, Long id, List<Task> tasks) {
         this.contractors = contractors;
-        this.tasks = tasks;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
         this.id = id;
+        this.tasks = tasks;
     }
 
     public List<Contractor> getContractors() {
@@ -38,6 +31,14 @@ public class Step3DTO implements StepDTO{
 
     public void setContractors(List<Contractor> contractors) {
         this.contractors = contractors;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Task> getTasks() {

@@ -36,10 +36,10 @@ public class RegistrationController {
 
     @Value("${host.name}")
     String hostName;
-
-    //TODO PROPERTY
-    private final String CLIEND_ID = "7104443";
-    private final String CLIENT_SECRET = "dW9deofq9rWqvBoiLkoJ";
+    @Value("${vk.app.id")
+    private String CLIEND_ID;
+    @Value("${vk.app.secret")
+    private String CLIENT_SECRET;
 
     @GetMapping("/new")
     public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {

@@ -1,0 +1,93 @@
+body {
+    background: url(../images/card.jpg)no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    text-align:center;
+}
+
+.head-crm {
+    vertical-align: super;
+    color: #007c5d;
+    font-size: 18px;
+}
+
+/*--header--*/
+.header-w3l {
+    padding: 6em 0 4.5em;
+}
+.header-w3l h1 {
+    font-size: 3em;
+    color: #ffffff;
+    text-shadow: 1px 1px 10px #9a8b89;
+    text-transform: capitalize;
+    font-family: 'Raleway', sans-serif;
+    word-spacing: 7px;
+    letter-spacing: 1px;
+    text-align:center
+}
+/*--box--*/
+.box{
+    width: 400px;
+    padding: 40px;
+    margin: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -50%);
+    background: rgba(19, 17, 17, 0.62);
+    text-align: center;
+}
+
+.box h3{
+    color: #fff;
+    font-weight: 300;
+}
+
+.box input[type="email"], .box input[type="password"]{
+    /*border:0;*/
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #fff;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: #ffffff;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.box input[type="email"]:focus, .box input[type="password"]:focus{
+    width: 280px;
+    border-color: #007c5d;
+
+}
+
+.box input[type="submit"]{
+    /*border:0;*/
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #ffffff;
+    padding: 14px 40px;
+    outline: none;
+    color: #ffffff;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.box input[type="submit"]:hover{
+    background: #007c5d;
+}
+#error-message {
+    color : #FFF;
+}

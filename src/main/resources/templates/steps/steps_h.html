@@ -62,19 +62,19 @@
                     <div class="row">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
-                            <a class="nav-link active" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <a class="nav-link" href="#v-pills-home">
                                 Информация о заявителе
                             </a>
-                            <a class="nav-link" data-toggle="pill" href="#neighbourhood_inf" role="tab" aria-controls="v-pills-home" aria-selected="false">
-                                Информация о соседях
-                            </a>
-                            <a class="nav-link" href="#container_photo" aria-selected="false" data-toggle="pill" role="tab" aria-controls="v-pills-home">
+                            <a class="nav-link" href="#container_photo">
                                 Фото контейнера
                             </a>
-                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            <div id = "1_step_custom_tasks">
+
+                            </div>
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal" onclick="show_add_task_modal(1)">Задача
                                 +</a>
                         </div>
-                        <div class="tab-content" id="v-pills-tabContent" style="width: 70%">
+                        <div class="tab-content" id="step_1_task_work_space" style="width: 70%">
                             <div class="tab-pane fade" id="v-pills-home" role="tabpanel">
                                 <div id="task_1">
                                     <div class="input-group mb-3">
@@ -112,35 +112,29 @@
                                     <br>
                                     <div class="h6">Участвует в деятельности движения "Раздельный сбор"</div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="monthly"
-                                               name="activity">
+                                        <input type="radio" class="form-check-input activity" id="monthly" name="activity">
                                         <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё
                                             вторсырьё</label>
                                     </div>
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="volunteer"
-                                               name="activity">
+                                        <input type="radio" class="form-check-input activity" id="volunteer" name="activity">
                                         <label class="form-check-label">Волонтер на акциях</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="corrdinator"
-                                               name="activity">
+                                        <input type="radio" class="form-check-input activity" id="corrdinator" name="activity">
                                         <label class="form-check-label">Координатор на акциях</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="participant"
-                                               name="activity">
+                                        <input type="radio" class="form-check-input activity" id="participant" name="activity">
                                         <label class="form-check-label" for="participant">Участник рабочих групп
                                             движения</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input activity" id="no_participate"
-                                               name="activity">
-                                        <label class="form-check-label" for="participant">Не принимаю участия в
-                                            деятельности движения</label>
+                                        <input type="radio" class="form-check-input activity" id="no_participate" name="activity">
+                                        <label class="form-check-label" for="participant">Не принимаю участия в деятельности движения</label>
                                     </div>
 
                                     <div class="form-check">
@@ -159,10 +153,6 @@
                                         <input type="checkbox" class="form-check-input" id="glass">
                                         <label class="form-check-label">Стекло</label>
                                     </div>
-                                    <!--<div class="form-check">-->
-                                    <!--<input type="checkbox" class="form-check-input" id="metal">-->
-                                    <!--<label class="form-check-label">Металл</label>-->
-                                    <!--</div>-->
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="hard_plastic">
                                         <label class="form-check-label">Твёрдый пластик</label>
@@ -181,8 +171,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="hazardous_waste">
-                                        <label class="form-check-label">Опасные отходы (батарейки, лампочки и
-                                            т.п.)</label>
+                                        <label class="form-check-label">Опасные отходы (батарейки, лампочки и т.п.)</label>
                                     </div>
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="another_waste">
@@ -191,14 +180,24 @@
                                     <input type="text" class="form-control" id="another_waste_input" disabled>
                                     <br>
 
-                                </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Адресс</span>
+                                        </div>
+                                        <input type="text" class="form-control" id = "adres_petitioner_input" placeholder="адресс">
+                                    </div>
 
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Адресс</span>
+                                        </div>
+                                        <input type="text" class="form-control" id = "district_petitioner" placeholder="район">
+                                    </div>
+
+
+                                </div>
                             </div>
-                            <div class="tab-pane fade" id="neighbourhood_inf" role="tabpanel">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d511638.0496814032!2d29.530301548695494!3d59.93900943041817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696378cc74a65ed%3A0x6dc7673fab848eff!2z0KHQsNC90LrRgi3Qn9C10YLQtdGA0LHRg9GA0LM!5e0!3m2!1sru!2sru!4v1566243087100!5m2!1sru!2sru"
-                                        width="600" height="450" frameborder="0" style="border:0"
-                                        allowfullscreen></iframe>
-                            </div>
+
                             <div class="tab-pane fade" id="container_photo" role="tabpanel">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -242,7 +241,10 @@
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
                                 Следующая таска
                             </a>
-                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            <div id = "2_step_custom_tasks">
+
+                            </div>
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal" onclick="add_task(2)">Задача
                                 +</a>
                         </div>
                         <div class="tab-content" style="width: 70%">
@@ -280,7 +282,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade show active" id="next_task" role="tabpanel"
+                            <div class="tab-pane fade" id="next_task" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_2_2">
                                     <h1>Next task</h1>
@@ -691,7 +693,7 @@
                     <input type = "hidden" id = "step_number_create_task">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id = "add_task_btn">Добавить задачу</button>
+                        <button type="button" class="btn btn-primary" id = "add_task_btn" onclick="add_task($('#step_number_create_task').val())">Добавить задачу</button>
                     </div>
                 </div>
             </div>
@@ -721,8 +723,8 @@
 </div>
 
 <script th:inline="text">
+    var projectId = [[${projectid}]];
 
-    var projectId = [[${projectid}]]
     $( document ).ready(function () {
         $.ajax({
             url: "/api/projects/" + projectId,
@@ -736,23 +738,38 @@
             }
         });
 
-        // $('.nav-pills a').on('click', function (e) {
-        //     e.preventDefault();
-        //     $(this).tab('show')
-        // })
+        $("body").on("click", ".nav-link", function(e){
+            if(!$(this).hasClass('custom_pil')){
+                $('.custom_pil').attr('class','nav-link custom_pil');
+            }
+            $(this).tab('show');
+
+        });
+
     });
 
-
-
-
-    // function show_task(pil) {
-    //     $('#'+pil.id+'').tab('show');
-    //     $('#'+$('#'+pil.id+'').href()+'').tab('show');
-    // }
     function show_add_task_modal(stepnumber) {
         $('#step_number_create_task').val("");
         $('#step_number_create_task').val(stepnumber);
         $('#add_task_modal').modal('show');
+    }
+
+    function add_task_tab(number, id, name) {
+        var a_nav = document.createElement('a');
+        a_nav.classList.add("nav-link");
+        a_nav.href = "#"+name+"_custom_task";
+        a_nav.setAttribute('aria-selected', 'false');
+        a_nav.setAttribute('data-toggle', 'pill');
+        a_nav.setAttribute('role', 'tab');
+        a_nav.innerText = name;
+        document.getElementById(number+'_step_custom_tasks').appendChild(a_nav);
+        var div_tab = document.createElement('div');
+        div_tab.classList.add('tab-pane');
+        div_tab.classList.add('fade');
+        div_tab.id = ''+name+'_custom_task';
+        div_tab.setAttribute('role', 'tabpanel');
+        div_tab.innerHTML = '<h3>'+name+'</h3>';
+        document.getElementById('step_'+number+'_task_work_space').appendChild(div_tab);
     }
 
     function add_task(stepnumber){
@@ -765,9 +782,12 @@
                 "&description="+$('#description_of_task').val(),
             contentType: 'application/json; charset=utf-8',
             success: function (task) {
-                $('#'+stepnumber+'_step_custom_tasks').append('<a class="nav-link" href="#'+task.id+'_custom_task" id = "'+task.id+'" >Фото контейнера </a>');
 
-                $('#step_'+stepnumber+'_task_work_space').append('<div class="tab-pane fade" id="'+task.id+'_custom_task"><h3>'+task.name+'</h3>' +
+                // add_task_tab(stepnumber, task.id, task.name);
+                var id = task.id+'';
+                $('#'+stepnumber+'_step_custom_tasks').append('<a class="nav-link custom_pil" href="#custom_'+id+'_task" id = "'+task.id+'" aria-selected="false"  data-toggle="pill" role="tab"  >'+task.name+'</a>');
+
+                $('#step_'+stepnumber+'_task_work_space').append('<div class="tab-pane fade" id="custom_'+id+'_task" role="tabpanel"><h3>'+task.name+'</h3>' +
                     '<br><br>Описание:'+task.description+'</div>');
 
                 $('#add_task_modal').modal('hide');

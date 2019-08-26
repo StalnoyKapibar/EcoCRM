@@ -1,6 +1,7 @@
 body {
     font-size: .875rem;
     background-color: white;
+    /*background: url(../../public/images/card.jpg)no-repeat 0px 0px;*/
 }
 
 .feather {

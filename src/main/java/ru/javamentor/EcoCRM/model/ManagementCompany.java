@@ -1,8 +1,11 @@
 package ru.javamentor.EcoCRM.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "management_company")
@@ -43,14 +46,15 @@ public class ManagementCompany implements Serializable {  //управляюща
     private String description;
 
     @Column(name="next_contact_date")
-    private LocalDateTime nextContactDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
+    private Date nextContactDate;
 
     public ManagementCompany() {
 
     }
 
     public ManagementCompany(String name, String inn, String link, String managerName, String managerSurname, String managerPatronymic,
-                             String phoneNumber, String email, String clock, String description, LocalDateTime nextContactDate) {
+                             String phoneNumber, String email, String clock, String description, Date nextContactDate) {
         this.name = name;
         this.inn = inn;
         this.link = link;
@@ -152,11 +156,12 @@ public class ManagementCompany implements Serializable {  //управляюща
         this.description = description;
     }
 
-    public LocalDateTime getNextContactDate() {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd")
+    public Date getNextContactDate() {
         return nextContactDate;
     }
 
-    public void setNextContactDate(LocalDateTime nextContactDate) {
+    public void setNextContactDate(Date nextContactDate) {
         this.nextContactDate = nextContactDate;
     }
 }

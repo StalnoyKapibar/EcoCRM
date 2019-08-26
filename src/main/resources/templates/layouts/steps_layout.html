@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <th:block th:replace="fragments/commonfragments :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/commonfragments :: nav"></th:block>
+<div class="container-fluid">
+    <input type="hidden" id="projectId" th:value="${id}">
+    <input type="hidden" id="stepNumber" th:value="${stepNumber}">
+<div class="container">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_1_link" href="#STEP_1" role="tab" aria-controls="nav-home"
+               aria-selected="true" onclick="getStep('STEP_1')">1. Заявитель</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_2_link" href="#STEP_2" role="tab" aria-controls="nav-profile"
+               aria-selected="false" onclick="getStep('STEP_2')">2. Управляющая<br>компания</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_3_link" href="#STEP_3" role="tab" aria-controls="nav-contact"
+               aria-selected="false" onclick="getStep('STEP_3')">3. Заготовители</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_4_link" href="#STEP_4" role="tab" aria-controls="nav-contact"
+               aria-selected="false" onclick="getStep('STEP_4')">4. Заключение<br>договора</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_5_link" href="#STEP_5" role="tab" aria-controls="nav-contact"
+               aria-selected="false" onclick="getStep('STEP_5')">5. Установка<br>контейнера</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_6_link" href="#STEP_6" role="tab" aria-controls="nav-contact"
+               aria-selected="false" onclick="getStep('STEP_6')">6. Работа с<br>жителями</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_7_link" href="#STEP_7" role="tab" aria-controls="nav-contact"
+               aria-selected="false" onclick="getStep('STEP_7')">7. Описание<br>кейса</a>
+            <a class="nav-item nav-link" data-toggle="tab" id="STEP_8_link" href="#STEP_8" role="tab" aria-controls="nav-contact"
+               aria-selected="false" onclick="getStep('STEP_8')">8. Контроль</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+
+        <!--начало 1 шага-->
+        <th:block th:replace="steps/step1 :: step1"></th:block>
+        <!--Конец 1 шага-->
+
+        <!--начало 2 шага-->
+        <th:block th:replace="steps/step2 :: step2"></th:block>
+        <!--конец 2 шага-->
+
+        <!--начало 3 шага-->
+        <th:block th:replace="steps/step3 :: step3"></th:block>
+        <!--конец 3 шага-->
+
+        <!--начало 4 шага-->
+        <th:block th:replace="steps/step4 :: step4"></th:block>
+        <!--конец 4 шага-->
+
+        <!--начало 5 шага-->
+        <th:block th:replace="steps/step5 :: step5"></th:block>
+        <!--конец 5 шага-->
+
+        <!--начало 6 шага-->
+        <th:block th:replace="steps/step6 :: step6"></th:block>
+        <!--конец 6 шага-->
+
+        <!--начало 7 шага-->
+        <th:block th:replace="steps/step7 :: step7"></th:block>
+        <!--конец 7 шага-->
+
+        <!--начало 8 шага-->
+        <th:block th:replace="steps/step8 :: step8"></th:block>
+        <!--конец 8 шага-->
+
+</div>
+</div>
+</div>
+</body>
+</html>

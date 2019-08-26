@@ -35,6 +35,7 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
         }
     }
 
+    @SuppressWarnings("unchecked")
     public List<Step> getAllByprojectId(Long id){
         return stepDao.getAllByProjectId(id);
     }

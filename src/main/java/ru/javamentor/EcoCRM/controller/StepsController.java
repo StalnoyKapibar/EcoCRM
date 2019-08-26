@@ -52,6 +52,7 @@ public class StepsController {
 //        }
 //        model.addAttribute("stepnumber", stepinProgress.getStepNumber());
         model.addAttribute("projectid", projectid);
+        model.addAttribute("step_6_tasks", stepService.getAllByprojectId(projectid));
 //        List<Task> tasksInProgress = taskService.getAllByStepId(stepinProgress.getId());
 //        model.addAttribute("tasks", tasksInProgress);
 

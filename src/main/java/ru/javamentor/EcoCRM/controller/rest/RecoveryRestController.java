@@ -31,14 +31,16 @@ public class RecoveryRestController {
 
     @PostMapping("/recovery")
     public String recoverUser(@RequestParam("email") String email){
-        User userToRecover;
+        User userToRecover = userService.getUserByEmail(email);
         //TODO разобраться с AbstractDao и её эксепшенами
-        try{
+        /*try{
             userToRecover = userService.getUserByEmail(email);
         } catch (Exception e){
             e.printStackTrace();
             return "error";
         }
+
+         */
         if (userToRecover != null) {
             String newPass = faker.superhero().name().replaceAll(" ", "") + (new Random()).nextInt(322);
             userToRecover.setPassword(bCryptPasswordEncoder.encode(newPass));

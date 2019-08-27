@@ -25,7 +25,8 @@ public class StepDaoImpl extends AbstractDaoImpl<Step> implements StepDao {
         return (Step) query.getSingleResult();
     }
 
-    public List <Step> getAllByProjectId(Long projectId){
+    @SuppressWarnings("unchecked")
+    public List<Step> getAllByProjectId(Long projectId){
         Query query = entityManager.unwrap(Session.class).createQuery("from Step as s where s.project = :project");
         query.setParameter("project", projectService.get(projectId));
         return query.getResultList();

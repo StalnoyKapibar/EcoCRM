@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "/api/projects",
+        url: "/api/project",
         type: "GET",
         async: false,
         success: function (projects) {

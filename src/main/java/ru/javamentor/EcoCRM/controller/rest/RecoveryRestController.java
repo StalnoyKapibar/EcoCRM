@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.javamentor.EcoCRM.model.User;
+import ru.javamentor.EcoCRM.service.EmailService;
 import ru.javamentor.EcoCRM.service.EmailServiceImpl;
 import ru.javamentor.EcoCRM.service.UserService;
 
@@ -22,7 +23,7 @@ public class RecoveryRestController {
     private UserService userService;
 
     @Autowired
-    private EmailServiceImpl emailService;
+    private EmailService emailService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,14 +32,7 @@ public class RecoveryRestController {
 
     @PostMapping("/recovery")
     public String recoverUser(@RequestParam("email") String email){
-        User userToRecover;
-        //TODO разобраться с AbstractDao и её эксепшенами
-        try{
-            userToRecover = userService.getUserByEmail(email);
-        } catch (Exception e){
-            e.printStackTrace();
-            return "error";
-        }
+        User userToRecover = userService.getUserByEmail(email);
         if (userToRecover != null) {
             String newPass = faker.superhero().name().replaceAll(" ", "") + (new Random()).nextInt(322);
             userToRecover.setPassword(bCryptPasswordEncoder.encode(newPass));

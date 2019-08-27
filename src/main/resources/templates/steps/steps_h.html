@@ -8,9 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/public/css/steps.css">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css"
-          rel="stylesheet">
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
+    <script src="/private/js/steps.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
@@ -522,7 +522,6 @@
                                 +</a>
                         </div>
                         <div class="tab-content" style="width: 70%">
-
                             <div class="tab-pane fade show active" id="container_report_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_5_1">
@@ -582,23 +581,32 @@
                             <a class="nav-link active" data-toggle="pill" href="#leaflets_layout_pil" role="tab"
                                aria-controls="v-pills-home" aria-selected="true">
                                 Разработка макета листовок
-                                <input type="checkbox" id="flyerTemplateTaskToggle" checked
+                                <input type="checkbox" id="task_6_1_toggle"
                                        data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
                                        data-onstyle="success" data-offstyle="light" data-style="ios">
                             </a>
 
                             <a class="nav-link" data-toggle="pill" href="#print_leaflets_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                <input type="checkbox" id="task_6_2_toggle"
+                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                       data-onstyle="success" data-offstyle="light" data-style="ios">
                                 Печать листовок
                             </a>
 
                             <a class="nav-link" data-toggle="pill" href="#publication_leaflets_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                <input type="checkbox" id="task_6_3_toggle"
+                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                       data-onstyle="success" data-offstyle="light" data-style="ios">
                                 Публикация листовок
                             </a>
 
                             <a class="nav-link" data-toggle="pill" href="#residents_activities_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                <input type="checkbox" id="task_6_4_toggle"
+                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                       data-onstyle="success" data-offstyle="light" data-style="ios">
                                 Мероприятия с жителями
                             </a>
                             <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
@@ -607,7 +615,7 @@
                         <div class="tab-content" style="width: 70%">
                             <div class="tab-pane fade show active" id="leaflets_layout_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
-                                <div id="task_6_1">
+                                <div id="task_6_1_desc">
                                     <form class="form" action="#">
                                         <div class="form-group">
                                             <h5>Разработка макета листовок</h5>
@@ -623,23 +631,49 @@
 
                             <div class="tab-pane fade show " id="print_leaflets_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
-                                <div id="task_6_2">
-                                    <h5>Печать листовок</h5>
+                                <div id="task_6_2_desc">
+                                    <form class="form" action="#">
+                                        <div class="form-group">
+                                            <h5>Печать листовок</h5>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5"
+                                                      placeholder="Введите детали задачи"></textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+                                    </form>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade show" id="publication_leaflets_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
-                                <div id="task_6_3">
-                                    <h5>Публикация листовок</h5>
-
+                                <div id="task_6_3_desc">
+                                    <form class="form" action="#">
+                                        <div class="form-group">
+                                            <h5>Публикация листовок</h5>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5"
+                                                      placeholder="Введите детали задачи"></textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+                                    </form>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade show" id="residents_activities_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
-                                <div id="task_6_4">
-                                    <h5>Мероприятия с жителями</h5>
+                                <div id="task_6_4_desc">
+                                    <form class="form" action="#">
+                                        <div class="form-group">
+                                            <h5>Мероприятия с жителями</h5>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5"
+                                                      placeholder="Введите детали задачи"></textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
+                                    </form>
                                 </div>
                             </div>
 
@@ -802,7 +836,28 @@
 </div>
 
 <script th:inline="text">
-    // for choose file
+    var projectId = [[${projectid}]];
+    initSixthStep();
+    $("#step_6_link").on('click',refreshPage());
+    $(document).ready(function () {
+        $.ajax({
+            url: "/api/projects/" + projectId,
+            type: "GET",
+            async: false,
+            success: function (proj) {
+                project = proj;
+                get_steps(proj);
+            },
+            error: function (e) {
+                alert(e.responseText);
+            }
+        });
+
+        // $('.nav-pills a').on('click', function (e) {
+        //     e.preventDefault();
+        //     $(this).tab('show')
+        // })
+    });
 
     $(function() {
         function readURL(input) {
@@ -819,26 +874,7 @@
             readURL(this);
         });
     });
-
-    // function saveContainerInfo() {
-    //     let container = {
-    //         // 'newContainerPhoto': $('#imgForm').val(),
-    //         'newContainerComment': $('#container_comment').val(),
-    //         'newContainerDate': $('#container_installation_date').val()
-    //     };
-    //     $.ajax({
-    //         url: "/manage/add_container?projectid=" + projectId,
-    //         type: "POST",
-    //         data: container,
-    //         success: function (request) {
-    //             console.log("information about container insert");
-    //         },
-    //         error: function(request) {
-    //             console.error("insert information about container FAILED!" + request.responseText);
-    //         }
-    //     });
-    // }
-        function saveContainerInfo() {
+    function saveContainerInfo() {
 
         let comment = $("#container_comment").val();
         let date =  $("#container_installation_date").val();
@@ -878,39 +914,6 @@
             format: 'yyyy-mm-dd',
             uiLibrary: 'bootstrap4'
         });
-        // $.ajax({
-        //     url: "/api/projects/" + projectId,
-        //     type: "GET",
-        //     async: false,
-        //     success: function (project) {
-        //         get_steps(project);
-        //     },
-        //     error: function (e) {
-        //         alert(e.responseText);
-        //     }
-        // });
-
-    // $(document).ready(function () {
-    //     $.ajax({
-    //         url: "/api/projects/" + projectId,
-    //         type: "GET",
-    //         async: false,
-    //         success: function (project) {
-    //             get_steps(project);
-    //         },
-    //         error: function (e) {
-    //             alert(e.responseText);
-    //         }
-    //     });
-
-        // $('.nav-pills a').on('click', function (e) {
-        //     e.preventDefault();
-        //     $(this).tab('show')
-        // })
-    });
-
-
-
 
     // function show_task(pil) {
     //     $('#'+pil.id+'').tab('show');
@@ -953,6 +956,7 @@
             async: false,
             success: function (steps) {
                 let b;
+
                 for (let i = 0; i < steps.length; i++) {
                     if (steps[i].status == 'DONE') {
                         b = i + 1;
@@ -979,6 +983,7 @@
                             //todo получить таски по 5му шагу
                         }
                         if (steps[i].stepNumber == 'STEP_6') {
+                            get_tasks_step_6(steps[i].id)
                             //todo получить таски по 6му шагу
                         }
                         if (steps[i].stepNumber == 'STEP_7') {
@@ -998,14 +1003,14 @@
 
     function get_tasks_step_1(stepId){
         $.ajax({
-            url: "/api/tasks/get_1_step/" + stepId,
+            url: "/api/tasks/get_by_step/" + stepId,
             type: "GET",
             async: false,
             success: function (tasks) {
                 let b;
                 for (let i = 0; i < tasks.length; i++) {
                     let taskLinkStatusClass = " ";
-                    let taskBodyCalssActive = " ";
+                    let taskBodyClassActive = " ";
                     let taskBodyClassShow = " ";
 
                     if (tasks[i].taskStatus == 'DONE') {
@@ -1013,24 +1018,24 @@
                     }
                     if (tasks[i].taskStatus == 'IN_PROGRESS') {
                         taskLinkStatusClass = 'active';
-                        taskBodyCalssActive = 'active';
+                        taskBodyClassActive = 'active';
                         taskBodyClassShow = 'show';
                     }
                     if (tasks[i].type == 'PETITIONER_INFO') {
                         $('#petitioner_info_pil').addClass(taskLinkStatusClass);
-                        $('#v-pills-home').addClass(taskBodyCalssActive);
+                        $('#v-pills-home').addClass(taskBodyClassActive);
                         $('#v-pills-home').addClass(taskBodyClassShow);
                         getPetition(tasks[i].step.project.id);
                     }
                     if (tasks[i].type == 'NEIGHBOURHOODS_INFO') {
                         $('#neighbourhood_info_pil').addClass(taskLinkStatusClass);
-                        $('#neighbourhood_inf').addClass(taskBodyCalssActive);
+                        $('#neighbourhood_inf').addClass(taskBodyClassActive);
                         $('#neighbourhood_inf').addClass(taskBodyClassShow);
                         //todo
                     }
                     if (tasks[tasks[i].type == 'OLD_CONTAINER_PHOTO']) {
                         $('#old_container_pil').addClass(taskLinkStatusClass);
-                        $('#container_photo').addClass(taskBodyCalssActive);
+                        $('#container_photo').addClass(taskBodyClassActive);
                         $('#container_photo').addClass(taskBodyClassShow);
                         //todo
                     }
@@ -1081,11 +1086,9 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
 
-
     (function () {
         var originalAddClassMethod = jQuery.fn.addClass;
         var originalRemoveClassMethod = jQuery.fn.removeClass;
-
             jQuery.fn.addClass = function () {
                 var result = originalAddClassMethod.apply(this, arguments);
                 jQuery(this).trigger('classChanged');

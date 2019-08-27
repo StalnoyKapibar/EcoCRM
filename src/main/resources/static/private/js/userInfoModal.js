@@ -109,16 +109,28 @@ function unblockUser() {
 }
 
 function sendReg() {
-    var email = $('#email_input').val();
+    let email = $('#email_input').val();
     $.ajax({
         url: "/processSendForm?userEmail=" + email,
         type: "GET",
         async: false,
-        success: function() {
-            console.log("Mail was sent.");
+        success: function(address) {
+            if(address === "Already is user") {
+                let helpTag = document.getElementById('message-alert');
+                helpTag.insertAdjacentHTML('afterbegin','<div class="alert alert-danger" role="alert" style="position: absolute; top: 70%; right: 40%; opacity: 0.7;"><p>Пользовалель с такой почтой уже существует.</p></div>');
+                setTimeout(function() {
+                    window.location.href = "/admin/usersList";
+                }, 3000);
+            } else {
+                let helpTag = document.getElementById('message-alert');
+                helpTag.insertAdjacentHTML('afterbegin', '<div class="alert alert-success" role="alert" style="position: absolute; top: 70%; right: 40%; opacity: 0.7;"><p>Письмо отправлено.</p></div>');
+                setTimeout(function () {
+                    window.location.href = address;
+                }, 3000);
+            }
         },
-        error: function() {
-            console.error("Error: mail wasn't sent!");
+        error: function(address) {
+            console.log(address.responseText)
         }
 });
 }

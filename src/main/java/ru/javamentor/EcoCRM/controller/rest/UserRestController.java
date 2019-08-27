@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.CurrentUserDTO;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
-import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.UserStatus;
@@ -28,6 +27,9 @@ public class UserRestController {
     @Autowired
     DTOService dtoService;
 
+
+    @Autowired
+    private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public User getUser(@PathVariable(required = false) Long id) {
@@ -65,7 +67,7 @@ public class UserRestController {
         user.setStatus(UserStatus.BLOCKED);
         user.setEnabled();
         userService.update(user);
-        return "/admin/usersList";
+        return "/admin/manage";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/unblock")
@@ -74,7 +76,20 @@ public class UserRestController {
         user.setStatus(UserStatus.ACTIVE);
         user.setEnabled();
         userService.update(user);
-        return "/admin/usersList";
+        return "/admin/manage";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
+    public CurrentUserDTO getCurrentUser(Principal principal){
+        User user = (User) userService.loadUserByUsername(principal.getName());
+        CurrentUserDTO userDTO = dtoService.convertCurrentUserToDTO(user);
+        return userDTO;
+    }
+    @PutMapping("/update")
+    public User updateUser(@RequestBody CurrentUserDTO userdto) {
+        User user = dtoService.convertDTOToCurrentUser(userdto);
+        userService.update(user);
+        return user;
     }
     @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
     public CurrentUserDTO getCurrentUser(Principal principal){

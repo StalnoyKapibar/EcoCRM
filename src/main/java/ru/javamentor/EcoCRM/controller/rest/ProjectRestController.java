@@ -73,7 +73,7 @@ public class ProjectRestController {
 
         User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Request newRequest = new Request(currentUser.getName() + " " + currentUser.getSurname(),projectRequested.getPetition().getHouseArea(),currentUser.getId(),projectRequested.getId());
+        Request newRequest = new Request(currentUser.getName() + " " + currentUser.getSurname(),/*projectRequested.getPetition().getHouseArea(),currentUser.getId()*/"someaddress",currentUser.getId(),projectRequested.getId());
 
         User Manager = userService.get(ManagerId);
         List<Request> currentRequests = Manager.getRequestList();

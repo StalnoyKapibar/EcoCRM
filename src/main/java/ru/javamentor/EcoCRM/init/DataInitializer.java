@@ -9,13 +9,13 @@ import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.model.embedded.TaskType;
+import ru.javamentor.EcoCRM.model.petition.embedded.TrashType;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDate;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Component
@@ -184,14 +184,13 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
-            petition.setAdresHome(faker.address().streetName());
+            petition.setAddressHome(faker.address().streetName());
             petition.setData(LocalDate.now());
-            petition.setSeparateCollection(faker.commerce().material());
-            petition.setTypeOfRawMaterial(faker.commerce().material());
+
             if(new Random().nextInt() % 2 == 0){
-                petition.setHouseArea("Другой район");
+                petition.setHouseDistrict("Другой район");
             } else {
-                petition.setHouseArea("Адмиралтейский район");
+                petition.setHouseDistrict("Адмиралтейский район");
             }
             petitionService.insert(petition);
         }

@@ -72,24 +72,24 @@
             <div class="form-check">
                 Участвуете ли Вы в деятельности движения "Раздельный сбор"<br>
                 <input class="form-check-input" type="checkbox"
-                       value="Участвую в ежемесячных акциях и сдаю своё вторсырьё" name="separateCollection">
+                       value="Участвую в ежемесячных акциях и сдаю своё вторсырьё" name="trashType">
                 <label class="form-check-label" for="defaultCheck1">Участвую в ежемесячных акциях и сдаю своё
                     вторсырьё</label><br>
                 <input class="form-check-input" type="checkbox" value="Волонтер на акциях"
-                       name="separateCollection">
+                       name="trashType">
                 <label class="form-check-label" for="defaultCheck1">Волонтер на акциях</label><br>
                 <input class="form-check-input" type="checkbox" value="Координатор на акциях"
-                       name="separateCollection">
+                       name="trashType">
                 <label class="form-check-label" for="defaultCheck1">Координатор на акциях</label><br>
                 <input class="form-check-input" type="checkbox" value="Участник рабочих групп движени"
-                       name="separateCollection">
+                       name="trashType">
                 <label class="form-check-label" for="defaultCheck1">Участник рабочих групп движени</label><br>
                 <input class="form-check-input" type="checkbox" value="Не принимаю участия в деятельности движения"
-                       name="separateCollection">
+                       name="trashType">
                 <label class="form-check-label" for="defaultCheck1">Не принимаю участия в деятельности
                     движения/label><br>
                     <label for="formGroupExampleInput2">Другое</label>
-                    <input type="text" class="form-control" name="separateCollection" placeholder="Другое">
+                    <input type="text" class="form-control" name="trashType" placeholder="Другое">
                 </label>
             </div>
             <p></p>
@@ -116,13 +116,13 @@
                 <label class="form-check-label" for="defaultCheck1">Опасные отходы (батарейки, лампочки и
                     т.п.)</label><br>
                 <label for="formGroupExampleInput2">Другое</label>
-                <input type="text" class="form-control" name="separateCollection" placeholder="Другое">
+                <input type="text" class="form-control" name="trashType" placeholder="Другое">
             </div>
             <p></p>
 
             <div class="form-group">
                 <label for="formGroupExampleInput2">Адрес дома?*</label>
-                <input type="text" class="form-control" name="adresHome" placeholder="Адрес дома" required>
+                <input type="text" class="form-control" name="addressHome" placeholder="Адрес дома" required>
             </div>
 
             <div class="form-row align-items-center">
@@ -159,7 +159,7 @@
 
             <div class="form-group">
                 <label for="formGroupExampleInput2">Сколько квартир в доме?</label>
-                <input type="text" class="form-control" name="countOfApartments" placeholder="Колличество квартир">
+                <input type="text" class="form-control" name="flatsCount" placeholder="Колличество квартир">
             </div>
 
             <div class="form-check">
@@ -193,12 +193,12 @@
             <div class="form-check">
                 Как управляющая организация относится к РНО?<br>
                 <input class="form-check-input" type="checkbox" value="Положительно, ждёт предложений"
-                       name="managementOrganization">
+                       name="managementOrganizationRelation">
                 <label class="form-check-label" for="defaultCheck1">Положительно, ждёт предложений</label><br>
                 <input class="form-check-input" type="checkbox" value="Отрицательно, не верит в раздельный сбор"
-                       name="managementOrganization">
+                       name="managementOrganizationRelation">
                 <label class="form-check-label" for="defaultCheck1">Отрицательно, не верит в раздельный сбор</label><br>
-                <input class="form-check-input" type="checkbox" value="Не знаю" name="managementOrganization">
+                <input class="form-check-input" type="checkbox" value="Не знаю" name="managementOrganizationRelation">
                 <label class="form-check-label" for="defaultCheck1">Не знаю</label><br>
             </div>
             <p></p>
@@ -221,9 +221,9 @@
 
             <div class="form-check">
                 Имеется ли у Вашего дома своя контейнерная площадка (КП)?<br>
-                <input class="form-check-input" type="checkbox" value="да" name="containerSite">
+                <input class="form-check-input" type="checkbox" value="да" name="containerAvailable">
                 <label class="form-check-label" for="defaultCheck1">Да</label><br>
-                <input class="form-check-input" type="checkbox" value="Нет" name="containerSite">
+                <input class="form-check-input" type="checkbox" value="Нет" name="containerAvailable">
                 <label class="form-check-label" for="defaultCheck1">Нет</label><br>
             </div>
             <p></p>

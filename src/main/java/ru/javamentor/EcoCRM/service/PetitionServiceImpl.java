@@ -3,7 +3,6 @@ package ru.javamentor.EcoCRM.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.PetitionDao;
-import ru.javamentor.EcoCRM.dao.PetitionDaoImpl;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.User;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -40,11 +38,11 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
         for (Petition petiton : petitionList) {
             LocalDate data = petiton.getData();
             long id = petiton.getId();
-            String adress = petiton.getAdresHome();
+            String adress = petiton.getAddressHome();
             if(adress == null){
                 adress = "данных нет";
             }
-            String area = petiton.getHouseArea();
+            String area = petiton.getHouseDistrict();
             if(area == null){
                 area = "данных нет";
             }
@@ -63,11 +61,11 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
         for (Petition petition : petitionList){
             LocalDate date = petition.getData();
              id = petition.getId();
-            String adress = petition.getAdresHome();
+            String adress = petition.getAddressHome();
             if(adress == null){
                 adress = "Нет данных";
             }
-            String area = petition.getHouseArea();
+            String area = petition.getHouseDistrict();
             if(area == null){
                 area = "Нет данных";
             }

@@ -3,15 +3,13 @@ package ru.javamentor.EcoCRM.dao;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
+import ru.javamentor.EcoCRM.model.Photo;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectDao {

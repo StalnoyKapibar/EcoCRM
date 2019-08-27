@@ -147,8 +147,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public byte[] getPhoto() {return photo;
     }
 
     public String getEncoderPhoto() {

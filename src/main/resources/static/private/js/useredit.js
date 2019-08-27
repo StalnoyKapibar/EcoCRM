@@ -27,12 +27,9 @@ function initTextArea() {
     $("#phone").val(currentUser.phone);
     $("#vk").val(currentUser.link);
     $("#profession").val(currentUser.profession);
-    $("#photo").val(currentUser.photo);
-    $("#status").val(currentUser.status);
+    var helpTag = document.getElementById('photo');
+    helpTag.insertAdjacentHTML('afterend','<img src="data:image/png;base64,' + currentUser.photo + '" class="img-rounded" alt="profile image" id = "profile_avatar" >');
     $("#notToDo").val(currentUser.notToDo);
-    getProjectsManager(id);
-    getProjectsVolunteer(id);
-    getPhoto(id);
     //$('#photo').attr("src","/api/user/photo/" + user.id);
 }
 function updateUser() {
@@ -46,7 +43,6 @@ function updateUser() {
     'phone' : $('#phone').val(),
     'link' : $('#vk').val(),
     'profession' : $('#profession').val(),
-    'status' : $('#status').val(),
     'notToDo' : $('#notToDo').val(),
     'photo' : $('#photo').val()
     };
@@ -56,7 +52,8 @@ function updateUser() {
         data:JSON.stringify(user),
         contentType: 'application/json; charset=utf-8',
         success: function (){
-            alert('Заявка одобрена')
+            alert('Данные обновлены');
+            window.location.href = '/userinfo'
         },
         error: function (e) {
             alert(e.responseText);

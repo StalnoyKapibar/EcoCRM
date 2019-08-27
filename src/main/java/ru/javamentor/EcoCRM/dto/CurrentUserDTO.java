@@ -13,7 +13,7 @@ public class CurrentUserDTO {
     private String link;
     private String profession;
     private String notToDo;
-    private byte[] photo;
+    private String photo;
 
     public CurrentUserDTO() {
     }
@@ -90,11 +90,11 @@ public class CurrentUserDTO {
         this.notToDo = notToDo;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 }

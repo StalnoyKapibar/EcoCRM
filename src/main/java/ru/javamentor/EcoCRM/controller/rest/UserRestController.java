@@ -24,9 +24,6 @@ public class UserRestController {
 
     @Autowired
     private ProjectService projectService;
-    @Autowired
-    DTOService dtoService;
-
 
     @Autowired
     private DTOService dtoService;
@@ -67,7 +64,7 @@ public class UserRestController {
         user.setStatus(UserStatus.BLOCKED);
         user.setEnabled();
         userService.update(user);
-        return "/admin/manage";
+        return "/admin/usersList";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/unblock")
@@ -76,7 +73,7 @@ public class UserRestController {
         user.setStatus(UserStatus.ACTIVE);
         user.setEnabled();
         userService.update(user);
-        return "/admin/manage";
+        return "/admin/usersList";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
@@ -91,10 +88,5 @@ public class UserRestController {
         userService.update(user);
         return user;
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
-    public CurrentUserDTO getCurrentUser(Principal principal){
-        User user = (User) userService.loadUserByUsername(principal.getName());
-        CurrentUserDTO userDTO = dtoService.convertCurrentUserToDTO(user);
-        return userDTO;
-    }
+
 }

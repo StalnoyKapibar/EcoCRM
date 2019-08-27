@@ -14,10 +14,7 @@ import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
-import ru.javamentor.EcoCRM.service.PetitionService;
-import ru.javamentor.EcoCRM.service.ProjectService;
-import ru.javamentor.EcoCRM.service.StepService;
-import ru.javamentor.EcoCRM.service.UserService;
+import ru.javamentor.EcoCRM.service.*;
 
 import java.util.List;
 
@@ -125,5 +122,14 @@ public class ApplicationController {
         model.addAttribute("all", userService.getAll());
         return "all_users";
     }
+    @GetMapping("/userinfo")
+    public String getuserinfo() {
+        return "userinfo";
+    }
+    @GetMapping("/useredit")
+    public String useredit() {
+        return "edituserform";
+    }
+
 
 }

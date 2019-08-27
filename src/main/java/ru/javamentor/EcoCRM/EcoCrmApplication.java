@@ -15,10 +15,10 @@ import javax.annotation.PostConstruct;
 
 @EnableScheduling
 @SpringBootApplication
-@PropertySource({
-		"classpath:properties/datasource.properties",
+@PropertySource({"classpath:properties/datasource.properties",
 		"classpath:properties/jpa.properties",
 		"classpath:properties/mail.properties",
+		"classpath:properties/token.properties",
 		"classpath:properties/application.properties"})
 public class EcoCrmApplication implements WebMvcConfigurer {
 

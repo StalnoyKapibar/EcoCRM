@@ -21,6 +21,7 @@ function initTextArea() {
     $("#name").text(currentUser.name);
     $("#surname").text(currentUser.surname);
     $("#userId").text(currentUser.id);
+    $("#password").text(currentUser.password);
     $("#patronymic").text(currentUser.patronymic);
     $("#email").text(currentUser.email);
     $("#phone").text(currentUser.phone);

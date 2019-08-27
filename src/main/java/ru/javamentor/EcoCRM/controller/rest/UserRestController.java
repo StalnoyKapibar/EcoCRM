@@ -74,4 +74,10 @@ public class UserRestController {
         System.out.println("CURRENT USERNAME IS " + user.getUsername());
         return user;
     }
+    @PutMapping("/update")
+    public User updateUser(@RequestBody User user) {
+        System.out.println(user.getUsername());
+        userService.update(user);
+        return user;
+    }
 }

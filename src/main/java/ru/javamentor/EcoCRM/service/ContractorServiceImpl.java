@@ -8,6 +8,7 @@ import ru.javamentor.EcoCRM.model.Contractor;
 
 @Service
 public class ContractorServiceImpl extends AbstractServiceImpl<Contractor> implements ContractorService {
+
     private ContractorDao contractorDao;
 
     @Autowired

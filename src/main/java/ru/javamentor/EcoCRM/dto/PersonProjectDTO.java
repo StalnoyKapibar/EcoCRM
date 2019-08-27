@@ -2,13 +2,24 @@ package ru.javamentor.EcoCRM.dto;
 
 public class PersonProjectDTO {
 
-    String id = "";
+    private String id = "id";
 
-    String number = "";
+    private String number = "step";
 
-    String time = "";
+    private String time = "00:00";
 
-    String area = "";
+    private String area = "Нет района";
+
+    public PersonProjectDTO() {
+
+    }
+
+    public PersonProjectDTO(String id, String number, String time, String area) {
+        this.id = id;
+        this.number = number;
+        this.time = time;
+        this.area = area;
+    }
 
     public String getId() {
         return id;

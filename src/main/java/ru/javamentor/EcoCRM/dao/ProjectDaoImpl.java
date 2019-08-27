@@ -2,7 +2,6 @@ package ru.javamentor.EcoCRM.dao;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
@@ -35,16 +34,14 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
     public List<Project> getProjectsByUserId(Long id) {
         Query query = entityManager.createQuery("select p from Project p where p.manager.id = :id");
         query.setParameter("id", id);
-        List<Project> projects = query.getResultList();
-        return projects;
+        return query.getResultList();
     }
 
     @Override
     public List<Project> getProjManagerByUserId(Long id) {
         Query query = entityManager.createQuery("select p from Project p where p.manager.id = :id");
         query.setParameter("id", id);
-        List<Project> projects = query.getResultList();
-        return projects;
+        return query.getResultList();
     }
 
     @Override
@@ -52,8 +49,7 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
 
         Query query = entityManager.createQuery("SELECT DISTINCT p FROM Project p LEFT JOIN p.users AS u WHERE u.id = :id");
         query.setParameter("id", id);
-        List<Project> projects = query.getResultList();
-        return projects;
+        return query.getResultList();
     }
 
     @Override
@@ -97,8 +93,7 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
         if(query.getResultList().isEmpty()){
             return new Report();
         } else {
-            Report report = (Report) query.getResultList().get(0);
-            return report;
+            return (Report) query.getResultList().get(0);
         }
     }
 }

@@ -33,6 +33,11 @@ public class UserRestController {
         return userService.get(id).getEncoderPhoto();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/photos")
+    public List<String> getAllUserPhotos(@PathVariable(required = false) Long id) {
+        return userService.getAllUsersPhoto();
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/projects/manager/{id}")
     public List<Project> getUserProjManager(@PathVariable(required = false) Long id) {
         return projectService.getProjectsByUserId(id);

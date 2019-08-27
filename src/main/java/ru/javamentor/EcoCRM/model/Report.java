@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "reports")
 public class Report {
 
     @Id
@@ -13,7 +13,6 @@ public class Report {
 
     @Column(name = "description")
     private String description;
-
 
     @ElementCollection
     @CollectionTable(name="link", joinColumns=@JoinColumn(name="report_id"))

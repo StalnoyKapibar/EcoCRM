@@ -2,9 +2,9 @@ package ru.javamentor.EcoCRM.dto;
 
 public class TaskDTO {
 
-    String name;
+    private String name;
 
-    String description;
+    private String description;
 
     public TaskDTO() {
 

@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class TaskServiceImpl extends AbstractServiceImpl<Task> implements TaskService{
+
     private TaskDao taskDao;
 
     @Autowired
@@ -31,7 +32,7 @@ public class TaskServiceImpl extends AbstractServiceImpl<Task> implements TaskSe
     }
 
     @Override
-    public Task getDistinctStaticTask(long projectId, StepNumber stepNumber, TaskType taskType) {
+    public Task getDistinctStaticTask(Long projectId, StepNumber stepNumber, TaskType taskType) {
         return taskDao.getDistinctStaticTask(projectId, stepNumber, taskType);
     }
 }

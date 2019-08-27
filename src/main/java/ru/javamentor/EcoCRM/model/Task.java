@@ -16,18 +16,10 @@ public class Task implements Serializable {
     private Long id;
 
     @Column(name = "description")
-    private String description = "Нет описания";
+    private String description;
 
     @Column(name = "name")
-    private String name = "Нет названия";
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Column(name = "task_status")
     @Enumerated(value = EnumType.STRING)
@@ -48,10 +40,6 @@ public class Task implements Serializable {
 
     }
 
-    public Task(String description) {
-        this.description = description;
-    }
-
     public Task(String description, Step step, TaskType taskType) {
         this.description = description;
         this.step = step;
@@ -62,6 +50,14 @@ public class Task implements Serializable {
         this.description = description;
         this.step = step;
         this.type = taskType;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 

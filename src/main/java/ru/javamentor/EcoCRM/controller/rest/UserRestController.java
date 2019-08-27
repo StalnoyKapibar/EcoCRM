@@ -2,15 +2,18 @@ package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.javamentor.EcoCRM.dto.CurrentUserDTO;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.UserStatus;
+import ru.javamentor.EcoCRM.service.DTOService;
 import ru.javamentor.EcoCRM.service.ProjectService;
 import ru.javamentor.EcoCRM.service.UserService;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,9 @@ public class UserRestController {
 
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    DTOService dtoService;
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public User getUser(@PathVariable(required = false) Long id) {
@@ -69,5 +75,11 @@ public class UserRestController {
         user.setEnabled();
         userService.update(user);
         return "/admin/usersList";
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
+    public CurrentUserDTO getCurrentUser(Principal principal){
+        User user = (User) userService.loadUserByUsername(principal.getName());
+        CurrentUserDTO userDTO = dtoService.convertCurrentUserToDTO(user);
+        return userDTO;
     }
 }

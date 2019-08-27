@@ -7,6 +7,6 @@ public interface TokenService extends AbstractService<Token> {
     String encodeToken();
 
     Token loadTokenByEmail(String email);
-
+    void deleteOldTokens();
     String loadEmailByToken(String token);
 }

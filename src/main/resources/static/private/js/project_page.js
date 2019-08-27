@@ -15,9 +15,36 @@ function getStep(stepNumber) {
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
             stepId = stepDto.id;
-            // getStepType(stepNumber, stepDto);
+            getStepType(stepNumber, stepDto);
         }
     });
+}
+
+function getCurrentStep(StepNumber, StepDto) {
+    if (stepNumber == 'STEP_1') {
+        step1(stepDto);
+    }
+    if (stepNumber == 'STEP_2') {
+        step2(stepDto);
+    }
+    if (stepNumber == 'STEP_3') {
+        step3(stepDto);
+    }
+    if (stepNumber == 'STEP_4') {
+
+    }
+    if (stepNumber == 'STEP_5') {
+
+    }
+    if (stepNumber == 'STEP_6') {
+
+    }
+    if (stepNumber == 'STEP_7') {
+        step7(stepDto);
+    }
+    if (stepNumber == 'STEP_8') {
+
+    }
 }
 
 function getStepType(stepNumber, stepDto) {

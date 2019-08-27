@@ -17,11 +17,27 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="nav flex-column nav-pills"  role="tablist" id = "tabList_STEP_7" aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                            <a class="nav-link active" data-toggle="pill" href="#case_description_pil"
+                               role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                Описание
+                            </a>
                         </div>
                         <div class="tab-content" id = "tabContent_STEP_7" style="width: 70%">
+                            <h6>Описание кейса</h6>
+                            <br/>
+                            <textarea class="form-control rounded-0"></textarea>
+                            <br/>
+                            <h6>Ссылки на ресурсы</h6>
+                            <div id = "case_link_list">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <a href="#" class="text-primary" onclick="addlink()">Ссылка +</a>
                         </div>
-                    </div>
-                    <div class="row">
                     </div>
                 </div>
         </div>

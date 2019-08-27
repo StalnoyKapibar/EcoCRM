@@ -30,7 +30,7 @@ function getStepType(stepNumber, stepDto) {
     $.each(stepDto.tasks, function (key, value) {
             if (value.name !== null) {
                 tabList.append(
-                    '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
+                    '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '_" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
                     value.name + '<input type="checkbox" id="t_toggle_' + value.id + '"' +
                     '                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "' +
                     '                                       data-onstyle="success" data-offstyle="light" data-style="ios"></a>');
@@ -41,7 +41,7 @@ function getStepType(stepNumber, stepDto) {
                 }
 
                 tabContent.append(
-                    ' <div class="tab-pane fade" id="task3_' + value.id + '" role="tabpanel" aria-labelledby="v-pills-home-tab">' +
+                    ' <div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">' +
                     '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
                 if (stepNumber == 'STEP_1') {
 
@@ -70,7 +70,7 @@ function getStepType(stepNumber, stepDto) {
             }
         }
     );
-    $('#tabListStep3').append(
+    $(tabList).append(
         '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
     fillToggles();
 }
@@ -97,16 +97,16 @@ function add_task() {
 
             $('#nav-link-step3').html('');
 
-            $('#tabListStep3').append(
+            $('tabList').append(
                 '<a class="nav-link" data-toggle="pill" href="#task3_' + task.id + '" role="tab" aria-controls="v-pills-home" aria-selected="false">\n' +
                 task.name + '<input type="checkbox" id="t_toggle_' + value.id + '"' +
                 '                                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "' +
                 '                                                       data-onstyle="success" data-offstyle="light" data-style="ios"></a>');
 
-            $('#tabListStep3').append(
+            $('tabList').append(
                 '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
 
-            $('#tabContentStep3').append(
+            $('tabList').append(
                 ' <div class="tab-pane fade" id="task3_' + task.id + '" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
                 '<h5>Описание:</h5><h5>\n' + task.description + '</h5><br></div>');
         },

@@ -3,13 +3,13 @@ function step3(stepDto) {
     $.each(stepDto.tasks, function (key, value) {
         if (value.name !== null) {
             if (value.type === 'CONTRACTOR_INFO') {
-                $('#task3_' + value.id).append(
+                $('#task3_' + value.id+'_').append(
                     '<div id="task_3_1"><table class="table table-hover">\n' +
                     '<tbody id="tableCompany"></tbody></table>\n' +
                     '<button type="button" class="btn btn-outline-primary">Добавить заготовителя +</button></div>')
             }
 
-            $('#task3_' + value.id).append(
+            $('#task3_' + value.id+'_').append(
                 '<label for="comment" class="h6">Комментарий:</label>\n' +
                 '<textarea class="form-control" rows="5"></textarea></div>');
         }

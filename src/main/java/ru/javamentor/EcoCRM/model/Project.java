@@ -1,10 +1,13 @@
 package ru.javamentor.EcoCRM.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,6 +52,18 @@ public class Project implements Serializable {
 
     @Column(name = "end_step")
     private LocalDate endStep;
+
+    @OneToMany
+    private List<Photo> newContainerPhoto;   //step 5
+
+    //todo сделать поле для видео из step 5
+
+    @Column(name="new_container_comment")
+    private String newContainerComment; //step 5
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="new_container_date")
+    private Date newContainerDate;  //step 5
 
     public Project() {
 
@@ -167,6 +182,32 @@ public class Project implements Serializable {
     public void setEndStep(LocalDate endStep) {
         this.endStep = endStep;
     }
+
+    public List<Photo> getNewContainerPhoto() {
+        return newContainerPhoto;
+    }
+
+    public void setNewContainerPhoto(List<Photo> newContainerPhoto) {
+        this.newContainerPhoto = newContainerPhoto;
+    }
+
+    public String getNewContainerComment() {
+        return newContainerComment;
+    }
+
+    public void setNewContainerComment(String newContainerComment) {
+        this.newContainerComment = newContainerComment;
+    }
+
+    public Date getNewContainerDate() {
+        return newContainerDate;
+    }
+
+    public void setNewContainerDate(Date newContainerDate) {
+        this.newContainerDate = newContainerDate;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

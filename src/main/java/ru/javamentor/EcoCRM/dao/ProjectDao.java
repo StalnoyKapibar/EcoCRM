@@ -1,10 +1,12 @@
 package ru.javamentor.EcoCRM.dao;
 
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
+import ru.javamentor.EcoCRM.model.Photo;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 

@@ -1,6 +1,5 @@
-let projectId;
 $(document).ready(function () {
-    projectId = $('#projectId').val();
+    var projectId = $('#projectId').val();
     $('#datepicker').datepicker({
         format: 'yyyy-mm-dd',
         uiLibrary: 'bootstrap4'

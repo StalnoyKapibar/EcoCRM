@@ -1,8 +1,11 @@
 package ru.javamentor.EcoCRM.model;
 
 import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.petition.embedded.TrashType;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,7 +14,7 @@ public class Petition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "email")
     private String email;
@@ -20,43 +23,47 @@ public class Petition {
     private String userName;
 
     @Column(name= "contact_information")
-    private String contactInformation; // профиль в соцсети или номер телефона
+    private String contactInformation;
+
+    @Column(name = "petitioner_type")
+    private String petitionerType;
+
+    @Column(name = "activity_type")
+    private String activityType;
+
+    @ElementCollection
+    @CollectionTable(name="type_of_raw_material", joinColumns=@JoinColumn(name="petition_id"))
+    private List<String> typeOfRawMaterial;
+
+    @Column(name = "address_home")
+    private String addressHome;
+
+    @Column(name = "house_district")
+    private String houseDistrict;
+
+    @Column(name = "flats_count")
+    private String flatsCount;
 
     @Column(name ="status_home")
     private String statusHome;
 
-    @Column(name = "separate_collection")
-    private String separateCollection;
+    @Column(name = "management_company_type")
+    private String managementCompanyType;
 
-    @Column(name = "type_of_raw_material")
-    private String typeOfRawMaterial;
+    @Column(name = "available_council")
+    private String availableCouncil;
 
-    @Column(name = "adres_home")
-    private String adresHome;
+    @Column (name = "management_organization_relation")
+    private String managementOrganizationRelation;
 
-    @Column(name = "house_area")
-    private String houseArea;
-
-    @Column(name = "count_of_apartments")
-    private String countOfApartments;
-
-    @Column(name = "home_control_form")
-    private String homeControlForm;
-
-    @Column(name = "house_council")
-    private String houseCouncil;
-
-    @Column (name = "management_organization")
-    private String managementOrganization;
-
-    @Column(name = "board_house_contact_information")
-    private String boardHouseContactInformation;
+    @Column(name = "management_company_contacts")
+    private String managementCompanyContacts;
 
     @Column(name = "additional_information")
     private String additionalInformation;
 
-    @Column(name = "container_site")
-    private String containerSite;
+    @Column(name = "container_available")
+    private String containerAvailable;
 
     @Column (name = "container_size")
     private String containerSize;
@@ -64,17 +71,14 @@ public class Petition {
     @Column (name = "container_owner")
     private String containerOwner;
 
-    @Column(name = "why_not_container")
-    private String whyNotContainer;
-
-    @Column(name = "garbage")
-    private String garbage;
+    @Column(name = "garbage_available")
+    private String garbageAvailable;
 
     @Column(name = "export_garbage")
     private String exportGarbage;
 
-    @Column(name = "yes")
-    private String yes;
+    @Column(name = "agreement")
+    private String agreement;
 
     @Column (name = "data")
     private LocalDate data;
@@ -82,7 +86,6 @@ public class Petition {
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private Status status = Status.TODO;
-
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -93,220 +96,7 @@ public class Petition {
     )
     private Set<User> userPetition;
 
-    public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial, String adresHome, String houseArea, String countOfApartments, String homeControlForm, String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage, String exportGarbage, String yes, LocalDate data, Status status, Set<User> userPetition) {
-        this.email = email;
-        this.userName = userName;
-        this.contactInformation = contactInformation;
-        this.statusHome = statusHome;
-        this.separateCollection = separateCollection;
-        this.typeOfRawMaterial = typeOfRawMaterial;
-        this.adresHome = adresHome;
-        this.houseArea = houseArea;
-        this.countOfApartments = countOfApartments;
-        this.homeControlForm = homeControlForm;
-        this.houseCouncil = houseCouncil;
-        this.managementOrganization = managementOrganization;
-        this.boardHouseContactInformation = boardHouseContactInformation;
-        this.additionalInformation = additionalInformation;
-        this.containerSite = containerSite;
-        this.containerSize = containerSize;
-        this.containerOwner = containerOwner;
-        this.whyNotContainer = whyNotContainer;
-        this.garbage = garbage;
-        this.exportGarbage = exportGarbage;
-        this.yes = yes;
-        this.data = data;
-        this.status = status;
-        this.userPetition = userPetition;
-    }
-
-    public Petition(String email, String userName, String contactInformation, String statusHome, String separateCollection, String typeOfRawMaterial, String adresHome, String houseArea, String countOfApartments, String homeControlForm,
-                    String houseCouncil, String managementOrganization, String boardHouseContactInformation, String additionalInformation, String containerSite, String containerSize, String containerOwner, String whyNotContainer, String garbage,
-                    String exportGarbage, String yes, LocalDate data, Status status) {
-        this.email = email;
-        this.userName = userName;
-        this.contactInformation = contactInformation;
-        this.statusHome = statusHome;
-        this.separateCollection = separateCollection;
-        this.typeOfRawMaterial = typeOfRawMaterial;
-        this.adresHome = adresHome;
-        this.houseArea = houseArea;
-        this.countOfApartments = countOfApartments;
-        this.homeControlForm = homeControlForm;
-        this.houseCouncil = houseCouncil;
-        this.managementOrganization = managementOrganization;
-        this.boardHouseContactInformation = boardHouseContactInformation;
-        this.additionalInformation = additionalInformation;
-        this.containerSite = containerSite;
-        this.containerSize  =containerSize;
-        this.containerOwner = containerOwner;
-        this.whyNotContainer  = whyNotContainer;
-        this.garbage = garbage;
-        this.exportGarbage = exportGarbage;
-        this.yes = yes;
-        this.data = data;
-        this.status = status;
-//        this.userPetition = userPetition;
-
-    }
-
     public Petition() {}
-
-    public Set<User> getUserPetition() {
-        return userPetition;
-    }
-
-    public void setUserPetition(Set<User> userPetition) {
-        this.userPetition = userPetition;
-    }
-
-    public String getYes() {
-        return yes;
-    }
-
-    public void setYes(String yes) {
-        this.yes = yes;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getExportGarbage() {
-        return exportGarbage;
-    }
-
-    public void setExportGarbage(String exportGarbage) {
-        this.exportGarbage = exportGarbage;
-    }
-
-    public String getWhyNotContainer() {
-        return whyNotContainer;
-    }
-
-    public void setWhyNotContainer(String whyNotContainer) {
-        this.whyNotContainer = whyNotContainer;
-    }
-
-    public String getGarbage() {
-        return garbage;
-    }
-
-    public void setGarbage(String garbage) {
-        this.garbage = garbage;
-    }
-
-    public String getContainerOwner() {
-        return containerOwner;
-    }
-
-    public void setContainerOwner(String containerOwner) {
-        this.containerOwner = containerOwner;
-    }
-
-    public String getContainerSize() {
-        return containerSize;
-    }
-
-    public void setContainerSize(String containerSize) {
-        this.containerSize = containerSize;
-    }
-
-    public String getContainerSite() {
-        return containerSite;
-    }
-
-    public void setContainerSite(String containerSite) {
-        this.containerSite = containerSite;
-    }
-
-    public String getAdditionalInformation() {
-        return additionalInformation;
-    }
-
-    public void setAdditionalInformation(String additionalInformation) {
-        this.additionalInformation = additionalInformation;
-    }
-
-    public String getBoardHouseContactInformation() {
-        return boardHouseContactInformation;
-    }
-
-    public void setBoardHouseContactInformation(String boardHouseContactInformation) {
-        this.boardHouseContactInformation = boardHouseContactInformation;
-    }
-
-    public String getManagementOrganization() {
-        return managementOrganization;
-    }
-
-    public void setManagementOrganization(String managementOrganization) {
-        this.managementOrganization = managementOrganization;
-    }
-
-    public String getHouseCouncil() {
-        return houseCouncil;
-    }
-
-    public void setHouseCouncil(String houseCouncil) {
-        this.houseCouncil = houseCouncil;
-    }
-
-    public String getHomeControlForm() {
-        return homeControlForm;
-    }
-
-    public void setHomeControlForm(String homeControlForm) {
-        this.homeControlForm = homeControlForm;
-    }
-
-    public String getCountOfApartments() {
-        return countOfApartments;
-    }
-
-    public void setCountOfApartments(String countOfApartments) {
-        this.countOfApartments = countOfApartments;
-    }
-
-    public String getHouseArea() {
-        return houseArea;
-    }
-
-    public void setHouseArea(String houseArea) {
-        this.houseArea = houseArea;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAdresHome() {
-        return adresHome;
-    }
-
-    public void setAdresHome(String adresHome) {
-        this.adresHome = adresHome;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -332,6 +122,54 @@ public class Petition {
         this.contactInformation = contactInformation;
     }
 
+    public String getPetitionerType() {
+        return petitionerType;
+    }
+
+    public void setPetitionerType(String petitionerType) {
+        this.petitionerType = petitionerType;
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    public List<String> getTypeOfRawMaterial() {
+        return typeOfRawMaterial;
+    }
+
+    public void setTypeOfRawMaterial(List<String> typeOfRawMaterial) {
+        this.typeOfRawMaterial = typeOfRawMaterial;
+    }
+
+    public String getAddressHome() {
+        return addressHome;
+    }
+
+    public void setAddressHome(String addressHome) {
+        this.addressHome = addressHome;
+    }
+
+    public String getHouseDistrict() {
+        return houseDistrict;
+    }
+
+    public void setHouseDistrict(String houseDistrict) {
+        this.houseDistrict = houseDistrict;
+    }
+
+    public String getFlatsCount() {
+        return flatsCount;
+    }
+
+    public void setFlatsCount(String flatsCount) {
+        this.flatsCount = flatsCount;
+    }
+
     public String getStatusHome() {
         return statusHome;
     }
@@ -340,19 +178,123 @@ public class Petition {
         this.statusHome = statusHome;
     }
 
-    public String getSeparateCollection() {
-        return separateCollection;
+    public String getManagementCompanyType() {
+        return managementCompanyType;
     }
 
-    public void setSeparateCollection(String separateCollection) {
-        this.separateCollection = separateCollection;
+    public void setManagementCompanyType(String managementCompanyType) {
+        this.managementCompanyType = managementCompanyType;
     }
 
-    public String getTypeOfRawMaterial() {
-        return typeOfRawMaterial;
+    public String getAvailableCouncil() {
+        return availableCouncil;
     }
 
-    public void setTypeOfRawMaterial(String typeOfRawMaterial) {
-        this.typeOfRawMaterial = typeOfRawMaterial;
+    public void setAvailableCouncil(String availableCouncil) {
+        this.availableCouncil = availableCouncil;
+    }
+
+    public String getManagementOrganizationRelation() {
+        return managementOrganizationRelation;
+    }
+
+    public void setManagementOrganizationRelation(String managementOrganizationRelation) {
+        this.managementOrganizationRelation = managementOrganizationRelation;
+    }
+
+    public String getManagementCompanyContacts() {
+        return managementCompanyContacts;
+    }
+
+    public void setManagementCompanyContacts(String managementCompanyContacts) {
+        this.managementCompanyContacts = managementCompanyContacts;
+    }
+
+    public String getAdditionalInformation() {
+        return additionalInformation;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
+    public String getContainerAvailable() {
+        return containerAvailable;
+    }
+
+    public void setContainerAvailable(String containerAvailable) {
+        this.containerAvailable = containerAvailable;
+    }
+
+    public String getContainerSize() {
+        return containerSize;
+    }
+
+    public void setContainerSize(String containerSize) {
+        this.containerSize = containerSize;
+    }
+
+    public String getContainerOwner() {
+        return containerOwner;
+    }
+
+    public void setContainerOwner(String containerOwner) {
+        this.containerOwner = containerOwner;
+    }
+
+    public String getGarbageAvailable() {
+        return garbageAvailable;
+    }
+
+    public void setGarbageAvailable(String garbageAvailable) {
+        this.garbageAvailable = garbageAvailable;
+    }
+
+    public String getExportGarbage() {
+        return exportGarbage;
+    }
+
+    public void setExportGarbage(String exportGarbage) {
+        this.exportGarbage = exportGarbage;
+    }
+
+    public String getAgreement() {
+        return agreement;
+    }
+
+    public void setAgreement(String agreement) {
+        this.agreement = agreement;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<User> getUserPetition() {
+        return userPetition;
+    }
+
+    public void setUserPetition(Set<User> userPetition) {
+        this.userPetition = userPetition;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

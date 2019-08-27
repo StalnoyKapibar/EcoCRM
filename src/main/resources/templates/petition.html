@@ -20,96 +20,111 @@
         </div>
         <div class="col-sm-4" style="border-color: #2d4373">
             <form name="petition" action="/api/petition" method="POST">
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Адрес электронной почты*</label>
-                    <input type="text" class="form-control" name="email" placeholder="Введите адрес электронной почты"
+                <!-- Email -->
+                <div class="form-group" id="email">
+                    <h6>Адрес электронной почты*</h6>
+                    <input type="email" class="form-control" name="email"
+                           placeholder="Введите адрес электронной почты"
                            required>
                 </div>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Как Вас зовут?*</label>
-                    <input type="text" class="form-control" name="userName" placeholder="Введите ваше имя" required>
+                <!-- Username -->
+                <div class="form-group" id="userName">
+                    <h6>Как Вас зовут?*</h6>
+                    <input type="text" class="form-control" name="userName" placeholder="Введите ваше имя"
+                    required>
                 </div>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Контактная информация (профили в социальных сетях,
-                        телефон)</label>
-                    <input type="text" class="form-control" name="contactInformation"
+                <!-- Contact Info -->
+                <div class="form-group" id="contactInfo">
+                    <h6>Контактная информация (профили в социальных сетях,
+                        телефон)</h6>
+                    <input type="text" class="form-control"  name="contactInformation"
                            placeholder="Контактная информация">
                 </div>
 
-                <div class="form-check">
-                    Ваш статус<br>
-                    <input class="form-check-input" type="checkbox" value="Житель, собственник жилья" name="statusHome">
-                    <label class="form-check-label" for="defaultCheck1">Житель, собственник жилья</label><br>
-                    <input class="form-check-input" type="checkbox"
-                           value="Представитель управляющей организации (УК, ТСЖ и т.п.)" name="statusHome">
-                    <label class="form-check-label" for="defaultCheck1"> Представитель управляющей организации (УК, ТСЖ
-                        и т.п.)</label>
+                <!-- Petitioner type -->
+                <div class="form-group" id="petitionerType">
+                    <div class="form-check">
+                        <h6>Ваш статус:</h6>
+                        <input class="form-check-input" type="radio" value="Житель, собственник жилья"
+                        name="statusHome">
+                        <label class="form-check-label">Житель, собственник жилья</label><br>
+                        <input class="form-check-input" type="radio"
+                               value="Представитель управляющей организации (УК, ТСЖ и т.п.)"
+                        name="statusHome">
+                        <label class="form-check-label"> Представитель управляющей организации (УК, ТСЖ
+                            и т.п.)</label>
+                    </div>
                 </div>
-                <p></p>
 
-                <div class="form-check">
-                    Участвуете ли Вы в деятельности движения "Раздельный сбор"<br>
-                    <input class="form-check-input" type="checkbox"
-                           value="Участвую в ежемесячных акциях и сдаю своё вторсырьё" name="separateCollection">
-                    <label class="form-check-label" for="defaultCheck1">Участвую в ежемесячных акциях и сдаю своё
-                        вторсырьё</label><br>
-                    <input class="form-check-input" type="checkbox" value="Волонтер на акциях"
-                           name="separateCollection">
-                    <label class="form-check-label" for="defaultCheck1">Волонтер на акциях</label><br>
-                    <input class="form-check-input" type="checkbox" value="Координатор на акциях"
-                           name="separateCollection">
-                    <label class="form-check-label" for="defaultCheck1">Координатор на акциях</label><br>
-                    <input class="form-check-input" type="checkbox" value="Участник рабочих групп движени"
-                           name="separateCollection">
-                    <label class="form-check-label" for="defaultCheck1">Участник рабочих групп движени</label><br>
-                    <input class="form-check-input" type="checkbox" value="Не принимаю участия в деятельности движения"
-                           name="separateCollection">
-                    <label class="form-check-label" for="defaultCheck1">Не принимаю участия в деятельности
-                        движения/label><br>
-                        <label for="formGroupExampleInput2">Другое</label>
-                        <input type="text" class="form-control" name="separateCollection" placeholder="Другое">
-                    </label>
+                <!-- Type of activity -->
+                <div class="form-group" id="typeOfActivity">
+                    <div class="form-check">
+                        <h6>Участвуете ли Вы в деятельности движения "Раздельный сбор":</h6>
+                        <input class="form-check-input" type="radio"
+                               value="Участвую в ежемесячных акциях и сдаю своё вторсырьё" name="trashType">
+                        <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё
+                            вторсырьё</label><br>
+                        <input class="form-check-input" type="radio" value="Волонтер на акциях"
+                               name="trashType">
+                        <label class="form-check-label">Волонтер на акциях</label><br>
+                        <input class="form-check-input" type="radio" value="Координатор на акциях"
+                        name="trashType">
+                        <label class="form-check-label">Координатор на акциях</label><br>
+                        <input class="form-check-input" type="radio" value="Участник рабочих групп движени"
+                        name="trashType">
+                        <label class="form-check-label">Участник рабочих групп движения</label><br>
+                        <input class="form-check-input" type="radio"
+                        value="Не принимаю участия в деятельности движения"
+                        name="trashType">
+                        <label class="form-check-label">Не принимаю участия в деятельности
+                            движения</label><br>
+                        <input class="form-check-input" type="radio" value="Другое" name="trashType">
+                        <label lass="form-check-label">Другое</label><br>
+                    </div>
                 </div>
-                <p></p>
 
-                <div class="form-check">
-                    Накопление какого вторсырья Вам бы хотелось организовать?<br>
+                <!-- Type of raw -->
+                <div class="form-check" id="rawType">
+                    <h6>Накопление какого вторсырья Вам бы хотелось организовать?</h6>
                     <input class="form-check-input" type="checkbox" value="Бумага/картон" name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Бумага/картон</label><br>
+                    <label class="form-check-label" >Бумага/картон</label><br>
                     <input class="form-check-input" type="checkbox" value="Стекло" name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Стекло</label><br>
+                    <label class="form-check-label" >Стекло</label><br>
                     <input class="form-check-input" type="checkbox" value="Металл" name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Металл</label><br>
+                    <label class="form-check-label">Металл</label><br>
                     <input class="form-check-input" type="checkbox" value="Твёрдый пластик" name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Твёрдый пластик</label><br>
+                    <label class="form-check-label">Твёрдый пластик</label><br>
                     <input class="form-check-input" type="checkbox" value="Мягкий пластик" name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Мягкий пластик</label><br>
+                    <label class="form-check-label">Мягкий пластик</label><br>
                     <input class="form-check-input" type="checkbox" value="Тетрапак" name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Тетрапак</label><br>
+                    <label class="form-check-label">Тетрапак</label><br>
                     <input class="form-check-input" type="checkbox" value="Органические отходы"
                            name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Органические отходы</label><br>
+                    <label class="form-check-label">Органические отходы</label><br>
                     <input class="form-check-input" type="checkbox" value="Опасные отходы (батарейки, лампочки и т.п.)"
                            name="typeOfRawMaterial">
-                    <label class="form-check-label" for="defaultCheck1">Опасные отходы (батарейки, лампочки и
+                    <label class="form-check-label">Опасные отходы (батарейки, лампочки и
                         т.п.)</label><br>
-                    <label for="formGroupExampleInput2">Другое</label>
-                    <input type="text" class="form-control" name="separateCollection" placeholder="Другое">
+                    <input class="form-check-input" type="checkbox" value="Другое"
+                           name="typeOfRawMaterial">
+                    <label class="form-check-label">Другое</label><br>
                 </div>
                 <p></p>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Адрес дома?*</label>
-                    <input type="text" class="form-control" name="adresHome" placeholder="Адрес дома" required>
+                <!-- Home address -->
+                <div class="form-group" id="homeAddress">
+                    <h6>Адрес дома?*</h6>
+                    <input type="text" class="form-control" name="homeAddress" placeholder="Адрес дома" required>
                 </div>
 
-                <div class="form-row align-items-center">
+                <!-- District -->
+                <div class="form-row align-items-center" id="district">
                     <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">В каком районе расположен дом? *</label>
+                        <label class="mr-sm-2"><h6>В каком районе расположен дом? *</h6></label>
                         <select class="custom-select mr-sm-2" name="houseArea">
-                            <option selected>С какого ты района? епта</option>
+                            <option selected>Нет района</option>
                             <option value="Адмиралтейский район">Адмиралтейский район</option>
                             <option value="Василеостровский район">Василеостровский район</option>
                             <option value="Выборгский район">Выборгский район</option>
@@ -137,123 +152,130 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Сколько квартир в доме?</label>
-                    <input type="text" class="form-control" name="countOfApartments" placeholder="Колличество квартир">
+                <!-- Flats count -->
+                <div class="form-group" id="flatsCount">
+                    <h6>Сколько квартир в доме?</h6>
+                    <input type="text" class="form-control" name="flatsCount" placeholder="Колличество квартир">
                 </div>
 
-                <div class="form-check">
-                    Какая форма управления Вашим домом<br>
-                    <input class="form-check-input" type="checkbox" value="Товарищество собственников жилья (ТСЖ)"
+                <!-- Management company type -->
+                <div class="form-check" id="manag_comp_type">
+                    <h6>Какая форма управления Вашим домом</h6>
+                    <input class="form-check-input" type="radio" value="Товарищество собственников жилья (ТСЖ)"
                            name="homeControlForm">
-                    <label class="form-check-label" for="defaultCheck1">Товарищество собственников жилья
+                    <label class="form-check-label">Товарищество собственников жилья
                         (ТСЖ)</label><br>
-                    <input class="form-check-input" type="checkbox" value="Управляющая компания (УК)"
+                    <input class="form-check-input" type="radio" value="Управляющая компания (УК)"
                            name="homeControlForm">
-                    <label class="form-check-label" for="defaultCheck1">Управляющая компания (УК)</label><br>
-                    <input class="form-check-input" type="checkbox" value="Жилищно-коммунальная служба (ЖКС)"
+                    <label class="form-check-label">Управляющая компания (УК)</label><br>
+                    <input class="form-check-input" type="radio" value="Жилищно-коммунальная служба (ЖКС)"
                            name="homeControlForm">
-                    <label class="form-check-label" for="defaultCheck1">Жилищно-коммунальная служба (ЖКС)</label><br>
-                    <input class="form-check-input" type="checkbox" value="Другая" name="homeControlForm">
-                    <label class="form-check-label" for="defaultCheck1">Другая</label><br>
+                    <label class="form-check-label">Жилищно-коммунальная служба (ЖКС)</label><br>
+                    <input class="form-check-input" type="radio" value="Другая" name="homeControlForm">
+                    <label class="form-check-label">Другая</label><br>
                 </div>
                 <p></p>
 
-                <div class="form-check">
-                    Есть ли совет многоквартирного дома?<br>
-                    <input class="form-check-input" type="checkbox" value="Да" name="houseCouncil">
-                    <label class="form-check-label" for="defaultCheck1">Да</label><br>
-                    <input class="form-check-input" type="checkbox" value="Нет" name="houseCouncil">
-                    <label class="form-check-label" for="defaultCheck1">Нет</label><br>
-                    <input class="form-check-input" type="checkbox" value="Сомневается" name="houseCouncil">
-                    <label class="form-check-label" for="defaultCheck1">Сомневается</label><br>
+                <!-- House council info -->
+                <div class="form-check" id="manag_comp_council_available">
+                    <h6>Есть ли совет многоквартирного дома?</h6>
+                    <input class="form-check-input" type="radio" value="Да" name="houseCouncil">
+                    <label class="form-check-label">Да</label><br>
+                    <input class="form-check-input" type="radio" value="Нет" name="houseCouncil">
+                    <label class="form-check-label">Нет</label><br>
+                    <input class="form-check-input" type="radio" value="Сомневается" name="houseCouncil">
+                    <label class="form-check-label">Сомневается</label><br>
                 </div>
                 <p></p>
 
-                <div class="form-check">
-                    Как управляющая организация относится к РНО?<br>
-                    <input class="form-check-input" type="checkbox" value="Положительно, ждёт предложений"
-                           name="managementOrganization">
-                    <label class="form-check-label" for="defaultCheck1">Положительно, ждёт предложений</label><br>
-                    <input class="form-check-input" type="checkbox" value="Отрицательно, не верит в раздельный сбор"
-                           name="managementOrganization">
-                    <label class="form-check-label" for="defaultCheck1">Отрицательно, не верит в раздельный сбор</label><br>
-                    <input class="form-check-input" type="checkbox" value="Не знаю" name="managementOrganization">
-                    <label class="form-check-label" for="defaultCheck1">Не знаю</label><br>
+                <!-- Management organization relation -->
+                <div class="form-check" id="manag_rel">
+                    <h6>Как управляющая организация относится к РНО?</h6>
+                    <input class="form-check-input" type="radio" value="Положительно, ждёт предложений"
+                           name="managementOrganizationRelation">
+                    <label class="form-check-label">Положительно, ждёт предложений</label><br>
+                    <input class="form-check-input" type="radio" value="Отрицательно, не верит в раздельный сбор"
+                           name="managementOrganizationRelation">
+                    <label class="form-check-label">Отрицательно, не верит в раздельный сбор</label><br>
+                    <input class="form-check-input" type="radio" value="Не знаю" name="managementOrganizationRelation">
+                    <label class="form-check-label">Не знаю</label><br>
                 </div>
                 <p></p>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Контактная информация правления дома (ФИО руководителя, телефон,
-                        адрес, часы приёма жильцов и т.п.)</label>
+                <!-- Management company contact information -->
+                <div class="form-group" id="manag_comp_contact">
+                    <h6>Контактная информация управления дома (ФИО руководителя, телефон,
+                        адрес, часы приёма жильцов и т.п.)</h6>
                     <input type="text" class="form-control" name="boardHouseContactInformation"
                            placeholder="Контактная информация">
                 </div>
                 <p></p>
 
-
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Дополнительная информация</label>
+                <!-- Additional Info -->
+                <div class="form-group" id="additional_info">
+                   <h6>Дополнительная информация</h6>
                     <input type="text" class="form-control" name="additionalInformation"
                            placeholder="Дополнительная информация">
                 </div>
                 <p></p>
 
-                <div class="form-check">
-                    Имеется ли у Вашего дома своя контейнерная площадка (КП)?<br>
-                    <input class="form-check-input" type="checkbox" value="да" name="containerSite">
-                    <label class="form-check-label" for="defaultCheck1">Да</label><br>
-                    <input class="form-check-input" type="checkbox" value="Нет" name="containerSite">
-                    <label class="form-check-label" for="defaultCheck1">Нет</label><br>
+                <!-- Container available -->
+                <div class="form-check" id="container_available">
+                    <h6>Имеется ли у Вашего дома своя контейнерная площадка (КП)?</h6>
+                    <input class="form-check-input" type="radio" value="да" name="containerAvailable">
+                    <label class="form-check-label">Да</label><br>
+                    <input class="form-check-input" type="radio" value="Нет" name="containerAvailable">
+                    <label class="form-check-label">Нет</label><br>
                 </div>
                 <p></p>
 
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Если КП имеется, то укажите её площадь и особенности
-                        устройства</label>
+                <!-- KP size info -->
+                <div class="form-group" id="kp_info">
+                    <h6>Если КП имеется, то укажите её площадь и особенности устройства</h6>
                     <input type="text" class="form-control" name="containerSize" placeholder="Введите текст">
                 </div>
                 <p></p>
 
-                <div class="form-check">
-                    Если КП имеется, то укажите собственника земли, на которой она находится<br>
-                    <input class="form-check-input" type="checkbox" value="Cобственик дома" name="containerOwner">
-                    <label class="form-check-label" for="defaultCheck1">Cобственик дома</label><br>
-                    <input class="form-check-input" type="checkbox" value="Муниципальное образование"
+                <!-- KP place owner -->
+                <div class="form-check" id="kp_owner">
+                    <h6>Если КП имеется, то укажите собственника земли, на которой она находится</h6>
+                    <input class="form-check-input" type="radio" value="Собственник дома" name="containerOwner">
+                    <label class="form-check-label">Собственник дома</label><br>
+                    <input class="form-check-input" type="radio" value="Муниципальное образование"
                            name="containerOwner">
-                    <label class="form-check-label" for="defaultCheck1">Муниципальное образование</label><br>
-                    <input class="form-check-input" type="checkbox" value="Город (субъект РФ)" name="containerOwner">
-                    <label class="form-check-label" for="defaultCheck1">Город (субъект РФ)</label><br>
-                    <input class="form-check-input" type="checkbox" value="Другое" name="containerOwner">
-                    <label class="form-check-label" for="defaultCheck1">Другое</label><br>
+                    <label class="form-check-label">Муниципальное образование</label><br>
+                    <input class="form-check-input" type="radio" value="Город (субъект РФ)" name="containerOwner">
+                    <label class="form-check-label">Город (субъект РФ)</label><br>
+                    <input class="form-check-input" type="radio" value="Другое" name="containerOwner">
+                    <label class="form-check-label">Другое</label><br>
                 </div>
                 <p></p>
 
+                <!-- Chute available -->
                 <div class="form-check">
-                    Имеется ли в Вашем доме мусоропровод?<br>
-                    <input class="form-check-input" type="checkbox" value="Да" name="garbage">
-                    <label class="form-check-label" for="defaultCheck1">Да</label><br>
-                    <input class="form-check-input" type="checkbox" value="Нет" name="garbage">
-                    <label class="form-check-label" for="defaultCheck1">Нет</label><br>
+                    <h6>Имеется ли в Вашем доме мусоропровод?</h6>
+                    <input class="form-check-input" type="radio" value="Да" name="garbage">
+                    <label class="form-check-label">Да</label><br>
+                    <input class="form-check-input" type="radio" value="Нет" name="garbage">
+                    <label class="form-check-label">Нет</label><br>
                 </div>
                 <p></p>
 
+                <!-- Export garbage company info -->
                 <div class="form-group">
-                    <label for="formGroupExampleInput2">Какая компания занимается вывозом ТКО?</label>
+                    <h6>Какая компания занимается вывозом ТКО?</h6>
                     <input type="text" class="form-control" name="exportGarbage" placeholder="Введите текст">
                 </div>
                 <p></p>
 
-                <div class="form-check">
-                    Настоящим я даю свое согласия на сбор<br>
-                    <input class="form-check-input" type="checkbox" value="Да" name="yes">
-                    <label class="form-check-label" for="defaultCheck1">Да</label><br>
+                <!-- Agreement -->
+                <div class="form-inline" id="agreement">
+                    <h6>Настоящим я даю свое согласия на сбор</h6>
+                    <input class="form-check" type="checkbox" value="Да" name="agreement"
+                           style="margin-left:auto;margin-right:0px" required>
                 </div>
                 <p></p>
-                </select>
-                <div class="col-auto my-1">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                    <button type="submit" class="btn btn-primary float-right">Отправить заявку</button>
             </form>
         </div>
         <div class="col-sm-4">

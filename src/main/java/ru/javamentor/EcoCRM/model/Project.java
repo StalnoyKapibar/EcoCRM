@@ -1,10 +1,13 @@
 package ru.javamentor.EcoCRM.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,9 +24,6 @@ public class Project implements Serializable {
 
     @OneToOne
     private Petition petition;
-
-    @Column(name = "title", nullable = false)
-    private String title;
 
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
@@ -50,23 +50,20 @@ public class Project implements Serializable {
     @Column(name = "end_step")
     private LocalDate endStep;
 
+    @OneToMany
+    private List<Photo> newContainerPhoto;   //step 5
+
+    //todo сделать поле для видео из step 5
+
+    @Column(name="new_container_comment")
+    private String newContainerComment; //step 5
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="new_container_date")
+    private Date newContainerDate;  //step 5
+
     public Project() {
 
-    }
-
-    public Project(Report report) {
-        this.report = report;
-    }
-
-    public Project(User manager, Petition petition, String title, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
-        this.manager = manager;
-        this.petition = petition;
-        this.title = title;
-        this.status = status;
-        this.point = point;
-        this.company = company;
-        this.contractor = contractor;
-        this.report = report;
     }
 
     public Project(User manager, Petition petition) {
@@ -74,10 +71,14 @@ public class Project implements Serializable {
         this.petition = petition;
     }
 
-    public Project(User manager, Petition petition, String title) {
+    public Project(User manager, Petition petition, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
         this.manager = manager;
         this.petition = petition;
-        this.title = title;
+        this.status = status;
+        this.point = point;
+        this.company = company;
+        this.contractor = contractor;
+        this.report = report;
     }
 
     public void setId(Long id) {
@@ -88,12 +89,12 @@ public class Project implements Serializable {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public Status getStatus() {
@@ -168,6 +169,32 @@ public class Project implements Serializable {
         this.endStep = endStep;
     }
 
+    public List<Photo> getNewContainerPhoto() {
+        return newContainerPhoto;
+    }
+
+    public void setNewContainerPhoto(List<Photo> newContainerPhoto) {
+        this.newContainerPhoto = newContainerPhoto;
+    }
+
+    public String getNewContainerComment() {
+        return newContainerComment;
+    }
+
+    public void setNewContainerComment(String newContainerComment) {
+        this.newContainerComment = newContainerComment;
+    }
+
+    public Date getNewContainerDate() {
+        return newContainerDate;
+    }
+
+    public void setNewContainerDate(Date newContainerDate) {
+        this.newContainerDate = newContainerDate;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -176,7 +203,6 @@ public class Project implements Serializable {
         return Objects.equals(id, project.id) &&
                 Objects.equals(manager, project.manager) &&
                 Objects.equals(petition, project.petition) &&
-                Objects.equals(title, project.title) &&
                 status == project.status &&
                 Objects.equals(point, project.point) &&
                 Objects.equals(company, project.company) &&
@@ -186,14 +212,6 @@ public class Project implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, manager, petition, title, status, point, company, contractor, report);
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
+        return Objects.hash(id, manager, petition, status, point, company, contractor, report);
     }
 }

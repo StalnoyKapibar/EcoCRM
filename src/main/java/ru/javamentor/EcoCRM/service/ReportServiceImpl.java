@@ -8,6 +8,7 @@ import ru.javamentor.EcoCRM.model.Report;
 
 @Service
 public class ReportServiceImpl extends AbstractServiceImpl<Report> implements ReportService {
+
     private ReportDao reportDao;
 
     @Autowired

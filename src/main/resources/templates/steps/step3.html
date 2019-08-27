@@ -16,8 +16,15 @@
                 <div>
                     <div class="row" id="accordion">
                         <div id="tabList_STEP_3" class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                            <a class="nav-link active" data-toggle="pill" href="#contractor_list_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                Список заготовителей
+                            </a>
                         </div>
                         <div id="tabContent_STEP_3" class="tab-content" style="width: 70%">
+                            <div class="tab-pane fade show active" id="contractor_list_pil" role="tabpanel"
+                                 aria-labelledby="v-pills-home-tab">
+                                <h3>Заготовители</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,6 +47,48 @@
                     <textarea class="form-control" rows="5" id="description_of_task"></textarea>
                 </div>
                 <input type = "hidden" id="step_number_create_task">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a class="btn btn-warning" onclick="add_task()">Добавить задачу</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Модальное окно добавления заготовителя -->
+    <div class="modal fade" id="add_contractor_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="contactForm" action="handler.php" method="post">
+                        <div class="form-group">
+                            <label for="name">Ваше имя:</label>
+                            <input id="name" class="form-control" name="name" required type="text" placeholder="Иванов Иван Иванович">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Ваш E-mail:</label>
+                            <input id="email" class="form-control" name="email" required type="text" placeholder="ivanov@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Ваш телефон:</label>
+                            <input id="phone" class="form-control" name="phone" required type="text" placeholder="+7 (800) 000-00-00">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Текст сообщения:</label>
+                            <textarea id="message" class="form-control" required name="message" rows="4"></textarea>
+                        </div>
+                        <div class="form-group form-check">
+                            <input id="check" class="form-check-input" checked type="checkbox">
+                            <label class="form-check-label" for="check">Я добровольно отправляю свои данные</label>
+                        </div>
+                        <button id="button" class="btn btn-success" type="submit">Отправить</button>
+                        <div class="result">
+                            <span id="answer"></span>
+                            <span id="loader" style="display:none"><img src="images/loader.gif" alt=""></span>
+                        </div>
+                    </form>
+                </div>
+                <input type = "hidden" id="">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a class="btn btn-warning" onclick="add_task()">Добавить задачу</a>

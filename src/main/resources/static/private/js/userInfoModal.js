@@ -18,6 +18,12 @@ function getUser(id) {
             getProjectsManager(id);
             getProjectsVolunteer(id);
             getPhoto(id);
+            if(user.status === 'BLOCKED'){
+                document.getElementById("block-btn").style.display='none';
+            } else {
+                document.getElementById("unblock-btn").style.display='none';
+            }
+
         }
     });
 }
@@ -72,14 +78,13 @@ function getProjectsVolunteer(id) {
 
 function blockUser() {
     var userId = $('#userId').text();
+
     $.ajax({
         url: "/api/user/block?id=" + userId,
         type: "POST",
         async: false,
         success: function (address) {
             window.location.href = address;
-            //$("#unblock-btn").prop('disabled', false);
-            //$("#block-btn").prop('disabled', true);
         },
         error: function(error) {
             console.error('problem with blocking', error);
@@ -95,8 +100,7 @@ function unblockUser() {
         async: false,
         success: function (address) {
             window.location.href = address;
-            //$('#block-btn').prop('disabled', false);
-            //$('#unblock-btn').prop('disabled', true);
+
         },
         error: function(error) {
             console.error('problem with unblocking', error);

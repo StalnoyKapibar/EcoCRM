@@ -149,8 +149,6 @@ public class Petition {
         this.yes = yes;
         this.data = data;
         this.status = status;
-//        this.userPetition = userPetition;
-
     }
 
     public Petition() {}

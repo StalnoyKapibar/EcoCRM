@@ -1,4 +1,4 @@
-package ru.javamentor.EcoCRM.controller;
+package ru.javamentor.EcoCRM.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

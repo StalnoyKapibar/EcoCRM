@@ -12,9 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.javamentor.EcoCRM.dto.stepDTO.StepDTO;
 import ru.javamentor.EcoCRM.model.Photo;
 import ru.javamentor.EcoCRM.model.Project;
+import ru.javamentor.EcoCRM.model.Request;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
+import ru.javamentor.EcoCRM.service.ProjectService;
+import ru.javamentor.EcoCRM.service.RequestService;
+import ru.javamentor.EcoCRM.service.StepServiceImpl;
+import ru.javamentor.EcoCRM.service.UserService;
 
 import javax.imageio.ImageIO;
 import java.io.ByteArrayInputStream;
@@ -24,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +45,8 @@ public class ProjectRestController {
 
     @Autowired
     private StepServiceImpl stepService;
+    @Autowired
+    RequestService requestService;
 
     @Autowired
     private PhotoService photoService;
@@ -86,6 +94,26 @@ public class ProjectRestController {
         }
         project.setOldContainerPhoto(listPhoto);
         return project.getOldContainerPhoto();
+    }
+
+
+    //Добавление заявки на участие в проекте
+    @RequestMapping(value = "/request/{project_id}", method = RequestMethod.GET)
+    public String addRequest(@PathVariable("project_id") Long id) {
+        Project projectRequested = projectService.get(id);
+        Long ManagerId = projectRequested.getManager().getId();
+
+        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Request newRequest = new Request(currentUser.getName() + " " + currentUser.getSurname(),/*projectRequested.getPetition().getHouseArea(),currentUser.getId()*/"someaddress",currentUser.getId(),projectRequested.getId());
+
+        User Manager = userService.get(ManagerId);
+        List<Request> currentRequests = Manager.getRequestList();
+        currentRequests.add(newRequest);
+        requestService.insert(newRequest);
+        Manager.setRequestList(currentRequests);
+        userService.update(Manager);
+        return "/projects/all";
     }
 
 }

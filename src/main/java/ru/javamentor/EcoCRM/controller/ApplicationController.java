@@ -2,7 +2,7 @@ package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
+import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
-import ru.javamentor.EcoCRM.service.PetitionService;
-import ru.javamentor.EcoCRM.service.ProjectService;
-import ru.javamentor.EcoCRM.service.StepService;
-import ru.javamentor.EcoCRM.service.UserService;
+import ru.javamentor.EcoCRM.service.*;
 
 import java.util.List;
 
@@ -25,6 +23,9 @@ public class ApplicationController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthoritiesService authoritiesService;
 
     @Autowired
     StepService stepService;
@@ -121,5 +122,14 @@ public class ApplicationController {
         model.addAttribute("all", userService.getAll());
         return "all_users";
     }
+    @GetMapping("/userinfo")
+    public String getuserinfo() {
+        return "userinfo";
+    }
+    @GetMapping("/useredit")
+    public String useredit() {
+        return "edituserform";
+    }
+
 
 }

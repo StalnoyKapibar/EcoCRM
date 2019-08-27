@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.javamentor.EcoCRM.model.embedded.UserStatus;
+import ru.javamentor.EcoCRM.service.ImageService;
 
 import javax.persistence.*;
 import java.util.Base64;
@@ -56,6 +57,9 @@ public class User implements UserDetails {
     @Column(name = "logo")
     @Type(type = "image")
     private byte[] photo;
+
+    @OneToMany
+    List<Request> requestList;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
@@ -146,8 +150,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public byte[] getPhoto() {return photo;
     }
 
     public String getEncoderPhoto() {
@@ -155,6 +158,7 @@ public class User implements UserDetails {
     }
 
     public void setPhoto(byte[] photo) {
+
         this.photo = photo;
     }
     public void setEnabled() {
@@ -218,4 +222,12 @@ public class User implements UserDetails {
     public String getPhone() {return phone;}
 
     public void setPhone(String phone) {this.phone = phone;}
+
+    public List<Request> getRequestList() {
+        return requestList;
+    }
+
+    public void setRequestList(List<Request> requestList) {
+        this.requestList = requestList;
+    }
 }

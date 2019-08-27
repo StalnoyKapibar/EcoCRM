@@ -20,4 +20,6 @@ public class ManagementCompanyServiceImpl extends AbstractServiceImpl<Management
     public ManagementCompanyDao getDao() {
         return managementCompanyDao;
     }
+
+
 }

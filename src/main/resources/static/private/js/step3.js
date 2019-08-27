@@ -21,5 +21,5 @@ function step3(stepDto) {
 }
 
 function addContractor() {
-    
+
 }

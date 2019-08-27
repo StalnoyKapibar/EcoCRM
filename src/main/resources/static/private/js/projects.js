@@ -16,11 +16,11 @@ function fillPage(apiUrl){
                     '            <div class="eco-col card" id="col_' + count + '" style="height:47rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
                     docVar += '<div class="eco-card card m-2" style="min-height:210px;box-shadow:0px 5px 9px -8px #000000;">' +
-                        '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.petition.adresHome + '</div>' +
+                        '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.petition.addressHome + '</div>' +
                         '                            <div class="card-body">' +
-                        '                            <div class="card-text house-area">' + project.petition.houseArea + '</div>';
+                        '                            <div class="card-text house-area">' + project.petition.houseDistrict + '</div>';
                         if(currentUser.id != project.manager.id){
-                            docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary" href="#">Учавствовать</button></div>';
+                            docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary" onclick="sendRequest('+project.id+')">Учавствовать</button></div>';
                         }
 
                         docVar += '                            </div>' +
@@ -56,6 +56,16 @@ function getCurrentUser() {
         }
     });
     return currUser;
+}
+function sendRequest(project_id) {
+    $.ajax({
+        url: "/api/project/request/"+project_id,
+        type: "GET",
+        async: false,
+        success: function (redirect) {
+            window.location.href = redirect;
+        }
+    });
 }
 
 

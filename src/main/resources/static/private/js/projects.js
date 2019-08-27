@@ -20,7 +20,7 @@ function fillPage(apiUrl){
                         '                            <div class="card-body">' +
                         '                            <div class="card-text house-area">' + project.petition.houseArea + '</div>';
                         if(currentUser.id != project.manager.id){
-                            docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary" href="#">Учавствовать</button></div>';
+                            docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary" onclick="sendRequest('+project.id+')">Учавствовать</button></div>';
                         }
 
                         docVar += '                            </div>' +
@@ -56,6 +56,16 @@ function getCurrentUser() {
         }
     });
     return currUser;
+}
+function sendRequest(project_id) {
+    $.ajax({
+        url: "/api/project/request/"+project_id,
+        type: "GET",
+        async: false,
+        success: function (redirect) {
+            window.location.href = redirect;
+        }
+    });
 }
 
 

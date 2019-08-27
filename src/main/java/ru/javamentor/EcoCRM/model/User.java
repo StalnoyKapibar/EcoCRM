@@ -58,6 +58,9 @@ public class User implements UserDetails {
     @Type(type = "image")
     private byte[] photo;
 
+    @OneToMany
+    List<Request> requestList;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.REFRESH,CascadeType.MERGE})
     @JoinTable(
@@ -219,4 +222,12 @@ public class User implements UserDetails {
     public String getPhone() {return phone;}
 
     public void setPhone(String phone) {this.phone = phone;}
+
+    public List<Request> getRequestList() {
+        return requestList;
+    }
+
+    public void setRequestList(List<Request> requestList) {
+        this.requestList = requestList;
+    }
 }

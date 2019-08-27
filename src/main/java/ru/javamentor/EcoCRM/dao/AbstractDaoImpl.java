@@ -1,10 +1,10 @@
 package ru.javamentor.EcoCRM.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
@@ -45,6 +45,13 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
     public T findByFieldNameAndValue(String fieldName, String fieldValue) {
         Query query = entityManager.createQuery("select t from " + entityBeanType.getSimpleName() + " t where t." + fieldName + "=:fieldValue");
         query.setParameter("fieldValue", fieldValue);
-        return (T)query.getResultList().get(0);
+        T result;
+        //TODO Сделать по-умному, если это вообще возможно
+        try {
+            result = (T)query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        return result;
     }
 }

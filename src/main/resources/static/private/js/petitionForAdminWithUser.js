@@ -13,6 +13,8 @@ function f() {
             var surname;
             var email;
             var  phone;
+            var id;
+
 
             petition.forEach(petition => {
                 petition.userList.forEach(user=>{
@@ -20,6 +22,7 @@ function f() {
                      surname = user.surname;
                      email = user.email;
                      phone = user.phone;
+                     id = user.id;
                 });
 
                 template+='<div class="col-sm-4">' +
@@ -32,10 +35,27 @@ function f() {
                    '</h5>Имя юзера<h5 id="5">' + name + '' +
                    '</h5>Фамилия<h5 id="6">' + surname + '' +
                    '</h5>Емаил<h5 id="7">' + email + ''+
-                   '</h5>Номер телефона<h5 id="8">' + phone + ''+ '</h5>'+
-                   '<button class="button_b" style="float: right">Одобрить заявку</button> </div></div></div>'
+                   '</h5>Номер телефона<h5 id="8">' + phone + ''+
+                   '<button class="button_b" onclick="approvedByAdministrator('+id+', '+petition.id+')" style="float: right">Одобрить заявку</button> </div></div></div>'
                 $("#cardes").html(template);
             });
         }
     })};
+
+function approvedByAdministrator(id,idp) {
+
+    $.ajax({
+        url: '/api/petition/approvedByAdministrator?id='+id +'&idp='+idp,
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        success: function (){
+            alert('Заявка одобрена')
+
+        },
+        error: function (e) {
+            alert(e.responseText);
+
+        }
+
+})}
 

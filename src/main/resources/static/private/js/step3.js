@@ -4,7 +4,7 @@ function step3(stepDto) {
         if (value.name !== null) {
             if (value.type === 'CONTRACTOR_INFO') {
                 $('#task3_' + value.id+'_').append(
-                    '<div id="task_3_1"><button type="button" class="btn btn-outline-primary">Добавить заготовителя +</button><table class="table table-hover">\n' +
+                    '<div id="task_3_1"><a type="button" onclick="addContractor()" class="btn btn-outline-primary">Добавить заготовителя +</a><table class="table table-hover">\n' +
                     '<tbody id="tableCompany"></tbody></table></div>')
             }
         }
@@ -18,4 +18,8 @@ function step3(stepDto) {
             '</button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><input id="1_datapiker" placeholder="назначить встречу">' +
             '<button class="btn btn-success" type="button" onclick="appoint(1)">назначить</button></div></div></td></tr>');
     });
+}
+
+function addContractor() {
+    
 }

@@ -23,16 +23,15 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
 
     @Autowired
     public PetitionServiceImpl(PetitionDao petitionDao) {
-
         this.petitionDao = petitionDao;
     }
 
     @Override
     public PetitionDao getDao() {
-
         return petitionDao;
     }
 
+    @Override
     public List<PetitionDTO> getAllPetition() {
         List<Petition> petitionList = new ArrayList<>();
         List<PetitionDTO> petitionDTOList = new ArrayList<>();
@@ -56,6 +55,7 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
         return petitionDTOList;
     }
 
+    @Override
     public List<PetitionDTO> getAllPetitionForAdmin(){
         List<Petition> petitionList = petitionDao.getAllPetitionForAdmin();
         List<PetitionDTO> petitionDTOList = new ArrayList<>();

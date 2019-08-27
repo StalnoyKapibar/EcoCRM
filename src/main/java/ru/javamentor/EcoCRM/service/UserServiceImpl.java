@@ -5,9 +5,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.javamentor.EcoCRM.dao.AbstractDao;
 import ru.javamentor.EcoCRM.dao.UserDetailsDao;
 import ru.javamentor.EcoCRM.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserService , UserDetailsService {
@@ -27,18 +29,24 @@ public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserS
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDetailsDao.findByFieldNameAndValue("email", email);
-        if(user == null)
-        //todo
-        {
+        if(user == null) {
             throw new UsernameNotFoundException("User with name " + email + " not found");
         }
         return user;
     }
+
+    @Override
     public User getUserByEmail(String email){
         User user = userDetailsDao.findByFieldNameAndValue("email", email);
-        if(user == null) {
-            throw new UsernameNotFoundException("User with " + email + " not found");
-        }
         return user;
+    }
+
+    @Override
+    public List<String> getAllUsersPhoto() {
+        List<String> photos = new ArrayList<>();
+        for (User user : getAll()) {
+            photos.add(user.getEncoderPhoto());
+        }
+        return photos;
     }
 }

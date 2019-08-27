@@ -1,7 +1,17 @@
 body {
     font-size: .875rem;
-    background-color: white;
+    background-color: #fcfcfc;
     /*background: url(../../public/images/card.jpg)no-repeat 0px 0px;*/
+    /*background-size: cover;*/
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*-ms-background-size: cover;*/
+    /*background-attachment: fixed;*/
+    /*background-position: center;*/
+    /*background-size: cover;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*text-align:center;*/
 }
 
 .feather {
@@ -63,7 +73,8 @@ ul.fio li{
 }
 
 .card-header {
-    background-color: #54b68924;
+    background-color: gainsboro;
+    /*opacity: .2; filter: alpha(opacity=50); background-color: rgba(0, 0, 0, 0.5); transition: all 1s; -webkit-transition: all 1s;*/
 }
 
 body {

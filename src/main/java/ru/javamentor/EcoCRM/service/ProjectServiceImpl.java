@@ -50,4 +50,5 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
     public Report getReportByWithIdProject(Long id){
         return projectDao.getReportByWithIdProject(id);
     }
+
 }

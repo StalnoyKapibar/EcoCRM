@@ -3,6 +3,13 @@ function initToggles() {
 }
 
 function fillToggles() {
+    $('[id ^= "t_toggle_"]').each(function (i, el) {
+        let task = getTaskById(el.id.substring(el.id.lastIndexOf("_") + 1));
+        if(task.taskStatus == 'DONE') {
+            $('#'+el.id).bootstrapToggle('on');
+        }
+    });
+
     $('[id ^= \"t_toggle_\"]').change(function (e) {
         let prefix = 't_toggle_';
         let taskId = e.target.id.substr(e.target.id.lastIndexOf('_') + 1);
@@ -32,16 +39,16 @@ function initSixthStep() {
 
 function getTaskById(id) {
     let task;
-    $.ajax({
-        url: "/api/tasks/get/",
-        type: "POST",
-        async: false,
-        data: ({id: id}),
-        success: function (t) {
-            task = t;
-        }
-    });
-    return task;
+        $.ajax({
+            url: "/api/tasks/get/",
+            type: "POST",
+            async: false,
+            data: ({id: id}),
+            success: function (t) {
+                task = t;
+            }
+        });
+        return task;
 }
 
 function getStaticTask(projectId, stepNumber, taskType) {

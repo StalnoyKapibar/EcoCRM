@@ -19,7 +19,8 @@ public class ManagementCompanyRestController {
     ProjectService projectService;
 
     @PostMapping("/add")
-    public ResponseEntity<ManagementCompany> saveManagInfo(@RequestParam(value = "projectid") Long projectId, @RequestBody ManagementCompany managementCompany) {
+    public ResponseEntity saveManagInfo(@RequestParam(value = "projectid") Long projectId,
+                                        @RequestBody ManagementCompany managementCompany) {
         if (managementCompanyService.get(projectId) == null) {
             managementCompanyService.insert(managementCompany);
         } else {

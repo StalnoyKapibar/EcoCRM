@@ -29,6 +29,7 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
     @Autowired
     public ProjectService projectService;
 
+    @Override
     public Step getProgressStepByProjectId(Long projectId){
        return stepDao.getProgressStepByProjectId(projectId);
     }
@@ -44,10 +45,13 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
         }
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
     public List<Step> getAllByprojectId(Long id){
         return stepDao.getAllByProjectId(id);
     }
 
+    @Override
     public StepDao getDao() {
         return stepDao;
     }
@@ -57,6 +61,7 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
         return stepDao.getStepByProjectIdAndStepNumber(projectId, stepNumber);
     }
 
+    @Override
     public StepDTO getStepDTO(Long id, StepNumber stepNumber) {
         switch (stepNumber) {
             case STEP_1: return getStep1(id, stepNumber);

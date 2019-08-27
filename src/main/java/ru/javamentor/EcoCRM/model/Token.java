@@ -42,7 +42,6 @@ public class Token {
     }
 
     public void encodeToken() {
-
         String origin = "root";
         int encoded = origin.hashCode();
     }

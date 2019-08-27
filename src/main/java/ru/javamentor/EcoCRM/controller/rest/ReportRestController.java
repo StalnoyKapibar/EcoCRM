@@ -18,9 +18,9 @@ public class ReportRestController {
     private ProjectService projectService;
 
     @GetMapping("/all/{projectId}")
-    public Report allReport(@PathVariable("projectId") Long id){
-        Report report = projectService.getReportByWithIdProject(id);
-        return report;
+    public Report Allreport(@PathVariable("projectId") Long id){
+      Report report = projectService.getReportByWithIdProject(id);
+      return report;
     }
 
     @PostMapping("/add/{projectId}")
@@ -34,4 +34,7 @@ public class ReportRestController {
         }
     }
 }
+
+
+
 

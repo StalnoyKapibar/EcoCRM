@@ -12,7 +12,9 @@ public interface ProjectDao extends AbstractDao<Project> {
 
     Map<StepNumber, List<Project>> getListByStepInProgress();
 
-    List<Project> getProjectManagerByUserId(Long id);
+    List<Project> getProjectsByUserId(Long id);
+
+    List<Project> getProjManagerByUserId(Long id);
 
     List<Project> getProjVolunteerByUserId(Long id);
 

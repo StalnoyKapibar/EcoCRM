@@ -2,33 +2,33 @@ package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.ProjectService;
 
-import java.util.List;
-import java.util.Map;
+import javax.jws.WebParam;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/projects")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @GetMapping("/projects")
-    public ModelAndView showProjects(ModelAndView modelAndView) {
-        modelAndView.addObject("stepNumber", StepNumber.values());
-        modelAndView.addObject("projects", projectService.getListByStepInProgress());
-        modelAndView.setViewName("admin/projects");
+    @GetMapping("/all")
+    public ModelAndView showProjects() {
+        ModelAndView modelAndView = new ModelAndView("projects");
+        modelAndView.addObject("apiHref","/api/project/all");
         return modelAndView;
     }
 
-    @PostMapping("/projects")
-    public void getTestList() {
-        projectService.getListByStepInProgress();
+    @GetMapping("/selfOnly")
+    public ModelAndView showSelfProjects() {
+        ModelAndView modelAndView = new ModelAndView("projects");
+        modelAndView.addObject("apiHref","/api/project/selfOnly");
+        return modelAndView;
     }
 }

@@ -38,7 +38,6 @@ public class ProjectRestController {
         return r;
     }
 
-    //todo
     @GetMapping("/selfOnly")
     public Map<StepNumber, List<Project>> getProjectsByStepsSelfOnly() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -46,7 +45,7 @@ public class ProjectRestController {
         User currentUser = userService.getUserByEmail(email);
         Map<StepNumber, List<Project>> r = projectService.getListByStepInProgress();
         for (Map.Entry<StepNumber,List<Project>> entry : r.entrySet()) {
-            entry.getValue().removeIf(project -> project.getManager().equals(currentUser));
+            entry.getValue().removeIf(project -> !project.getManager().equals(currentUser));
         }
         return r;
     }

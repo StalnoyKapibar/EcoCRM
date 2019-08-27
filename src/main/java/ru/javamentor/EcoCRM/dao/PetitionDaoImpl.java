@@ -1,14 +1,10 @@
 package ru.javamentor.EcoCRM.dao;
 
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.javamentor.EcoCRM.model.Petition;
-import ru.javamentor.EcoCRM.model.Report;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +12,7 @@ import java.util.Set;
 @Repository
 public class PetitionDaoImpl extends AbstractDaoImpl<Petition> implements PetitionDao {
 
+    @Override
     public List<Petition> getAllPetitionWithStatusTodo(){
         String select = "from Petition where status = :statusone or status =:statustwo";
         Query query = entityManager.createQuery(select, Petition.class);
@@ -25,6 +22,7 @@ public class PetitionDaoImpl extends AbstractDaoImpl<Petition> implements Petiti
         return petitionList;
     }
 
+    @Override
     public List<Petition> getAllPetitionForAdmin(){
         String select = "from Petition where status = :status";
         Query query = entityManager.createQuery(select, Petition.class);
@@ -33,6 +31,7 @@ public class PetitionDaoImpl extends AbstractDaoImpl<Petition> implements Petiti
         return petitionList;
     }
 
+    @Override
     public Set<User> getAllUserForAdmin(Long id){
         String select = "select p.userPetition from Petition p where p.id = :id";
         Query query = entityManager.createQuery(select);

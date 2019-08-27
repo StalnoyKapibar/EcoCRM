@@ -18,6 +18,7 @@ public class StepDaoImpl extends AbstractDaoImpl<Step> implements StepDao {
 
     @Autowired
     ProjectService projectService;
+
     public Step getProgressStepByProjectId(Long projectId){
         Query query = entityManager.unwrap(Session.class).createQuery("from Step as s where s.project = :project and s.status = :status");
         query.setParameter("project", projectService.get(projectId));
@@ -26,6 +27,7 @@ public class StepDaoImpl extends AbstractDaoImpl<Step> implements StepDao {
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     public List<Step> getAllByProjectId(Long projectId){
         Query query = entityManager.unwrap(Session.class).createQuery("from Step as s where s.project = :project");
         query.setParameter("project", projectService.get(projectId));

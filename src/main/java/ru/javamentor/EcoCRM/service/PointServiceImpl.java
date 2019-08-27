@@ -7,6 +7,7 @@ import ru.javamentor.EcoCRM.model.Point;
 
 @Service
 public class PointServiceImpl extends AbstractServiceImpl<Point> implements PointService {
+
     private PointDao pointDao;
 
     @Autowired
@@ -18,5 +19,4 @@ public class PointServiceImpl extends AbstractServiceImpl<Point> implements Poin
     public PointDao getDao() {
         return pointDao;
     }
-
 }

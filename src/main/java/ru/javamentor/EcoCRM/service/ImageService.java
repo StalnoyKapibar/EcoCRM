@@ -9,9 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 @Service("imageService")
-
 public class ImageService {
-
 
     public byte[] resizeImage(BufferedImage img, int height, int width) {
         int type = img.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : img.getType();
@@ -46,5 +44,4 @@ public class ImageService {
             return null;
         }
     }
-
 }

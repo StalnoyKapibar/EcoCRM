@@ -14,6 +14,7 @@ function getStep(stepNumber) {
             $('#' + stepNumber + '_link').addClass('active');
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
+            stepId = stepDto.id;
             getStepType(stepNumber, stepDto);
         }
     });
@@ -28,7 +29,7 @@ function getStepType(stepNumber, stepDto) {
     $.each(stepDto.tasks, function (key, value) {
             if (value.name !== null) {
                 tabList.append(
-                    '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '_" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
+                    '<a class="nav-link" data-toggle="pill" href="#task3_' + value.id + '" role="tab" aria-controls="v-pills-home" aria-selected="true">\n' +
                     value.name + '<input type="checkbox" id="t_toggle_' + value.id + '"' +
                     '                                       data-toggle="toggle" data-size="xs" data-on=" " data-off=" "' +
                     '                                       data-onstyle="success" data-offstyle="light" data-style="ios"></a>');
@@ -65,10 +66,16 @@ function getStepType(stepNumber, stepDto) {
                 if (stepNumber == 'STEP_8') {
 
                 }
+
+                $('#task3_' + value.id + '_').append(
+                    '<label for="comment" id="commentId" data-comment="' + value.id + '" class="h6">Комментарий:</label>\n' +
+                    '<textarea class="form-control" id="commentArea' + value.id + '_" rows="5"></textarea>' +
+                    '<a class="btn btn-warning" onclick="saveComment()">Отправить</a>'
+                );
             }
         }
     );
-    $('#tabListStep3').append(
+    tabList.append(
         '<a class="nav-link" id="nav-link-step3" data-toggle="pill" onclick="show_add_task_modal()" role="tab" aria-controls="v-pills-home" aria-selected="true">Добавить задачу</a>');
     fillToggles();
 }
@@ -111,6 +118,21 @@ function add_task() {
         },
         error: function () {
             alert("Задача не добавлена");
+        }
+    });
+}
+
+function saveComment() {
+    let com = document.getElementById('commentId');
+    let comId = com.dataset.comment;
+    let comment = $('#commentArea' + comId).val();
+    $.ajax({
+        type: 'POST',
+        url: "/api/tasks/" + comId + "/comment",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(comment),
+        success: function (task) {
+
         }
     });
 }

@@ -4,7 +4,7 @@ import ru.javamentor.EcoCRM.dao.AbstractDao;
 
 import java.util.List;
 
-public abstract class AbstractServiceImpl<T> implements AbstractService<T>{
+public abstract class AbstractServiceImpl<T> implements AbstractService<T> {
 
     public abstract AbstractDao<T> getDao();
 

@@ -1,6 +1,6 @@
- function step1(stepDto) {
+ function step1(tasks) {
     stepId = stepDto.id;
-    $.each(stepDto.tasks, function (key, value) {
+    $.each(tasks, function (key, value) {
 
             if (value.type === 'PETITIONER_INFO') {
                 $('#task3_' + value.id+'_').append('<label class="h6">ФИО</label>' +

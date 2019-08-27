@@ -42,7 +42,7 @@ function getStepType(stepNumber, stepDto) {
                     ' <div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
                     '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
                 if (stepNumber == 'STEP_1') {
-                    step1(stepDto);
+                    step1(value);
                 }
                 if (stepNumber == 'STEP_2') {
                     step2(stepDto);

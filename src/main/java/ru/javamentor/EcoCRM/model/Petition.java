@@ -1,11 +1,8 @@
 package ru.javamentor.EcoCRM.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -80,7 +77,7 @@ public class Petition {
     private String yes;
 
     @Column (name = "data")
-    LocalDate data;
+    private LocalDate data;
 
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)

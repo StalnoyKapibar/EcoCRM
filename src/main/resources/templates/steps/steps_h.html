@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
     <style>
         .nav-item.nav-link.active {
             background: #4c40ff;
@@ -29,7 +30,11 @@
             background: #cbf8c7;
             color: #89a987;
         }
-
+        img {
+            width: auto;
+            height: 80px;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
@@ -296,7 +301,7 @@
 
                                     <label><h6>Комментарий</h6></label>
                                     <textarea class="form-control" rows="5" id="comment"></textarea>
-                                    <button type="button" class="btn btn-primary">Сохранить</button>
+                                    <button type="button" class="btn btn-primary" onclick="saveManagCompInfo()">Сохранить</button>
                                 </div>
                             </div>
 
@@ -507,7 +512,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="nav flex-column nav-pills" role="tablist"
+                        <div class="nav flex-column nav-pills"  role="tablist"
                              aria-orientation="vertical" style="width: 27%; margin-right: 3%">
                             <a class="nav-link active" data-toggle="pill" href="#container_report_pil"
                                role="tab" aria-controls="v-pills-home" aria-selected="true">
@@ -521,42 +526,41 @@
                                  aria-labelledby="v-pills-home-tab">
                                 <div id="task_5_1">
 
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Фото</span>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Фото</span>
+                                            </div>
+                                            <form enctype="multipart/form-data" method="post" id="imgForm">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="image" id="imgInput" multiple
+                                                           aria-describedby="inputGroupFileAddon01">
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input"
-                                                   aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        <div id="im"></div>
+                                        <br>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Видео</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="bn" id="videoInput" multiple
+                                                       aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Видео</span>
-                                        </div>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input"
-                                                   aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <label for="comment" class="h6">Комментарий:</label>
-                                    <textarea class="form-control" rows="5"></textarea>
-                                    <br>
-                                    <input id="container_installation_date" placeholder="дата установки">
-                                    <button class="btn btn-success" type="button" onclick="get_cont_instal_date()">
-                                        Установить дату
-                                    </button>
+                                        <br>
+                                        <label for="comment" class="h6">Комментарий:</label>
+                                        <textarea class="form-control" rows="5" id="container_comment"></textarea>
+                                        <br>
+                                        <input id = "container_installation_date" width="276" placeholder="Дата установки">
+                                        <br>
+                                        <button type="button" class="btn btn-primary" onclick="saveContainerInfo()">Сохранить</button>
+
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -855,8 +859,61 @@
         // })
     });
 
+    $(function() {
+        function readURL(input) {
+            $(input.files).each(function(i, el) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('<img>').attr('src', e.target.result).appendTo('#im');
+                };
+                reader.readAsDataURL(input.files[i]);
+            });
+        }
 
+        $("#imgInput").change(function() {
+            readURL(this);
+        });
+    });
+    function saveContainerInfo() {
 
+        let comment = $("#container_comment").val();
+        let date =  $("#container_installation_date").val();
+        //var datestr = (new Date(date)).toUTCString();
+        let img = $('#imgForm')[0];
+        let data = new FormData(img);
+        data.append("newContainerComment", comment);
+        data.append("newContainerDate", date);
+        $.ajax({
+            url: "/manage/add_container?projectid=" + projectId,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (request) {
+                console.log("information about container insert");
+            },
+            error: function(request) {
+                console.error("insert information about container FAILED!" + request.responseText);
+            }
+        });
+    }
+
+    //
+
+    $('#container_installation_date').datepicker({
+        format: 'yyyy-mm-dd',
+        uiLibrary: 'bootstrap4'
+    });
+
+    function get_cont_instal_date() {
+        alert($('#container_installation_date').val());
+    }
+    var projectId = [[${projectid}]];
+    $( document ).ready(function () {
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
 
     // function show_task(pil) {
     //     $('#'+pil.id+'').tab('show');
@@ -1109,6 +1166,35 @@
 
     }
 
+    function saveManagCompInfo() {
+        var managComp ={
+            'name': $('#management_org_title').val(),
+            'inn': $('#management_org_inn').val(),
+            'link': $('#management_org_link').val(),
+            'managerName': $('#management_org_surname').val(),
+            'managerSurname': $('#management_org_name').val(),
+            'managerPatronymic': $('#management_org_patronymic').val(),
+            'phoneNumber': $('#management_org_tel').val(),
+            'email': $('#management_org_email').val(),
+            'clock': $('#management_org_clock').val(),
+            'nextContactDate': $('#datepicker').val(),
+            'description': $('#comment').val()
+        };
+        $.ajax({
+            url: "/manage/add_company?projectid=" + projectId,
+            type: "POST",
+            data: JSON.stringify(managComp),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (id) {
+                console.log("information about " + id + " company insert");
+            },
+            error: function(e) {
+                console.error("insert information about " + id + " company FAILED!");
+
+            }
+        });
+    }
 </script>
 </body>
 </html>

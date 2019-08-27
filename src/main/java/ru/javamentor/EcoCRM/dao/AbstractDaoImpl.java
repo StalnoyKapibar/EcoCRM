@@ -1,11 +1,9 @@
 package ru.javamentor.EcoCRM.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
@@ -53,7 +51,6 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
         } catch (NoResultException e) {
             return null;
         }
-
         return result;
     }
 }

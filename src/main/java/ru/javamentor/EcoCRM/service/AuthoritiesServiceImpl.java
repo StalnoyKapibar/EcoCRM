@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthoritiesServiceImpl extends AbstractServiceImpl<Authority> implements AuthoritiesService {
+
     private AuthoritiesDao authoritiesDao;
 
     @Autowired

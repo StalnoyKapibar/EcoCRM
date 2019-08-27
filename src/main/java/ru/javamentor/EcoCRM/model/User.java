@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.javamentor.EcoCRM.model.embedded.UserStatus;
+import ru.javamentor.EcoCRM.service.ImageService;
 
 import javax.persistence.*;
 import java.util.Base64;
@@ -146,8 +147,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public byte[] getPhoto() {return photo;
     }
 
     public String getEncoderPhoto() {
@@ -155,6 +155,7 @@ public class User implements UserDetails {
     }
 
     public void setPhoto(byte[] photo) {
+
         this.photo = photo;
     }
     public void setEnabled() {

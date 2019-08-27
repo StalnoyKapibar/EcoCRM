@@ -1,5 +1,6 @@
 package ru.javamentor.EcoCRM.dto.stepDTO;
 
+import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Task;
 
 import java.util.ArrayList;
@@ -11,13 +12,16 @@ public class Step1DTO implements StepDTO {
 
     private List<Task> tasks = new ArrayList<>();
 
+    private Petition petition;
+
     public Step1DTO() {
 
     }
 
-    public Step1DTO(Long id, List<Task> tasks) {
+    public Step1DTO(Long id, List<Task> tasks, Petition petition) {
         this.id = id;
         this.tasks = tasks;
+        this.petition = petition;
     }
 
     public Long getId() {
@@ -34,5 +38,13 @@ public class Step1DTO implements StepDTO {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public Petition getPetition() {
+        return petition;
+    }
+
+    public void setPetition(Petition petition) {
+        this.petition = petition;
     }
 }

@@ -5,6 +5,7 @@ import ru.javamentor.EcoCRM.dao.AbstractDao;
 import java.util.List;
 
 public interface AbstractService<T> {
+
     AbstractDao<T> getDao();
 
     void delete(T t);

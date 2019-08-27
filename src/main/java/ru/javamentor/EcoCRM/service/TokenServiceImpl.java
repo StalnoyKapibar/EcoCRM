@@ -1,20 +1,16 @@
 package ru.javamentor.EcoCRM.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.TokenDao;
 import ru.javamentor.EcoCRM.model.Token;
-import ru.javamentor.EcoCRM.model.User;
 
 import java.security.SecureRandom;
 
 
 @Service
 public class TokenServiceImpl extends AbstractServiceImpl<Token> implements TokenService{
-
 
     private TokenDao tokenDao;
 
@@ -28,14 +24,15 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
         return tokenDao;
     }
 
+    @Override
     public String encodeToken() {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[20];
         random.nextBytes(bytes);
         String gentoken = bytes.toString();
-
         return gentoken;
     }
+
     @Override
     public Token loadTokenByEmail(String email)  throws UsernameNotFoundException{
         Token token = tokenDao.findByFieldNameAndValue("email", email);
@@ -44,6 +41,8 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
         }
         return token;
     }
+
+    @Override
     public String loadEmailByToken(String token)  throws UsernameNotFoundException{
         String email = tokenDao.findByFieldNameAndValue("token", token).getEmail();
         if(email== null) {

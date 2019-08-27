@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javamentor.EcoCRM.model.Token;
@@ -42,32 +43,44 @@ public class RegistrationController {
     private String CLIENT_SECRET;
 
     @GetMapping("/new")
-    public String registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
+    public ModelAndView registrationForm(@RequestParam("email")String email,@RequestParam("token")String token, Model model) {
         User user = new User();
         user.setEmail(email);
         model.addAttribute("user", user);
         Token dbtoken =  tokenService.loadTokenByEmail(email);
         String tokenFromDB =dbtoken.getToken();
+
         if (tokenFromDB.equals(token)) {
-            return "registration/registration-form";
+            ModelAndView modelAndView = new ModelAndView("registration/registration-form");
+            modelAndView.addObject("email",email);
+            return modelAndView;
         }
-        return "access-denied";
+        return new ModelAndView("access-denied");
     }
 
 
     @GetMapping("/usercode")
-    public ModelAndView getCode(@RequestParam(name = "code") String code) throws JSONException {
+    public ModelAndView getCode(@RequestParam(name = "code") String code,@RequestParam(name = "email") String email) throws JSONException {
 
             String urlForToken = "https://oauth.vk.com/access_token?client_id="+CLIEND_ID+"&client_secret="+CLIENT_SECRET+"&redirect_uri=http://"+hostName+"/registration/usercode&code="+code;
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> response = restTemplate.getForEntity(urlForToken, String.class);
+            ResponseEntity<String> response;
+            try {
+                 response = restTemplate.getForEntity(urlForToken, String.class);
+            } catch (HttpClientErrorException e){
+                System.err.println("Vk auth Failed with 401 status");
+                ModelAndView modelAndView = new ModelAndView("registration/registration-form");
+                modelAndView.addObject("email",email);
+                modelAndView.addObject("error","Что-то пошло не так");
+                return modelAndView;
+            }
             JSONObject jsonReq = new JSONObject(response.getBody());
             String accesToken = jsonReq.getString("access_token");
             String userId = jsonReq.getString("user_id");
             String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=bdate&access_token=" + accesToken +"&v=5.101";
             ModelAndView modelAndView = new ModelAndView("registration/registration-form-with-vk");
             modelAndView.addObject("urlForInfo",urlForInfo);
-
+            modelAndView.addObject("email",email);
             return modelAndView;
     }
 

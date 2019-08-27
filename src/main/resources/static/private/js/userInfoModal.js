@@ -1,3 +1,28 @@
+$(document).ready(function () {
+    $.ajax({
+        url: "/api/user/get_current_user",
+        type: "POST",
+        async: false,
+        success: function (user) {
+            //$('#photo').attr("src","/api/user/photo/" + user.id);
+            $("#name").text(user.name);
+            $("#surname").text(user.surname);
+            $("#userId").text(user.id);
+            $("#patronymic").text(user.patronymic);
+            $("#email").text(user.email);
+            $("#phone").text(user.phone);
+            $("#vk").text(user.link);
+            $("#profession").text(user.profession);
+            $("#status").text(user.status);
+            $("#notToDo").text(user.notToDo);
+            getProjectsManager(id);
+            getProjectsVolunteer(id);
+            getPhoto(id);
+        }
+    });
+});
+
+
 function getUser(id) {
     $.ajax({
         url: "/api/user/" + id,
@@ -18,6 +43,12 @@ function getUser(id) {
             getProjectsManager(id);
             getProjectsVolunteer(id);
             getPhoto(id);
+            if(user.status === 'BLOCKED'){
+                document.getElementById("block-btn").style.display='none';
+            } else {
+                document.getElementById("unblock-btn").style.display='none';
+            }
+
         }
     });
 }
@@ -72,14 +103,13 @@ function getProjectsVolunteer(id) {
 
 function blockUser() {
     var userId = $('#userId').text();
+
     $.ajax({
         url: "/api/user/block?id=" + userId,
         type: "POST",
         async: false,
         success: function (address) {
             window.location.href = address;
-            //$("#unblock-btn").prop('disabled', false);
-            //$("#block-btn").prop('disabled', true);
         },
         error: function(error) {
             console.error('problem with blocking', error);
@@ -95,8 +125,7 @@ function unblockUser() {
         async: false,
         success: function (address) {
             window.location.href = address;
-            //$('#block-btn').prop('disabled', false);
-            //$('#unblock-btn').prop('disabled', true);
+
         },
         error: function(error) {
             console.error('problem with unblocking', error);
@@ -105,16 +134,28 @@ function unblockUser() {
 }
 
 function sendReg() {
-    var email = $('#email_input').val();
+    let email = $('#email_input').val();
     $.ajax({
         url: "/processSendForm?userEmail=" + email,
         type: "GET",
         async: false,
-        success: function() {
-            console.log("Mail was sent.");
+        success: function(address) {
+            if(address === "Already is user") {
+                let helpTag = document.getElementById('message-alert');
+                helpTag.insertAdjacentHTML('afterbegin','<div class="alert alert-danger" role="alert" style="position: absolute; top: 70%; right: 40%; opacity: 0.7;"><p>Пользовалель с такой почтой уже существует.</p></div>');
+                setTimeout(function() {
+                    window.location.href = "/admin/usersList";
+                }, 3000);
+            } else {
+                let helpTag = document.getElementById('message-alert');
+                helpTag.insertAdjacentHTML('afterbegin', '<div class="alert alert-success" role="alert" style="position: absolute; top: 70%; right: 40%; opacity: 0.7;"><p>Письмо отправлено.</p></div>');
+                setTimeout(function () {
+                    window.location.href = address;
+                }, 3000);
+            }
         },
-        error: function() {
-            console.error("Error: mail wasn't sent!");
+        error: function(address) {
+            console.log(address.responseText)
         }
 });
 }

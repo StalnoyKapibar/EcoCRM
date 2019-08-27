@@ -6,6 +6,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
@@ -15,6 +17,7 @@ import ru.javamentor.EcoCRM.service.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -44,11 +47,9 @@ public class PetitionRestController {
 
     @PostMapping
     public void getSearchUserProfiles(@ModelAttribute("petition") Petition petition) throws MessagingException {
-
         LocalDate data = LocalDate.now();
         petition.setData(data);
         petitionService.insert(petition);
-
         MimeMessage mimeMessage = emailService.getEmailSender().createMimeMessage();
         boolean multipart = true;
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, multipart,"utf-8");
@@ -69,7 +70,6 @@ public class PetitionRestController {
         mimeMessage.setContent(content,"text/html; charset=utf-8");
         helper.setTo(petition.getEmail());
         this.emailService.getEmailSender().send(mimeMessage);
-
     }
 
     @PutMapping(value = "/addPetitionUser")
@@ -100,7 +100,7 @@ public class PetitionRestController {
         Petition petition = petitionService.get(idp);
         petition.setStatus(Status.DONE);
         petitionService.update(petition);
-        Project project = new Project(manager,petition, "ПРОЕКТ НОМЕР КАКОЙ-ТО ТАМ");
+        Project project = new Project(manager,petition);
         projectService.insert(project);
     }
 }

@@ -40,11 +40,9 @@ public class SendRegistrationController {
     public String processingSendForm(@RequestParam("userEmail") String userEmail) {
         String token = bCryptPasswordEncoder.encode(userEmail);
         tokenService.insert(new Token(userEmail, token));
-        System.out.println("result String: " + token);
         String message = "Hello,Volunteer! Welcome to our Service!\n Your link for registration: " +
                 "\nhttp://"+hostName+"/registration/new/?email=" + userEmail + "&token=" + token;
         emailService.sendSimpleMessage(userEmail,"To target mail from form", message);
-        System.out.println("Send Successful!");
         return "admin_page";
     }
 }

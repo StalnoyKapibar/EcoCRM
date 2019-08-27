@@ -23,10 +23,10 @@
         <div class="col-sm-4">
         </div>
         <div class="col-sm-4">
-            <a href="https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101" class="btn btn-block btn-social btn-vk" >
+            <a id="vk-button" href="https://oauth.vk.com/authorize?client_id=7104443&display=page&redirect_uri=http://localhost:8080/registration/usercode&response_type=code&v=5.101" class="btn btn-block btn-social btn-vk">
                 <span class="fa fa-vk"></span>Sign in with VK
             </a>
-            <p> </p>
+            <p th:text="${error}"></p>
             <div class="form-group">
                 <label>Имя:</label>
                 <input id="person-name" type="text" class="form-control"  placeholder="Елена">
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label>Адрес электронной почты:</label>
-                <input id="emailHelp" type="email"  class="form-control"  aria-describedby="emailHelp" placeholder="Введите email">
+                <input id="emailHelp" type="email"  class="form-control"  aria-describedby="emailHelp" placeholder="Введите email" th:value="${email}" readonly>
             </div>
             <div class="form-group">
                 <label>Пароль:</label>
@@ -81,6 +81,10 @@
 </div>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="/public/js/sendUserPhoto.js">
+
+</script>
+
+<script type="text/javascript" src="/public/js/throwEmail.js">
 
 </script>
 </body>

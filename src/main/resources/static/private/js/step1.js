@@ -257,7 +257,7 @@
                     '    <label class="h6">Какая компания занимается вывозом ТКО?</label>\n' +
                     '    <input type="text" class="form-control" value="'+stepDto.petition.exportGarbage+'" id ="garbage_disposal_company">\n' +
                     '    <br>\n');
-                $('#status_petitioner [value = '+stepDto.petition.statusHome+']').prop('checked',true);
+                $('#status_petitioner [value = '+ +']').prop('checked',true);
                 $('#activity_petitioner [value = '+stepDto.petition.separateCollection+']').prop('checked',true);
                 $('#row_type [value = '+stepDto.petition.typeOfRawMaterial+']').prop('checked',true);
                 $('#home_district [value = '+stepDto.petition.typeOfRawMaterial+']').attr("selected", "selected");

@@ -37,7 +37,6 @@ function getStepType(stepNumber, stepDto) {
                 } else {
                     $('#t_toggle_' + value.id).bootstrapToggle('of');
                 }
-
                 tabContent.append(
                     ' <div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
                     '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');

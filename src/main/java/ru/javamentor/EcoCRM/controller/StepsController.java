@@ -36,26 +36,7 @@ public class StepsController {
 
     @RequestMapping(value = "/steps/{projectid}", method = RequestMethod.GET)
     public String adminPageEmployerToEdit(@PathVariable Long projectid, Model model) {
-////        stepService.putProgressStatusToFirstStep();//todo когда 1й step будет по умолчанию in_progress удалить этот метод;
-//        Project currentProject = projectService.get(projectid);
-//        Step stepinProgress = stepService.getProgressStepByProjectId(currentProject.getId());
-//        model.addAttribute("steps", stepService.getAllByprojectId(currentProject.getId()));
-//        if (stepinProgress.getStepNumber() == StepNumber.STEP_1) {
-//            model.addAttribute("petition", currentProject.getPetition());
-//        }
-//        if (stepinProgress.getStepNumber() == StepNumber.STEP_2) {
-//            ManagementCompany company = currentProject.getManagementCompany();
-//            if (company == null) {
-//                company = new ManagementCompany();
-//            }
-//            model.addAttribute("mencompany", company);
-//        }
-//        model.addAttribute("stepnumber", stepinProgress.getStepNumber());
         model.addAttribute("projectid", projectid);
-        model.addAttribute("step_6_tasks", stepService.getAllByprojectId(projectid));
-//        List<Task> tasksInProgress = taskService.getAllByStepId(stepinProgress.getId());
-//        model.addAttribute("tasks", tasksInProgress);
-
         return "steps/steps_h";
     }
 

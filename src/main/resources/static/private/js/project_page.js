@@ -14,9 +14,7 @@ function getStep(stepNumber) {
             $('#' + stepNumber + '_link').addClass('active');
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
-
             getStepType(stepNumber, stepDto);
-
         }
     });
 }
@@ -41,10 +39,10 @@ function getStepType(stepNumber, stepDto) {
                 }
 
                 tabContent.append(
-                    ' <div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">' +
+                    ' <div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
                     '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');
                 if (stepNumber == 'STEP_1') {
-
+                    step1(stepDto);
                 }
                 if (stepNumber == 'STEP_2') {
                     step2(stepDto);

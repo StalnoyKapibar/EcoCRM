@@ -1,7 +1,7 @@
-function step1(stepDto) {
+ function step1(stepDto) {
     stepId = stepDto.id;
     $.each(stepDto.tasks, function (key, value) {
-        if (value.name !== null) {
+
             if (value.type === 'PETITIONER_INFO') {
                 $('#task3_' + value.id+'_').append('<label class="h6">ФИО</label>' +
                     '<input type="text" class="form-control" placeholder="ФИО заявителя" value="'+stepDto.petition.userName+'" id="fio_petitioner">' +
@@ -272,7 +272,7 @@ function step1(stepDto) {
             $('#task3_' + value.id+'_').append(
                 '<label for="comment" class="h6">Комментарий:</label>\n' +
                 '<textarea class="form-control" rows="5"></textarea></div>');
-        }
+
     });
 
 }

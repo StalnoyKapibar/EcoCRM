@@ -123,11 +123,14 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn orng-btn" onclick="sendReg()">Отправить</button>
+                <button type="button" class="btn orng-btn" data-dismiss="modal" onclick="sendReg()">Отправить</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Всплывающее окно с сообщением об успехе -->
+<div id="message-alert"></div>
 
 <!-- Modal with user info -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

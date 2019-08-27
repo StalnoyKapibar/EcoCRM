@@ -8,14 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.javamentor.EcoCRM.dto.stepDTO.StepDTO;
+import ru.javamentor.EcoCRM.model.Photo;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
-import ru.javamentor.EcoCRM.service.ProjectService;
-import ru.javamentor.EcoCRM.service.StepServiceImpl;
-import ru.javamentor.EcoCRM.service.UserService;
+import ru.javamentor.EcoCRM.service.*;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +39,12 @@ public class ProjectRestController {
 
     @Autowired
     private StepServiceImpl stepService;
+
+    @Autowired
+    private PhotoService photoService;
+
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/all")
     public Map<StepNumber, List<Project>> getProjectsBySteps() {
@@ -59,4 +73,19 @@ public class ProjectRestController {
     public StepDTO getStepDTO(@PathVariable("id") Long id, @RequestParam(value = "stepnumber") StepNumber stepNumber) {
         return stepService.getStepDTO(id, stepNumber);
     }
+
+    @PostMapping("/add_old_container_photo")
+    public List<Photo> saveContainerInfo(@RequestParam(value = "projectid") Long projectId,
+                                         @RequestParam(value = "image") List<MultipartFile> img ) throws IOException, ParseException {
+        Project project = projectService.get(projectId);
+        List<Photo> listPhoto = new ArrayList<>();
+        for(MultipartFile file : img){
+            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())),600,600));
+            photoService.insert(p);
+            listPhoto.add(p);
+        }
+        project.setOldContainerPhoto(listPhoto);
+        return project.getOldContainerPhoto();
+    }
+
 }

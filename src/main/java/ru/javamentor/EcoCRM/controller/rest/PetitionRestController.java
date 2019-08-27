@@ -101,6 +101,13 @@ public class PetitionRestController {
         Project project = new Project(manager,petition);
         projectService.insert(project);
     }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public void updatePetition(@RequestBody Petition petition){
+        Petition updatedPetition = petitionService.get(petition.getId());
+
+    }
 }
 
 

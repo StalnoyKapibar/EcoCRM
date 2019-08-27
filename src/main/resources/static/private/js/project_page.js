@@ -15,7 +15,7 @@ function getStep(stepNumber) {
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
             stepId = stepDto.id;
-            getStepType(stepNumber, stepDto);
+            // getStepType(stepNumber, stepDto);
         }
     });
 }

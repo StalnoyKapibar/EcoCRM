@@ -6,6 +6,7 @@ import ru.javamentor.EcoCRM.dao.PetitionDao;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.User;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
 
     @Autowired
     private PetitionDao petitionDao;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     public PetitionServiceImpl(PetitionDao petitionDao) {
@@ -46,7 +50,8 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
             if(area == null){
                 area = "данных нет";
             }
-            PetitionDTO petitionDTO = new PetitionDTO(data, adress, area, id);
+            List<User> users = new ArrayList<>(petiton.getUserPetition());
+            PetitionDTO petitionDTO = new PetitionDTO(data, adress, area, id, users);
             petitionDTOList.add(petitionDTO);
         }
         petitionDTOList.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
@@ -76,6 +81,14 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
             petitionDTOList.add(petitionDTO);
         }
         return petitionDTOList;
+    }
+
+    @Override
+    public void addUserPetition(Long petitionId, User user) {
+        Petition petition = get(petitionId);
+        User userMember = userService.get(user.getId());
+        petition.setStatus(Status.IN_PROGRESS);
+        petition.getUserPetition().add(userMember);
     }
 }
 

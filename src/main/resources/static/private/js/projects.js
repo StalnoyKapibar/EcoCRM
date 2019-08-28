@@ -45,9 +45,9 @@ function fillPage(apiUrl){
                                 }
                             }
                             if(flag === false){
-                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary" onclick="sendRequest('+project.id+')">Учавствовать</button></div>';
+                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary btn-sm" onclick="sendRequest('+project.id+')">Учавствовать</button></div>';
                             } else {
-                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-secondary">Отправлено</button></div>';
+                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-secondary btn-sm">Отправлено</button></div>';
                             }
 
                         }

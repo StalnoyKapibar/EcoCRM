@@ -11,6 +11,7 @@ import ru.javamentor.EcoCRM.model.Project;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class MeetingServiceImpl extends AbstractServiceImpl<Meeting> implements MeetingService{
@@ -47,5 +48,11 @@ public class MeetingServiceImpl extends AbstractServiceImpl<Meeting> implements 
         Meeting meeting = new Meeting(contractor, managementCompany, localDate);
         meetingDao.insert(meeting);
         return meeting;
+    }
+
+    @Override
+    public List<Meeting> getAllByManagementCompany(Long id) {
+        ManagementCompany managementCompany = projectService.get(id).getManagementCompany();
+        return meetingDao.getAllByManagementCompany(managementCompany.getId());
     }
 }

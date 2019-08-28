@@ -160,6 +160,7 @@
 
     $(document).ready(function () {
         getAllContractors();
+        addMeetings(3);
 
     });
 
@@ -210,17 +211,24 @@ function getAllContractors() {
                     '    <div class="card-header" id="headingOne">\n' +
                     '      <h2 class="mb-0">\n' +
                     '        <button style="color: black" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+company.id+'" aria-expanded="true" aria-controls="collapseOne">\n' +
-                     company.name + '<button class="btn btn-warning" data-toggle="modal" data-target="#show_contractor_modal" onclick="getInfo(' + company.id + ')">Info</button>' +
+                     company.name + '<button style="float: right; margin-right: 5px" class="btn btn-warning" data-toggle="modal" data-target="#show_contractor_modal" onclick="getInfo(' + company.id + ')">Info</button>' +
                     '        </button>\n' +
-                        '<button class="btn btn-warning" data-toggle="modal" data-target="#add_data" onclick="addData(' + company.id + ')">Назначить встречу</button>' +
-                    '<div id="data_' + company.id + '"></div>' +
+                        '<button style="float: right; margin-right: 5px" class="btn btn-warning" data-toggle="modal" data-target="#add_data" onclick="addData(' + company.id + ')" id="date_meet_' + company.id + '">Назначить встречу</button>' +
+                    '<span id="data_' + company.id + '"></span>' +
                     '      </h2>\n' +
                     '    </div>\n' +
                     '    <div id="collapse'+company.id+'" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">\n' +
                     '      <div class="card-body">\n' +
-                    '<h6>Комментарии:</h6>' +
-                    '        <div id="commentText'+company.id+'"></div>' +
-                    '        <div id="commentTextArea'+company.id+'"></div>' +
+                        '<div class="row"> ' +
+                            '<div class="col-6"> ' +
+                            '<h6>Комментарии:</h6>' +
+                        '        <div id="commentText'+company.id+'"></div>' +
+                        '        <div id="commentTextArea'+company.id+'"></div>' +
+                            '</div> ' +
+                            '<div class="col-6"> ' +
+                            '<div id="meet_new_' + company.id + '"></div>' +
+                            '</div> ' +
+                    '    </div> ' +
                     '      </div>\n' +
                     '    </div>\n' +
                     '  </div>\n' +
@@ -232,7 +240,7 @@ function getAllContractors() {
                     )
                 });
                 $('#commentTextArea' + company.id + '').append(
-                    '<textarea type="text" placeholder="Оставить комментарий" id="textComment' + company.id + '"></textarea><br/>' +
+                    '<textarea class="form-control" type="text" placeholder="Оставить комментарий" id="textComment' + company.id + '"></textarea><br/>' +
                     '<a class="btn btn-secondary" onclick="saveComment(' + company.id + ')">Отправить</a>'
                 )
             });
@@ -253,6 +261,7 @@ function saveComment(id) {
             $('#commentText' + id + '').append(
                 '<h6>' + comment + '</h6>'
             )
+            $("#textComment"+id+"").val('');
         }
     })
 }
@@ -296,6 +305,23 @@ function saveData() {
             $('#add_buttonModal').click();
         }
     })
+}
+
+function addMeetings(id) {
+    $.ajax({
+        url: "/api/meeting/contractor/" + id,
+        type: "GET",
+        async: false,
+        success: function (meetings) {
+            console.log(meetings);
+            $.each(meetings, function (key, meet) {
+                document.getElementById('meet_new_' + meet.contractor.id).insertAdjacentHTML("beforeend",
+                    '<h6>Встреча назначена на:</h6><h6 style="color: #f71752;">' + meet.dateTime + '</h6>'
+                );
+                $('#date_meet_' + meet.contractor.id +'').remove();
+            })
+        }
+    });
 }
 
 </script>

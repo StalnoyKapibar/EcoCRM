@@ -61,7 +61,7 @@ public class ApplicationController {
     public ModelAndView showProjects(ModelAndView modelAndView) {
         modelAndView.addObject("stepNumber", StepNumber.values());
         modelAndView.addObject("projects", projectService.getListByStepInProgress());
-        modelAndView.setViewName("admin/projects");
+        modelAndView.setViewName("projects");
         return modelAndView;
     }
 

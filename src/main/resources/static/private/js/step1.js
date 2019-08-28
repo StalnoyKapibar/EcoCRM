@@ -1,6 +1,4 @@
-
 function step1(stepDto) {
-
     let petititon = stepDto.petition;
      $('#fio_petitioner').val(petititon.userName);
      $('#email_petitioner').val(petititon.email);

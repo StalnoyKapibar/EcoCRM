@@ -1,16 +1,17 @@
 function initToggles() {
-    initSixthStep();
+    initStaticToggles();
 }
 
 function fillToggles() {
-    $('[id ^= "t_toggle_"]').each(function (i, el) {
+    let toggles = $('[id ^= "t_toggle_"]');
+    toggles.each(function (i, el) {
         let task = getTaskById(el.id.substring(el.id.lastIndexOf("_") + 1));
         if(task.taskStatus == 'DONE') {
             $('#'+el.id).bootstrapToggle('on');
         }
     });
 
-    $('[id ^= \"t_toggle_\"]').change(function (e) {
+    toggles.change(function (e) {
         let prefix = 't_toggle_';
         let taskId = e.target.id.substr(e.target.id.lastIndexOf('_') + 1);
         $.ajax({
@@ -24,7 +25,7 @@ function fillToggles() {
     });
 }
 
-function initSixthStep() {
+function initStaticToggles() {
     let prefixToggle = 't_toggle_';
     let t_6_1 = getStaticTask(projectId, 'STEP_6', 'LEAFLETS_DESIGN');
     let t_6_2 = getStaticTask(projectId, 'STEP_6', 'LEAFLETS_PRINT');

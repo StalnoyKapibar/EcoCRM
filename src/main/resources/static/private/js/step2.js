@@ -33,10 +33,10 @@ function saveManagCompInfo(projectId) {
         data: JSON.stringify(managComp),
         contentType: 'application/json; charset=utf-8',
         success: function (id) {
-            console.log("information about " + id + " company insert");
+            alert(id.responseText);
         },
         error: function (e) {
-            console.error("insert information about " + id + " company FAILED!");
+            alert(e.responseText);
         }
     });
 }

@@ -76,7 +76,6 @@ function step1(stepDto) {
              alert(error.responseText);
          }
      })
-
  }
 
  function save_old_container_photo(projectId) {

@@ -118,4 +118,33 @@ public class ProjectRestController {
         return "/projects/all";
     }
 
+    @PostMapping("/add_new_container_photo")
+    public List<Photo> saveNewContainerPhoto(@RequestParam(value = "projectid") Long projectId,
+                                         @RequestParam(value = "image") List<MultipartFile> img ) throws IOException, ParseException {
+        Project project = projectService.get(projectId);
+        List<Photo> listPhoto = new ArrayList<>();
+        for(MultipartFile file : img){
+            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())),600,600));
+            photoService.insert(p);
+            listPhoto.add(p);
+        }
+        project.setNewContainerPhoto(listPhoto);
+        projectService.update(project);
+        return project.getNewContainerPhoto();
+    }
+
+    @PostMapping("/add_container_comment")
+    public Long saveContainerInfo(@RequestParam(value = "projectid") Long projectId,
+                                  @RequestParam(value = "newContainerComment") String comment,
+                                  @RequestParam(value = "newContainerDate") String date) throws IOException, ParseException {
+        Project project = projectService.get(projectId);
+        project.setNewContainerComment(comment);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date formatedDate = dateFormat.parse(date);
+        project.setNewContainerDate(formatedDate);
+        projectService.update(project);
+        return projectId;
+    }
+
+
 }

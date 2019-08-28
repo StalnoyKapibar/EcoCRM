@@ -65,23 +65,6 @@ public class ProjectRestController {
         return stepService.getStepDTO(id, stepNumber);
     }
 
-    //Добавление заявки на участие в проекте
-    @RequestMapping(value = "/request/{project_id}", method = RequestMethod.GET)
-    public String addRequest(@PathVariable("project_id") Long id) {
-        Project projectRequested = projectService.get(id);
-        Long ManagerId = projectRequested.getManager().getId();
 
-        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Request newRequest = new Request(currentUser.getName() + " " + currentUser.getSurname(),/*projectRequested.getPetition().getHouseArea(),currentUser.getId()*/"someaddress",currentUser.getId(),projectRequested.getId());
-
-        User Manager = userService.get(ManagerId);
-        List<Request> currentRequests = Manager.getRequestList();
-        currentRequests.add(newRequest);
-        requestService.insert(newRequest);
-        Manager.setRequestList(currentRequests);
-        userService.update(Manager);
-        return "/projects/all";
-    }
 
 }

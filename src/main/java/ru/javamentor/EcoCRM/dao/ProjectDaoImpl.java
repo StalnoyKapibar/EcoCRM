@@ -44,7 +44,6 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
 
     @Override
     public List<Project> getProjVolunteerByUserId(Long id) {
-
         Query query = entityManager.createQuery("SELECT DISTINCT p FROM Project p LEFT JOIN p.users AS u WHERE u.id = :id");
         query.setParameter("id", id);
         return query.getResultList();
@@ -54,7 +53,7 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
     public List<PersonProjectDTO> getProjectDtoByUserId(Long id) {
         List<PersonProjectDTO> projects = new ArrayList<>();
         List petitions = entityManager
-                .createNativeQuery("select uprs.proj_id as id, uprs.step_number as number, uprs.start_time_project as time, pe.house_area as area from\n" +
+                .createNativeQuery("select uprs.proj_id as id, uprs.step_number as number, uprs.start_time_project as time, pe.house_district as area from\n" +
                         "(select * from \n" +
                         "(select pr.id as proj_id, pr.start_step as start_time_project, pr.petition_id\n" +
                         "from users as u \n" +

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 @Repository
 @Transactional
 public class CommentDaoImpl extends AbstractDaoImpl<Comment> implements CommentDao {
+
     @Override
     public void insertByTaskId(long id, Comment comment) {
         Query query = entityManager.createNativeQuery("INSERT INTO tasks_comments (task_id, comments_id) VALUES(?,?)");
@@ -17,3 +18,4 @@ public class CommentDaoImpl extends AbstractDaoImpl<Comment> implements CommentD
         query.setParameter("2", comment.getId());
     }
 }
+

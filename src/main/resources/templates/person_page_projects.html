@@ -61,10 +61,60 @@
     </div>
 </nav>
 <main role="main" class="container-fluid">
-    <!--<h3 style="margin-left: 4%">Мои проекты :</h3>-->
+
+    <!--<h3>Мои проекты :</h3>-->
     <div class="row" style="margin: 3%;" id="users_petition_area">
     </div>
 </main>
+
+
+<!-- Modal show info-->
+<div id="show_contractor_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light">
+            <div class="modal-body">
+                <form id="show_contactForm" action="" method="post">
+                    <div class="form-group">
+                        <label for="show_name">Название:</label>
+                        <textarea id="show_name" class="form-control" name="name" required type="text" placeholder="Компания" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_rowType">Тип сырья:</label>
+                        <textarea id="show_rowType" class="form-control" name="email" required type="text" placeholder="Тип сырья" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_collectorType">Тип накопителя:</label>
+                        <textarea id="show_collectorType" class="form-control" required name="message" rows="4" placeholder="Тип накопителя" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_link">Сайт компании:</label>
+                        <textarea id="show_link" class="form-control" name="phone" required type="text" placeholder="Сайт компании" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_contactPerson">Имя менеджера:</label>
+                        <textarea id="show_contactPerson" class="form-control" required name="message" rows="4" placeholder="Имя менеджера" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_phoneNumber">Номер телефона:</label>
+                        <textarea id="show_phoneNumber" class="form-control" required name="message" rows="4" placeholder="Номер телефона" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_linkByPerson">Ссылка на соц. сеть:</label>
+                        <textarea id="show_linkByPerson" class="form-control" required name="message" rows="4" placeholder="Ссылка на соц. сеть" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_description">Условия вывоза:</label>
+                        <textarea id="show_description" class="form-control" required name="message" rows="4" placeholder="Условия вывоза" disabled></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="show_buttonModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal show info-->
 <div id="show_message" class="modal fade" role="dialog">
@@ -104,7 +154,7 @@
                     '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +
                     '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ project.petition.data + '</span></div></div>\n' +
                                         '<div class="card-footer" style="font-size: medium; color: black">' +
-                    '                    <a id="petition_button_' + project.id + '" onclick="showProject(' + project.id + ')" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Информация</a></div>\n' +
+                    '                    <a href="/project/' + project.id + '" class="btn" style="float:right; margin-top: 15px; margin-right: 5px; background-color: rgb(52, 152, 219); color: white">Перейти</a>\n' +
                     '            </div></div>'
                 )
             })
@@ -126,7 +176,7 @@
                         '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +
                         '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ project.petition.data + '</span></div></div>\n' +
                         '<div class="card-footer" style="font-size: medium; color: black">' +
-                        '                    <a id="petition_button_' + project.id + '" onclick="showProject(' + project.id + ')" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Информация</a></div>\n' +
+                        '                    <a href="/steps/' + project.id + '" class="btn" style="float:right; margin-top: 15px; margin-right: 5px; background-color: rgb(52, 152, 219); color: white">Перейти</a>\n' +
                         '            </div></div>'
                     )
                 })

@@ -79,7 +79,6 @@ public class ProjectRestController {
 
     @RequestMapping(value = "/{id}/stepdto", method = RequestMethod.GET)
     public StepDTO getStepDTO(@PathVariable("id") Long id, @RequestParam(value = "stepnumber") StepNumber stepNumber) {
-
         return stepService.getStepDTO(id, stepNumber);
     }
 
@@ -99,24 +98,7 @@ public class ProjectRestController {
     }
 
 
-    //Добавление заявки на участие в проекте
-    @RequestMapping(value = "/request/{project_id}", method = RequestMethod.GET)
-    public String addRequest(@PathVariable("project_id") Long id) {
-        Project projectRequested = projectService.get(id);
-        Long ManagerId = projectRequested.getManager().getId();
 
-        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Request newRequest = new Request(currentUser.getName() + " " + currentUser.getSurname(),/*projectRequested.getPetition().getHouseArea(),currentUser.getId()*/"someaddress",currentUser.getId(),projectRequested.getId());
-
-        User Manager = userService.get(ManagerId);
-        List<Request> currentRequests = Manager.getRequestList();
-        currentRequests.add(newRequest);
-        requestService.insert(newRequest);
-        Manager.setRequestList(currentRequests);
-        userService.update(Manager);
-        return "/projects/all";
-    }
 
     @PostMapping("/add_new_container_photo")
     public List<Photo> saveNewContainerPhoto(@RequestParam(value = "projectid") Long projectId,

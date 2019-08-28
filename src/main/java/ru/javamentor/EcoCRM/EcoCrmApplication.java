@@ -4,6 +4,7 @@ package ru.javamentor.EcoCRM;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -22,8 +23,8 @@ import javax.annotation.PostConstruct;
 		"classpath:properties/application.properties"})
 public class EcoCrmApplication implements WebMvcConfigurer {
 
-	@PostConstruct
-	@Bean(initMethod = "init")
+	//@PostConstruct
+	//@Bean(initMethod = "init")
 	public DataInitializer init() {
 		return new DataInitializer();
 	}

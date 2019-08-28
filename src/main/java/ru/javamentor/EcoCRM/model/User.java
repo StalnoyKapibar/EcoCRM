@@ -115,7 +115,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return enabled;
     }
 
     @Override
@@ -161,9 +161,9 @@ public class User implements UserDetails {
 
         this.photo = photo;
     }
-    public void setEnabled() {
+
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-        //this.enabled = status != UserStatus.BLOCKED;
     }
 
     public UserStatus getStatus() {
@@ -173,6 +173,7 @@ public class User implements UserDetails {
     public void setStatus(UserStatus status) {
             this.status = status;
     }
+
     public String getName() { return name; }
 
     public void setName(String name) {

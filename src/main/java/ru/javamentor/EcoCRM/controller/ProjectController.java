@@ -17,7 +17,6 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-
     @GetMapping("/all")
     public ModelAndView showProjects() {
         ModelAndView modelAndView = new ModelAndView("projects");

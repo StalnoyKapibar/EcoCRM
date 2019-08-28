@@ -1,5 +1,6 @@
 package ru.javamentor.EcoCRM.service;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
@@ -19,5 +20,7 @@ public interface ProjectService extends AbstractService<Project> {
     List<PersonProjectDTO> getPersonProjectDto(Long id);
 
     Report getReportByWithIdProject(Long id);
+
+    List<Project> getProjManagerByUserId(Long id);
 
 }

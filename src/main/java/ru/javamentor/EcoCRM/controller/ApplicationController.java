@@ -132,4 +132,16 @@ public class ApplicationController {
     }
 
 
+    @GetMapping("/users_list")
+    public String showAllUsers(Model model) {
+        List<User> usersList = userService.getAll();
+        model.addAttribute("usersList", usersList);
+        return "/admin/users";
+    }
+
+    @GetMapping("/test")
+    public String getTest() {
+        return "test";
+    }
+
 }

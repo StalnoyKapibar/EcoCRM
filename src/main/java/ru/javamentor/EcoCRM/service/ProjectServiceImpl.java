@@ -36,6 +36,7 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
         return projectDao.getProjVolunteerByUserId(id);
     }
 
+    //todo
     @Override
     public List<Project> getProjectsByUserId(Long id) {
         return null;
@@ -49,6 +50,11 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
     @Override
     public Report getReportByWithIdProject(Long id){
         return projectDao.getReportByWithIdProject(id);
+    }
+
+    @Override
+    public List<Project> getProjManagerByUserId(Long id) {
+        return projectDao.getProjManagerByUserId(id);
     }
 
 }

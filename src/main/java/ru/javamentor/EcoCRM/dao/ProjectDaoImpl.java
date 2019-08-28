@@ -46,7 +46,6 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
 
     @Override
     public List<Project> getProjVolunteerByUserId(Long id) {
-
         Query query = entityManager.createQuery("SELECT DISTINCT p FROM Project p LEFT JOIN p.users AS u WHERE u.id = :id");
         query.setParameter("id", id);
         return query.getResultList();

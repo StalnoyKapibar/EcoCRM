@@ -77,10 +77,10 @@ public class RegistrationController {
             JSONObject jsonReq = new JSONObject(response.getBody());
             String accesToken = jsonReq.getString("access_token");
             String userId = jsonReq.getString("user_id");
-            String urlForInfo = "https://api.vk.com/method/users.get?user_ids="+ userId +"&fields=bdate&access_token=" + accesToken +"&v=5.101";
+            String urlForInfo = "https://api.vk.com/method/users.get?user_ids=" + userId + "&fields=bdate&access_token=" + accesToken + "&v=5.101";
             ModelAndView modelAndView = new ModelAndView("registration/registration-form-with-vk");
-            modelAndView.addObject("urlForInfo",urlForInfo);
-            modelAndView.addObject("email",email);
+            modelAndView.addObject("urlForInfo", urlForInfo);
+            modelAndView.addObject("email", email);
             return modelAndView;
     }
 

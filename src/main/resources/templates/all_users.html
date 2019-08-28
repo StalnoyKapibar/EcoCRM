@@ -41,11 +41,11 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/all_users" style="color: white;">Все пользователи <span
+                <a class="nav-link" href="/petition" style="color: white;">Добавить заявку <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/petition" style="color: white;">Добавить заявку <span
+                <a class="nav-link" href="/all_users" style="color: white;">Все пользователи <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
@@ -61,42 +61,135 @@
     </div>
 </nav>
 <main role="main" class="container-fluid">
-    <!--<h3 style="margin-left: 4%">Мои проекты :</h3>-->
-    <div class="row" style="margin: 3%;">
-        <div class="col-sm-4" th:each="user : ${all}">
-            <div class="card" style="margin-top: 5%">
-                <div class="card-header" th:text="${user.name}">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <!--<input class="input-group" type='search' id='search' placeholder="Поиск пользователя" autocomplete='off'>-->
+    <!--<div id='result'></div>-->
+    <div class="row" style="margin: 3%;" id="allUserTable">
+
+    </div>
+</main>
+
+<!-- Modal -->
+<div id="get_project_info" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content card border-light">
+            <div class="modal-body">
+                <div id="managerHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 3%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Менеджер проектов:</div>
+                <div id="modalManagerProject">
+
                 </div>
-                <div class="card-body">
-                    <div id="photo" class="text-center">
-                        <!--<img th:src="@{/api/user/photo/{id}(id=${user.id})}" class="img-rounded" alt="profile image" id = "profile_avatar"/>-->
-                        <img th:src="*{'data:image/png;base64,' + user.photo}" alt="" />
-                    </div>
-                    <br>
-                    <table class="table">
-                        <tr>
-                            <td><h6> VK: </h6></td><td><a><h6 id="vk" th:text="${user.link}"></h6></a></td>
-                        </tr>
-                        <tr>
-                            <td><h6> Профессия: </h6></td><td><h6 id="profession" th:text="${user.profession}"></h6></td>
-                        </tr>
-                    </table>
-                    <!--<h4 align="center" style="color: #002bff;">Проекты</h4>-->
-                    <!--<table class="table table-sm">-->
-                        <!--<tr>-->
-                            <!--<td><h6> Менеджер: </h6></td><td><h5 id="projManager" ></h5></td>-->
-                        <!--</tr>-->
-                        <!--<tr>-->
-                            <!--<td><h6> Волонтер: </h6></td><td><h5 id="projVolunteer"></h5></td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
+                <div id="memberHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 5%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Участник проектов:</div>
+                <div id="modalMemberProject">
+
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="buttonModal">Close</button>
             </div>
         </div>
     </div>
-</main>
+</div>
+
+
+<script>
+    var arr = [];
+    $(document).ready(function () {
+        getAllUsers();
+        // document.getElementById('search').onkeyup = function(){
+        //     document.getElementById('result').innerHTML = '';
+        //     var l = this.value.length;
+        //     if(l>0){
+        //         for(var i=0;i<arr.length;i++){
+        //             var _ = arr[i].split('').slice(0,l).join('');
+        //             if(_==this.value){
+        //                 document.getElementById('result').innerHTML+='<div class="list">'+arr[i]+'</div>';
+        //             }
+        //         }
+        //     }
+        // };
+    })
+
+    function getAllUsers() {
+        $.ajax({
+            url: "/api/user/all/encodephotos",
+            type: "GET",
+            async: false,
+            success: function (users) {
+                $.each(users, function (key, user) {
+                    let username = '' + user.name + user.surname + '';
+                    arr.push(username);
+                    $('#allUserTable').append(
+                        '<div class="col-sm-3">' +
+                        '<div class="card" style="margin-top: 3%">\n' +
+                        '                <div class="card-body">\n' +
+                        '                    <div id="photo" class="text-center">\n' +
+                        '<img src="data:image/png;base64,' + user.photo + '" class="img-rounded" alt="profile image" id = "profile_avatar" sizes="(max-width: 30px) 30px, (min-width: 10px) 10px">' +
+                        '                    </div>\n' +
+                        '                    <br>\n' +
+                        '                    <table class="table">\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Статус: </h6></td><td><h6 id="profession"><span class="badge badge-pill text-light" style="font-size: small; background-color: #f71752">' + user.status + '</span></h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Статус: </h6></td><td><h6 id="profession">' +
+                        '<button class="btn btn-warning" data-toggle="modal" data-target="#get_project_info" onclick="getProjects(' + user.id + ')">Проекты</button>'+
+                        '</h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                    </table>\n' +
+                        '                </div>\n' +
+                        '            </div> </div>');
+                });
+            }
+        });
+    }
+
+    function getProjects(id) {
+        $.ajax({
+            url: "/api/project/manager/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+                $('#modalManagerProject').val('');
+                if (projects.length == 0) {
+                    $('#managerHeader').val('');
+                }
+                $.each(projects, function (key, project) {
+                    $('#modalManagerProject').append(
+                        '<div class="card" style="margin-top: 1%">' +
+                        '<div class="card-header"><div style="white-space: pre"><h6>Статус:  <span class="badge badge-pill text-light" style="font-size: medium; background-color: #f71752">' + project.status + '</span></h6></div></div>' +
+                        '<div class="card-body">' +
+                        '<div style="white-space: pre"><h6>Адреc:  ' + project.petition.adresHome + '</h6></div>' +
+                        '<a class="btn btn-warning" href="/steps/' + project.id + '">Перейти</a></div></div>'
+                    )
+                }
+                )
+            }
+        });
+
+        $.ajax({
+            url: "/api/project/member/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+                $('#modalMemberProject').val('');
+                if (projects.length == 0) {
+                    $('#memberHeader').remove();
+                }
+                $.each(projects, function (key, project) {
+                    $('#modalMemberProject').append(
+                            '<div class="card" style="margin-top: 2%">' +
+                            '<div class="card-body">' +
+                            '<div><h6>' + project.petition.adresHome + '</h6></div>' +
+                            '<div><h6>' + project.status + '</h6></div>' +
+                            '<a class="btn btn-warning"  href="/steps/' + project.id + '">Перейти</a></div></div>'
+                        )
+                    }
+                )
+            }
+        });
+    }
+</script>
 </body>
 </html>

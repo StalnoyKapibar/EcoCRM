@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Взаимодействие с заготовителями</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="tab-content" style="width: 70%">
+                    <div class="tab-pane fade show active" id="contractor_list_pil" role="tabpanel"
+                         aria-labelledby="v-pills-home-tab">
+                        <div id="task_3_1">
+                            <table class="table table-hover" id="tableCompany">
+                            </table>
+                            <button class="btn btn-warning" data-toggle="modal" data-target="#add_contractor_modal">Добавить заготовителя</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div id="add_contractor_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light">
+            <div class="modal-header card-header">
+                <h2><span id="VMHeadline"></span><br/></h2>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm" action="" method="post">
+                    <div class="form-group">
+                        <label for="name">Название:</label>
+                        <input id="name" class="form-control" name="name" required type="text" placeholder="Компания">
+                    </div>
+                    <div class="form-group">
+                        <label for="rowType">Тип сырья:</label>
+                        <input id="rowType" class="form-control" name="email" required type="text" placeholder="Тип сырья">
+                    </div>
+                    <div class="form-group">
+                        <label for="collectorType">Тип накопителя:</label>
+                        <textarea id="collectorType" class="form-control" required name="message" rows="4" placeholder="Тип накопителя"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="link">Сайт компании:</label>
+                        <input id="link" class="form-control" name="phone" required type="text" placeholder="Сайт компании">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPerson">Имя менеджера:</label>
+                        <textarea id="contactPerson" class="form-control" required name="message" rows="4" placeholder="Имя менеджера"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Номер телефона:</label>
+                        <textarea id="phoneNumber" class="form-control" required name="message" rows="4" placeholder="Номер телефона"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="linkByPerson">Ссылка на соц. сеть:</label>
+                        <textarea id="linkByPerson" class="form-control" required name="message" rows="4" placeholder="Ссылка на соц. сеть"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Условия вывоза:</label>
+                        <textarea id="description" class="form-control" required name="message" rows="4" placeholder="Условия вывоза"></textarea>
+                    </div>
+                    <a class="btn btn-warning" onclick="addContractor()">Сохранить</a>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="buttonModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal show info-->
+    <div id="show_contractor_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content card border-light">
+                <div class="modal-body">
+                    <form id="show_contactForm" action="" method="post">
+                        <div class="form-group">
+                            <label for="show_name">Название:</label>
+                            <textarea id="show_name" class="form-control" name="name" required type="text" placeholder="Компания" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_rowType">Тип сырья:</label>
+                            <textarea id="show_rowType" class="form-control" name="email" required type="text" placeholder="Тип сырья" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_collectorType">Тип накопителя:</label>
+                            <textarea id="show_collectorType" class="form-control" required name="message" rows="4" placeholder="Тип накопителя" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_link">Сайт компании:</label>
+                            <textarea id="show_link" class="form-control" name="phone" required type="text" placeholder="Сайт компании" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_contactPerson">Имя менеджера:</label>
+                            <textarea id="show_contactPerson" class="form-control" required name="message" rows="4" placeholder="Имя менеджера" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_phoneNumber">Номер телефона:</label>
+                            <textarea id="show_phoneNumber" class="form-control" required name="message" rows="4" placeholder="Номер телефона" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_linkByPerson">Ссылка на соц. сеть:</label>
+                            <textarea id="show_linkByPerson" class="form-control" required name="message" rows="4" placeholder="Ссылка на соц. сеть" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="show_description">Условия вывоза:</label>
+                            <textarea id="show_description" class="form-control" required name="message" rows="4" placeholder="Условия вывоза" disabled></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="show_buttonModal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+
+    $(document).ready(function () {
+        getAllContractors();
+
+    })
+
+function addContractor() {
+    let name = $("#name").val();
+    let row = $("#rowType").val();
+    let link = $("#link").val();
+    let contact = $("#contactPerson").val();
+    let phone = $("#phoneNumber").val();
+    let person = $("#linkByPerson").val();
+    let collector = $("#collectorType").val();
+    let description = $("#description").val();
+
+
+    var contractor = {
+        'name': name,
+        'rowType': row,
+        'link': link,
+        'contactPerson': contact,
+        'phoneNumber': phone,
+        'linkByPerson': person,
+        'collectorType': collector,
+        'description': description
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: "/api/contractor/new",
+        data: JSON.stringify(contractor),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            alert("Заготовитель добавлен");
+            $('#buttonModal').click();
+        }
+    })
+}
+
+function getAllContractors() {
+    $.ajax({
+        url: "/api/contractor/all",
+        type: "GET",
+        async: false,
+        success: function (contractors) {
+            $.each(contractors, function (key, company) {
+                $('#tableCompany').append(
+                    '<div class="accordion" id="accordionExample">\n' +
+                    '  <div class="card">\n' +
+                    '    <div class="card-header" id="headingOne">\n' +
+                    '      <h2 class="mb-0">\n' +
+                    '        <button style="color: black" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+company.id+'" aria-expanded="true" aria-controls="collapseOne">\n' +
+                     company.name + '<button class="btn btn-warning" data-toggle="modal" data-target="#show_contractor_modal" onclick="getInfo(' + company.id + ')">Info</button>' +
+                    '        </button>\n' +
+                    '      </h2>\n' +
+                    '    </div>\n' +
+                    '    <div id="collapse'+company.id+'" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">\n' +
+                    '      <div class="card-body" id="comment'+company.id+'">\n' +
+                    '        ' +
+                    '      </div>\n' +
+                    '    </div>\n' +
+                    '  </div>\n' +
+                    '</div>')
+
+                $.each(company.comments, function (key, comment) {
+                    $('#comment' + company.id + '').append(
+                        '<textarea disabled>' + comment + '</textarea>'
+                    )
+                });
+                $('#comment' + company.id + '').append(
+                    '<textarea placeholder="Оставить комментарий по заготовителю"><a class="btn btn-primary"></textarea>'
+                )
+
+            });
+
+        }
+    });
+}
+
+
+function getInfo(id) {
+    $.ajax({
+        url: "/api/contractor/" + id,
+        type: "GET",
+        async: false,
+        success: function (data) {
+            $("#show_name").text(data.name);
+            $("#show_rowType").text(data.rowType);
+            $("#show_link").text(data.link);
+            $("#show_contactPerson").text(data.contactPerson);
+            $("#show_phoneNumber").text(data.phoneNumber);
+            $("#show_linkByPerson").text(data.linkByPerson);
+            $("#show_collectorType").text(data.collectorType);
+            $("#show_description").text(data.description);
+        }
+    });
+}
+
+</script>
+</body>
+</html>

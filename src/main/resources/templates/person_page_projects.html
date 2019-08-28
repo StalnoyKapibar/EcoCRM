@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,7 +32,7 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/projects" style="color: white;">Все проекты <span
+                <a class="nav-link" href="/projects/all" style="color: white;">Все проекты <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
@@ -62,20 +61,44 @@
 </nav>
 <main role="main" class="container-fluid">
     <!--<h3 style="margin-left: 4%">Мои проекты :</h3>-->
-    <div class="row" style="margin: 3%;">
-        <div class="col-sm-4" th:each="project : ${projects}">
-            <div class="card shadow bg-white rounded" style="margin-top: 15px">
-                <div class="card-header" th:text="${project.area}" style="font-size: medium; color: black">
-                </div>
-                <div class="card-body">
-                    <div>Проект на этапе: <span th:text="${project.number}" class="badge badge-pill text-light" style="font-size: small; background-color: orange"></span></div>
-                    <div>Начало проекта: <span th:text="${project.time}" style="font-size: small"></span></div>
-                    <a th:href="@{/steps/{id}(id=${project.id})}" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Перейти</a>
-                </div>
-            </div>
-        </div>
+    <div class="row" style="margin: 3%;" id="users_petition_area">
     </div>
 </main>
 
+<!-- Modal show info-->
+<div id="show_message" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light">
+            <div class="modal-body">
+                <h3 style="font: icon; font-size: large">Заявка отпралена на обработку</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        getAllPetitions();
+
+    });
+
+    function getAllPetitions() {
+        $.ajax({
+            url: "/api/project/member",
+            type: "GET",
+            async: false,
+            success: function (petitions) {
+                $('#users_petition_area').
+            }
+        });
+    }
+
+</script>
+
 </body>
 </html>
+

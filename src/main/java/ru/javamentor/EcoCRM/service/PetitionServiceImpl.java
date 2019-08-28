@@ -89,6 +89,7 @@ public class PetitionServiceImpl extends AbstractServiceImpl<Petition> implement
         User userMember = userService.get(user.getId());
         petition.setStatus(Status.IN_PROGRESS);
         petition.getUserPetition().add(userMember);
+        petitionDao.update(petition);
     }
 }
 

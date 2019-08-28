@@ -33,7 +33,7 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/projects" style="color: white;">Все проекты <span
+                <a class="nav-link" href="/projects/all" style="color: white;">Все проекты <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
@@ -71,19 +71,22 @@
 <!-- Modal -->
 <div id="get_project_info" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content card border-light">
-            <div class="modal-body">
-                <div id="managerHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 3%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Менеджер проектов:</div>
-                <div id="modalManagerProject">
+        <div class="modal-content card border-light" id="fff">
+            <div class="modal-body" id="f" >
+                <div id="fffff">
+                    <div id="managerHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 3%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Менеджер проектов:</div>
+                    <div id="modalManagerProject">
 
-                </div>
-                <div id="memberHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 5%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Участник проектов:</div>
-                <div id="modalMemberProject">
+                    </div>
+                    <div id="memberHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 5%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Участник проектов:</div>
+                    <div id="modalMemberProject">
 
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" id="ff">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="buttonModal">Close</button>
+            </div>
             </div>
         </div>
     </div>
@@ -94,18 +97,6 @@
     var arr = [];
     $(document).ready(function () {
         getAllUsers();
-        // document.getElementById('search').onkeyup = function(){
-        //     document.getElementById('result').innerHTML = '';
-        //     var l = this.value.length;
-        //     if(l>0){
-        //         for(var i=0;i<arr.length;i++){
-        //             var _ = arr[i].split('').slice(0,l).join('');
-        //             if(_==this.value){
-        //                 document.getElementById('result').innerHTML+='<div class="list">'+arr[i]+'</div>';
-        //             }
-        //         }
-        //     }
-        // };
     })
 
     function getAllUsers() {
@@ -117,6 +108,7 @@
                 $.each(users, function (key, user) {
                     let username = '' + user.name + user.surname + '';
                     arr.push(username);
+
                     $('#allUserTable').append(
                         '<div class="col-sm-3">' +
                         '<div class="card" style="margin-top: 3%">\n' +
@@ -133,7 +125,7 @@
                         '                            <td><h6> Статус: </h6></td><td><h6 id="profession"><span class="badge badge-pill text-light" style="font-size: small; background-color: #f71752">' + user.status + '</span></h6></td>\n' +
                         '                        </tr>\n' +
                         '                        <tr>\n' +
-                        '                            <td><h6> Статус: </h6></td><td><h6 id="profession">' +
+                        '                            <td><h6></h6></td><td><h6 id="profession">' +
                         '<button class="btn btn-warning" data-toggle="modal" data-target="#get_project_info" onclick="getProjects(' + user.id + ')">Проекты</button>'+
                         '</h6></td>\n' +
                         '                        </tr>\n' +
@@ -151,37 +143,52 @@
             type: "GET",
             async: false,
             success: function (projects) {
-                $('#modalManagerProject').val('');
+                $('#fffff').remove();
+                $('#f').append(
+                    '<div id="fffff">\n' +
+                    '                    <div id="managerHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 3%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Менеджер проектов:</div>\n' +
+                    '                    <div id="modalManagerProject">\n' +
+                    '                        \n' +
+                    '                    </div>\n' +
+                    '                    <div id="memberHeader" class="navbar rounded" style="font-size: medium; color: white; margin-top: 5%; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">Участник проектов:</div>\n' +
+                    '                    <div id="modalMemberProject">\n' +
+                    '\n' +
+                    '                    </div>\n' +
+                    '                </div>'
+                );
+
                 if (projects.length == 0) {
-                    $('#managerHeader').val('');
+                    $('#managerHeader').remove();
                 }
                 $.each(projects, function (key, project) {
                     $('#modalManagerProject').append(
-                        '<div class="card" style="margin-top: 1%">' +
+                        '<div id="fffff"><div class="to_delete_ card" style="margin-top: 1%">' +
                         '<div class="card-header"><div style="white-space: pre"><h6>Статус:  <span class="badge badge-pill text-light" style="font-size: medium; background-color: #f71752">' + project.status + '</span></h6></div></div>' +
                         '<div class="card-body">' +
-                        '<div style="white-space: pre"><h6>Адреc:  ' + project.petition.adresHome + '</h6></div>' +
-                        '<a class="btn btn-warning" href="/steps/' + project.id + '">Перейти</a></div></div>'
+                        '<div style="white-space: pre"><h6>Адреc:  ' + project.petition.addressHome + '</h6></div>' +
+                        '<a class="btn btn-warning" href="/steps/' + project.id + '">Перейти</a></div></div></div>'
                     )
                 }
                 )
             }
         });
+        next(id);
+    }
 
+    function next(id) {
         $.ajax({
             url: "/api/project/member/" + id,
             type: "GET",
             async: false,
             success: function (projects) {
-                $('#modalMemberProject').val('');
                 if (projects.length == 0) {
                     $('#memberHeader').remove();
                 }
                 $.each(projects, function (key, project) {
-                    $('#modalMemberProject').append(
-                            '<div class="card" style="margin-top: 2%">' +
+                        $('#modalMemberProject').append(
+                            '<div class="to_delete card" style="margin-top: 2%">' +
                             '<div class="card-body">' +
-                            '<div><h6>' + project.petition.adresHome + '</h6></div>' +
+                            '<div><h6>' + project.petition.addressHome + '</h6></div>' +
                             '<div><h6>' + project.status + '</h6></div>' +
                             '<a class="btn btn-warning"  href="/steps/' + project.id + '">Перейти</a></div></div>'
                         )
@@ -190,6 +197,7 @@
             }
         });
     }
+
 </script>
 </body>
 </html>

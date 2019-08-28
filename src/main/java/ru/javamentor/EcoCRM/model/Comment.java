@@ -3,6 +3,7 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,13 +18,13 @@ public class Comment implements Serializable {
     private String message;
 
     @Column(name = "time")
-    private LocalDateTime time;
+    private LocalDate time;
 
     public Comment() {
 
     }
 
-    public Comment(String message, LocalDateTime time) {
+    public Comment(String message, LocalDate time) {
         this.message = message;
         this.time = time;
     }
@@ -44,11 +45,11 @@ public class Comment implements Serializable {
         this.message = message;
     }
 
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 }

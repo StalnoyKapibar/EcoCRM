@@ -1,34 +1,41 @@
 package ru.javamentor.EcoCRM.model;
 
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@Table (name = "mitings")
-public class Meting {
+@Table (name = "meetings")
+public class Meeting {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "contractor")
+    @OneToOne
     private Contractor contractor;
 
-    @Column(name = "management_company")
+    @OneToOne
     private ManagementCompany managementCompany;
 
     @Column(name = "date")
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
 
-    public Meting() {
+    public Meeting() {
 
     }
 
-    public LocalDateTime getDateTime() {
+    public Meeting(Contractor contractor, ManagementCompany managementCompany, LocalDate dateTime) {
+        this.contractor = contractor;
+        this.managementCompany = managementCompany;
+        this.dateTime = dateTime;
+    }
+
+    public LocalDate getDateTime() {
           return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
 

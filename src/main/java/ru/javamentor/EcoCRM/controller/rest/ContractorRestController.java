@@ -31,4 +31,10 @@ public class ContractorRestController {
         contractorService.insert(contractor);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PostMapping("/{id}/comment")
+    public ResponseEntity addComment(@PathVariable Long id, @RequestBody String comment) {
+        contractorService.saveComment(id, comment);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

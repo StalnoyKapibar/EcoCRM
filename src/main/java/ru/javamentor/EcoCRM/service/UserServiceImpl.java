@@ -6,7 +6,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.UserDetailsDao;
+import ru.javamentor.EcoCRM.dto.UserEncoderPhotoDTO;
 import ru.javamentor.EcoCRM.model.User;
+import ru.javamentor.EcoCRM.model.embedded.Status;
+import ru.javamentor.EcoCRM.model.embedded.UserStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +51,20 @@ public class UserServiceImpl  extends AbstractServiceImpl<User> implements UserS
             photos.add(user.getEncoderPhoto());
         }
         return photos;
+    }
+
+    @Override
+    public List<UserEncoderPhotoDTO> getUsersWithEncoderPhoto() {
+        List<User> users = getAll();
+        List<UserEncoderPhotoDTO> userList = new ArrayList<>();
+        for (User user : users) {
+            Long id = user.getId();
+            String name = user.getName();
+            String surname = user.getSurname();
+            UserStatus status = user.getStatus();
+            String photo = user.getEncoderPhoto();
+            userList.add(new UserEncoderPhotoDTO(id, name, surname, status, photo));
+        }
+        return userList;
     }
 }

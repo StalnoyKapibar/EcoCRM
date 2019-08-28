@@ -84,4 +84,14 @@ public class ProjectRestController {
         return "/projects/all";
     }
 
+
+    @GetMapping("/manager/{id}")
+    public List<Project> getProjectsWhereUserIsManager(@PathVariable("id") Long id) {
+        return projectService.getProjManagerByUserId(id);
+    }
+
+    @GetMapping("/member/{id}")
+    public List<Project> getProjectsWhereUserIsMember(@PathVariable("id") Long id) {
+        return projectService.getProjVolunteerByUserId(id);
+    }
 }

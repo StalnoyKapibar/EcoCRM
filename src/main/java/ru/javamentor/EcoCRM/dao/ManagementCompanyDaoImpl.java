@@ -5,4 +5,5 @@ import ru.javamentor.EcoCRM.model.ManagementCompany;
 
 @Repository
 public class ManagementCompanyDaoImpl extends AbstractDaoImpl<ManagementCompany> implements ManagementCompanyDao {
+
 }

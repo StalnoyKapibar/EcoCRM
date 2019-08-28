@@ -1,7 +1,3 @@
-function initToggles() {
-    initSixthStep();
-}
-
 function fillToggles() {
     $('[id ^= \"t_toggle_\"]').change(function (e) {
         let prefix = 't_toggle_';

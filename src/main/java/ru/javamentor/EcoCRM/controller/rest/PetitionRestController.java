@@ -125,7 +125,6 @@ public class PetitionRestController {
         String district = petition.getHouseDistrict();
         updatedPetition.setHouseDistrict(district);
         updatedPetition.setFlatsCount(petition.getFlatsCount());
-        updatedPetition.setStatusHome(petition.getStatusHome());
         updatedPetition.setManagementCompanyType(petition.getManagementCompanyType());
         updatedPetition.setAvailableCouncil(petition.getAvailableCouncil());
         updatedPetition.setManagementOrganizationRelation(petition.getManagementOrganizationRelation());

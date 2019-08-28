@@ -19,6 +19,7 @@
     <link href="/private/css/common_style.css" rel="stylesheet">
 </head>
 <body>
+<input type="hidden" id="UserId" th:value="${id}">
 <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
     <a class="navbar-brand" href="/user" style="white-space: pre"><span class="fa fa-leaf"></span> Eco CRM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -81,20 +82,66 @@
 </div>
 
 <script>
+    let id = $('#UserId').val();
     $(document).ready(function () {
-        getAllPetitions();
+        getAllProjects();
 
     });
 
-    function getAllPetitions() {
+    function getAllProjects() {
         $.ajax({
-            url: "/api/project/member",
+            url: "/api/project/manager/" + id,
             type: "GET",
             async: false,
-            success: function (petitions) {
-                $('#users_petition_area').
+            success: function (projects) {
+                $.each(projects, function (key, project) {
+                $('#users_petition_area').append(
+                    '<div class="col-sm-4">' +
+                    '<div class="card shadow bg-white rounded" style="margin-top: 15px">\n' +
+                    '                <div class="card-header" style="background-color: #f1b0b7">Менеджер проекта</div>\n' +
+                    '                <div class="card-body">\n' +
+                    '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.addressHome + '</span></div>\n' +
+                    '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +
+                    '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ project.petition.data + '</span></div></div>\n' +
+                                        '<div class="card-footer" style="font-size: medium; color: black">' +
+                    '                    <a id="petition_button_' + project.id + '" onclick="showProject(' + project.id + ')" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Информация</a></div>\n' +
+                    '            </div></div>'
+                )
+            })
+        }
+        });
+
+        $.ajax({
+            url: "/api/project/member/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+                $.each(projects, function (key, project) {
+                    $('#users_petition_area').append(
+                        '<div class="col-sm-4">' +
+                        '<div class="card shadow bg-white rounded" style="margin-top: 15px">\n' +
+                        '                <div class="card-header" style="background-color: #9fcdff">Участник проекта</div>\n' +
+                        '                <div class="card-body">\n' +
+                        '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.addressHome + '</span></div>\n' +
+                        '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +
+                        '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ project.petition.data + '</span></div></div>\n' +
+                        '<div class="card-footer" style="font-size: medium; color: black">' +
+                        '                    <a id="petition_button_' + project.id + '" onclick="showProject(' + project.id + ')" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Информация</a></div>\n' +
+                        '            </div></div>'
+                    )
+                })
             }
         });
+    }
+
+    function showProject() {
+        $.ajax({
+            url: "/api/project/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+
+            }})
     }
 
 </script>

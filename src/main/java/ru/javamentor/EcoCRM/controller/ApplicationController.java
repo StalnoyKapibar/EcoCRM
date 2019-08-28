@@ -55,8 +55,8 @@ public class ApplicationController {
 
     @GetMapping("/user")
     public String showUser(Model model, Authentication authentication) {
-        Long id = ((User)authentication.getPrincipal()).getId();
-        model.addAttribute("projects", projectService.getPersonProjectDto(id));
+        Long id = ((User) authentication.getPrincipal()).getId();
+        model.addAttribute("id", id);
         return "person_page_projects";
     }
 

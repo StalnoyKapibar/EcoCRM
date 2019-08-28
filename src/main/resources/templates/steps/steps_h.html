@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>steps_2</title>
+    <link href="/private/css/calendar.css" rel="stylesheet">
+    <script src="/private/js/calendar.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -15,7 +17,11 @@
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
     <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <style>
+
         .nav-item.nav-link.active {
             background: #4c40ff;
             color: #eeeeee;
@@ -761,22 +767,102 @@
                         <div class="tab-content" style="width: 70%">
                             <div class="tab-pane fade show active" id="check_point_control_pil" role="tabpanel"
                                  aria-labelledby="v-pills-home-tab">
-                                <div id="task_8_1">
-                                    <label><h6>Комментарий</h6></label>
-                                    <textarea class="form-control" rows="5"></textarea>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Добавить точку контроля
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel2">Добавить точку контроля</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="task_8_1">
+                                                    <label><h6>Название</h6></label>
+                                                    <input id="check_point_name" type="text" class="form-control" placeholder="Название">
+                                                    <br>
+                                                    <label><h6>Описание</h6></label>
+                                                    <textarea id="check_point_description" class="form-control" rows="5" placeholder="Описание"></textarea>
+                                                    <br>
+                                                    <label><h6>Дата контроля</h6></label>
+                                                    <br>
+                                                    <input id = "check_point_date" width="276" placeholder="Дата">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                                <button type="button" class="btn btn-primary" onclick="saveCheckPointInfo()">Сохранить</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button type="button" onclick="saveReport()" class="btn btn-primary">Сохранить</button>
 
+                                <!-- Calendar Button -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                                    Клетка календаря
+                                </button>
+                                <!-- Modal for comment-->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel1">Добавить точку контроля</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <label><h6>Название</h6></label>
+                                                    <h5 th:text="${checkPoint.name}"></h5>
+                                                    <br>
+                                                    <label><h6>Описание</h6></label>
+                                                    <h5 th:text="${checkPoint.description}"></h5>
+                                                    <br>
+                                                    <label><h6>Дата контроля</h6></label>
+                                                    <br>
+                                                    <h5 th:text="${checkPoint.date}"></h5>
+                                                    <label><h6>Комментарий</h6></label>
+                                                    <textarea id="check_point_comment" class="form-control" rows="5" placeholder="Комментарий" th:text="${checkPoint.comment}"></textarea>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                                <button type="button" class="btn btn-primary" onclick="saveCheckPointComment()">Сохранить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                &lt;!&ndash;Calendar&ndash;&gt;-->
+
+<!--                                <div id="page-body">-->
+<!--                                    &lt;!&ndash; [PERIOD SELECTOR] &ndash;&gt;-->
+<!--                                    <div id="cal-date">-->
+<!--                                        <select id="cal-mth"></select>-->
+<!--                                        <select id="cal-yr"></select>-->
+<!--                                        <input id="cal-set" type="button" value="SET"/>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; [CALENDAR] &ndash;&gt;-->
+<!--                                    <div id="cal-container"></div>-->
+
+<!--                                    &lt;!&ndash; [EVENT] &ndash;&gt;-->
+<!--                                    <div id="cal-event"></div>-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                                  &ndash;&gt;-->
                             </div>
-
                         </div>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- Button trigger modal -->
 
@@ -837,6 +923,29 @@
 
 <script th:inline="text">
     var projectId = [[${projectid}]];
+
+    // $(document).ready(function() {
+    //     $("#calendar").fullCalendar();
+    // });
+
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
+
+        $('#container_installation_date').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
+
+        $('#check_point_date').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
+
+
+
+
     initSixthStep();
     $("#step_6_link").on('click',refreshPage());
     $(document).ready(function () {
@@ -844,7 +953,7 @@
             url: "/api/projects/" + projectId,
             type: "GET",
             async: false,
-            success: function (proj) {
+            success: function (proj)                    {
                 project = proj;
                 get_steps(proj);
             },
@@ -874,6 +983,7 @@
             readURL(this);
         });
     });
+
     function saveContainerInfo() {
 
         let comment = $("#container_comment").val();
@@ -900,20 +1010,16 @@
 
     //
 
-    $('#container_installation_date').datepicker({
-        format: 'yyyy-mm-dd',
-        uiLibrary: 'bootstrap4'
-    });
+
+
 
     function get_cont_instal_date() {
         alert($('#container_installation_date').val());
     }
-    var projectId = [[${projectid}]];
+
     $( document ).ready(function () {
-        $('#datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            uiLibrary: 'bootstrap4'
-        });
+
+
 
     // function show_task(pil) {
     //     $('#'+pil.id+'').tab('show');
@@ -1194,7 +1300,46 @@
 
             }
         });
+    }});
+
+    function saveCheckPointInfo() {
+        let checkPoint = {
+            'name': $('#check_point_name').val(),
+            'description': $('#check_point_description').val(),
+            'date': $('#check_point_date').val(),
+        };
+        $.ajax({
+            url: "/manage/add_check_point?projectid=" + projectId,
+            type: "POST",
+            data: checkPoint,
+            async: false,
+            success: function (response) {
+                console.log(response.responseText);
+            },
+            error: function (e) {
+                console.error(e.responseText);
+
+            }
+        });
     }
+
+    function saveCheckPointComment() {
+        let comment = $('#check_point_comment').val();
+        $.ajax({
+            url: "/manage/add_check_point_comment?checkpointid=" + checkPointId,
+            type: "POST",
+            data: comment,
+            async: false,
+            success: function (response) {
+                console.log(response.responseText);
+            },
+            error: function (e) {
+                console.error(e.responseText);
+
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

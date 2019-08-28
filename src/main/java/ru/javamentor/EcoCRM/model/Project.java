@@ -62,6 +62,9 @@ public class Project implements Serializable {
     @Column(name="new_container_date")
     private Date newContainerDate;  //step 5
 
+    @OneToMany
+    private List<CheckPoint> checkPoints;  //step 8
+
     public Project() {
 
     }
@@ -193,7 +196,13 @@ public class Project implements Serializable {
         this.newContainerDate = newContainerDate;
     }
 
+    public List<CheckPoint> getCheckPoints() {
+        return checkPoints;
+    }
 
+    public void setCheckPoints(List<CheckPoint> checkPoints) {
+        this.checkPoints = checkPoints;
+    }
 
     @Override
     public boolean equals(Object o) {

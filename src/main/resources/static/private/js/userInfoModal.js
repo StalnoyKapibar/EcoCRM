@@ -23,7 +23,6 @@ function getUser(id) {
             } else {
                 document.getElementById("unblock-btn").style.display='none';
             }
-
         }
     });
 }

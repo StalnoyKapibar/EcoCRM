@@ -122,4 +122,8 @@ public class ApplicationController {
         return "all_users";
     }
 
+    @GetMapping("/calendar")
+    public String getCalendar() {
+        return "/steps/calendar";
+    }
 }

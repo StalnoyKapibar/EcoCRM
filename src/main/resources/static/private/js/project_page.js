@@ -15,9 +15,38 @@ function getStep(stepNumber) {
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
             stepId = stepDto.id;
-            getStepType(stepNumber, stepDto);
+            getCurrentStep(stepNumber, stepDto);
         }
     });
+}
+
+function getCurrentStep(StepNumber, StepDto) {
+    var stn = StepNumber;
+    var stDTO = StepDto;
+    if (stn == 'STEP_1') {
+        step1(stDTO);
+    }
+    if (stn == 'STEP_2') {
+        step2(stDTO);
+    }
+    if (stn == 'STEP_3') {
+        step3(stDTO, id);
+    }
+    if (stn == 'STEP_4') {
+
+    }
+    if (stn == 'STEP_5') {
+        step5(stDTO);
+    }
+    if (stn == 'STEP_6') {
+        step6(stDTO);
+    }
+    if (stn == 'STEP_7') {
+        step7(stDTO);
+    }
+    if (stn == 'STEP_8') {
+
+    }
 }
 
 function getStepType(stepNumber, stepDto) {
@@ -38,7 +67,6 @@ function getStepType(stepNumber, stepDto) {
                 } else {
                     $('#t_toggle_' + value.id).bootstrapToggle('of');
                 }
-
                 tabContent.append(
                     ' <div class="tab-pane fade" id="task3_' + value.id + '_" role="tabpanel" aria-labelledby="v-pills-home-tab">\n' +
                     '<h5>Описание:</h5><h5>\n' + value.description + '</h5><br></div>');

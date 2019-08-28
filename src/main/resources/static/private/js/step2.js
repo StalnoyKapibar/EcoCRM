@@ -13,7 +13,7 @@ function step2(stepDto) {
     }
 }
 
-function saveManagCompInfo() {
+function saveManagCompInfo(projectId) {
     var managComp = {
         'name': $('#management_org_title').val(),
         'inn': $('#management_org_inn').val(),

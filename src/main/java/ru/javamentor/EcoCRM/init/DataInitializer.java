@@ -76,8 +76,8 @@ public class DataInitializer {
     private void initPhoto() throws IOException {
         User user = userService.get(1);
         //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
-        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         userService.update(user);
     }
 
@@ -95,7 +95,7 @@ public class DataInitializer {
         admin.setSurname("Travalgia");
         //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
         //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
-        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
         admin.setProfession("Bastard Operator");
@@ -115,7 +115,7 @@ public class DataInitializer {
         user.setNotToDo("school learning");
         //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
         //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         user.setEmail("user");
         user.setPassword(bCryptPasswordEncoder.encode("user"));
         List<Authority> roles = new ArrayList<>();
@@ -141,7 +141,7 @@ public class DataInitializer {
             user.setAuthorities(roles);
             //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
-            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
         }
     }

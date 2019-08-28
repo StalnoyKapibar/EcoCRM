@@ -1,18 +1,13 @@
 package ru.javamentor.EcoCRM.service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dto.CurrentUserDTO;
 import ru.javamentor.EcoCRM.model.User;
-
 import java.util.Base64;
-
 @Service
 public class DTOServiceImpl  implements  DTOService{
-
     @Autowired
     UserService userService;
-
     @Override
     public User convertDTOToCurrentUser(CurrentUserDTO userDTO) {
         User user = userService.get(userDTO.getId());
@@ -24,11 +19,9 @@ public class DTOServiceImpl  implements  DTOService{
         user.setLink(userDTO.getLink());
         user.setProfession(userDTO.getProfession());
         user.setNotToDo(userDTO.getNotToDo());
-        user.setPhoto(Base64.getDecoder().decode(userDTO.getPhoto()));
-
-        return null;
+       // user.setPhoto(Base64.getDecoder().decode(userDTO.getPhoto()));
+        return user;
     }
-
     @Override
     public CurrentUserDTO convertCurrentUserToDTO(User user) {
         CurrentUserDTO userDTO = new CurrentUserDTO();

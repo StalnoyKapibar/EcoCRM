@@ -101,6 +101,38 @@ public class PetitionRestController {
         projectService.insert(project);
     }
 
+    @PostMapping("/update")
+    @ResponseBody
+    public void updatePetition(@RequestBody Petition petition,
+                               @RequestParam (value = "projectId") Long projectId){
+        Project project = projectService.get(projectId);
+        Petition updatedPetition = project.getPetition();
+        updatedPetition.setUserName(petition.getUserName());
+        updatedPetition.setEmail(petition.getEmail());
+        updatedPetition.setContactInformation(petition.getContactInformation());
+        updatedPetition.setPetitionerType(petition.getPetitionerType());
+        updatedPetition.setActivityType(petition.getActivityType());
+        List<String> rowTypes = petition.getTypeOfRawMaterial();
+        updatedPetition.setTypeOfRawMaterial(rowTypes);
+        updatedPetition.setAddressHome(petition.getAddressHome());
+        String district = petition.getHouseDistrict();
+        updatedPetition.setHouseDistrict(district);
+        updatedPetition.setFlatsCount(petition.getFlatsCount());
+        updatedPetition.setStatusHome(petition.getStatusHome());
+        updatedPetition.setManagementCompanyType(petition.getManagementCompanyType());
+        updatedPetition.setAvailableCouncil(petition.getAvailableCouncil());
+        updatedPetition.setManagementOrganizationRelation(petition.getManagementOrganizationRelation());
+        updatedPetition.setManagementCompanyContacts(petition.getManagementCompanyContacts());
+        updatedPetition.setAdditionalInformation(petition.getAdditionalInformation());
+        String containerAveleble= petition.getContainerAvailable();
+        updatedPetition.setContainerAvailable(containerAveleble);
+        updatedPetition.setContainerSize(petition.getContainerSize());
+        updatedPetition.setContainerOwner(petition.getContainerOwner());
+        updatedPetition.setGarbageAvailable(petition.getGarbageAvailable());
+        updatedPetition.setExportGarbage(petition.getExportGarbage());
+        projectService.update(project);
+    }
+
     @GetMapping("/all")
     public List<PetitionDTO> getAllPetitionsWithStatusToDo() {
         return petitionService.getAllPetition();

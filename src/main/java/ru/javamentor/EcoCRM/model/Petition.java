@@ -44,9 +44,6 @@ public class Petition {
     @Column(name = "flats_count")
     private String flatsCount;
 
-    @Column(name ="status_home")
-    private String statusHome;
-
     @Column(name = "management_company_type")
     private String managementCompanyType;
 
@@ -168,14 +165,6 @@ public class Petition {
 
     public void setFlatsCount(String flatsCount) {
         this.flatsCount = flatsCount;
-    }
-
-    public String getStatusHome() {
-        return statusHome;
-    }
-
-    public void setStatusHome(String statusHome) {
-        this.statusHome = statusHome;
     }
 
     public String getManagementCompanyType() {

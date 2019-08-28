@@ -1,6 +1,7 @@
-$(document).ready(function () {
+function fillPage(apiUrl){
+    var currentUser = getCurrentUser();
     $.ajax({
-        url: "/api/project/all",
+        url: apiUrl,
         type: "GET",
         async: false,
         success: function (projects) {
@@ -15,10 +16,14 @@ $(document).ready(function () {
                     '            <div class="eco-col card" id="col_' + count + '" style="height:47rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
                     docVar += '<div class="eco-card card m-2" style="min-height:210px;box-shadow:0px 5px 9px -8px #000000;">' +
-                        '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.petition.adresHome + '</div>' +
+                        '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.petition.addressHome + '</div>' +
                         '                            <div class="card-body">' +
-                        '                            <div class="card-text house-area">' + project.petition.houseArea + '</div>' +
-                        '                            </div>' +
+                        '                            <div class="card-text house-area">' + project.petition.houseDistrict + '</div>';
+                        if(currentUser.id != project.manager.id){
+                            docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-primary" onclick="sendRequest('+project.id+')">Учавствовать</button></div>';
+                        }
+
+                        docVar += '                            </div>' +
                         '<div class="member">' + project.manager.name.charAt(0) + project.manager.surname.charAt(0) + '</div>' +
                         '     </div>';
                 });
@@ -28,7 +33,7 @@ $(document).ready(function () {
             });
             $("#projectsTable").html(docVar);        }
     });
-});
+}
 
 function sortByArea(areaName) {
     let list = document.getElementsByClassName('house-area');
@@ -39,6 +44,28 @@ function sortByArea(areaName) {
         }
     });
 
+}
+function getCurrentUser() {
+    let currUser;
+    $.ajax({
+        url: "/api/user/get_current_user",
+        type: "GET",
+        async: false,
+        success: function (user) {
+            currUser = user;
+        }
+    });
+    return currUser;
+}
+function sendRequest(project_id) {
+    $.ajax({
+        url: "/api/project/request/"+project_id,
+        type: "GET",
+        async: false,
+        success: function (redirect) {
+            window.location.href = redirect;
+        }
+    });
 }
 
 

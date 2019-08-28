@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="/private/css/projects_table.css">
     <link href="/private/css/common_style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!--        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
+<!--                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
+<!--                crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
+<!--            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
+<!--            crossorigin="anonymous"></script>-->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="/private/js/projects.js"></script>
     <title>Все пректы</title>
 </head>
@@ -41,7 +47,7 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/all_users" style="color: white;">Все пользователи <span
+                <a class="nav-link" href="/all_users" style="color: white;">Все заявки <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
@@ -49,7 +55,7 @@
                    aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Уведомления</a>
-                    <a class="dropdown-item" href="#">Моя страница</a>
+                    <a class="dropdown-item" href="/userinfo">Моя страница</a>
                     <a class="dropdown-item" href="/logout">Выйти</a>
                 </div>
             </li>
@@ -58,11 +64,8 @@
 </nav>
 
 <!--конец хидера-->
-<div class="row" style="margin-top: 0px">
-    <div class="col-10"></div>
-    <div class="col-2">
-    <div class="dropdown dropright">
-    <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown dropright">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Выбрать по району
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -91,12 +94,21 @@
         <a class="dropdown-item"onclick="sortByArea(this.textContent)">Тосненский район</a>
         <a class="dropdown-item"onclick="sortByArea(this.textContent)">Другой район</a>
     </div>
-    </div>
-    </div>
+    <a class="btn btn-primary" href="/projects/all">Все проекты</a>
+    <a class="btn btn-primary" href="/projects/selfOnly">Свои проекты</a>
 </div>
-<main role="main" class="container-fluid h-75 d-inline-block">
-    <div class="row row-flex flex-nowrap" id="projectsTable">
-    </div>
+
+<main role="main" class="container-fluid">
+            <h3 style="margin-left: 4%;">Мои проекты :</h3>
+                <div class="row row-flex flex-nowrap" id="projectsTable">
+                </div>
 </main>
 </body>
+<script th:inline="javascript">
+    $(document).ready(function (){
+        var apiHref = [[${apiHref}]];
+        fillPage(apiHref);
+    });
+
+</script>
 </html>

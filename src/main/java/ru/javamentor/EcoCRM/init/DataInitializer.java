@@ -9,13 +9,13 @@ import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.model.embedded.TaskType;
+import ru.javamentor.EcoCRM.model.petition.embedded.TrashType;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDate;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Component
@@ -75,8 +75,9 @@ public class DataInitializer {
     //вспомагательный метод для изменения автарки пользователю 1
     private void initPhoto() throws IOException {
         User user = userService.get(1);
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
-        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\photo.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         userService.update(user);
     }
 
@@ -90,19 +91,31 @@ public class DataInitializer {
     }
     private void initBaseUserAndAdmin() throws IOException {
         User admin = new User();
-        admin.setName("admin");
-        admin.setSurname("admin");
-        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        admin.setName("Simon");
+        admin.setSurname("Travalgia");
+        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
+        admin.setProfession("Bastard Operator");
+        admin.setNotToDo("User support");
+        admin.setLink("https://vk.com/bofh");
+        admin.setPatronymic("No");
+        admin.setPhone("+7-777-777-77-77");
         admin.setAuthorities(authoritiesService.getAll());
 
         User user = new User();
-        user.setName("name");
-        user.setSurname("surname");
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        user.setName("Eric");
+        user.setSurname("Cartman");
+        user.setProfession("Hippy Destroyer");
+        user.setPhone("+9-999-999-99-99");
+        user.setPatronymic("No");
+        user.setLink("https://vk.com/cartman");
+        user.setNotToDo("school learning");
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
         user.setEmail("user");
         user.setPassword(bCryptPasswordEncoder.encode("user"));
         List<Authority> roles = new ArrayList<>();
@@ -126,9 +139,9 @@ public class DataInitializer {
             List<Authority> roles = new ArrayList<>();
             roles.add(authoritiesService.get(2));
             user.setAuthorities(roles);
-            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+            user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
+            //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
             userService.insert(user);
         }
     }
@@ -171,14 +184,13 @@ public class DataInitializer {
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
             petition.setStatusHome("статус_дома");
-            petition.setAdresHome(faker.address().streetName());
+            petition.setAddressHome(faker.address().streetName());
             petition.setData(LocalDate.now());
-            petition.setSeparateCollection(faker.commerce().material());
-            petition.setTypeOfRawMaterial(faker.commerce().material());
+
             if(new Random().nextInt() % 2 == 0){
-                petition.setHouseArea("Другой район");
+                petition.setHouseDistrict("Другой район");
             } else {
-                petition.setHouseArea("Адмиралтейский район");
+                petition.setHouseDistrict("Адмиралтейский район");
             }
             petitionService.insert(petition);
         }

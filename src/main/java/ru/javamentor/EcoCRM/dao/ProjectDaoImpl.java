@@ -3,15 +3,13 @@ package ru.javamentor.EcoCRM.dao;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
+import ru.javamentor.EcoCRM.model.Photo;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectDao {
@@ -55,7 +53,7 @@ public class ProjectDaoImpl extends AbstractDaoImpl<Project> implements ProjectD
     public List<PersonProjectDTO> getProjectDtoByUserId(Long id) {
         List<PersonProjectDTO> projects = new ArrayList<>();
         List petitions = entityManager
-                .createNativeQuery("select uprs.proj_id as id, uprs.step_number as number, uprs.start_time_project as time, pe.house_area as area from\n" +
+                .createNativeQuery("select uprs.proj_id as id, uprs.step_number as number, uprs.start_time_project as time, pe.house_district as area from\n" +
                         "(select * from \n" +
                         "(select pr.id as proj_id, pr.start_step as start_time_project, pr.petition_id\n" +
                         "from users as u \n" +

@@ -23,11 +23,14 @@ public class SuccessRedirectHandler implements AuthenticationSuccessHandler {
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+
         if (roles.contains("ROLE_ADMIN")) {
-            httpServletResponse.setHeader("redirect","/admin/page");
-        } else if (roles.contains("ROLE_USER")) {
+            httpServletResponse.setStatus(HttpStatus.OK.value());
+            httpServletResponse.setHeader("redirect","/admin/manage");
+
+        } else if(roles.contains("ROLE_USER")) {
+            httpServletResponse.setStatus(HttpStatus.OK.value());
             httpServletResponse.setHeader("redirect","/user");
         }
-        httpServletResponse.setStatus(HttpStatus.OK.value());
     }
 }

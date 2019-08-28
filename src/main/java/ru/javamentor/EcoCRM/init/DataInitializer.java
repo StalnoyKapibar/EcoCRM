@@ -183,7 +183,6 @@ public class DataInitializer {
             petition.setEmail(faker.internet().emailAddress());
             petition.setUserName(faker.name().fullName());
             petition.setContactInformation(faker.phoneNumber().phoneNumber());
-            petition.setStatusHome("статус_дома");
             petition.setAddressHome(faker.address().streetName());
             petition.setData(LocalDate.now());
 

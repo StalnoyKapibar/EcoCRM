@@ -6,8 +6,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
@@ -17,7 +15,6 @@ import ru.javamentor.EcoCRM.service.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -46,7 +43,7 @@ public class PetitionRestController {
     String pathToLetter;
 
     @PostMapping
-    public void getSearchUserProfiles(@ModelAttribute("petition") Petition petition) throws MessagingException {
+    public void getSearchUserProfiles(@RequestBody Petition petition) throws MessagingException {
         LocalDate data = LocalDate.now();
         petition.setData(data);
         petitionService.insert(petition);

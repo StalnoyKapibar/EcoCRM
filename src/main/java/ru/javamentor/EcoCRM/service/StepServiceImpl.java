@@ -79,7 +79,9 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
     private StepDTO getStep1(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
         List<Task> tasks = taskService.getAllByStepId(stepId);
-        return new Step1DTO(stepId, tasks, projectService.get(id).getPetition());
+        Project project = projectService.get(id);
+        List <Photo> oldContainerPhoto = project.getOldContainerPhoto();
+        return new Step1DTO(stepId, tasks, project.getPetition(), oldContainerPhoto);
     }
 
     private StepDTO getStep2(Long id, StepNumber stepNumber) {

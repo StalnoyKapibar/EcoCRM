@@ -6,25 +6,34 @@ function step1(stepDto) {
      $('#email_petitioner').val(petititon.email);
      $('#contacts_petitioner').val(petititon.contactInformation);
      $('#status_petitioner input[value = "'+petititon.petitionerType+'"]').prop('checked', true);
-     $('#activity_petitioner input [value = "'+petititon.activityType+'"]').prop('checked', true);
+     let activity = petititon.activityType;
+     $('#activity_petitioner input[value = "'+activity+'"]').prop('checked', true);
+     // $('#activity_petitioner input[value = "Волонтер на акциях"]').prop('checked', true);
      for(let i = 0; i<petititon.typeOfRawMaterial.length; i++){
-         $('#row_type input [value = "'+petititon.typeOfRawMaterial[i]+'"]').prop('checked', true);
+         let row_type = petititon.typeOfRawMaterial[i];
+         $('#row_type input[value = "'+row_type+'"]').prop('checked', true);
      }
      $('#home_adres').val(petititon.addressHome);
-     $('#home_district option [value="'+petititon.houseDistrict+'"]').prop('selected', true);
+     let district = petititon.houseDistrict;
+     $('#home_district option[value="'+district+'"]').attr("selected", "selected");
      $('#apartments_count').val(petititon.flatsCount);
      $('#home_management_form input[value="'+petititon.managementCompanyType+'"]').prop('checked', true);
-     $('#home_sovet input [value = "'+petititon.availableCouncil+'"]').prop('checked', true);
-     $('#menegement_org_relate input [value = "'+petititon.managementOrganizationRelation+'"]').prop('checked', true);
+     let concil = petititon.availableCouncil;
+     $('#home_sovet input[value = "'+concil+'"]').prop('checked', true);
+     let relation = petititon.managementOrganizationRelation;
+     $('#menegement_org_relate input[value = "'+relation+'"]').prop('checked', true);
      $('#contact_management').val(petititon.managementCompanyContacts);
      $('#additional_information').val(petititon.additionalInformation);
-     $('#container_place input [value = "'+petititon.containerAvailable+'"]').prop('checked', true);
+     let place = petititon.containerAvailable;
+     $('#container_place input[value = "'+place+'"]').prop('checked', true);
      $('#container_area').val(petititon.containerSize);
-     $('#container_area_owner input [value = "'+petititon.containerOwner+'"]').prop('checked', true);
-     $('#chute_form input [value = "'+petititon.garbageAvailable+'"]').prop('checked', true);
+     $('#container_area_owner input[value = "'+petititon.containerOwner+'"]').prop('checked', true);
+     $('#chute_form input[value = "'+petititon.garbageAvailable+'"]').prop('checked', true);
      $('#garbage_disposal_company').val(petititon.exportGarbage);
+     for(let i = 0; i<stepDto.oldContainerPhotos.length; i++){
+         $('#uploaded_old_container_photo').append('<img src="data:image/png;base64,' + stepDto.oldContainerPhotos[i].photo + '" alt="profile image"  height="200px">');
+     }
 
-    $('#uploaded_old_container_photo').append('<img src="data:image/png;base64,' + images[i].photo + '" alt="profile image"  height="200px">');
 }
 
  function save_task_1(projectId) {
@@ -37,7 +46,7 @@ function step1(stepDto) {
          'userName': $('#fio_petitioner').val(),
          'contactInformation': $('#contacts_petitioner').val(),
          'petitionerType': $('input[name="status"]:checked').val(),
-         'activityType': $('input[name="activity_petitioner"]:checked').val(),
+         'activityType': $('input[name="activity"]:checked').val(),
          'typeOfRawMaterial': row_types,
          'addressHome': $('#home_adres').val(),
          'houseDistrict': $("#home_district option:selected").val(),

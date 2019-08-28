@@ -94,6 +94,7 @@ public class ProjectRestController {
             listPhoto.add(p);
         }
         project.setOldContainerPhoto(listPhoto);
+        projectService.update(project);
         return project.getOldContainerPhoto();
     }
 

@@ -115,9 +115,11 @@ public class PetitionRestController {
         updatedPetition.setContactInformation(petition.getContactInformation());
         updatedPetition.setPetitionerType(petition.getPetitionerType());
         updatedPetition.setActivityType(petition.getActivityType());
-        updatedPetition.setTypeOfRawMaterial(petition.getTypeOfRawMaterial());
+        List<String> rowTypes = petition.getTypeOfRawMaterial();
+        updatedPetition.setTypeOfRawMaterial(rowTypes);
         updatedPetition.setAddressHome(petition.getAddressHome());
-        updatedPetition.setHouseDistrict(petition.getHouseDistrict());
+        String district = petition.getHouseDistrict();
+        updatedPetition.setHouseDistrict(district);
         updatedPetition.setFlatsCount(petition.getFlatsCount());
         updatedPetition.setStatusHome(petition.getStatusHome());
         updatedPetition.setManagementCompanyType(petition.getManagementCompanyType());
@@ -125,7 +127,8 @@ public class PetitionRestController {
         updatedPetition.setManagementOrganizationRelation(petition.getManagementOrganizationRelation());
         updatedPetition.setManagementCompanyContacts(petition.getManagementCompanyContacts());
         updatedPetition.setAdditionalInformation(petition.getAdditionalInformation());
-        updatedPetition.setContainerAvailable(petition.getContainerAvailable());
+        String containerAveleble= petition.getContainerAvailable();
+        updatedPetition.setContainerAvailable(containerAveleble);
         updatedPetition.setContainerSize(petition.getContainerSize());
         updatedPetition.setContainerOwner(petition.getContainerOwner());
         updatedPetition.setGarbageAvailable(petition.getGarbageAvailable());

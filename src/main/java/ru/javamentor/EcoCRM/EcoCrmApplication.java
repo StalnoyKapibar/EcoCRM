@@ -22,11 +22,11 @@ import javax.annotation.PostConstruct;
 		"classpath:properties/application.properties"})
 public class EcoCrmApplication implements WebMvcConfigurer {
 
-	@PostConstruct
-	@Bean(initMethod = "init")
-	public DataInitializer init() {
-		return new DataInitializer();
-	}
+//	@PostConstruct
+//	@Bean(initMethod = "init")
+//	public DataInitializer init() {
+//		return new DataInitializer();
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcoCrmApplication.class, args);

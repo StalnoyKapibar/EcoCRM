@@ -1,4 +1,4 @@
-var projectId;
+// var projectId;
 $(document).ready(function () {
     projectId = $('#projectId').val();
     $('#datepicker').datepicker({
@@ -42,11 +42,13 @@ function saveManagCompInfo() {
 }
 
 function addCompany(manageCompany) {
-        $('#management_org_title').text(manageCompany.name);
+        $('#management_org_name').text(manageCompany.name);
         $('#management_org_inn').val(manageCompany.inn);
-        $('#management_org_link').val(manageCompany.link);
-        $('#management_org_surname').val(manageCompany.managerSurname);
-        $('#management_org_name').val(manageCompany.managerName);
+        $('#management_org_fio').val(manageCompany.managerName);
+
+        // $('#management_org_link').val(manageCompany.link);
+
+        // $('#management_org_name').val(manageCompany.managerName);
         $('#management_org_patronymic').val(manageCompany.managerPatronymic);
         $('#management_org_tel').val(manageCompany.phoneNumber);
         $('#management_org_email').val(manageCompany.email);

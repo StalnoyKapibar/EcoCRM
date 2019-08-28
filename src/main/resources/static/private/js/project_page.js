@@ -15,34 +15,36 @@ function getStep(stepNumber) {
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
             stepId = stepDto.id;
-            // getStepType(stepNumber, stepDto);
+            getCurrentStep(stepNumber, stepDto);
         }
     });
 }
 
 function getCurrentStep(StepNumber, StepDto) {
-    if (stepNumber == 'STEP_1') {
-        step1(stepDto);
+    var stn = StepNumber;
+    var stDTO = StepDto;
+    if (stn == 'STEP_1') {
+        step1(stDTO);
     }
-    if (stepNumber == 'STEP_2') {
-        step2(stepDto);
+    if (stn == 'STEP_2') {
+        step2(stDTO);
     }
-    if (stepNumber == 'STEP_3') {
-        step3(stepDto);
+    if (stn == 'STEP_3') {
+        step3(stDTO);
     }
-    if (stepNumber == 'STEP_4') {
+    if (stn == 'STEP_4') {
 
     }
-    if (stepNumber == 'STEP_5') {
+    if (stn == 'STEP_5') {
 
     }
-    if (stepNumber == 'STEP_6') {
+    if (stn == 'STEP_6') {
 
     }
-    if (stepNumber == 'STEP_7') {
-        step7(stepDto);
+    if (stn == 'STEP_7') {
+        step7(stDTO);
     }
-    if (stepNumber == 'STEP_8') {
+    if (stn == 'STEP_8') {
 
     }
 }

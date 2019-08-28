@@ -106,9 +106,31 @@ public class PetitionRestController {
 
     @PostMapping("/update")
     @ResponseBody
-    public void updatePetition(@RequestBody Petition petition){
-        Petition updatedPetition = petitionService.get(petition.getId());
-
+    public void updatePetition(@RequestBody Petition petition,
+                               @RequestParam (value = "projectId") Long projectId){
+        Project project = projectService.get(projectId);
+        Petition updatedPetition = project.getPetition();
+        updatedPetition.setUserName(petition.getUserName());
+        updatedPetition.setEmail(petition.getEmail());
+        updatedPetition.setContactInformation(petition.getContactInformation());
+        updatedPetition.setPetitionerType(petition.getPetitionerType());
+        updatedPetition.setActivityType(petition.getActivityType());
+        updatedPetition.setTypeOfRawMaterial(petition.getTypeOfRawMaterial());
+        updatedPetition.setAddressHome(petition.getAddressHome());
+        updatedPetition.setHouseDistrict(petition.getHouseDistrict());
+        updatedPetition.setFlatsCount(petition.getFlatsCount());
+        updatedPetition.setStatusHome(petition.getStatusHome());
+        updatedPetition.setManagementCompanyType(petition.getManagementCompanyType());
+        updatedPetition.setAvailableCouncil(petition.getAvailableCouncil());
+        updatedPetition.setManagementOrganizationRelation(petition.getManagementOrganizationRelation());
+        updatedPetition.setManagementCompanyContacts(petition.getManagementCompanyContacts());
+        updatedPetition.setAdditionalInformation(petition.getAdditionalInformation());
+        updatedPetition.setContainerAvailable(petition.getContainerAvailable());
+        updatedPetition.setContainerSize(petition.getContainerSize());
+        updatedPetition.setContainerOwner(petition.getContainerOwner());
+        updatedPetition.setGarbageAvailable(petition.getGarbageAvailable());
+        updatedPetition.setExportGarbage(petition.getExportGarbage());
+        projectService.update(project);
     }
 }
 

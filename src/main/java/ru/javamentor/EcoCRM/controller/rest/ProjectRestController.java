@@ -79,6 +79,7 @@ public class ProjectRestController {
 
     @RequestMapping(value = "/{id}/stepdto", method = RequestMethod.GET)
     public StepDTO getStepDTO(@PathVariable("id") Long id, @RequestParam(value = "stepnumber") StepNumber stepNumber) {
+
         return stepService.getStepDTO(id, stepNumber);
     }
 

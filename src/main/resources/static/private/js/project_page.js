@@ -30,7 +30,7 @@ function getCurrentStep(StepNumber, StepDto) {
         step2(stDTO);
     }
     if (stn == 'STEP_3') {
-        step3(stDTO);
+        step3(stDTO, id);
     }
     if (stn == 'STEP_4') {
 
@@ -39,7 +39,7 @@ function getCurrentStep(StepNumber, StepDto) {
         step5(stDTO);
     }
     if (stn == 'STEP_6') {
-
+        step6(stDTO);
     }
     if (stn == 'STEP_7') {
         step7(stDTO);

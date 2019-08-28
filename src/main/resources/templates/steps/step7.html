@@ -25,7 +25,7 @@
                         <div class="tab-content" id = "tabContent_STEP_7" style="width: 70%">
                             <h6>Описание кейса</h6>
                             <br/>
-                            <textarea class="form-control rounded-0"></textarea>
+                            <textarea class="form-control rounded-0" id = "task_7_1_textarea"></textarea>
                             <br/>
                             <h6>Ссылки на ресурсы</h6>
                             <div id = "case_link_list">
@@ -35,8 +35,12 @@
                                     </div>
                                     <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
+
                             </div>
-                            <a href="#" class="text-primary" onclick="addlink()">Ссылка +</a>
+                            <a href="javascript:void(0)" class="text-primary" onclick="addlink()">Ссылка +</a>
+                            <div style="margin-top: 10px">
+                            <button type="button" class="btn btn-primary" onclick="saveReport()">Сохранить</button>
+                            </div>
                         </div>
                     </div>
                 </div>

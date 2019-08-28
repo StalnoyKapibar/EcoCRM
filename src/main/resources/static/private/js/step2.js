@@ -28,7 +28,7 @@ function saveManagCompInfo(projectId) {
         'description': $('#comment').val()
     };
     $.ajax({
-        url: "/manage_company/add?projectid=" + projectId,
+        url: "/manage/add_company?projectid=" + projectId,
         type: "POST",
         data: JSON.stringify(managComp),
         contentType: 'application/json; charset=utf-8',

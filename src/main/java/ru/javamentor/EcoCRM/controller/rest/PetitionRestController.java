@@ -1,9 +1,15 @@
 package ru.javamentor.EcoCRM.controller.rest;
 
+import com.google.api.client.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
@@ -43,7 +49,7 @@ public class PetitionRestController {
     String pathToLetter;
 
     @PostMapping
-    public void getSearchUserProfiles(@RequestBody Petition petition) throws MessagingException {
+    public ResponseEntity<String> getSearchUserProfiles(@RequestBody Petition petition) throws MessagingException {
         LocalDate data = LocalDate.now();
         petition.setData(data);
         petitionService.insert(petition);
@@ -67,6 +73,7 @@ public class PetitionRestController {
         mimeMessage.setContent(content,"text/html; charset=utf-8");
         helper.setTo(petition.getEmail());
         this.emailService.getEmailSender().send(mimeMessage);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("{}");
     }
 
     @PutMapping(value = "/addPetitionUser")

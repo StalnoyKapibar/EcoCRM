@@ -51,6 +51,9 @@ public class Project implements Serializable {
     private LocalDate endStep;
 
     @OneToMany
+    private List<Photo> oldContainerPhoto;
+
+    @OneToMany
     private List<Photo> newContainerPhoto;   //step 5
 
     //todo сделать поле для видео из step 5
@@ -193,7 +196,21 @@ public class Project implements Serializable {
         this.newContainerDate = newContainerDate;
     }
 
+    public ManagementCompany getCompany() {
+        return company;
+    }
 
+    public void setCompany(ManagementCompany company) {
+        this.company = company;
+    }
+
+    public List<Photo> getOldContainerPhoto() {
+        return oldContainerPhoto;
+    }
+
+    public void setOldContainerPhoto(List<Photo> oldContainerPhoto) {
+        this.oldContainerPhoto = oldContainerPhoto;
+    }
 
     @Override
     public boolean equals(Object o) {

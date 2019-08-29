@@ -112,11 +112,6 @@ public class ApplicationController {
         return "admin_page";
     }
 
-    @GetMapping("/get_petition")
-    public String getPetitionPage() {
-        return "petition_page";
-    }
-
     @GetMapping("/project/{id}")
     public String getProject(@PathVariable("id") Long id, Model model) {
         StepNumber stepNumber = stepService.getProgressStepByProjectId(id).getStepNumber();

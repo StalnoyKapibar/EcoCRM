@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="/private/js/jquery-ui-1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/private/css/projects_table.css">
@@ -64,12 +65,15 @@
 </nav>
 
 <!--конец хидера-->
+<h3 align="center" >Все проекты :</h3>
 <div class="dropdown dropright">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Выбрать по району
     </button>
+
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item "onclick="sortByArea(this.textContent)">Все районы</a>
+        <div class="dropdown-divider"></div>
         <a class="dropdown-item "onclick="sortByArea(this.textContent)">Адмиралтейский район</a>
         <a class="dropdown-item"onclick="sortByArea(this.textContent)">Василеостровский район</a>
         <a class="dropdown-item"onclick="sortByArea(this.textContent)">Выборгский район</a>
@@ -99,7 +103,7 @@
 </div>
 
 <main role="main" class="container-fluid">
-            <h3 style="margin-left: 4%;">Мои проекты :</h3>
+
                 <div class="row row-flex flex-nowrap" id="projectsTable">
                 </div>
 </main>

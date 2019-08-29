@@ -55,7 +55,7 @@
     border: 1px solid #28a745;
 }
 .current-date-selected{
-    color: #dc3545;
+    color: #dcc434;
     font-weight: bold;
 }
 .current-date-selected:after{
@@ -68,7 +68,7 @@
     background: transparent;
     color: #fff;
     border-radius: 50%;
-    border: 1px solid #dc3545;
+    border: 1px solid #dcc434;
 }
 .current-date-selected:hover:after{
     content: '';/*attr(data-date);*/
@@ -77,8 +77,8 @@
     height: 40px;
     top: 15%;
     opacity: 1;
-    background: #dc354533;
+    background: rgba(220, 196, 52, 0.2);
     color: #fff;
     border-radius: 50%;
-    border: 1px solid #dc3545;
+    border: 1px solid #dcc434;
 }

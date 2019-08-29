@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -92,13 +93,20 @@ public class PetitionRestController {
     }
 
     @PostMapping("/approvedByAdministrator")
-    public void approvedByAdministrator(@RequestParam(value = "id") Long id, @RequestParam(value = "idp") long idp){
-        User manager = userService.get(id);
-        Petition petition = petitionService.get(idp);
+    public void approvedByAdministrator(@RequestParam(value = "id") Long userId, @RequestParam(value = "idp") Long petitionId){
+        User manager = userService.get(userId);
+        Petition petition = petitionService.get(petitionId);
         petition.setStatus(Status.DONE);
         petitionService.update(petition);
         Project project = new Project(manager,petition);
         projectService.insert(project);
+        Set<User> usersPetition = petition.getUserPetition();
+        for (User user : usersPetition){
+            if (!user.getId().equals(userId)) {
+                project.getUsers().add(user);
+            }
+        }
+        projectService.update(project);
     }
 
     @PostMapping("/update")

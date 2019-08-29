@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/for_all_pages_layout}"
-      lang="en">
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+        <!--xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->
+      <!--xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+      <!--layout:decorate="~{layouts/for_all_pages_layout}"-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,53 +23,84 @@
     <title>Все пректы</title>
 </head>
 <body>
-
-<main role="main" class="container-fluid" layout:fragment="content">
-    <table class width="100%">
-        <tr>
-        <td>
-            <h3 style="margin-left: 4%;">Все проекты :</h3>
-        </td>
-        <td style="text-align: right;">
-            <div class="dropdown dropright">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Выбрать по району
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item "onclick="sortByArea(this.textContent)">Все районы</a>
-                    <a class="dropdown-item "onclick="sortByArea(this.textContent)">Адмиралтейский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Василеостровский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Выборгский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Калинский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Колпинский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Красногвардейский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Красносельский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Кронштадский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Курортный район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Московский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Невский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Петроградский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Выборгский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Приморский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Пушкинский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Фрунзенский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Центральный район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Всеволожский район ЛО</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Гатчинский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Кировский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Сосновоборский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Тосненский район</a>
-                    <a class="dropdown-item"onclick="sortByArea(this.textContent)">Другой район</a>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
+    <a class="navbar-brand" href="/user" style="white-space: pre"><span class="fa fa-leaf"></span> Eco CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active " >
+                <div class="dropdown dropright">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Выбрать по району
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item "onclick="sortByArea(this.textContent)">Все районы</a>
+                        <a class="dropdown-item "onclick="sortByArea(this.textContent)">Адмиралтейский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Василеостровский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Выборгский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Калинский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Колпинский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Красногвардейский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Красносельский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Кронштадский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Курортный район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Московский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Невский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Петроградский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Выборгский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Приморский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Пушкинский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Фрунзенский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Центральный район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Всеволожский район ЛО</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Гатчинский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Кировский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Сосновоборский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Тосненский район</a>
+                        <a class="dropdown-item"onclick="sortByArea(this.textContent)">Другой район</a>
+                    </div>
                 </div>
-                <a class="btn yellow-btn" href="/projects/all">Все проекты</a>
+            </li>
+            <li class="nav-item active" >
+                <a class="btn btn-info" href="/projects/all">Все проекты</a>
+            </li>
+            <li class="nav-item active" >
                 <a class="btn yellow-btn" href="/projects/selfOnly">Свои проекты</a>
-            </div>
-        </td>
-        </tr>
-    </table>
-<br>
-                <div class="row row-flex flex-nowrap" id="projectsTable">
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle btn btn-secondary" style="color: white;" href="#" id="dropdown03" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Проекты<span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                    <a class="dropdown-item" href="/user_projects">Мои проекты</a>
+                    <a class="dropdown-item" href="/projects/all">Все проекты</a>
                 </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle btn btn-info" style="color: white;" href="#" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Заявки<span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="/petition/getAllPetition">Все заявки</a>
+                    <a class="dropdown-item" href="/petition">Добавить заявку</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle btn btn-warning" style="color: white;" href="#" id="dropdown02" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu dropdown-menu-right" style="float: left" aria-labelledby="dropdown02">
+                    <a class="dropdown-item" href="/all_users">Все волонтеры</a>
+                    <a class="dropdown-item" href="/userinfo">Моя страница</a>
+                    <a class="dropdown-item" href="/logout">Выйти</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<main role="main" class="container-fluid">
+    <div class="row row-flex flex-nowrap" id="projectsTable">
+    </div>
     <script th:inline="javascript">
         $(document).ready(function (){
             var apiHref = [[${apiHref}]];

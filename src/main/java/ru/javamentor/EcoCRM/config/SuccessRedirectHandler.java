@@ -30,7 +30,7 @@ public class SuccessRedirectHandler implements AuthenticationSuccessHandler {
 
         } else if(roles.contains("ROLE_USER")) {
             httpServletResponse.setStatus(HttpStatus.OK.value());
-            httpServletResponse.setHeader("redirect","/user");
+            httpServletResponse.setHeader("redirect","/user_projects");
         }
     }
 }

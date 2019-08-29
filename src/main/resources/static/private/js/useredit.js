@@ -23,6 +23,8 @@ function initTextArea() {
     $("#password").val(currentUser.password);
     $("#email").val(currentUser.email);
     $("#phone").val(currentUser.phone);
+    // $("#status").val(currentUser.status);
+    $('#status_list input[value="'+currentUser.status+'"]').attr("checked", true);
     $("#vk").val(currentUser.link);
     $("#profession").val(currentUser.profession);
     var helpTag = document.getElementById('photo');
@@ -39,6 +41,7 @@ function updateUser() {
         'email' : $('#email').val(),
         'phone' : $('#phone').val(),
         'link' : $('#vk').val(),
+        'status' : $('#status_list input:checked').val(),
         'profession' : $('#profession').val(),
         'notToDo' : $('#notToDo').val(),
     };

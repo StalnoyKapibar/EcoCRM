@@ -19,6 +19,7 @@ public class DTOServiceImpl  implements  DTOService{
         user.setLink(userDTO.getLink());
         user.setProfession(userDTO.getProfession());
         user.setNotToDo(userDTO.getNotToDo());
+        user.setStatus(userDTO.getStatus());
        // user.setPhoto(Base64.getDecoder().decode(userDTO.getPhoto()));
         return user;
     }

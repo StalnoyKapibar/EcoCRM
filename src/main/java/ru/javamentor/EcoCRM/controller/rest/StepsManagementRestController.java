@@ -39,19 +39,15 @@ public class StepsManagementRestController {
     @Autowired
     CheckPointService checkPointService;
 
-//step 2
+    //step 2
     @PostMapping("/add_company")
     public ResponseEntity<ManagementCompany> saveManagInfo(@RequestParam(value = "projectid") Long projectId, @RequestBody ManagementCompany managementCompany) {
         String companyName = managementCompany.getName();
         Project project = projectService.get(projectId);
-        if (project.getCompany()==null){
+        if (project.getCompany() == null) {
             managementCompanyService.insert(managementCompany);
             project.setCompany(managementCompanyService.get(managementCompany.getId()));
-//            project.setCompany(new ManagementCompany(managementCompany.getName(), managementCompany.getInn(), managementCompany.getLink(),
-//                    managementCompany.getManagerName(), managementCompany.getManagerSurname(), managementCompany.getManagerPatronymic(),
-//                    managementCompany.getPhoneNumber(), managementCompany.getEmail(), managementCompany.getClock(), managementCompany.getDescription(),
-//                    managementCompany.getNextContactDate()));
-        }else {
+        } else {
             ManagementCompany updatedCompany = project.getCompany();
             updatedCompany.setName(managementCompany.getName());
             updatedCompany.setInn(managementCompany.getInn());
@@ -66,16 +62,10 @@ public class StepsManagementRestController {
             updatedCompany.setNextContactDate(managementCompany.getNextContactDate());
         }
         projectService.update(project);
-//        if (managementCompanyService.get(projectId) == null) {
-//            managementCompanyService.insert(managementCompany);
-//        } else {
-//            managementCompanyService.update(managementCompany);
-//        }
         return new ResponseEntity(managementCompanyService.get(projectId), HttpStatus.OK);
     }
 
-
-//  step 5
+    //  step 5
     @PostMapping("/add_container")
     public Long saveContainerInfo(@RequestParam(value = "projectid") Long projectId,
                                   @RequestParam(value = "image") List<MultipartFile> img,
@@ -83,8 +73,8 @@ public class StepsManagementRestController {
                                   @RequestParam(value = "newContainerDate") String date) throws IOException, ParseException {
         Project project = projectService.get(projectId);
         List<Photo> listPhoto = new ArrayList<>();
-        for(MultipartFile file : img){
-            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())),600,600));
+        for (MultipartFile file : img) {
+            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())), 600, 600));
             photoService.insert(p);
             listPhoto.add(p);
         }
@@ -96,14 +86,13 @@ public class StepsManagementRestController {
         projectService.update(project);
         return projectId;
     }
-}
 
     //step 8
     @PostMapping("/add_check_point/{id}")
     public ResponseEntity saveCheckPointInfo(@PathVariable Long id,
                                              @RequestParam(value = "name") String name,
-                                  @RequestParam(value = "description") String description,
-                                  @RequestParam(value = "date") String date) throws ParseException {
+                                             @RequestParam(value = "description") String description,
+                                             @RequestParam(value = "date") String date) throws ParseException {
 
         Project project = projectService.get(id);
 
@@ -114,16 +103,6 @@ public class StepsManagementRestController {
         project.getCheckPoints().add(cp);
         projectService.update(project);
         return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/add_check_point_comment")
-    public Long saveCheckPointComment(@RequestParam(value = "checkpointid") Long checkPointId,
-                                   @RequestParam(value = "comment") String comment) {
-        CheckPoint checkPoint = checkPointService.getCheckPointById(checkPointId);
-        Comment cpComment = new Comment(comment, new Date());
-        checkPoint.setComment(cpComment);
-        checkPointService.update(checkPoint);
-        return checkPointId;
     }
 
     @GetMapping("/all_checked_dates/{projectId}")
@@ -137,3 +116,4 @@ public class StepsManagementRestController {
         CheckPoint cp = checkPointService.get(id);
         return cp;
     }
+}

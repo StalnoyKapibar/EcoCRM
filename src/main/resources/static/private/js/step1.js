@@ -34,6 +34,7 @@ function step1(stepDto) {
          $('#uploaded_old_container_photo').append('<img src="data:image/png;base64,' + stepDto.oldContainerPhotos[i].photo + '" alt="profile image"  height="200px">');
      }
 
+
 }
 
  function save_task_1(projectId) {

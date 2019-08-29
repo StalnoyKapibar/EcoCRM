@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.dto.stepDTO;
 
 import ru.javamentor.EcoCRM.model.Task;
+import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,24 @@ public class Step8DTO implements StepDTO {
 
     private List<Task> tasks = new ArrayList<>();
 
+    private Status status;
+
     public Step8DTO() {
 
     }
 
-    public Step8DTO(Long id, List<Task> tasks) {
+    public Step8DTO(Long id, List<Task> tasks, Status status) {
         this.id = id;
         this.tasks = tasks;
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Long getId() {

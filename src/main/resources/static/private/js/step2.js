@@ -5,6 +5,20 @@ $(document).ready(function () {
         format: 'yyyy-mm-dd',
         uiLibrary: 'bootstrap4'
     });
+
+    $('#STEP_2_togle').change(function () {
+        if($(this).prop('checked')===true){
+            $('#STEP_3_link').removeClass('disabled');
+            $('#STEP_3_link').removeAttr('style');
+            $('#STEP_2_link').css({'background-color': '#e0f3df', 'color': '#8fb78d', 'border': '1px solid ', 'border-color':'#7e8c78'});
+
+        }
+        if($(this).prop('checked')===false){
+            $('#STEP_2_link').nextAll('.nav-link').addClass('disabled');
+            $('#STEP_2_link').nextAll('.nav-link').css({'background-color': '#d2d2d2', 'color': '#a49f9f', 'border': '1px solid', 'border-color':'#8d8787'});
+            $('#STEP_2_link').removeAttr('style');
+        }
+    })
 });
 
 function step2(stepDto) {

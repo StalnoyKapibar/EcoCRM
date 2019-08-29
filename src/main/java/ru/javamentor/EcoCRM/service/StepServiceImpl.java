@@ -78,56 +78,64 @@ public class StepServiceImpl extends AbstractServiceImpl<Step> implements StepSe
 
     private StepDTO getStep1(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         List<Task> tasks = taskService.getAllByStepId(stepId);
         Project project = projectService.get(id);
         List <Photo> oldContainerPhoto = project.getOldContainerPhoto();
-        return new Step1DTO(stepId, tasks, project.getPetition(), oldContainerPhoto);
+        return new Step1DTO(stepId, tasks, project.getPetition(), oldContainerPhoto, status);
     }
 
     private StepDTO getStep2(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         List<Task> tasks = taskService.getAllByStepId(stepId);
         ManagementCompany company = projectService.get(id).getManagementCompany();
-        return new Step2DTO(company, stepId, tasks);
+        return new Step2DTO(company, stepId, tasks, status);
     }
 
     private StepDTO getStep3(Long id, StepNumber stepNumber) {
         List<Contractor> contractors = contractorService.getAll();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
         List<Task> tasks = taskService.getAllByStepId(stepId);
-        return new Step3DTO(contractors, stepId, tasks);
+        return new Step3DTO(contractors, stepId, tasks, status);
     }
 
     private StepDTO getStep4(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         List<Task> tasks = taskService.getAllByStepId(stepId);
-        return new Step4DTO(stepId, tasks);
+        return new Step4DTO(stepId, tasks, status);
     }
 
     private StepDTO getStep5(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         List<Task> tasks = taskService.getAllByStepId(stepId);
         Project project = projectService.get(id);
-        return new Step5DTO(stepId, tasks, project);
+        return new Step5DTO(stepId, tasks, project, status);
     }
 
     private StepDTO getStep6(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         List<Task> tasks = taskService.getAllByStepId(stepId);
-        return new Step6DTO(stepId, tasks);
+        return new Step6DTO(stepId, tasks, status);
     }
 
     private StepDTO getStep7(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
         List<Task> tasks = taskService.getAllByStepId(stepId);
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         Report report = projectService.getReportByWithIdProject(id);
-        return new Step7DTO(report, stepId, tasks);
+        return new Step7DTO(report, stepId, tasks, status);
     }
 
     private StepDTO getStep8(Long id, StepNumber stepNumber) {
         Long stepId = getStepByProjectIdAndStepNumber(id, stepNumber).getId();
+        Status status = getStepByProjectIdAndStepNumber(id, stepNumber).getStatus();
         List<Task> tasks = taskService.getAllByStepId(stepId);
-        return new Step8DTO(stepId, tasks);
+        return new Step8DTO(stepId, tasks, status);
     }
 
 }

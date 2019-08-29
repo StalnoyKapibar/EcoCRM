@@ -48,10 +48,6 @@ public class StepsManagementRestController {
         if (project.getCompany() == null) {
             managementCompanyService.insert(managementCompany);
             project.setCompany(managementCompanyService.get(managementCompany.getId()));
-//            project.setCompany(new ManagementCompany(managementCompany.getName(), managementCompany.getInn(), managementCompany.getLink(),
-//                    managementCompany.getManagerName(), managementCompany.getManagerSurname(), managementCompany.getManagerPatronymic(),
-//                    managementCompany.getPhoneNumber(), managementCompany.getEmail(), managementCompany.getClock(), managementCompany.getDescription(),
-//                    managementCompany.getNextContactDate()));
         } else {
             ManagementCompany updatedCompany = project.getCompany();
             updatedCompany.setName(managementCompany.getName());
@@ -67,14 +63,8 @@ public class StepsManagementRestController {
             updatedCompany.setNextContactDate(managementCompany.getNextContactDate());
         }
         projectService.update(project);
-//        if (managementCompanyService.get(projectId) == null) {
-//            managementCompanyService.insert(managementCompany);
-//        } else {
-//            managementCompanyService.update(managementCompany);
-//        }
         return new ResponseEntity(managementCompanyService.get(projectId), HttpStatus.OK);
     }
-
 
     //  step 5
     @PostMapping("/add_container")
@@ -110,7 +100,11 @@ public class StepsManagementRestController {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-d");
         Date formatedDate = dateFormat.parse(date);
-        CheckPoint cp = new CheckPoint(name, description, formatedDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(formatedDate);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        Date newDate = c.getTime();
+        CheckPoint cp = new CheckPoint(name, description, newDate);
         checkPointService.insert(cp);
         project.getCheckPoints().add(cp);
         projectService.update(project);

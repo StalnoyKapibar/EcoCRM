@@ -76,11 +76,11 @@ function updateUser() {
         data:JSON.stringify(user),
         contentType: 'application/json; charset=utf-8',
         success: function (){
-            alert('Данные обновлены');
+            // alert('Данные обновлены');
             window.location.href = '/userinfo'
         },
         error: function (e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     })
 }
@@ -91,7 +91,7 @@ $(function() {
         $(input.files).each(function(i, el) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('<img height="250px">').attr('src', e.target.result).appendTo('#photo');
+                $('<img height="400px">').attr('src', e.target.result).appendTo('#photo');
             };
             reader.readAsDataURL(input.files[i]);
         });

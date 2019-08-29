@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/for_all_pages_layout}"
+      lang="en">
+<head>
+    <link href="/public/css/green.css" rel="stylesheet">
+</head>
+<body>
+
+<main role="main" class="container-fluid" layout:fragment="content">
+    <input type="hidden" id="UserId" th:value="${id}">
+    <p style="font-size: large; margin-left: 5%" >Выбери проект для участия: </p>
+    <div class="row" style="margin-left: 3%; margin-right: 3%" id="petitions_area">
+
+    </div>
+
+<!-- Modal show info-->
+<div id="show_message" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light" style="background-color: white">
+            <div class="modal-body">
+                <button style="float: right" type="button" class="btn btn-default" data-dismiss="modal">X</button>
+                <p style="font: icon; font-size: large">Заявка отправлена на обработку</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let userId = $('#UserId').val();
+    $(document).ready(function () {
+       getAllPetitions();
+
+    });
+
+    function getAllPetitions() {
+        $.ajax({
+            url: "/api/petition/all",
+            type: "GET",
+            async: false,
+            success: function (petitions) {
+                $.each(petitions, function (key, petition) {
+                    $('#petitions_area').append(
+                        '<div class="col-sm-4">' +
+                        '<div class="card shadow bg-white rounded" style="margin-top: 15px">\n' +
+                        '                <div class="card-body">\n' +
+                        '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + petition.adress + '</span></div>\n' +
+                        '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + petition.area + '</span></div>\n' +
+                        '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ petition.data + '</span></div></div>\n' +
+                        '<div class="card-footer" style="font-size: medium; color: black">' +
+                        '                    <a id="petition_button_' + petition.id + '" onclick="addUserToPetition(' + petition.id + ')" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Курировать проект</a></div>\n' +
+                        '            </div></div>'
+                    );
+
+                    $.each(petition.userList, function (key, member) {
+                        if (member.id == userId) {
+                            $('#petition_button_' + petition.id + '').text("Заявка отправлена");
+                            $('#petition_button_' + petition.id + '').css({'backgroundColor':'#f71752', 'cursor': 'not-allowed'});
+                            $('#petition_button_' + petition.id + '').removeAttr("onclick");
+                        }
+                    })
+                })
+
+            }
+        });
+    }
+
+    function addUserToPetition(id) {
+        $.ajax({
+            type: 'put',
+            url: '/api/petition/addPetitionUser?id='+id,
+            async: false,
+            success:function () {
+                $('#show_message').modal('show');
+                $('#petition_button_' + id + '').text("Заявка отправлена");
+                $('#petition_button_' + id + '').css({'backgroundColor' : '#f71752', 'cursor': 'not-allowed'});
+                $('#petition_button_' + id + '').removeAttr("onclick");
+            }
+        });
+    }
+
+</script>
+</main>
+</body>
+</html>

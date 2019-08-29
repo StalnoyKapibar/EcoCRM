@@ -29,7 +29,7 @@ function initTextArea() {
     $("#status").text(currentUser.status);
     $("#notToDo").text(currentUser.notToDo);
     var helpTag = document.getElementById('photo');
-    helpTag.insertAdjacentHTML('afterend','<img src="data:image/png;base64,' + currentUser.photo + '" class="img-rounded mt-5 mb-3"   height="500" alt="profile image" id = "profile_avatar" >');
+    helpTag.insertAdjacentHTML('afterend','<img src="data:image/png;base64,' + currentUser.photo + '" style="margin: 20px;" height="300" alt="profile image" id = "profile_avatar" >');
     getProjectsManager(id);
     getProjectsVolunteer(id);
     getPhoto(id);

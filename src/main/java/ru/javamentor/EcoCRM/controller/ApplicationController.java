@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,31 +38,34 @@ public class ApplicationController {
     PetitionService petitionService;
 
     @GetMapping("/")
-    public String getPersonProjects(Model model, Authentication authentication) {
-        Long id = ((User)authentication.getPrincipal()).getId();
-        model.addAttribute("projects", projectService.getPersonProjectDto(id));
-        return "person_page_projects";
+    public String startPageRedirectRoleDepending() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Authority> roles = (List<Authority>) auth.getAuthorities();
+        for (Authority role : roles) {
+            if (role.getAuthority().contains("ROLE_ADMIN")) {
+                return "redirect:/admin/usersList";
+            }
+        }
+        return "redirect:/userinfo";
+    }
+
+    @GetMapping("/userinfo")
+    public String showUserInfo(Model model) {
+        return "userinfo";
     }
 
     @GetMapping("/user")
     public String showUser(Model model, Authentication authentication) {
-        Long id = ((User)authentication.getPrincipal()).getId();
-        model.addAttribute("projects", projectService.getPersonProjectDto(id));
+        Long id = ((User) authentication.getPrincipal()).getId();
+        model.addAttribute("id", id);
         return "person_page_projects";
-    }
-
-    @RequestMapping(value = "/steps/{projectid}", method = RequestMethod.GET)
-    public String adminPageEmployerToEdit(@PathVariable Long projectid, Model model) {
-        model.addAttribute("projectid", projectid);
-        model.addAttribute("step_6_tasks", stepService.getAllByprojectId(projectid));
-        return "steps/steps_h";
     }
 
     @GetMapping("/projects")
     public ModelAndView showProjects(ModelAndView modelAndView) {
         modelAndView.addObject("stepNumber", StepNumber.values());
         modelAndView.addObject("projects", projectService.getListByStepInProgress());
-        modelAndView.setViewName("admin/projects");
+        modelAndView.setViewName("/projects");
         return modelAndView;
     }
 
@@ -71,17 +75,10 @@ public class ApplicationController {
     }
 
     @GetMapping("/petition/getAllPetition")
-    public ModelAndView allUsers() {
-        List<PetitionDTO> petitionDTOList = petitionService.getAllPetition();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("petitions");
-        modelAndView.addObject("petitionList", petitionDTOList);
-        return modelAndView;
-    }
-
-    @GetMapping("/petition/getAllAdminPetitionWithUser")
-    public String getAllPetitionWithUser() {
-        return "petitionWithUserForAdmin";
+    public String allUsers(Model model, Authentication authentication) {
+        Long id = ((User) authentication.getPrincipal()).getId();
+        model.addAttribute("id", id);
+        return "all_petitions";
     }
 
     @GetMapping("/recovery")
@@ -104,17 +101,17 @@ public class ApplicationController {
         return "admin_page";
     }
 
-    @GetMapping("/get_petition")
-    public String getPetitionPage() {
-        return "petition_page";
-    }
-
     @GetMapping("/project/{id}")
-    public String getProject(@PathVariable("id") Long id, Model model) {
-        StepNumber stepNumber = stepService.getProgressStepByProjectId(id).getStepNumber();
-        model.addAttribute("id", id);
-        model.addAttribute("stepNumber", stepNumber);
-        return "project_page";
+    public ModelAndView getProject(@PathVariable("id") Long projectId, ModelAndView modelAndView, Authentication authentication) {
+        modelAndView.setViewName("project_page");
+        if (!projectService.isManageProject(((User)authentication.getPrincipal()).getId(), projectId)) {
+            return  new ModelAndView("access-denied", HttpStatus.FORBIDDEN);
+        } else {
+            StepNumber stepNumber = stepService.getProgressStepByProjectId(projectId).getStepNumber();
+            modelAndView.addObject("id", projectId);
+            modelAndView.addObject("stepNumber", stepNumber);
+        }
+            return modelAndView;
     }
 
     @GetMapping("/all_users")
@@ -122,10 +119,7 @@ public class ApplicationController {
         model.addAttribute("all", userService.getAll());
         return "all_users";
     }
-    @GetMapping("/userinfo")
-    public String getuserinfo() {
-        return "userinfo";
-    }
+
     @GetMapping("/useredit")
     public String useredit() {
         return "edituserform";
@@ -144,4 +138,8 @@ public class ApplicationController {
         return "test";
     }
 
+    @GetMapping("/calendar")
+    public String getCalendar() {
+        return "/steps/calendar";
+    }
 }

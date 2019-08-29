@@ -5,13 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.javamentor.EcoCRM.model.ManagementCompany;
-import ru.javamentor.EcoCRM.model.Photo;
-import ru.javamentor.EcoCRM.model.Project;
-import ru.javamentor.EcoCRM.service.ImageService;
-import ru.javamentor.EcoCRM.service.ManagementCompanyService;
-import ru.javamentor.EcoCRM.service.PhotoService;
-import ru.javamentor.EcoCRM.service.ProjectService;
+import ru.javamentor.EcoCRM.model.*;
+import ru.javamentor.EcoCRM.service.*;
 
 import javax.imageio.ImageIO;
 import javax.persistence.Convert;
@@ -20,7 +15,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,19 +37,22 @@ public class StepsManagementRestController {
     @Autowired
     PhotoService photoService;
 
-//step 2
+    @Autowired
+    CheckPointService checkPointService;
+
+    //step 2
     @PostMapping("/add_company")
     public ResponseEntity<ManagementCompany> saveManagInfo(@RequestParam(value = "projectid") Long projectId, @RequestBody ManagementCompany managementCompany) {
         String companyName = managementCompany.getName();
         Project project = projectService.get(projectId);
-        if (project.getCompany()==null){
+        if (project.getCompany() == null) {
             managementCompanyService.insert(managementCompany);
             project.setCompany(managementCompanyService.get(managementCompany.getId()));
 //            project.setCompany(new ManagementCompany(managementCompany.getName(), managementCompany.getInn(), managementCompany.getLink(),
 //                    managementCompany.getManagerName(), managementCompany.getManagerSurname(), managementCompany.getManagerPatronymic(),
 //                    managementCompany.getPhoneNumber(), managementCompany.getEmail(), managementCompany.getClock(), managementCompany.getDescription(),
 //                    managementCompany.getNextContactDate()));
-        }else {
+        } else {
             ManagementCompany updatedCompany = project.getCompany();
             updatedCompany.setName(managementCompany.getName());
             updatedCompany.setInn(managementCompany.getInn());
@@ -76,7 +76,7 @@ public class StepsManagementRestController {
     }
 
 
-//  step 5
+    //  step 5
     @PostMapping("/add_container")
     public Long saveContainerInfo(@RequestParam(value = "projectid") Long projectId,
                                   @RequestParam(value = "image") List<MultipartFile> img,
@@ -84,12 +84,11 @@ public class StepsManagementRestController {
                                   @RequestParam(value = "newContainerDate") String date) throws IOException, ParseException {
         Project project = projectService.get(projectId);
         List<Photo> listPhoto = new ArrayList<>();
-        for(MultipartFile file : img){
-            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())),600,600));
+        for (MultipartFile file : img) {
+            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())), 600, 600));
             photoService.insert(p);
             listPhoto.add(p);
         }
-
         project.setNewContainerPhoto(listPhoto);
         project.setNewContainerComment(comment);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -100,4 +99,43 @@ public class StepsManagementRestController {
     }
 
 
+    //step 8
+    @PostMapping("/add_check_point/{id}")
+    public ResponseEntity saveCheckPointInfo(@PathVariable Long id,
+                                             @RequestParam(value = "name") String name,
+                                             @RequestParam(value = "description") String description,
+                                             @RequestParam(value = "date") String date) throws ParseException {
+
+        Project project = projectService.get(id);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-M-d");
+        Date formatedDate = dateFormat.parse(date);
+        CheckPoint cp = new CheckPoint(name, description, formatedDate);
+        checkPointService.insert(cp);
+        project.getCheckPoints().add(cp);
+        projectService.update(project);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add_check_point_comment")
+    public Long saveCheckPointComment(@RequestParam(value = "checkpointid") Long checkPointId,
+                                      @RequestParam(value = "comment") String comment) {
+        CheckPoint checkPoint = checkPointService.getCheckPointById(checkPointId);
+        Comment cpComment = new Comment(comment, LocalDate.now());
+        checkPoint.setComment(cpComment);
+        checkPointService.update(checkPoint);
+        return checkPointId;
+    }
+
+    @GetMapping("/all_checked_dates/{projectId}")
+    public List<CheckPoint> getAllCheckPoints(@PathVariable(required = false) Long projectId) {
+        List<CheckPoint> cp = checkPointService.getAllCheckPoints(projectId);
+        return cp;
+    }
+
+    @GetMapping("/check_point/{id}")
+    public CheckPoint getCheckPoint(@PathVariable(required = false) Long id) {
+        CheckPoint cp = checkPointService.get(id);
+        return cp;
+    }
 }

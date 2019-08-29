@@ -7,6 +7,7 @@ import ru.javamentor.EcoCRM.model.embedded.Status;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class Project implements Serializable {
     private Point point;
 
     @ManyToMany
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToOne
     private ManagementCompany company;

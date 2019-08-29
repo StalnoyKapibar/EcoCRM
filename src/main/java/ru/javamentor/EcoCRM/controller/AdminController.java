@@ -17,14 +17,14 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/admin/usersList")
+    @GetMapping("/usersList")
     public String showAllUsers(Model model) {
         List<User> usersList = userService.getAll();
         model.addAttribute("usersList", usersList);
         return "/admin/users";
     }
 
-    @GetMapping("/admin/getAllAdminPetitionWithUser")
+    @GetMapping("/getAllAdminPetitionWithUser")
     public String getAllPetitionWithUser() {
         return "petitionWithUserForAdmin";
     }

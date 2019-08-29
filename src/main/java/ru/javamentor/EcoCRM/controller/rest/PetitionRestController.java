@@ -106,6 +106,7 @@ public class PetitionRestController {
                 project.getUsers().add(user);
             }
         }
+        projectService.update(project);
     }
 
     @PostMapping("/update")

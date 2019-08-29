@@ -1,4 +1,5 @@
 function fillPage(apiUrl){
+    jQuery.noConflict();
     var currentUser = getCurrentUser();
 
     $.ajax({
@@ -24,7 +25,7 @@ function fillPage(apiUrl){
                     '                <div class="eco-column-header-extras">' +
                     '                    <h6>Шаг ' + (count + 1) + '</h6>' +
                     '                </div>' +
-                    '            <div class="eco-col card" id="col_' + count + '" style="height:47rem;overflow:auto;background-color: #F5F5F5">';
+                    '            <div class="eco-col card" id="col_' + count + '" style="height:47rem;overflow: scroll;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
                     docVar += '<div class="eco-card card m-2" style="min-height:210px;box-shadow:0px 5px 9px -8px #000000;">' +
                         '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size: small">' + project.petition.addressHome + '</div>' +
@@ -53,8 +54,19 @@ function fillPage(apiUrl){
                         }
 
                         docVar += '                            </div>' +
-                        '<div class="member">' + project.manager.name.charAt(0) + project.manager.surname.charAt(0) + '</div>' +
-                        '     </div>';
+                            '<div style="display: inline">' +
+                        '<button type="button" class="member" data-toggle="popover" data-placement="bottom" title="Менеджер" data-content="'+project.manager.name+' ' + project.manager.surname +'">' + project.manager.name.charAt(0) + project.manager.surname.charAt(0) + '</button>';
+                        if(project.users.length > 0){
+                            docVar+='<button type="button" class="member" data-toggle="popover" data-placement="bottom" title="Участники" data-content="';
+                            for(let i = 0; i < project.users.length;i++){
+                                docVar+= project.users[i].name + ' ' +project.users[i].surname + '\n';
+                            }
+
+                            docVar+='">+' + project.users.length + '</button>';
+                        }
+
+                        docVar+='     </div>'+
+                        '</div>';
                 });
                 rgbaColor += .1;
                 docVar += '</div> </div>';
@@ -62,6 +74,8 @@ function fillPage(apiUrl){
             });
             $("#projectsTable").html(docVar);        }
     });
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover();
 }
 
 function sortByArea(areaName) {
@@ -96,14 +110,8 @@ function sendRequest(project_id) {
         }
     });
 }
-function getAllRequests(){
 
-    var result;
-
-    return result;
-}
-
-
-
-
-
+//
+// $(document).ready(function() {
+//     document.body.style.overflow = 'hidden';
+// });

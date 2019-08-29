@@ -14,6 +14,17 @@ body {
     /*text-align:center;*/
 }
 
+.yellow-btn {
+    background: #ffa500;
+    border-color: #ffa500;
+    color: white;
+}
+
+.yellow-btn:hover {
+    background: #d68900;
+    color: white;
+}
+
 .feather {
     width: 16px;
     height: 16px;

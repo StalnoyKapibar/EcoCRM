@@ -5,9 +5,11 @@
       layout:decorate="~{layouts/for_all_pages_layout}"
       lang="en">
 <head>
+    <link href="/public/css/green.css" rel="stylesheet">
     <link href="/private/css/searching_style.css" rel="stylesheet">
     <script type="text/javascript" src="/private/js/userInfoModal.js"></script>
     <script type="text/javascript" src="/private/js/search.js"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
 <main role="main" class="container-fluid" layout:fragment="content">
@@ -55,7 +57,7 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phone}"></td>
                     <td th:text="${user.status}" th:id = "${user.id}+'_td_user_stat'"></td>
-                    <td><button type="button" class="btn orng-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><span class="glyphicon glyphicon-user" style="color: white;"></span></button></td>
+                    <td><button type="button" class="btn orng-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><i class="far fa-address-card"></i></button></td>
                 </tr>
                 </tbody>
             </table>

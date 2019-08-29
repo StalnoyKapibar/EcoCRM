@@ -5,12 +5,13 @@
       layout:decorate="~{layouts/for_all_pages_layout}"
       lang="en">
 <head>
+    <link href="/public/css/green.css" rel="stylesheet">
 </head>
 <body>
 
 <main role="main" class="container-fluid" layout:fragment="content">
     <input type="hidden" id="UserId" th:value="${id}">
-    <p style="color: #f71752; font-size: large; margin-left: 5%" >Выбери проект для участия: </p>
+    <p style="font-size: large; margin-left: 5%" >Выбери проект для участия: </p>
     <div class="row" style="margin-left: 3%; margin-right: 3%" id="petitions_area">
 
     </div>

@@ -1,5 +1,5 @@
 body {
-    background: url(../images/card.jpg)no-repeat 0px 0px;
+    background: url(../images/paporotnik.jpg)no-repeat 0px 0px;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -13,13 +13,15 @@ body {
 
 .head-crm {
     vertical-align: super;
-    color: #007c5d;
+    color: #54b689;
     font-size: 18px;
+    text-shadow: #fff3cd;
 }
 
 /*--header--*/
 .header-w3l {
     padding: 6em 0 4.5em;
+    margin: -40px;
 }
 .header-w3l h1 {
     font-size: 3em;

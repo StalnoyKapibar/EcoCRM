@@ -5,11 +5,12 @@
       layout:decorate="~{layouts/for_all_pages_layout}"
       lang="en">
 <head>
+    <link href="/public/css/green.css" rel="stylesheet">
 </head>
 <body>
 <main role="main" class="container-fluid" layout:fragment="content">
     <input type="hidden" id="UserId" th:value="${id}">
-    <p style="color: #f71752; font-size: large; margin-left: 5%" >Все проекты в которых я участвую:</p>
+    <p style="font-size: large; margin-left: 5%" >Все проекты в которых я участвую:</p>
     <div class="row" style="margin-left: 3%; margin-right: 3%" id="users_petition_area">
     </div>
 
@@ -93,7 +94,7 @@
                 $('#users_petition_area').append(
                     '<div class="col-sm-4">' +
                     '<div class="card shadow bg-white rounded" style="margin-top: 15px">\n' +
-                    '                <div class="card-header" style="background-color: lightblue">Менеджер проекта</div>\n' +
+                    '                <div class="card-header" style="background-color: rgba(84,182,137,0.73);; color: white;">Менеджер проекта</div>\n' +
                     '                <div class="card-body">\n' +
                     '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.addressHome + '</span></div>\n' +
                     '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +

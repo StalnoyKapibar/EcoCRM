@@ -5,10 +5,11 @@
       layout:decorate="~{layouts/for_all_pages_layout}"
       lang="en">
 <head>
+    <link href="/public/css/green.css" rel="stylesheet">
 </head>
 <body>
 <main role="main" class="container-fluid" layout:fragment="content">
-    <p style="color: #f71752; font-size: large; margin-left: 5%" >Список волонтеров:</p>
+    <p style="font-size: large; margin-left: 5%" >Список волонтеров:</p>
     <div class="row" style="margin-left: 3%; margin-right: 3%" id="allUserTable">
     </div>
 
@@ -55,9 +56,9 @@
 
                     $('#allUserTable').append(
                         '<div class="col-sm-3">' +
-                        '<div class="card" style="margin-top: 3%">\n' +
+                        '<div class="card" style="margin-top: 3%; height: 400px;">\n' +
                         '                <div class="card-body">\n' +
-                        '                    <div id="photo" class="text-center">\n' +
+                        '                    <div id="photo" class="text-center" style="height: 150px;">\n' +
                         '<img src="data:image/png;base64,' + user.photo + '" class="img-rounded" alt="profile image" id = "profile_avatar" sizes="(max-width: 30px) 30px, (min-width: 10px) 10px">' +
                         '                    </div>\n' +
                         '                    <br>\n' +

@@ -9,7 +9,6 @@ import ru.javamentor.EcoCRM.model.*;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.model.embedded.TaskType;
-import ru.javamentor.EcoCRM.model.petition.embedded.TrashType;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.time.LocalDate;

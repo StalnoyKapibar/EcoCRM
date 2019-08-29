@@ -1,7 +1,6 @@
 package ru.javamentor.EcoCRM.model;
 
 import ru.javamentor.EcoCRM.model.embedded.Status;
-import ru.javamentor.EcoCRM.model.petition.embedded.TrashType;
 
 import javax.persistence.*;
 import java.time.LocalDate;

@@ -75,26 +75,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a  class="btn btn-default" onclick="delete_modal()" data-dismiss="modal" id="add_buttonModal">Close</a>
+                <button  class="btn btn-default" onclick="delete_modal()" data-dismiss="modal" id="add_buttonModal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
-<!--&lt;!&ndash; Modal show info&ndash;&gt;-->
-<!--<div id="show_contractor_modal" class="modal fade" role="dialog">-->
-    <!--<div class="modal-dialog">-->
-        <!--&lt;!&ndash; Modal content&ndash;&gt;-->
-        <!--<div class="modal-content card border-light">-->
-            <!--<div class="modal-body">-->
-
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<button type="button" class="btn btn-default" data-dismiss="modal" id="show_buttonModal">Close</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 
 <script>
     $( document ).ready(function() {
@@ -155,12 +140,6 @@
                         '                        <tr>\n' +
 
                         '                            <td><h6></h6></td><td><h6>' +
-                        '<button id="manager_button" class="btn btn-secondary" onclick="approvedByAdministrator(' + user.id + ',' + petitionId + ')">Отклонить</button>'+
-                        '</h6></td>\n' +
-                        '                        </tr>\n' +
-                        '                        <tr>\n' +
-
-                        '                            <td><h6></h6></td><td><h6>' +
                         '<button id="manager_button" class="btn btn-warning" onclick="approvedByAdministrator(' + user.id + ',' + petitionId + ')">Выбрать менеджером</button>'+
                         '</h6></td>\n' +
                         '                        </tr>\n' +
@@ -178,7 +157,6 @@
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             success: function (){
-                alert('Заявка одобрена')
                 $('#add_buttonModal').click();
                 $('#card_' + idproject + '').remove()
             },

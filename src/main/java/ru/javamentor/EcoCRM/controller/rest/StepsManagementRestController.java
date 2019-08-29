@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,19 +40,19 @@ public class StepsManagementRestController {
     @Autowired
     CheckPointService checkPointService;
 
-//step 2
+    //step 2
     @PostMapping("/add_company")
     public ResponseEntity<ManagementCompany> saveManagInfo(@RequestParam(value = "projectid") Long projectId, @RequestBody ManagementCompany managementCompany) {
         String companyName = managementCompany.getName();
         Project project = projectService.get(projectId);
-        if (project.getCompany()==null){
+        if (project.getCompany() == null) {
             managementCompanyService.insert(managementCompany);
             project.setCompany(managementCompanyService.get(managementCompany.getId()));
 //            project.setCompany(new ManagementCompany(managementCompany.getName(), managementCompany.getInn(), managementCompany.getLink(),
 //                    managementCompany.getManagerName(), managementCompany.getManagerSurname(), managementCompany.getManagerPatronymic(),
 //                    managementCompany.getPhoneNumber(), managementCompany.getEmail(), managementCompany.getClock(), managementCompany.getDescription(),
 //                    managementCompany.getNextContactDate()));
-        }else {
+        } else {
             ManagementCompany updatedCompany = project.getCompany();
             updatedCompany.setName(managementCompany.getName());
             updatedCompany.setInn(managementCompany.getInn());
@@ -75,7 +76,7 @@ public class StepsManagementRestController {
     }
 
 
-//  step 5
+    //  step 5
     @PostMapping("/add_container")
     public Long saveContainerInfo(@RequestParam(value = "projectid") Long projectId,
                                   @RequestParam(value = "image") List<MultipartFile> img,
@@ -83,8 +84,8 @@ public class StepsManagementRestController {
                                   @RequestParam(value = "newContainerDate") String date) throws IOException, ParseException {
         Project project = projectService.get(projectId);
         List<Photo> listPhoto = new ArrayList<>();
-        for(MultipartFile file : img){
-            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())),600,600));
+        for (MultipartFile file : img) {
+            Photo p = new Photo(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(file.getBytes())), 600, 600));
             photoService.insert(p);
             listPhoto.add(p);
         }
@@ -96,14 +97,14 @@ public class StepsManagementRestController {
         projectService.update(project);
         return projectId;
     }
-}
+
 
     //step 8
     @PostMapping("/add_check_point/{id}")
     public ResponseEntity saveCheckPointInfo(@PathVariable Long id,
                                              @RequestParam(value = "name") String name,
-                                  @RequestParam(value = "description") String description,
-                                  @RequestParam(value = "date") String date) throws ParseException {
+                                             @RequestParam(value = "description") String description,
+                                             @RequestParam(value = "date") String date) throws ParseException {
 
         Project project = projectService.get(id);
 
@@ -118,9 +119,9 @@ public class StepsManagementRestController {
 
     @PostMapping("/add_check_point_comment")
     public Long saveCheckPointComment(@RequestParam(value = "checkpointid") Long checkPointId,
-                                   @RequestParam(value = "comment") String comment) {
+                                      @RequestParam(value = "comment") String comment) {
         CheckPoint checkPoint = checkPointService.getCheckPointById(checkPointId);
-        Comment cpComment = new Comment(comment, new Date());
+        Comment cpComment = new Comment(comment, LocalDate.now());
         checkPoint.setComment(cpComment);
         checkPointService.update(checkPoint);
         return checkPointId;
@@ -137,3 +138,4 @@ public class StepsManagementRestController {
         CheckPoint cp = checkPointService.get(id);
         return cp;
     }
+}

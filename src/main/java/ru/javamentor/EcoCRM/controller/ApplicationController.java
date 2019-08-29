@@ -81,11 +81,6 @@ public class ApplicationController {
         return "all_petitions";
     }
 
-    @GetMapping("/petition/getAllAdminPetitionWithUser")
-    public String getAllPetitionWithUser() {
-        return "petitionWithUserForAdmin";
-    }
-
     @GetMapping("/recovery")
     public String recoveryPage() {
         return "login/recovery";

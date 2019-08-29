@@ -98,7 +98,11 @@ public class StepsManagementRestController {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-M-d");
         Date formatedDate = dateFormat.parse(date);
-        CheckPoint cp = new CheckPoint(name, description, formatedDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(formatedDate);
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        Date newDate = c.getTime();
+        CheckPoint cp = new CheckPoint(name, description, newDate);
         checkPointService.insert(cp);
         project.getCheckPoints().add(cp);
         projectService.update(project);

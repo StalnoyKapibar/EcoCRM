@@ -1,4 +1,3 @@
-moment.locale("en");
 class CalendarYvv{
     constructor(etiqueta="", diaSeleccionado="", primerDia="Lunes") {
         this.etiqueta = etiqueta; // метка, где это будет отображаться
@@ -14,7 +13,7 @@ class CalendarYvv{
         this.colorResal = "#28a7454d"; // цвет важных дней
         this.textResalt = "#28a745"; // цвет текста важных дней
 
-        this.bg = "bg-dark"; // цвет фона заголовка
+        this.bg = "bg-success"; // цвет фона заголовка
         this.textColor = "text-white"; // цвет текста в заголовке
         this.btnH = "btn-outline-light"; // нормальный цвет кнопки
         this.btnD = "btn-rounded-success";// Цвет кнопки при наведении - "btn-outline-dark"
@@ -45,13 +44,13 @@ class CalendarYvv{
     }
     createHeaderM(){
         var cont = $("<div class='d-flex justify-content-between p-2 border align-items-center border-bottom-0 "+this.bg+" "+this.textColor+"'>");
-        var arrowL = $("<span class='btn "+this.btnH+"' onclick='getAllCheckPoints()'>").html("<");
-        var arrowR = $("<span class='btn "+this.btnH+"' onclick='getAllCheckPoints()'>").html(">");
+        var arrowL = $("<span class='btn "+this.btnH+"'>").html("<");
+        var arrowR = $("<span class='btn "+this.btnH+"'>").html(">");
         var title = $("<span class='text-uppercase'>").html(moment(this.diaSeleccionado).format("MMMM - Y"));
         var _this = this;
 
         arrowL.on("click", function(e){
-            _this.mesAnterior(_this)
+            _this.mesAnterior(_this);
         });
         arrowR.on("click", function(e){
             _this.mesSiguiente(_this)
@@ -213,8 +212,6 @@ function saveCheckPointInfo() {
         data: checkPoint,
         async: false,
         success: function (response) {
-            let dayId = $('#check_point_date').val()+"_date";
-            document.getElementById(dayId).classList.add('current-date-selected');
             getAllCheckPoints();
             console.log(response.responseText);
         },
@@ -225,23 +222,23 @@ function saveCheckPointInfo() {
     });
 }
 
-function saveCheckPointComment() {
-    let comment = $('#check_point_comment').val();
-    $.ajax({
-        url: "/manage/add_check_point_comment?checkpointid=" + checkPointId,
-        type: "POST",
-        data: comment,
-        async: false,
-        success: function (response) {
-            console.log(response.responseText);
-
-        },
-        error: function (e) {
-            console.error(e.responseText);
-
-        }
-    });
-}
+// function saveCheckPointComment() {
+//     let comment = $('#check_point_comment').val();
+//     $.ajax({
+//         url: "/manage/add_check_point_comment?checkpointid=" + checkPointId,
+//         type: "POST",
+//         data: comment,
+//         async: false,
+//         success: function (response) {
+//             console.log(response.responseText);
+//
+//         },
+//         error: function (e) {
+//             console.error(e.responseText);
+//
+//         }
+//     });
+// }
 
 
 // function getAllDataPoints() {
@@ -263,6 +260,8 @@ function saveCheckPointComment() {
 // }
 
 
+
+
 function getAllCheckPoints() {
     $.ajax({
         url: "/manage/all_checked_dates/" + 1,
@@ -270,6 +269,8 @@ function getAllCheckPoints() {
         async: false,
 
         success: function (check_point) {
+            // let lastElem = check_point.length - 1;
+            // alert(check_point[lastElem].date);
             let dayId;
             let ddate;
             let yyear;
@@ -277,8 +278,9 @@ function getAllCheckPoints() {
             let mmonth;
             let norm_data;
             $("#check_points_list").html("");
+            $('#check_points_list').append("<h4>Все точки контроля</h4>");
             $.each(check_point, function(i) {
-                $('#check_points_list').append("<p><button type='button' class='btn btn-primary' onclick='getCheckPoint(id)' id='" + check_point[i].id + "'>" + check_point[i].name + "</button></p>");
+                $('#check_points_list').append("<p><button type='button' class='btn btn-success' style='width: 300px;' onclick='getCheckPoint(id)' id='" + check_point[i].id + "'>" + check_point[i].name + "</button></p>");
 
                 ddate = check_point[i].date;
                 yyear = parseInt(ddate.substr(0, 4));
@@ -316,9 +318,38 @@ function getCheckPoint(id) {
             showCheckPointModalInfo();
             //$('#photo').attr("src","/api/user/photo/" + user.id);
             $("#check_p_name").text(checkPoint.name);
-            $("#description").text(checkPoint.description);
+            $("#check_p_description").text(checkPoint.description);
             let d = checkPoint.date;
             $("#check_p_date").text(d.substr(0, 10));
         }
     });
 }
+
+
+$(document).ready(function(e){
+
+    $('#check_point_date').datepicker({
+        format: 'yyyy-mm-dd',
+        uiLibrary: 'bootstrap4'
+    });
+
+    calendar = new CalendarYvv("#calendar", moment().format("Y-M-D"), "Monday");
+    calendar.funcPer = function(ev){
+        // $('#exampleModal2').modal('show');
+        console.log(ev);
+    };
+    calendar.diasResal = [4,15,26]
+    calendar.createCalendar();
+    getAllCheckPoints();
+});
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-36251023-1']);
+_gaq.push(['_setDomainName', 'jqueryscript.net']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();

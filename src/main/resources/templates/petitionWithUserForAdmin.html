@@ -60,38 +60,22 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
         <div class="row" style="margin: 3%" id="cardes">
         </div>
-    </div>
 </div>
 
 <!-- Modal show info-->
 <div id="show_user_list" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content card border-light">
-            <div class="modal-body" id="modal_users">
-                <form id="list_members">
+            <div class="modal-header">Выберите менеджера</div>
+            <div class="modal-body" id="f">
+                <form id="fffff">
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="add_buttonModal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal show info-->
-<div id="show_contractor_modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content card border-light">
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="show_buttonModal">Close</button>
+                <button  class="btn btn-default" onclick="delete_modal()" data-dismiss="modal" id="add_buttonModal">Close</button>
             </div>
         </div>
     </div>
@@ -109,7 +93,7 @@
             async: false,
             success: function (petitions) {
                 $.each(petitions, function (key, petition) {
-                    $('#cardes').append('<div class="col-sm-3">' +
+                    $('#cardes').append('<div class="col-sm-3" id="card_' + petition.id + '">' +
                     '<div class="card shadow bg-white rounded" style="margin-top: 15px">' +
                     '<div  class="card-header">Дата поступления заявки:' + '<div style="font-size: large">' +petition.data + '</div></div>' +
                     '<div class="card-body">' +
@@ -117,7 +101,7 @@
                         '<p style="font: medium;">Район:' + '<span class="badge badge-pill text-light" style="float: right; font-size: small; background-color: #007bff">' + petition.area + '</span></p>' +
                     '<a class="btn btn-warning" data-toggle="modal" data-target="#show_user_list" onclick="show_users('+petition.id+')" style="float: right">Участники</a>'+
                     '</div>'+
-                    '</div>');
+                    '</div></div>');
                 })
             }
         })};
@@ -128,10 +112,40 @@
             type: "GET",
             async: false,
             success: function (petition) {
+                $('#fffff').remove();
                 $.each(petition.userPetition, function (key, user) {
-                    $('#list_members').append(
-                            '<div><a onclick="chooseManager('+user.id+','+ petitionId+')"  class="btn btn-outline-success">'+user.name+'</a></div>'
-                    );
+                    $('#f').append(
+                        '<div id="fffff"><div class="card" id="modal_user_info_' + user.id + '" style="margin-top: 3%">\n' +
+                        '                <div class="card-body">\n' +
+                        '                    <br>\n' +
+                        '                    <table class="table">\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Имя и Фамилия: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> email: </h6></td><td><a><h6 style="font-size: medium;">' + user.email+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> vk: </h6></td><td><a><h6 style="font-size: medium;">' + user.link + '</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> phone: </h6></td><td><a><h6 style="font-size: medium;">' + user.phone + '</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> статус: </h6></td><td><h6 style="font-size: medium;"><span class="badge badge-pill text-light" style="font-size: small; background-color: #f71752">' + user.status + '</span></h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6></h6></td><td><h6 style="font-size: medium;"><a class="btn btn-primary" href="/user/' + user.id + ')">На страницу пользователя</a></h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+
+                        '                            <td><h6></h6></td><td><h6>' +
+                        '<button id="manager_button" class="btn btn-warning" onclick="approvedByAdministrator(' + user.id + ',' + petitionId + ')">Выбрать менеджером</button>'+
+                        '</h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                    </table>\n' +
+                        '                </div>\n' +
+                        '            </div></div>')
                 })
             }
         })
@@ -143,7 +157,8 @@
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             success: function (){
-                alert('Заявка одобрена')
+                $('#add_buttonModal').click();
+                $('#card_' + idproject + '').remove()
             },
             error: function (e) {
                 alert(e.responseText);
@@ -151,43 +166,8 @@
         })
     }
 
-    function chooseManager(userId, petitionId) {
-        $.ajax({
-            url: "/api/user/" + userId,
-            type: "GET",
-            async: false,
-            success: function (user) {
-                    $('#list_members').append(
-                        '<div class="card" style="margin-top: 3%">\n' +
-                        '                <div class="card-body">\n' +
-                        '                    <br>\n' +
-                        '                    <table class="table">\n' +
-                        '                        <tr>\n' +
-                        '                            <td><h6> Имя и Фамилия: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
-                        '                        </tr>\n' +
-                        '                        <tr>\n' +
-                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
-                        '                        </tr>\n' +
-                        '                        <tr>\n' +
-                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
-                        '                        </tr>\n' +
-                        '                        <tr>\n' +
-                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
-                        '                        </tr>\n' +
-                        '                        <tr>\n' +
-                        '                            <td><h6> Статус: </h6></td><td><h6 id="profession"><span class="badge badge-pill text-light" style="font-size: small; background-color: #f71752">' + user.status + '</span></h6></td>\n' +
-                        '                        </tr>\n' +
-                        '                        <tr>\n' +
-                        '                            <td><h6></h6></td><td><h6>' +
-                        '<button class="btn btn-warning" onclick="approvedByAdministrator(' + user.id+',' +userId+ ')">Выбрать менеджером</button>'+
-                        '<a class="btn btn-primary" href="/user/' + user.id+')">На страницу пользователя</a>'+
-                        '</h6></td>\n' +
-                        '                        </tr>\n' +
-                        '                    </table>\n' +
-                        '                </div>\n' +
-                        '            </div>')}
-
-        })
+    function delete_modal(){
+        $('#fffff').remove();
     }
 
 </script>

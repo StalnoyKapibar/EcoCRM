@@ -3,7 +3,9 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="comments")
@@ -16,11 +18,17 @@ public class Comment implements Serializable {
     @Column(name = "message")
     private String message;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private TaskByStep taskByStep;
-
     @Column(name = "time")
-    private LocalDateTime time;
+    private LocalDate time;
+
+    public Comment() {
+
+    }
+
+    public Comment(String message, LocalDate time) {
+        this.message = message;
+        this.time = time;
+    }
 
     public Long getId() {
         return id;
@@ -38,19 +46,11 @@ public class Comment implements Serializable {
         this.message = message;
     }
 
-    public TaskByStep getTaskByStep() {
-        return taskByStep;
-    }
-
-    public void setTaskByStep(TaskByStep taskByStep) {
-        this.taskByStep = taskByStep;
-    }
-
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 }

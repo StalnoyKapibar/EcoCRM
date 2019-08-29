@@ -1,5 +1,6 @@
 package ru.javamentor.EcoCRM.config;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -17,21 +18,19 @@ import java.util.Set;
 @Component
 public class SuccessRedirectHandler implements AuthenticationSuccessHandler {
 
-    //todo sout
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-//        for (String role : roles) {
-//            System.out.println("Role is: " + role);
-//        }
+
         if (roles.contains("ROLE_ADMIN")) {
-//            System.out.println("role finded");
-            httpServletResponse.sendRedirect("/admin_page");
-        } else if (roles.contains("ROLE_USER")) {
-//            System.out.println("user role");
-            httpServletResponse.sendRedirect("/");
+            httpServletResponse.setStatus(HttpStatus.OK.value());
+            httpServletResponse.setHeader("redirect","/admin/usersList");
+
+        } else if(roles.contains("ROLE_USER")) {
+            httpServletResponse.setStatus(HttpStatus.OK.value());
+            httpServletResponse.setHeader("redirect","/user");
         }
     }
 }

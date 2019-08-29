@@ -1,0 +1,31 @@
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wrong Token</title>
+</head>
+
+<body>
+
+<h2>Access Denied - Your reference is out of time.</h2>
+
+<hr>
+
+<div sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/admin/page}">Back to Home Page</a>
+
+    <br><br>
+
+    <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+    </form>
+    (Only for Admins)
+</div>
+
+
+<br><br>
+
+
+
+</body>
+</html>

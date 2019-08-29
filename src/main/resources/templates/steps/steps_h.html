@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>steps_2</title>
+    <link href="/private/css/calendar.css" rel="stylesheet">
+    <script src="/private/js/calendar.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
+    <script src="/private/js/steps.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/private/css/common_style.css" rel="stylesheet">
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <style>
+
+        .nav-item.nav-link.active {
+            background: #4c40ff;
+            color: #eeeeee;
+        }
+
+        .done-step {
+            background: #cbf8c7;
+            color: #89a987;
+        }
+
+        .done-task {
+            background: #cbf8c7;
+            color: #89a987;
+        }
+        img {
+            width: auto;
+            height: 80px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#step_1" role="tab" aria-controls="nav-home"
+           aria-selected="true">1. Заявитель</a>
+        <a class="nav-item nav-link" data-toggle="tab" id="step_2_link" href="#step_2" role="tab" aria-controls="nav-profile"
+           aria-selected="false">2. Управляющая<br>компания</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_3" id = "step_3_link" role="tab" aria-controls="nav-contact"
+           aria-selected="false">3. Заготовители</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_4" role="tab" aria-controls="nav-contact"
+           aria-selected="false">4. Заключение<br>договора</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_5" role="tab" aria-controls="nav-contact"
+           aria-selected="false">5. Установка<br>контейнера</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_6" role="tab" aria-controls="nav-contact"
+           aria-selected="false">6. Работа с<br>жителями</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_7" role="tab" aria-controls="nav-contact"
+           aria-selected="false">7. Описание<br>кейса</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#step_8" role="tab" aria-controls="nav-contact"
+           aria-selected="false">8. Контроль</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+
+    <!--начало 1 шага-->
+    <div class="tab-pane fade show active" id="step_1" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="card">
+            <div class="card-header">
+                <h3>Уточнить информацию о заявителе</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Информация о заявителе
+                        </a>
+                        <a class="nav-link" data-toggle="pill" href="#neighbourhood_inf" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Информация о соседях
+                        </a>
+                        <a class="nav-link" data-toggle="pill" href="#container_photo" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Фото контейнера
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" id="v-pills-tabContent" style="width: 70%">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <label class="h6">ФИО</label>
+                            <input type="text" class="form-control" placeholder="ФИО заявителя"  id="fio_petitioner">
+                            <br>
+                            <label class="h6">Email</label>
+                            <input type="text" class="form-control" placeholder="email"  id = "email_petitioner">
+                            <br>
+                            <label class="h6">Контактная информация</label>
+                            <input type="text" class="form-control" placeholder="контакная информация"  id="contacts_petitioner">
+                            <br>
+                            <div class="h6">Статус</div>
+                            <div id = "status_petitioner">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="resident" value="Житель, собственник жилья" name="status">
+                                <label class="form-check-label">Житель, собственник жилья</label>
+                                </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="manage_representative"name="status" value="Представитель управляющей организации (УК, ТСЖ и\n т.п.)">
+                                <label class="form-check-label">Представитель управляющей организации (УК, ТСЖ и\n т.п.)</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="h6">Участвует в деятельности движения "Раздельный сбор"</div>
+                                                         <div id = "activity_petitioner">
+                                                          <div class="form-check">
+                                                                 <input type="radio" class="form-check-input activity" id="monthly"
+                                                                           name="activity" value="Участвую в ежемесячных акциях и сдаю своё
+                                                                        вторсырьё">
+                                                                    <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё вторсырьё</label>
+                                                                </div>
+                                                           <div class="form-check">
+                                                                    <input type="radio" class="form-check-input activity" id="volunteer"
+                                                                          name="activity" value="Волонтер на акциях">
+                                                                    <label class="form-check-label">Волонтер на акциях</label>
+                                                                </div>
+                                                             <div class="form-check">
+                                                                   <input type="radio" class="form-check-input activity" id="corrdinator" name="activity" value="Координатор на акциях">
+                                                                    <label class="form-check-label">Координатор на акциях</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                    <input type="radio" class="form-check-input activity" id="participant" name="activity" value="Участник рабочих групп движения">
+                                                                    <label class="form-check-label" for="participant">Участник рабочих групп движения</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                   <input type="radio" class="form-check-input activity" id="no_participate"
+                                                                          name="activity" value="Не принимаю участия в деятельности движения">
+                                                                    <label class="form-check-label" for="participant">Не принимаю участия в
+                                                                           деятельности движения</label>
+                                                            </div>                             <div class="form-check">
+                                                                   <input type="radio" class="form-check-input" id="another_active"
+                                                                           name="activity" value="другое">
+                                                                   <label class="form-check-label" for="participant">другое</label>
+                                                                </div>
+                                                           <input type="text" class="form-control" id="another_active_input" disabled>
+                                                            </div>
+
+                                                           <br>
+                                                            <div class="h6">Накопление какого мусора хотелось бы организовать?</div>
+                                                            <div id = "row_type">
+                                                            <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="paper" value="Бумага/картон">
+                                                                    <label class="form-check-label">Бумага/картон</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="glass" value="Стекло">
+                                                                    <label class="form-check-label">Стекло</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="metal" value="Металл">
+                                                                    <label class="form-check-label">Металл</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="hard_plastic" value="Твёрдый пластик">
+                                                                    <label class="form-check-label">Твёрдый пластик</label>
+                                                                </div>
+                                                           <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="soft_plastic" value="Мягкий пластик">
+                                                                    <label class="form-check-label">Мягкий пластик</label>
+                                                                </div>
+                                                           <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="tetra_pak" value="Тетрапак">
+                                                                    <label class="form-check-label">Тетрапак</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                   <input type="checkbox" class="form-check-input" id="organic_waste" value="Органические отходы">
+                                                                    <label class="form-check-label">Органические отходы</label>
+                                                                </div>
+                                                            <div class="form-check">
+                                                                    <input type="checkbox" class="form-check-input" id="hazardous_waste" value="Опасные отходы (батарейки, лампочки и т.п.)">
+                                                                    <label class="form-check-label">Опасные отходы (батарейки, лампочки и
+                                                                            т.п.)</label>
+                                                               </div>
+                                                            <div class="form-check">
+                                                                   <input type="checkbox" class="form-check-input" id="another_waste" value="другое">
+                                                                    <label class="form-check-label">другое</label>
+                                                                </div>
+                                                            <input type="text" class="form-control" id="another_waste_input" disabled>
+                            </div>
+                            <br>
+                                <label class="h6">Адрес дома</label>
+                                <input type="text" class="form-control" placeholder="ФИО заявителя" id="home_adres">
+                            <br>
+                                <div class="form-row align-items-center">
+                                   <div class="col-auto my-1">
+                                            <label class="mr-sm-2" for="home_district">В каком районе расположен дом? *</label>
+                                            <select class="custom-select mr-sm-2" name="houseArea" id = "home_district">
+                                                    <option selected>С какого ты района? епта</option>
+                                                    <option value="Адмиралтейский район">Адмиралтейский район</option>
+                                                    <option value="Василеостровский район">Василеостровский район</option>
+                                                    <option value="Выборгский район">Выборгский район</option>
+                                                    <option value="Калинский район">Калинский район</option>
+                                                    <option value="Колпинский район">Колпинский район</option>
+                                                    <option value="Красногвардейский район">Красногвардейский район</option>
+                                                    <option value="Красносельский район">Красносельский район</option>
+                                                    <option value="Кронштадский район">Кронштадский район</option>
+                                                    <option value="Курортный район">Курортный район</option>
+                                                    <option value="Московский район">Московский район</option>
+                                                    <option value="Невский район">Невский район</option>
+                                                   <option value="Петроградский район">Петроградский район</option>
+                                                    <option value="Петродворцовый район">Выборгский район</option>
+                                                    <option value="Приморский район">Приморский район</option>
+                                                    <option value="Пушкинский район">Пушкинский район</option>
+                                                   <option value="Фрунзенский район">Фрунзенский район</option>
+                                                    <option value="Центральный район">Центральный район</option>
+                                                    <option value="Всеволожский район ЛО">Всеволожский район ЛО</option>
+                                                    <option value="Гатчинский район">Гатчинский район</option>
+                                                    <option value="Кировский район">Кировский район</option>
+                                                    <option value="Сосновоборский район">Сосновоборский район</option>
+                                                    <option value="Тосненский район">Тосненский район</option>
+                                                    <option value="Другой район">Другой район</option>
+                                                </select>
+                                   </div>
+                                </div>
+                                <br>
+                                <label class="h6">Сколько квартир в доме</label>
+                                <input type="text" class="form-control" placeholder="Коллиесвто квартир в доме" id ="apartments_count">
+                            <br>
+                            <div class="h6">Какая форма управления Вашим домом</div>
+                            <div id = "home_management_form">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="tszh" name="management_form" value="Товарищество собственников жилья">
+                                        <label class="form-check-label">Товарищество собственников жилья</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="yk" value="Управляющая компания"
+                                               name="management_form">
+                                        <label class="form-check-label">Управляющая компания</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="zhks" value="Жилищно-коммунальная служба (ЖКС)"
+                                               name="management_form">
+                                        <label class="form-check-label">Жилищно-коммунальная служба (ЖКС)</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="another_m_f" value="другая"
+                                               name="management_form">
+                                       <label class="form-check-label">другая</label>
+                                    </div>
+                                </div>
+                                <div class="h6">Есть ли совет многоквартирного дома</div>
+                                <div id = "home_sovet">
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="sovet_yes" value="Да" name="home_sovet">
+                                        <label class="form-check-label">Да</label>
+                                    </div>
+                                <div class="form-check">
+                                       <input type="radio" class="form-check-input" id="sovet_no" value="Нет" name="home_sovet">
+                                        <label class="form-check-label">Нет</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="sovet_doubts" value="Сомневается" name="home_sovet">
+                                        <label class="form-check-label">Сомневается</label>
+                                    </div>
+                                </div>
+                                <div class="h6">Как управляющая организация относится к РНО?</div>
+                            <div id = "menegement_org_relate">
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="positive_relate" name="menegement_org_relate" value="Положительно, ждёт предложений">
+                                        <label class="form-check-label">Положительно, ждёт предложений</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="negative_relate" name="menegement_org_relate" value="Отрицательно, не верит в раздельный сбор">
+                                        <label class="form-check-label">Отрицательно, не верит в раздельный сбор</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="unknown_relation" name="menegement_org_relate" value="Не знаю">
+                                        <label class="form-check-label">Не знаю</label>
+                                    </div>
+                               </div>
+                                <br>
+                                <label class="h6">Контактная информация правления дома</label>
+                                <input type="text" class="form-control" placeholder="Контактная информация правления дома" id ="contact_management">
+                                <br>
+                                <label class="h6">Дополнительня информация</label>
+                                <input type="text" class="form-control" placeholder="Контактная информация правления дома" id ="additional_information">
+                                <br>
+                                <div class="h6">Имеется ли у Вашего дома своя контейнерная площадка (КП)?</div>
+                                <div id = "container_place">
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="cont_place_yes" value="Да" name="container_place">
+                                        <label class="form-check-label">Да</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="cont_place_no" value="Нет" name="container_place">
+                                        <label class="form-check-label">Нет</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <label class="h6">Если КП имеется, то укажите её площадь и особенности устройства</label>
+                                <input type="text" class="form-control" id ="container_area">
+                                <br>
+                                <div class="h6">Если КП имеется, то укажите собственника земли, на которой она находится</div>
+                                <div id = "container_area_owner">
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="home_owner" name="container_area_owner" value="Собственник дома">
+                                       <label class="form-check-label">Собственник дома</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="municipality_owner" name="container_area_owner" value="Муниципальное образование">
+                                        <label class="form-check-label">Муниципальное образование</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="city_owner" name="container_area_owner" value="Город (субъект РФ)">
+                                        <label class="form-check-label">Город (субъект РФ)</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" value="Другое" id="another_owner" name="container_area_owner">
+                                        <label class="form-check-label">Другое</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="h6">Имеется ли в Вашем доме мусоропровод?</div>
+                                <div id = "chute_form">
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="chute_yes" value="Да" name="chute">
+                                        <label class="form-check-label">Да</label>
+                                    </div>
+                                <div class="form-check">
+                                        <input type="radio" class="form-check-input" id="chute_no" value="нет" name="chute">
+                                        <label class="form-check-label">Нет</label>
+                                    </div>
+                                </div>
+                                <br>
+                               <label class="h6">Какая компания занимается вывозом ТКО?</label>
+                                <input type="text" class="form-control" id ="garbage_disposal_company">
+                    </div>
+                        </div>
+                        <div class="tab-pane fade" id="neighbourhood_inf" role="tabpanel">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d511638.0496814032!2d29.530301548695494!3d59.93900943041817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696378cc74a65ed%3A0x6dc7673fab848eff!2z0KHQsNC90LrRgi3Qn9C10YLQtdGA0LHRg9GA0LM!5e0!3m2!1sru!2sru!4v1566243087100!5m2!1sru!2sru"
+                                    width="600" height="450" frameborder="0" style="border:0"
+                                    allowfullscreen></iframe>
+                        </div>
+                        <div class="tab-pane fade" id="container_photo" role="tabpanel">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                           aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Конец 1 шага-->
+
+    <!--начало 2 шага-->
+    <div class="tab-pane fade" id="step_2" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="card">
+            <div class="card-header">
+                <h1>
+                    Управляющая орагизация
+                </h1>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="nav flex-column nav-pills" role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#manage_org_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Информация о управляющей компании
+                        </a>
+
+                        <a class="nav-link" data-toggle="pill" href="#next_task"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Следующая таска
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="manage_org_pil" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div id="task_2_1">
+                                <label><h6>Навзвание организации</h6></label>
+                                <input type="text" class="form-control" placeholder="Название" id="management_org_title" >
+                                <br>
+                                <label><h6>ИНН</h6></label>
+                                <input type="text" class="form-control" placeholder="ИНН" id="management_org_inn">
+                                <br>
+                                <label><h6>Ссылка на сайт/социальную сеть</h6></label>
+                                <input type="text" class="form-control" placeholder="Ссылка" id="management_org_link" >
+                                <br>
+                                <label><h6>ФИО руководителя</h6></label>
+                                <input type="text" class="form-control" placeholder="Фамилия" id="management_org_surname">
+                                <br>
+                                <input type="text" class="form-control" placeholder="Имя" id="management_org_name" >
+                                <br>
+                                <input type="text" class="form-control" placeholder="Отчество" id="management_org_patronymic" >
+                                <br>
+                                <label><h6>Телефон организации</h6></label>
+                                <input type="text" class="form-control" placeholder="Телефон" id="management_org_tel" >
+                                <br>
+                                <label><h6>E-mail</h6></label>
+                                <input type="text" class="form-control" placeholder="E-mail" id="management_org_email" >
+                                <br>
+                                <label><h6>Часы приема</h6></label>
+                                <input type="text" class="form-control" placeholder="Часы приема" id="management_org_clock" >
+                                <br>
+                                <label><h6>Дата следующего контакта</h6></label>
+                                <input id="datepicker" width="276" placeholder="Дата" >
+                                <br>
+                                <label><h6>Комментарий</h6></label>
+                                <textarea class="form-control" rows="5" id="comment"></textarea>
+                                <br>
+                                <button id="save-btn" type="button" class="btn btn-primary" onclick="saveManagCompInfo()">Сохранить</button>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show active" id="next_task" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_2_2">
+                                <h1>Next task</h1>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--конец 2 шага-->
+
+    <!--начало 3 шага-->
+    <div class="tab-pane fade" id="step_3" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="card">
+            <div class="card-header">
+                <h4>Взаимодействие с заготовителями</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#contractor_list_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Список заготовителей
+                        </a>
+                        <a class="nav-link" data-toggle="pill" href="#check_point_pil"
+                           role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                            Точка контроля
+                        </a>
+                        <!--<a class="nav-link" data-toggle="pill" href="#container_photo" role="tab"-->
+                        <!--aria-controls="v-pills-profile" aria-selected="false">-->
+                        <!--Фото контейнера-->
+                        <!--</a>-->
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="contractor_list_pil" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div id="task_3_1">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row" >1</th>
+                                        <td data-toggle="modal" data-target="#contractor_modal">ООО "Рога и Копыта"</td>
+                                        <td><div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Коментарий
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <textarea class="form-control rounded-0"></textarea>
+                                            </div>
+                                        </div></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "1" onclick="getData(this.id)">
+                                                    Назначить встречу
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <input id = "1_datapiker" placeholder="назначить встречу">
+                                                    <button class="btn btn-success" type="button" onclick="appoint(1)">назначить</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td data-toggle="modal" data-target="#contractor_modal"> ООО "Ромашка" </td>
+                                        <td><div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Коментарий
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <textarea class="form-control rounded-0"></textarea>
+                                            </div>
+                                        </div></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id = "2" onclick="getData(this.id)">
+                                                    Назначить встречу
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <input id = "2_datapiker" placeholder="назначить встречу">
+                                                    <button class="btn btn-success" onclick="appoint(2)" type="button">назначить</button>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" class="btn btn-outline-primary">Добавить заготовителя +</button>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show active" id="check_point_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_3_2">
+                                <h5>Описание таски</h5>
+                                <h6>Сделать до:</h6>
+                                <div class="form-group">
+                                    <label for="comment">Комментарий:</label>
+                                    <textarea class="form-control" rows="5"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--конец 3 шага-->
+
+    <!--начало 4 шага-->
+    <div class="tab-pane fade" id="step_4" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Взаимодействие с заготовителями</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#offer_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Договор
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="offer_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_4_1">
+                                <h5>Название договора</h5>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor. Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut lacus ut, interdum tincidunt turpis. Proin et mollis libero.
+                                <br>
+                                <h5>Название договора</h5>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut efficitur tortor. Pellentesque tincidunt nunc tellus, nec interdum leo commodo maximus. Mauris blandit metus ac tellus maximus mattis. Vivamus egestas euismod leo blandit luctus. Ut vitae consectetur lorem. Maecenas facilisis, orci eu pharetra aliquam, urna ipsum porta erat, sit amet bibendum risus tortor nec erat. Cras vel faucibus turpis. Maecenas pharetra malesuada dui et vulputate. Proin pharetra ultricies magna, vel congue felis. Ut commodo mauris quis sem aliquet fermentum. Sed lacus nisl, pellentesque ut lacus ut, interdum tincidunt turpis. Proin et mollis libero.
+                                <br>
+                                <label for="comment" class="h6">Комментарий:</label>
+                                <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--конец 4 шага-->
+
+    <!--начало 5 шага-->
+    <div class="tab-pane fade" id="step_5" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>Установка контейнера</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="nav flex-column nav-pills"  role="tablist"
+                             aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                            <a class="nav-link active" data-toggle="pill" href="#container_report_pil"
+                               role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                Отчет о установке контейнера
+                            </a>
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                                +</a>
+                        </div>
+                        <div class="tab-content" style="width: 70%">
+                            <div class="tab-pane fade show active" id="container_report_pil" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                <div id="task_5_1">
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Фото</span>
+                                            </div>
+                                            <form enctype="multipart/form-data" method="post" id="imgForm">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="image" id="imgInput" multiple
+                                                           aria-describedby="inputGroupFileAddon01">
+                                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div id="im"></div>
+                                        <br>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Видео</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="bn" id="videoInput" multiple
+                                                       aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <label for="comment" class="h6">Комментарий:</label>
+                                        <textarea class="form-control" rows="5" id="container_comment"></textarea>
+                                        <br>
+                                        <input id = "container_installation_date" width="276" placeholder="Дата установки">
+                                        <br>
+                                        <button type="button" class="btn btn-primary" onclick="saveContainerInfo()">Сохранить</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--конец 5 шага-->
+
+    <!--начало 6 шага-->
+    <div class="tab-pane fade" id="step_6" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Работа с жителями</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist" aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#leaflets_layout_pil" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Разработка макета листовок
+                        </a>
+
+                        <a class="nav-link" data-toggle="pill" href="#print_leaflets_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Печать листовок
+                        </a>
+
+                        <a class="nav-link" data-toggle="pill" href="#publication_leaflets_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Публикация листовок
+                        </a>
+
+                        <a class="nav-link" data-toggle="pill" href="#residents_activities_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Мероприятия с жителями
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="leaflets_layout_pil" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div id="task_6_1">
+                                <h5>Разработка макета листовок</h5>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show " id="print_leaflets_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_6_2">
+                                <h5>Печать листовок</h5>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="publication_leaflets_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_6_3">
+                                <h5>Публикация листовок</h5>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="residents_activities_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_6_4">
+                                <h5>Мероприятия с жителями</h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--конец 6 шага-->
+
+    <!--начало 7 шага-->
+    <div class="tab-pane fade" id="step_7" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="card">
+            <div class="card-header">
+                <h4>Описание кейса</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#case_description_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Описание
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="case_description_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_7_1">
+                                <h6>Описание кейса</h6>
+                                <br/>
+                                <textarea class="form-control rounded-0"></textarea>
+                                <br/>
+                                <h6>Ссылки на ресурсы</h6>
+                                <div id = "case_link_list">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <a href="#" class="text-primary" onclick="addlink()">Ссылка +</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--конец 7 шага-->
+
+    <!--начало 8 шага-->
+    <div class="tab-pane fade" id="step_8" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Контроль</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#check_point_control_pil"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Точка контроля
+                        </a>
+                        <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                            +</a>
+                    </div>
+                    <div class="tab-content" style="width: 70%">
+                        <div class="tab-pane fade show active" id="check_point_control_pil" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div id="task_8_1">
+                                <label><h6>Комментарий</h6></label>
+                                <textarea class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--конец 8 шага-->
+
+    <!-- Button trigger modal -->
+</div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Контроль</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="nav flex-column nav-pills"  role="tablist"
+                             aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                            <a class="nav-link active" data-toggle="pill" href="#check_point_control_pil"
+                               role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                Точка контроля
+                            </a>
+                            <a href="#" class="text-primary" data-toggle="modal" data-target="#add_task_modal">Задача
+                                +</a>
+                        </div>
+                        <div class="tab-content" style="width: 70%">
+                            <div class="tab-pane fade show active" id="check_point_control_pil" role="tabpanel"
+                                 aria-labelledby="v-pills-home-tab">
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Добавить точку контроля
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel2">Добавить точку контроля</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="task_8_1">
+                                                    <label><h6>Название</h6></label>
+                                                    <input id="check_point_name" type="text" class="form-control" placeholder="Название">
+                                                    <br>
+                                                    <label><h6>Описание</h6></label>
+                                                    <textarea id="check_point_description" class="form-control" rows="5" placeholder="Описание"></textarea>
+                                                    <br>
+                                                    <label><h6>Дата контроля</h6></label>
+                                                    <br>
+                                                    <input id = "check_point_date" width="276" placeholder="Дата">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                                <button type="button" class="btn btn-primary" onclick="saveCheckPointInfo()">Сохранить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Calendar Button -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                                    Клетка календаря
+                                </button>
+                                <!-- Modal for comment-->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel1">Добавить точку контроля</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <label><h6>Название</h6></label>
+                                                    <h5 th:text="${checkPoint.name}"></h5>
+                                                    <br>
+                                                    <label><h6>Описание</h6></label>
+                                                    <h5 th:text="${checkPoint.description}"></h5>
+                                                    <br>
+                                                    <label><h6>Дата контроля</h6></label>
+                                                    <br>
+                                                    <h5 th:text="${checkPoint.date}"></h5>
+                                                    <label><h6>Комментарий</h6></label>
+                                                    <textarea id="check_point_comment" class="form-control" rows="5" placeholder="Комментарий" th:text="${checkPoint.comment}"></textarea>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                                <button type="button" class="btn btn-primary" onclick="saveCheckPointComment()">Сохранить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                &lt;!&ndash;Calendar&ndash;&gt;-->
+
+<!--                                <div id="page-body">-->
+<!--                                    &lt;!&ndash; [PERIOD SELECTOR] &ndash;&gt;-->
+<!--                                    <div id="cal-date">-->
+<!--                                        <select id="cal-mth"></select>-->
+<!--                                        <select id="cal-yr"></select>-->
+<!--                                        <input id="cal-set" type="button" value="SET"/>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; [CALENDAR] &ndash;&gt;-->
+<!--                                    <div id="cal-container"></div>-->
+
+<!--                                    &lt;!&ndash; [EVENT] &ndash;&gt;-->
+<!--                                    <div id="cal-event"></div>-->
+<!--                                </div>-->
+<!--&lt;!&ndash;                                  &ndash;&gt;-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Button trigger modal -->
+
+        <!-- Модальное окно добавления таски -->
+        <div class="modal fade" id="add_task_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Добавить задачу</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Название задачи</span>
+                            </div>
+                            <input type="text" class="form-control" id="name_of_task" placeholder="Навзвание задачи">
+                        </div>
+                        <br>
+                        <br>
+                        <label><h6>Описание задачи:</h6></label>
+                        <textarea class="form-control" rows="5" id="description_of_task"></textarea>
+                    </div>
+                    <input type = "hidden" id = "step_number_create_task">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id = "add_task_btn">Добавить задачу</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно информации о заготовителе -->
+        <div class="modal fade" id="contractor_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="text">
+    var projectId = [[${projectid}]];
+
+    // $(document).ready(function() {
+    //     $("#calendar").fullCalendar();
+    // });
+
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
+
+        $('#container_installation_date').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
+
+        $('#check_point_date').datepicker({
+            format: 'yyyy-mm-dd',
+            uiLibrary: 'bootstrap4'
+        });
+
+
+
+
+    initSixthStep();
+    $("#step_6_link").on('click',refreshPage());
+    $(document).ready(function () {
+        $.ajax({
+            url: "/api/projects/" + projectId,
+            type: "GET",
+            async: false,
+            success: function (proj)                    {
+                project = proj;
+                get_steps(proj);
+            },
+            error: function (e) {
+                alert(e.responseText);
+            }
+        });
+
+        // $('.nav-pills a').on('click', function (e) {
+        //     e.preventDefault();
+        //     $(this).tab('show')
+        // })
+    });
+
+    $(function() {
+        function readURL(input) {
+            $(input.files).each(function(i, el) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('<img>').attr('src', e.target.result).appendTo('#im');
+                };
+                reader.readAsDataURL(input.files[i]);
+            });
+        }
+
+        $("#imgInput").change(function() {
+            readURL(this);
+        });
+    });
+
+    function saveContainerInfo() {
+
+        let comment = $("#container_comment").val();
+        let date =  $("#container_installation_date").val();
+        //var datestr = (new Date(date)).toUTCString();
+        let img = $('#imgForm')[0];
+        let data = new FormData(img);
+        data.append("newContainerComment", comment);
+        data.append("newContainerDate", date);
+        $.ajax({
+            url: "/manage/add_container?projectid=" + projectId,
+            type: "POST",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (request) {
+                console.log("information about container insert");
+            },
+            error: function(request) {
+                console.error("insert information about container FAILED!" + request.responseText);
+            }
+        });
+    }
+
+    //
+
+
+
+
+    function get_cont_instal_date() {
+        alert($('#container_installation_date').val());
+    }
+
+    $( document ).ready(function () {
+
+
+
+    // function show_task(pil) {
+    //     $('#'+pil.id+'').tab('show');
+    //     $('#'+$('#'+pil.id+'').href()+'').tab('show');
+    // }
+    function show_add_task_modal(stepnumber) {
+        $('#step_number_create_task').val("");
+        $('#step_number_create_task').val(stepnumber);
+        $('#add_task_modal').modal('show');
+    }
+
+    function add_task(stepnumber){
+        $.ajax({
+            type: 'post',
+            url: "/api/tasks/add?" +
+                "project_id=" + projectId+
+                "&step_number="+stepnumber+
+                "&taskName="+$('#name_of_task').val()+
+                "&description="+$('#description_of_task').val(),
+            contentType: 'application/json; charset=utf-8',
+            success: function (task) {
+                $('#'+stepnumber+'_step_custom_tasks').append('<a class="nav-link" href="#'+task.id+'_custom_task" id = "'+task.id+'" >Фото контейнера </a>');
+
+                $('#step_'+stepnumber+'_task_work_space').append('<div class="tab-pane fade" id="'+task.id+'_custom_task"><h3>'+task.name+'</h3>' +
+                    '<br><br>Описание:'+task.description+'</div>');
+
+                $('#add_task_modal').modal('hide');
+            },
+            error: function (error) {
+                console.log(error);
+                alert(error.responseText);
+            }
+        })
+    }
+
+    function get_steps(project){
+        $.ajax({
+            url: "/api/steps/get_by_project_id/" + project.id,
+            type: "GET",
+            async: false,
+            success: function (steps) {
+                let b;
+
+                for (let i = 0; i < steps.length; i++) {
+                    if (steps[i].status == 'DONE') {
+                        b = i + 1;
+                        $('#step_' + b + '_link').addClass('done-step');
+                    }
+                    if (steps[i].status == 'IN_PROGRESS') {
+                        b = i + 1;
+                        $('#step_' + b + '_link').addClass('active');
+                        $('#step_' + b).addClass('show');
+                        $('#step_' + b).addClass('active');
+                        if (steps[i].stepNumber == 'STEP_1') {
+                            get_tasks_step_1(steps[i].id)
+                        }
+                        if (steps[i].stepNumber == 'STEP_2') {
+                            //todo получить таски по 2му шагу
+                        }
+                        if (steps[i].stepNumber == 'STEP_3') {
+                            //todo получить таски по 3му шагу
+                        }
+                        if (steps[i].stepNumber == 'STEP_4') {
+                            //todo получить таски по 4му шагу
+                        }
+                        if (steps[i].stepNumber == 'STEP_5') {
+                            //todo получить таски по 5му шагу
+                        }
+                        if (steps[i].stepNumber == 'STEP_6') {
+                            get_tasks_step_6(steps[i].id)
+                            //todo получить таски по 6му шагу
+                        }
+                        if (steps[i].stepNumber == 'STEP_7') {
+                            //todo получить таски по 7му шагу
+                        }
+                        if (steps[i].stepNumber == 'STEP_8') {
+                            //todo получить таски по 8му шагу
+                        }
+                    }
+                }
+            },
+            error: function (e) {
+                alert(e.responseText);
+            }
+        })
+    }
+
+    function get_tasks_step_1(stepId){
+        $.ajax({
+            url: "/api/tasks/get_by_step/" + stepId,
+            type: "GET",
+            async: false,
+            success: function (tasks) {
+                let b;
+                for (let i = 0; i < tasks.length; i++) {
+                    let taskLinkStatusClass = " ";
+                    let taskBodyClassActive = " ";
+                    let taskBodyClassShow = " ";
+
+                    if (tasks[i].taskStatus == 'DONE') {
+                        taskLinkStatusClass = 'done-task';
+                    }
+                    if (tasks[i].taskStatus == 'IN_PROGRESS') {
+                        taskLinkStatusClass = 'active';
+                        taskBodyClassActive = 'active';
+                        taskBodyClassShow = 'show';
+                    }
+                    if (tasks[i].type == 'PETITIONER_INFO') {
+                        $('#petitioner_info_pil').addClass(taskLinkStatusClass);
+                        $('#v-pills-home').addClass(taskBodyClassActive);
+                        $('#v-pills-home').addClass(taskBodyClassShow);
+                        getPetition(tasks[i].step.project.id);
+                    }
+                    if (tasks[i].type == 'NEIGHBOURHOODS_INFO') {
+                        $('#neighbourhood_info_pil').addClass(taskLinkStatusClass);
+                        $('#neighbourhood_inf').addClass(taskBodyClassActive);
+                        $('#neighbourhood_inf').addClass(taskBodyClassShow);
+                        //todo
+                    }
+                    if (tasks[tasks[i].type == 'OLD_CONTAINER_PHOTO']) {
+                        $('#old_container_pil').addClass(taskLinkStatusClass);
+                        $('#container_photo').addClass(taskBodyClassActive);
+                        $('#container_photo').addClass(taskBodyClassShow);
+                        //todo
+                    }
+                    //todo custom tasks
+                }
+            },
+            error: function (e) {
+                alert(e.responseText);
+            }
+        })
+    }
+
+    function getPetition(projectId) {
+        $.ajax({
+            url: "/api/petition/get_by_project_id/" + projectId,
+            type: "GET",
+            async: false,
+            success: function (petition) {
+                //todo распарсить петицию по полям
+                $('#petitioner_name').val(petition.userName);
+                $('#petitioner_email').val(petition.email);
+                $('#petitioner_contacts').val(petition.contactInformation);
+                if (petition.statusHome == 'Житель, собственник жилья') {
+                    $("#resident").prop('checked', true);
+                }
+                if (petition.statusHome == 'Представитель управляющей организации (УК, ТСЖ и т.п.)') {
+                    $("#manage_representative").prop('checked', true);
+                }
+                $('#get_activity input').each(function () {
+                    if (this.value == petition.trashType) {//todo сделать проверку на вариант "другое"
+                        this.setAttribute('checked', true);
+                    }
+                });
+
+                $('#row_type_input_list input').each(function () {//todo сделать проверку на вариант "другое"
+                    if (this.value == petition.typeOfRawMaterial) {
+                        this.setAttribute('checked', true);
+                    }
+                });
+
+            }, error: function (e) {
+                alert(e.responseText)
+            }
+        })
+    }
+
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+    (function () {
+        var originalAddClassMethod = jQuery.fn.addClass;
+        var originalRemoveClassMethod = jQuery.fn.removeClass;
+            jQuery.fn.addClass = function () {
+                var result = originalAddClassMethod.apply(this, arguments);
+                jQuery(this).trigger('classChanged');
+                return result;
+            }
+            jQuery.fn.removeClass = function () {
+                var result = originalRemoveClassMethod.apply(this, arguments);
+                jQuery(this).trigger('classChanged');
+                return result;
+            }
+        })();
+
+    function saveReport() {
+        var links = [];
+        $('#case_link_list input').each(function () {
+            links.push(this.value);
+        });
+        var report = {
+            'description':$('#description').val(),
+            'link':links
+        };
+        $.ajax({
+            url: "/report/add/" + projectId,
+            type:"POST",
+            async: false,
+            data: JSON.stringify(report),
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+                console.log("");
+            },
+            error: function(e) {
+                console.error(e);
+            }
+        });
+    }
+    function addlink() {
+        $('#case_link_list').append('<div class="input-group mb-3">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text" id="basic-addon1">@</span>' +
+            '</div>' +
+            '<input type="text" class="form-control" name="link" placeholder="link" aria-label="link" aria-describedby="basic-addon1">' +
+            '</div>');
+    }
+
+    // function getLinks() {
+    //     var links = {};
+    //     $('#case_link_list input').each(function () {
+    //         links.put(this.value);
+    //     })
+    // }
+
+    function allReport() {
+        $.ajax({
+            url: "/report/all/" + projectId,
+            type: "GET",
+            async: false,
+            success: function (report) {
+                $("#description").val(report.link);
+                $('#case_link_list').html('');
+                for(var i = 0; i<report.link.length ; i++){
+                    $('#case_link_list').append('<div class="input-group mb-3">' +
+                        '<div class="input-group-prepend">' +
+                        '            <span class="input-group-text" id="basic-addon1">@</span>' +
+                        '            </div>' +
+                        '            <input type="text" class="form-control" name="link" placeholder="link" value='+report.link[i]+' aria-label="link" aria-describedby="basic-addon1">' +
+                        '            </div>');
+                }
+                  report.for(link =>{
+                      report.link.forEach(link =>{
+                          $("#link").val(link.val())
+                      })
+                  })
+
+            }})
+
+    }
+
+    function saveManagCompInfo() {
+        var managComp ={
+            'name': $('#management_org_title').val(),
+            'inn': $('#management_org_inn').val(),
+            'link': $('#management_org_link').val(),
+            'managerName': $('#management_org_surname').val(),
+            'managerSurname': $('#management_org_name').val(),
+            'managerPatronymic': $('#management_org_patronymic').val(),
+            'phoneNumber': $('#management_org_tel').val(),
+            'email': $('#management_org_email').val(),
+            'clock': $('#management_org_clock').val(),
+            'nextContactDate': $('#datepicker').val(),
+            'description': $('#comment').val()
+        };
+        $.ajax({
+            url: "/manage/add_company?projectid=" + projectId,
+            type: "POST",
+            data: JSON.stringify(managComp),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (id) {
+                console.log("information about " + id + " company insert");
+            },
+            error: function(e) {
+                console.error("insert information about " + id + " company FAILED!");
+
+            }
+        });
+    }});
+
+    function saveCheckPointInfo() {
+        let checkPoint = {
+            'name': $('#check_point_name').val(),
+            'description': $('#check_point_description').val(),
+            'date': $('#check_point_date').val(),
+        };
+        $.ajax({
+            url: "/manage/add_check_point?projectid=" + projectId,
+            type: "POST",
+            data: checkPoint,
+            async: false,
+            success: function (response) {
+                console.log(response.responseText);
+            },
+            error: function (e) {
+                console.error(e.responseText);
+
+            }
+        });
+    }
+
+    function saveCheckPointComment() {
+        let comment = $('#check_point_comment').val();
+        $.ajax({
+            url: "/manage/add_check_point_comment?checkpointid=" + checkPointId,
+            type: "POST",
+            data: comment,
+            async: false,
+            success: function (response) {
+                console.log(response.responseText);
+            },
+            error: function (e) {
+                console.error(e.responseText);
+
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

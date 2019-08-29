@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="step1">
+    <div class="tab-pane fade" id="STEP_1" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="card">
+            <div class="card-header">
+                <h3>Уточнить информацию о заявителе</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills" id="tabList_STEP_1" role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%">
+                        <a class="nav-link active" data-toggle="pill" href="#contrakter_info"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Информация о заявителе
+                            <input type="checkbox" id="task_1_1_toggle"
+                                   data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                   data-onstyle="success" data-offstyle="light" data-style="ios">
+                        </a>
+
+                        <a class="nav-link" data-toggle="pill" href="#old_container_photo"
+                           role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Фото контейнера
+                            <input type="checkbox" id="task_1_2_toggle"
+                                   data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                   data-onstyle="success" data-offstyle="light" data-style="ios">
+                        </a>
+                    </div>
+                    <div class="tab-content" id="tabContent_STEP_1" style="width: 70%">
+                        <div class="tab-pane fade show active" id="contrakter_info" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                            <label class="h6">ФИО</label>
+                            <input type="text" class="form-control" placeholder="ФИО заявителя"  id="fio_petitioner">
+                            <br>
+                            <label class="h6">Email</label>
+                            <input type="text" class="form-control" placeholder="email"  id = "email_petitioner">
+                            <br>
+                            <label class="h6">Контактная информация</label>
+                            <input type="text" class="form-control" placeholder="контакная информация"  id="contacts_petitioner">
+                            <br>
+                            <div class="h6">Статус</div>
+                            <div id = "status_petitioner">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="resident" value="Житель, собственник жилья" name="status">
+                                    <label class="form-check-label">Житель, собственник жилья</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="manage_representative"name="status" value="Представитель управляющей организации (УК, ТСЖ и\n т.п.)">
+                                    <label class="form-check-label">Представитель управляющей организации (УК, ТСЖ и\n т.п.)</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="h6">Участвует в деятельности движения "Раздельный сбор"</div>
+                            <div id = "activity_petitioner">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input activity" id="monthly"
+                                           name="activity" value="Участвую в ежемесячных акциях и сдаю своё вторсырьё">
+                                    <label class="form-check-label">Участвую в ежемесячных акциях и сдаю своё вторсырьё</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input activity" id="volunteer"
+                                           name="activity" value="Волонтер на акциях">
+                                    <label class="form-check-label">Волонтер на акциях</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input activity" id="corrdinator" name="activity" value="Координатор на акциях">
+                                    <label class="form-check-label">Координатор на акциях</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input activity" id="participant" name="activity" value="Участник рабочих групп движения">
+                                    <label class="form-check-label" for="participant">Участник рабочих групп движения</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input activity" id="no_participate"
+                                           name="activity" value="Не принимаю участия в деятельности движения">
+                                    <label class="form-check-label" for="participant">Не принимаю участия в
+                                        деятельности движения</label>
+                                </div>                             <div class="form-check">
+                                <input type="radio" class="form-check-input" id="another_active"
+                                       name="activity" value="другое">
+                                <label class="form-check-label" for="participant">другое</label>
+                            </div>
+                                <input type="text" class="form-control" id="another_active_input" disabled>
+                            </div>
+                            <br>
+                            <div class="h6">Накопление какого мусора хотелось бы организовать?</div>
+                            <div id = "row_type">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="paper" value="Бумага/картон">
+                                    <label class="form-check-label">Бумага/картон</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="glass" value="Стекло">
+                                    <label class="form-check-label">Стекло</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="metal" value="Металл">
+                                    <label class="form-check-label">Металл</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="hard_plastic" value="Твёрдый пластик">
+                                    <label class="form-check-label">Твёрдый пластик</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="soft_plastic" value="Мягкий пластик">
+                                    <label class="form-check-label">Мягкий пластик</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="tetra_pak" value="Тетрапак">
+                                    <label class="form-check-label">Тетрапак</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="organic_waste" value="Органические отходы">
+                                    <label class="form-check-label">Органические отходы</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="hazardous_waste" value="Опасные отходы (батарейки, лампочки и т.п.)">
+                                    <label class="form-check-label">Опасные отходы (батарейки, лампочки и
+                                        т.п.)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="another_waste" value="другое">
+                                    <label class="form-check-label">другое</label>
+                                </div>
+                                <input type="text" class="form-control" id="another_waste_input" disabled>
+                            </div>
+                            <br>
+                            <label class="h6">Адрес дома</label>
+                            <input type="text" class="form-control" placeholder="ФИО заявителя" id="home_adres">
+                            <br>
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <label class="mr-sm-2" for="home_district">В каком районе расположен дом? *</label>
+                                    <select class="custom-select mr-sm-2" name="houseArea" id = "home_district">
+                                        <option selected>Из какого вы района?</option>
+                                        <option value="Адмиралтейский район">Адмиралтейский район</option>
+                                        <option value="Василеостровский район">Василеостровский район</option>
+                                        <option value="Выборгский район">Выборгский район</option>
+                                        <option value="Калинский район">Калинский район</option>
+                                        <option value="Колпинский район">Колпинский район</option>
+                                        <option value="Красногвардейский район">Красногвардейский район</option>
+                                        <option value="Красносельский район">Красносельский район</option>
+                                        <option value="Кронштадский район">Кронштадский район</option>
+                                        <option value="Курортный район">Курортный район</option>
+                                        <option value="Московский район">Московский район</option>
+                                        <option value="Невский район">Невский район</option>
+                                        <option value="Петроградский район">Петроградский район</option>
+                                        <option value="Петродворцовый район">Выборгский район</option>
+                                        <option value="Приморский район">Приморский район</option>
+                                        <option value="Пушкинский район">Пушкинский район</option>
+                                        <option value="Фрунзенский район">Фрунзенский район</option>
+                                        <option value="Центральный район">Центральный район</option>
+                                        <option value="Всеволожский район ЛО">Всеволожский район ЛО</option>
+                                        <option value="Гатчинский район">Гатчинский район</option>
+                                        <option value="Кировский район">Кировский район</option>
+                                        <option value="Сосновоборский район">Сосновоборский район</option>
+                                        <option value="Тосненский район">Тосненский район</option>
+                                        <option value="Другой район">Другой район</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <label class="h6">Сколько квартир в доме</label>
+                            <input type="text" class="form-control" placeholder="Коллиесвто квартир в доме" id ="apartments_count">
+                            <br>
+                            <div class="h6">Какая форма управления Вашим домом</div>
+                            <div id = "home_management_form">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="tszh" name="management_form" value="Товарищество собственников жилья">
+                                    <label class="form-check-label">Товарищество собственников жилья</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="yk" value="Управляющая компания"
+                                           name="management_form">
+                                    <label class="form-check-label">Управляющая компания</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="zhks" value="Жилищно-коммунальная служба (ЖКС)"
+                                           name="management_form">
+                                    <label class="form-check-label">Жилищно-коммунальная служба (ЖКС)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="another_m_f" value="другая"
+                                           name="management_form">
+                                    <label class="form-check-label">другая</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="h6">Есть ли совет многоквартирного дома</div>
+                            <div id = "home_sovet">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="sovet_yes" value="Да" name="home_sovet">
+                                    <label class="form-check-label">Да</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="sovet_no" value="Нет" name="home_sovet">
+                                    <label class="form-check-label">Нет</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="sovet_doubts" value="Сомневается" name="home_sovet">
+                                    <label class="form-check-label">Сомневается</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="h6">Как управляющая организация относится к РНО?</div>
+                            <div id = "menegement_org_relate">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="positive_relate" name="menegement_org_relate" value="Положительно, ждёт предложений">
+                                    <label class="form-check-label">Положительно, ждёт предложений</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="negative_relate" name="menegement_org_relate" value="Отрицательно, не верит в раздельный сбор">
+                                    <label class="form-check-label">Отрицательно, не верит в раздельный сбор</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="unknown_relation" name="menegement_org_relate" value="Не знаю">
+                                    <label class="form-check-label">Не знаю</label>
+                                </div>
+                            </div>
+                            <br>
+                            <label class="h6">Контактная информация правления дома</label>
+                            <input type="text" class="form-control" placeholder="Контактная информация правления дома" id ="contact_management">
+                            <br>
+                            <label class="h6">Дополнительня информация</label>
+                            <input type="text" class="form-control" placeholder="Контактная информация правления дома" id ="additional_information">
+                            <br>
+                            <div class="h6">Имеется ли у Вашего дома своя контейнерная площадка (КП)?</div>
+                            <div id = "container_place">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="cont_place_yes" value="Да" name="container_place">
+                                    <label class="form-check-label">Да</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="cont_place_no" value="Нет" name="container_place">
+                                    <label class="form-check-label">Нет</label>
+                                </div>
+                            </div>
+                            <br>
+                            <label class="h6">Если КП имеется, то укажите её площадь и особенности устройства</label>
+                            <input type="text" class="form-control" id ="container_area">
+                            <br>
+                            <div class="h6">Если КП имеется, то укажите собственника земли, на которой она находится</div>
+                            <div id = "container_area_owner">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="home_owner" name="container_area_owner" value="Собственник дома">
+                                    <label class="form-check-label">Собственник дома</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="municipality_owner" name="container_area_owner" value="Муниципальное образование">
+                                    <label class="form-check-label">Муниципальное образование</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="city_owner" name="container_area_owner" value="Город (субъект РФ)">
+                                    <label class="form-check-label">Город (субъект РФ)</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" value="Другое" id="another_owner" name="container_area_owner">
+                                    <label class="form-check-label">Другое</label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="h6">Имеется ли в Вашем доме мусоропровод?</div>
+                            <div id = "chute_form">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="chute_yes" value="Да" name="chute">
+                                    <label class="form-check-label">Да</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" id="chute_no" value="нет" name="chute">
+                                    <label class="form-check-label">Нет</label>
+                                </div>
+                            </div>
+                            <br>
+                            <label class="h6">Какая компания занимается вывозом ТКО?</label>
+                            <input type="text" class="form-control" id ="garbage_disposal_company">
+                            <button type="button" class="btn btn-primary" onclick="save_task_1($('#projectId').val())">Сохранить</button>
+                        </div>
+
+                        <!--конец таски 1_1-->
+                        <div class="tab-pane fade" id="old_container_photo" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <h5>Фото контейнера</h5>
+                            <form enctype="multipart/form-data" method="post" id="old_container_image_form">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="image" id="imgInput" multiple
+                                           aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                </div>
+                            </form>
+                            <button type="button" class="btn btn-primary" onclick="save_old_container_photo($('#projectId').val())" >Сохранить</button>
+                            <div class="row" id = "uploaded_old_container_photo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -17,8 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
+    @Qualifier("userServiceImpl")
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -27,28 +28,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SuccessRedirectHandler successRedirectHandler;
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("root").password(getEncoder().encode("root")).roles("ADMIN");
+        auth.userDetailsService(userDetailsService).passwordEncoder(getEncoder());
     }
 
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+    @Bean
+    public BCryptPasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.csrf().disable();
+
         http.authorizeRequests()
-                .antMatchers("/").hasAnyRole("USER","ADMIN")
+                .antMatchers("/actuator/**").permitAll()
+                .antMatchers("/recovery/**").permitAll()
+                .antMatchers("/report").permitAll()
+                .antMatchers("/petition").permitAll()
+                .antMatchers("/public/**").permitAll()
+//                .antMatchers("/private/**").permitAll()
+//                .antMatchers("/calendar").permitAll()
+                .antMatchers("/registration/**").permitAll()
+                .antMatchers("/api/petition/**").permitAll()
+                .antMatchers("/api/registration/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser").passwordParameter("password").usernameParameter("email")
                 .permitAll().successHandler(successRedirectHandler).failureHandler(failureHandler)
                 .and()
-                .logout().permitAll()
+                .logout()
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
     }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
+    <script src="/private/js/step8.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/private/css/steps.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<th:block th:fragment="step8">
+    <div class="tab-pane fade" id="STEP_8" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <label><h6>Название</h6></label>
+            <input type="text" class="form-control" placeholder="Название">
+            <br>
+            <label><h6>Комментарий</h6></label>
+            <textarea class="form-control" rows="5" placeholder="Комментарий"></textarea>
+            <br>
+            <input id = "check_point_date" width="276" placeholder="Дата установки">
+            <br>
+        </div>
+        <button type="button" onclick="saveReport()" class="btn btn-primary">Сохранить</button>
+        </div>
+
+    </div>
+</th:block>
+
+</body>
+</html>

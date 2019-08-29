@@ -2,6 +2,7 @@ package ru.javamentor.EcoCRM.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "contractors")
@@ -35,11 +36,15 @@ public class Contractor implements Serializable {  //заготовитель (�
     @Column(name = "description")
     private String description;  //условия вывоза
 
+    @OneToMany
+    private List<Comment> comments;
+
     public Contractor() {
 
     }
 
-    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber, String linkByPerson, String collectorType, String description) {
+    public Contractor(String name, String rowType, String link, String contactPerson, String phoneNumber,
+                      String linkByPerson, String collectorType, String description) {
         this.name = name;
         this.rowType = rowType;
         this.link = link;
@@ -120,5 +125,13 @@ public class Contractor implements Serializable {  //заготовитель (�
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

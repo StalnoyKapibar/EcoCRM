@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<th:block th:fragment="step4">
+    <div class="tab-pane fade" id="STEP_4" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Заключение договора</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="nav flex-column nav-pills"  role="tablist"
+                         aria-orientation="vertical" style="width: 27%; margin-right: 3%" id="tabList_STEP_4">
+                        <a class="nav-link active" data-toggle="pill" href="#offer" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            Заключить договор
+                            <input type="checkbox" id="task_4_1_toggle"
+                                   data-toggle="toggle" data-size="xs" data-on=" " data-off=" "
+                                   data-onstyle="success" data-offstyle="light" data-style="ios">
+                        </a>
+                    </div>
+                    <div class="tab-content" id = "tabContent_STEP_4" style="width: 70%">
+                        <div class="tab-pane fade show active" id="offer" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">
+                            <div class="h6">
+                                Название договора
+                            </div>
+                            <div>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras volutpat, dui vel finibus ultrices,
+                                dui nunc tincidunt urna, a aliquet quam nulla ac ex. Aliquam venenatis a lacus ac malesuada. Nullam
+                                pharetra posuere placerat. Mauris luctus accumsan elit vel aliquam. Vestibulum ante ipsum primis in
+                                faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus finibus semper aliquam. Donec ornare,
+                                quam at venenatis ultricies, justo nisl rutrum mauris, eu porttitor ex urna a eros. In aliquet semper
+                                lorem vestibulum tempus.
+
+                                Vestibulum eget odio quis lacus lobortis sagittis. Mauris hendrerit malesuada nunc at ultricies. Sed
+                                consequat risus a egestas vulputate. Fusce ante dolor, faucibus ut finibus ac, fermentum ut justo. Integer
+                                eget tristique lorem. Sed et luctus ex. Vivamus id maximus massa, eu molestie diam. Proin efficitur mi
+                                maximus molestie dignissim. Vestibulum id metus mollis, dignissim mauris sit amet, dictum nisl. Cras mollis
+                                sem turpis. Integer feugiat nec nisi ac fringilla. Nunc at est finibus, pretium sem sit amet, dictum felis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>

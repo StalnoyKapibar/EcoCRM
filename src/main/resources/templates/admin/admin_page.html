@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+
+<h3>Welcome Admin</h3>
+
+<h3><a th:href="@{/calendar}">Calendar</a></h3>
+
+<!--//todo -->
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+
+<br><br>
+
+
+</body>
+</html>

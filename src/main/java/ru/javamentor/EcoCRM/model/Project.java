@@ -1,10 +1,15 @@
 package ru.javamentor.EcoCRM.model;
 
-import org.hibernate.annotations.Type;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.javamentor.EcoCRM.model.embedded.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "projects")
@@ -20,18 +25,15 @@ public class Project implements Serializable {
     @OneToOne
     private Petition petition;
 
-    @Column(name = "title", nullable = false)
-    private String title;
-
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private Status status = Status.IN_PROGRESS;
-
-    @Column(name = "photo")
-    @Type(type = "image")
-    private byte[] photo;
 
     @OneToOne
     private Point point;
+
+    @ManyToMany
+    private List<User> users;
 
     @OneToOne
     private ManagementCompany company;
@@ -39,25 +41,50 @@ public class Project implements Serializable {
     @OneToOne
     private Contractor contractor;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Report report;
 
-    public Project(User manager, Petition petition, String title, Status status, byte[] photo, Point point, ManagementCompany company, Contractor contractor, Report report) {
+    @Column(name = "start_step")
+    private LocalDate startStep;
+
+    @Column(name = "end_step")
+    private LocalDate endStep;
+
+    @OneToMany
+    private List<Photo> oldContainerPhoto;
+
+    @OneToMany
+    private List<Photo> newContainerPhoto;   //step 5
+
+    //todo сделать поле для видео из step 5
+
+    @Column(name="new_container_comment")
+    private String newContainerComment; //step 5
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="new_container_date")
+    private Date newContainerDate;  //step 5
+
+    @OneToMany
+    private List<CheckPoint> checkPoints;  //step 8
+
+    public Project() {
+
+    }
+
+    public Project(User manager, Petition petition) {
         this.manager = manager;
         this.petition = petition;
-        this.title = title;
+    }
+
+    public Project(User manager, Petition petition, Status status, Point point, ManagementCompany company, Contractor contractor, Report report) {
+        this.manager = manager;
+        this.petition = petition;
         this.status = status;
-        this.photo = photo;
         this.point = point;
         this.company = company;
         this.contractor = contractor;
         this.report = report;
-    }
-
-    public Project(User manager, Petition petition, String title) {
-        this.manager = manager;
-        this.petition = petition;
-        this.title = title;
     }
 
     public void setId(Long id) {
@@ -68,12 +95,12 @@ public class Project implements Serializable {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public Status getStatus() {
@@ -92,11 +119,11 @@ public class Project implements Serializable {
         this.point = point;
     }
 
-    public ManagementCompany getCompany() {
+    public ManagementCompany getManagementCompany() {
         return company;
     }
 
-    public void setCompany(ManagementCompany company) {
+    public void setManagementCompany(ManagementCompany company) {
         this.company = company;
     }
 
@@ -132,11 +159,85 @@ public class Project implements Serializable {
         this.petition = petition;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public LocalDate getStartStep() {
+        return startStep;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setStartStep(LocalDate startStep) {
+        this.startStep = startStep;
+    }
+
+    public LocalDate getEndStep() {
+        return endStep;
+    }
+
+    public void setEndStep(LocalDate endStep) {
+        this.endStep = endStep;
+    }
+
+    public List<Photo> getNewContainerPhoto() {
+        return newContainerPhoto;
+    }
+
+    public void setNewContainerPhoto(List<Photo> newContainerPhoto) {
+        this.newContainerPhoto = newContainerPhoto;
+    }
+
+    public String getNewContainerComment() {
+        return newContainerComment;
+    }
+
+    public void setNewContainerComment(String newContainerComment) {
+        this.newContainerComment = newContainerComment;
+    }
+
+    public Date getNewContainerDate() {
+        return newContainerDate;
+    }
+
+    public void setNewContainerDate(Date newContainerDate) {
+        this.newContainerDate = newContainerDate;
+    }
+
+    public List<CheckPoint> getCheckPoints() {
+        return checkPoints;
+    }
+    public ManagementCompany getCompany() {
+        return company;
+    }
+
+    public void setCompany(ManagementCompany company) {
+        this.company = company;
+    }
+
+    public void setCheckPoints(List<CheckPoint> checkPoints) {
+        this.checkPoints = checkPoints;
+    }
+    public List<Photo> getOldContainerPhoto() {
+        return oldContainerPhoto;
+    }
+
+    public void setOldContainerPhoto(List<Photo> oldContainerPhoto) {
+        this.oldContainerPhoto = oldContainerPhoto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(id, project.id) &&
+                Objects.equals(manager, project.manager) &&
+                Objects.equals(petition, project.petition) &&
+                status == project.status &&
+                Objects.equals(point, project.point) &&
+                Objects.equals(company, project.company) &&
+                Objects.equals(contractor, project.contractor) &&
+                Objects.equals(report, project.report);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, manager, petition, status, point, company, contractor, report);
     }
 }

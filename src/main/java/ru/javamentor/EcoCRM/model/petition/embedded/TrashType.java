@@ -13,6 +13,9 @@ public class TrashType {
     @Column(name = "type_name")
     private String type;
 
+    public TrashType() {
+    }
+
     public TrashType(String type) {
         this.type = type;
     }

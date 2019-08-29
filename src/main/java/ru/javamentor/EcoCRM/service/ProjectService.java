@@ -23,4 +23,5 @@ public interface ProjectService extends AbstractService<Project> {
 
     List<Project> getProjManagerByUserId(Long id);
 
+    boolean isManageProject(Long authInitiatorId, Long projectId);
 }

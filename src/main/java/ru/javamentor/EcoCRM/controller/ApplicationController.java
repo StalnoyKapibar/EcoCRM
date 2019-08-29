@@ -149,4 +149,8 @@ public class ApplicationController {
         return "test";
     }
 
+    @GetMapping("/calendar")
+    public String getCalendar() {
+        return "/steps/calendar";
+    }
 }

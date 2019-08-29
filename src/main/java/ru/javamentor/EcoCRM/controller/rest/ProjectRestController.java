@@ -42,6 +42,7 @@ public class ProjectRestController {
 
     @Autowired
     private StepServiceImpl stepService;
+
     @Autowired
     RequestService requestService;
 
@@ -73,7 +74,7 @@ public class ProjectRestController {
     }
 
     @RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
-    public Project getProject(@PathVariable("projectId") Long projectId, Model model) {
+    public Project getProject(@PathVariable("projectId") Long projectId) {
         return projectService.get(projectId);
     }
 
@@ -96,9 +97,6 @@ public class ProjectRestController {
         projectService.update(project);
         return project.getOldContainerPhoto();
     }
-
-
-
 
     @PostMapping("/add_new_container_photo")
     public List<Photo> saveNewContainerPhoto(@RequestParam(value = "projectid") Long projectId,

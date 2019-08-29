@@ -1,11 +1,14 @@
 package ru.javamentor.EcoCRM.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.ProjectDao;
+import ru.javamentor.EcoCRM.dao.UserDao;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.Report;
+import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import java.util.List;
@@ -48,7 +51,22 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
     }
 
     @Override
-    public Report getReportByWithIdProject(Long id){
+    public boolean isManageProject(Long authInitiatorId, Long projectId) {
+        Project project = projectDao.get(projectId);
+        if (project.getManager().getId().equals(authInitiatorId)) {
+            return true;
+        } else {
+            for (User projectMember : project.getUsers()) {
+                if (authInitiatorId.equals(projectMember.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Report getReportByWithIdProject(Long id) {
         return projectDao.getReportByWithIdProject(id);
     }
 

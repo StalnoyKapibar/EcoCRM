@@ -1,7 +1,6 @@
 package ru.javamentor.EcoCRM.model;
 
 import ru.javamentor.EcoCRM.model.embedded.Status;
-import ru.javamentor.EcoCRM.model.petition.embedded.TrashType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="petitions")
+@Table(name = "petitions")
 public class Petition {
 
     @Id
@@ -22,7 +21,7 @@ public class Petition {
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name= "contact_information")
+    @Column(name = "contact_information")
     private String contactInformation;
 
     @Column(name = "petitioner_type")
@@ -32,7 +31,7 @@ public class Petition {
     private String activityType;
 
     @ElementCollection
-    @CollectionTable(name="type_of_raw_material", joinColumns=@JoinColumn(name="petition_id"))
+    @CollectionTable(name = "type_of_raw_material", joinColumns = @JoinColumn(name = "petition_id"))
     private List<String> typeOfRawMaterial;
 
     @Column(name = "address_home")
@@ -44,16 +43,13 @@ public class Petition {
     @Column(name = "flats_count")
     private String flatsCount;
 
-    @Column(name ="status_home")
-    private String statusHome;
-
     @Column(name = "management_company_type")
     private String managementCompanyType;
 
     @Column(name = "available_council")
     private String availableCouncil;
 
-    @Column (name = "management_organization_relation")
+    @Column(name = "management_organization_relation")
     private String managementOrganizationRelation;
 
     @Column(name = "management_company_contacts")
@@ -65,10 +61,10 @@ public class Petition {
     @Column(name = "container_available")
     private String containerAvailable;
 
-    @Column (name = "container_size")
+    @Column(name = "container_size")
     private String containerSize;
 
-    @Column (name = "container_owner")
+    @Column(name = "container_owner")
     private String containerOwner;
 
     @Column(name = "garbage_available")
@@ -80,7 +76,7 @@ public class Petition {
     @Column(name = "agreement")
     private String agreement;
 
-    @Column (name = "data")
+    @Column(name = "data")
     private LocalDate data;
 
     @Column(name = "status")
@@ -88,15 +84,35 @@ public class Petition {
     private Status status = Status.TODO;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
-            CascadeType.REFRESH,CascadeType.MERGE})
+            CascadeType.REFRESH, CascadeType.MERGE})
     @JoinTable(
-            name ="petitions_users",
+            name = "petitions_users",
             joinColumns = @JoinColumn(name = "petition_id"),
             inverseJoinColumns = @JoinColumn(name = "user_number")
     )
     private Set<User> userPetition;
 
-    public Petition() {}
+    public Petition() {
+        email = "";
+        userName = "";
+        contactInformation = "";
+        petitionerType = "";
+        activityType = "";
+        addressHome = "";
+        houseDistrict = "";
+        flatsCount = "";
+        managementCompanyType = "";
+        availableCouncil = "";
+        managementOrganizationRelation = "";
+        managementCompanyContacts = "";
+        additionalInformation = "";
+        containerAvailable = "";
+        containerSize = "";
+        containerOwner = "";
+        garbageAvailable = "";
+        exportGarbage = "";
+        agreement = "";
+    }
 
     public String getEmail() {
         return email;
@@ -168,14 +184,6 @@ public class Petition {
 
     public void setFlatsCount(String flatsCount) {
         this.flatsCount = flatsCount;
-    }
-
-    public String getStatusHome() {
-        return statusHome;
-    }
-
-    public void setStatusHome(String statusHome) {
-        this.statusHome = statusHome;
     }
 
     public String getManagementCompanyType() {

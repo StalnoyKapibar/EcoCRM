@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -87,6 +88,7 @@ public class StepsManagementRestController {
         return projectId;
     }
 
+
     //step 8
     @PostMapping("/add_check_point/{id}")
     public ResponseEntity saveCheckPointInfo(@PathVariable Long id,
@@ -103,6 +105,16 @@ public class StepsManagementRestController {
         project.getCheckPoints().add(cp);
         projectService.update(project);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add_check_point_comment")
+    public Long saveCheckPointComment(@RequestParam(value = "checkpointid") Long checkPointId,
+                                      @RequestParam(value = "comment") String comment) {
+        CheckPoint checkPoint = checkPointService.getCheckPointById(checkPointId);
+        Comment cpComment = new Comment(comment, LocalDate.now());
+        checkPoint.setComment(cpComment);
+        checkPointService.update(checkPoint);
+        return checkPointId;
     }
 
     @GetMapping("/all_checked_dates/{projectId}")

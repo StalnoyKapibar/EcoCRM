@@ -81,16 +81,25 @@
         </div>
     </div>
 </div>
+
+<!-- Modal show info-->
+<div id="show_contractor_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light">
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="show_buttonModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $( document ).ready(function() {
         getAllPetitions();
-        var radios = document.getElementsByName('dzen');
-        for (var i = 0, length = radios.length; i < length; i++) {
-            if (radios[i].checked) {
-                (radios[i].value);
-                break;
-            }
-        }
     })
 
     function getAllPetitions() {
@@ -121,20 +130,16 @@
             success: function (petition) {
                 $.each(petition.userPetition, function (key, user) {
                     $('#list_members').append(
-                        '    <p><input name="dzen" type="radio" value="' + user.id + '">' + user.name + '</p>'
+                            '<div><a onclick="chooseManager('+user.id+','+ petitionId+')"  class="btn btn-outline-success">'+user.name+'</a></div>'
                     );
                 })
-
-                $('#list_members').append(
-                    '    <p><a >Выбрать</a></p>'
-                )
             }
         })
     }
 
-    function approvedByAdministrator(id, idp) {
+    function approvedByAdministrator(id, idproject) {
         $.ajax({
-            url: '/api/petition/approvedByAdministrator?id='+id +'&idp='+idp,
+            url: '/api/petition/approvedByAdministrator?id='+id +'&idp='+idproject,
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             success: function (){
@@ -143,7 +148,48 @@
             error: function (e) {
                 alert(e.responseText);
             }
-        })}
+        })
+    }
+
+    function chooseManager(userId, petitionId) {
+        $.ajax({
+            url: "/api/user/" + userId,
+            type: "GET",
+            async: false,
+            success: function (user) {
+                    $('#list_members').append(
+                        '<div class="card" style="margin-top: 3%">\n' +
+                        '                <div class="card-body">\n' +
+                        '                    <br>\n' +
+                        '                    <table class="table">\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Имя и Фамилия: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Имя: </h6></td><td><a><h6 id="vk" style="font-size: medium; white-space: pre">'+user.name+' '+user.surname+'</h6></a></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6> Статус: </h6></td><td><h6 id="profession"><span class="badge badge-pill text-light" style="font-size: small; background-color: #f71752">' + user.status + '</span></h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                        <tr>\n' +
+                        '                            <td><h6></h6></td><td><h6>' +
+                        '<button class="btn btn-warning" onclick="approvedByAdministrator(' + user.id+',' +userId+ ')">Выбрать менеджером</button>'+
+                        '<a class="btn btn-primary" href="/user/' + user.id+')">На страницу пользователя</a>'+
+                        '</h6></td>\n' +
+                        '                        </tr>\n' +
+                        '                    </table>\n' +
+                        '                </div>\n' +
+                        '            </div>')}
+
+        })
+    }
+
 </script>
 </body>
 </html>

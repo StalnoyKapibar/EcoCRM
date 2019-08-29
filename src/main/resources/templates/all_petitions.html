@@ -15,7 +15,6 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="/private/js/person_page_projects.js" type="text/javascript"></script>
     <link href="/private/css/common_style.css" rel="stylesheet">
 </head>
 <body>
@@ -61,8 +60,8 @@
 </nav>
 <input type="hidden" id="UserId" th:value="${id}">
 <main role="main" class="container-fluid">
-    <!--<h3 style="margin-left: 4%">Мои проекты :</h3>-->
-    <div class="row" style="margin: 3%;" id="petitions_area">
+    <button class="btn btn-outline-danger" style="margin-left: 5%" disabled>Выбери проект</button>
+    <div class="row" style="margin-left: 3%; margin-right: 3%" id="petitions_area">
 
     </div>
 </main>
@@ -71,7 +70,7 @@
 <div id="show_message" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content card border-light">
+        <div class="modal-content card border-light" style="background-color: lightgreen">
             <div class="modal-body">
                 <h3 style="font: icon; font-size: large">Заявка отправлена на обработку</h3>
             </div>

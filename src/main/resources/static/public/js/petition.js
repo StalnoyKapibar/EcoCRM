@@ -21,21 +21,20 @@ let alertInfo = function(state) {
             break;
         case 'wait':
             $(form).prepend('<div class="alert alert-warning" role="alert" id="'+statusInfo+
-                '">\n' +
-                '  Ваша заявка обрабатывается. Пожалуйста, подождите.\n' +
+                '">\n' + '  Ваша заявка обрабатывается. Пожалуйста, подождите.\n' +
+                '<div class="spinner-border spinner-border-sm float-right" role="status">\n' +
+                '                        <span class="sr-only">Loading...</span>\n' +
+                '                    </div>' +
                 '</div>');
             break;
         case 'error':
             $(form).prepend('<div class="alert alert-danger" role="alert" id="alert_header' +
                 '">\n' +
-                '  При обработке заявки произошла ошибка!\n' +
+                '  При обработке заявки произошла ошибка! ' + '\n' +
                 '</div>');
             break;
     }
-    if(state === 'success') {
-
-    }
-}
+};
 
 $(document).ready(function() {
     $('#petition_form').submit(function (event) {
@@ -80,6 +79,7 @@ $(document).ready(function() {
         });
         event.preventDefault();
         $('input').attr('disabled', true);
+        $('.btn').attr('disabled', true);
         alertInfo('wait');
         scrollTop();
     });

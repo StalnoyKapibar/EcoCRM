@@ -27,31 +27,45 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
-    <a class="navbar-brand" href="#" style="white-space: pre"><span class="fa fa-leaf"></span>   Eco CRM</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/user" style="white-space: pre"><span class="fa fa-leaf"></span> Eco CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/user" style="color: white;">Мои проекты <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/user" style="color: white;">Мои проекты <span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" style="color: white;">Все проекты <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/projects" style="color: white;">Все проекты <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/petition/getAllPetition" style="color: white;">Все заявки <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/petition" style="color: white;">Добавить заявку <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/all_users" style="color: white;">Все пользователи <span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="#">Уведомления</a>
                     <a class="dropdown-item" href="#">Моя страница</a>
                     <a class="dropdown-item" href="/logout">Выйти</a>
-                </div>
+                </div>[
             </li>
         </ul>
     </div>
 </nav>
-
 <main role="main" class="container">
     <table class="grid-table">
         <tr>

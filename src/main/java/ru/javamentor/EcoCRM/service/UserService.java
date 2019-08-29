@@ -1,6 +1,7 @@
 package ru.javamentor.EcoCRM.service;
 
 
+import ru.javamentor.EcoCRM.dto.UserEncoderPhotoDTO;
 import ru.javamentor.EcoCRM.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,4 +15,6 @@ public interface UserService extends AbstractService<User> {
     User getUserByEmail(String email);
 
     List<String> getAllUsersPhoto();
+
+    List<UserEncoderPhotoDTO> getUsersWithEncoderPhoto();
 }

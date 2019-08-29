@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.CurrentUserDTO;
 import ru.javamentor.EcoCRM.dto.PersonProjectDTO;
+import ru.javamentor.EcoCRM.dto.UserEncoderPhotoDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
 import ru.javamentor.EcoCRM.model.User;
@@ -25,9 +26,9 @@ public class UserRestController {
 
     @Autowired
     private ProjectService projectService;
-    @Autowired
-    DTOService dtoService;
 
+    @Autowired
+    private DTOService dtoService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public User getUser(@PathVariable(required = false) Long id) {
@@ -63,7 +64,6 @@ public class UserRestController {
     public String blockUser(@RequestParam(value = "id") Long id) {
         User user = userService.get(id);
         user.setStatus(UserStatus.BLOCKED);
-        user.setEnabled();
         userService.update(user);
         return "/admin/usersList";
     }
@@ -72,14 +72,31 @@ public class UserRestController {
     public String unblockUser(@RequestParam(value = "id") Long id) throws IOException {
         User user = userService.get(id);
         user.setStatus(UserStatus.ACTIVE);
-        user.setEnabled();
         userService.update(user);
         return "/admin/usersList";
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/get_current_user")
     public CurrentUserDTO getCurrentUser(Principal principal){
         User user = (User) userService.loadUserByUsername(principal.getName());
         CurrentUserDTO userDTO = dtoService.convertCurrentUserToDTO(user);
         return userDTO;
+    }
+    @PutMapping("/update")
+    public User updateUser(@RequestBody CurrentUserDTO userdto) {
+        User user = dtoService.convertDTOToCurrentUser(userdto);
+        userService.update(user);
+        return user;
+    }
+
+
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return userService.getAll();
+    }
+
+    @GetMapping("/all/encodephotos")
+    public List<UserEncoderPhotoDTO> getUsersWithEncoderPhoto() {
+        return userService.getUsersWithEncoderPhoto();
     }
 }

@@ -51,6 +51,9 @@ public class Project implements Serializable {
     private LocalDate endStep;
 
     @OneToMany
+    private List<Photo> oldContainerPhoto;
+
+    @OneToMany
     private List<Photo> newContainerPhoto;   //step 5
 
     //todo сделать поле для видео из step 5
@@ -199,9 +202,23 @@ public class Project implements Serializable {
     public List<CheckPoint> getCheckPoints() {
         return checkPoints;
     }
+    public ManagementCompany getCompany() {
+        return company;
+    }
+
+    public void setCompany(ManagementCompany company) {
+        this.company = company;
+    }
 
     public void setCheckPoints(List<CheckPoint> checkPoints) {
         this.checkPoints = checkPoints;
+    }
+    public List<Photo> getOldContainerPhoto() {
+        return oldContainerPhoto;
+    }
+
+    public void setOldContainerPhoto(List<Photo> oldContainerPhoto) {
+        this.oldContainerPhoto = oldContainerPhoto;
     }
 
     @Override

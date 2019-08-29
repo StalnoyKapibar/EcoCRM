@@ -6,6 +6,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Petition;
 import ru.javamentor.EcoCRM.model.Project;
@@ -100,6 +102,38 @@ public class PetitionRestController {
         petitionService.update(petition);
         Project project = new Project(manager,petition);
         projectService.insert(project);
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public void updatePetition(@RequestBody Petition petition,
+                               @RequestParam (value = "projectId") Long projectId){
+        Project project = projectService.get(projectId);
+        Petition updatedPetition = project.getPetition();
+        updatedPetition.setUserName(petition.getUserName());
+        updatedPetition.setEmail(petition.getEmail());
+        updatedPetition.setContactInformation(petition.getContactInformation());
+        updatedPetition.setPetitionerType(petition.getPetitionerType());
+        updatedPetition.setActivityType(petition.getActivityType());
+        List<String> rowTypes = petition.getTypeOfRawMaterial();
+        updatedPetition.setTypeOfRawMaterial(rowTypes);
+        updatedPetition.setAddressHome(petition.getAddressHome());
+        String district = petition.getHouseDistrict();
+        updatedPetition.setHouseDistrict(district);
+        updatedPetition.setFlatsCount(petition.getFlatsCount());
+        updatedPetition.setStatusHome(petition.getStatusHome());
+        updatedPetition.setManagementCompanyType(petition.getManagementCompanyType());
+        updatedPetition.setAvailableCouncil(petition.getAvailableCouncil());
+        updatedPetition.setManagementOrganizationRelation(petition.getManagementOrganizationRelation());
+        updatedPetition.setManagementCompanyContacts(petition.getManagementCompanyContacts());
+        updatedPetition.setAdditionalInformation(petition.getAdditionalInformation());
+        String containerAveleble= petition.getContainerAvailable();
+        updatedPetition.setContainerAvailable(containerAveleble);
+        updatedPetition.setContainerSize(petition.getContainerSize());
+        updatedPetition.setContainerOwner(petition.getContainerOwner());
+        updatedPetition.setGarbageAvailable(petition.getGarbageAvailable());
+        updatedPetition.setExportGarbage(petition.getExportGarbage());
+        projectService.update(project);
     }
 }
 

@@ -26,7 +26,7 @@ public class SuccessRedirectHandler implements AuthenticationSuccessHandler {
 
         if (roles.contains("ROLE_ADMIN")) {
             httpServletResponse.setStatus(HttpStatus.OK.value());
-            httpServletResponse.setHeader("redirect","/admin/page");
+            httpServletResponse.setHeader("redirect","/admin/manage");
 
         } else if(roles.contains("ROLE_USER")) {
             httpServletResponse.setStatus(HttpStatus.OK.value());

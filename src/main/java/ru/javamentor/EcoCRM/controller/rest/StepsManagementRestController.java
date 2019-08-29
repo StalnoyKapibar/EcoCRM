@@ -42,11 +42,35 @@ public class StepsManagementRestController {
 //step 2
     @PostMapping("/add_company")
     public ResponseEntity<ManagementCompany> saveManagInfo(@RequestParam(value = "projectid") Long projectId, @RequestBody ManagementCompany managementCompany) {
-        if (managementCompanyService.get(projectId) == null) {
+        String companyName = managementCompany.getName();
+        Project project = projectService.get(projectId);
+        if (project.getCompany()==null){
             managementCompanyService.insert(managementCompany);
-        } else {
-            managementCompanyService.update(managementCompany);
+            project.setCompany(managementCompanyService.get(managementCompany.getId()));
+//            project.setCompany(new ManagementCompany(managementCompany.getName(), managementCompany.getInn(), managementCompany.getLink(),
+//                    managementCompany.getManagerName(), managementCompany.getManagerSurname(), managementCompany.getManagerPatronymic(),
+//                    managementCompany.getPhoneNumber(), managementCompany.getEmail(), managementCompany.getClock(), managementCompany.getDescription(),
+//                    managementCompany.getNextContactDate()));
+        }else {
+            ManagementCompany updatedCompany = project.getCompany();
+            updatedCompany.setName(managementCompany.getName());
+            updatedCompany.setInn(managementCompany.getInn());
+            updatedCompany.setLink(managementCompany.getLink());
+            updatedCompany.setManagerName(managementCompany.getManagerName());
+            updatedCompany.setManagerSurname(managementCompany.getManagerSurname());
+            updatedCompany.setManagerPatronymic(managementCompany.getManagerPatronymic());
+            updatedCompany.setPhoneNumber(managementCompany.getPhoneNumber());
+            updatedCompany.setEmail(managementCompany.getEmail());
+            updatedCompany.setClock(managementCompany.getClock());
+            updatedCompany.setDescription(managementCompany.getDescription());
+            updatedCompany.setNextContactDate(managementCompany.getNextContactDate());
         }
+        projectService.update(project);
+//        if (managementCompanyService.get(projectId) == null) {
+//            managementCompanyService.insert(managementCompany);
+//        } else {
+//            managementCompanyService.update(managementCompany);
+//        }
         return new ResponseEntity(managementCompanyService.get(projectId), HttpStatus.OK);
     }
 
@@ -72,6 +96,7 @@ public class StepsManagementRestController {
         projectService.update(project);
         return projectId;
     }
+}
 
     //step 8
     @PostMapping("/add_check_point/{id}")
@@ -112,4 +137,3 @@ public class StepsManagementRestController {
         CheckPoint cp = checkPointService.get(id);
         return cp;
     }
-}

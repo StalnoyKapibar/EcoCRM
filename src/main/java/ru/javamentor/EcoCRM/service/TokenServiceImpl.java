@@ -29,8 +29,8 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[20];
         random.nextBytes(bytes);
-        String gentoken = bytes.toString();
-        return gentoken;
+        String genToken = bytes.toString();
+        return genToken;
     }
 
     @Override
@@ -49,6 +49,10 @@ public class TokenServiceImpl extends AbstractServiceImpl<Token> implements Toke
             throw new UsernameNotFoundException("Token with " + email + " not found");
         }
         return email;
+    }
+    @Override
+    public void deleteOldTokens() {
+       tokenDao.deleteOldTokens();
     }
 }
 

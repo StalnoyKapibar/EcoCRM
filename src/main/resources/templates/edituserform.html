@@ -101,7 +101,23 @@
                     <label><h5>Чем я не хотел бы заниматься:</h5></label>
                     <input type="text" id="notToDo" class="form-control"  placeholder="уборка мусора">
                 </div>
-                ​
+                <div class="form-group" id="status">
+                    <div class="form-check">
+                        <h5>Ваш статус:</h5>
+                        <input class="form-check-input" type="radio" value="ACTIVE"
+                               name="statusHome">
+                        <label class="form-check-label"><h4>Активен</h4></label><br>
+                        <input class="form-check-input" type="radio" value="NOT_ACTIVE"
+                               name="statusHome">
+                        <label class="form-check-label"><h4>Не активен</h4></label><br>
+                        <input class="form-check-input" type="radio" value="VACATION"
+                               name="statusHome">
+                        <label class="form-check-label"><h4>В отпуcке</h4></label><br>
+                        <input class="form-check-input" type="radio" value="VACATION"
+                               name="statusHome">
+                        <label class="form-check-label"><h4>Заблокирован</h4></label><br>
+                ​   </div>
+                </div>
                 ​
                 <button  class="btn btn-primary  ml-4 " onclick="updateUser()"  style="float: right;" >Submit</button>
                 <!--//<button class="btn btn-primary pull-right" type="button" style="float: right;">Кнопка</button>-->

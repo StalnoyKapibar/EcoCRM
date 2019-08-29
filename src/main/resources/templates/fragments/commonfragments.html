@@ -30,39 +30,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item active " sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/admin/usersList" style="color: white;">Список пользователей<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/petition/getAllAdminPetitionWithUser" style="color: white;">Заявки <span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/user" style="color: white;">Мои проекты <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/projects/all" style="color: white;">Все проекты <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/petition/getAllPetition" style="color: white;">Все заявки <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/petition" style="color: white;">Добавить заявку <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/all_users" style="color: white;">Все пользователи <span
-                            class="sr-only">(current)</span></a>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-secondary" style="color: white;" href="#" id="dropdown03" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Проекты<span class="sr-only">(current)</span></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown03">
+                        <a class="dropdown-item" href="/user">Мои проекты</a>
+                        <a class="dropdown-item" href="/projects/all">Все проекты</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                    <a class="dropdown-toggle btn btn-info" style="color: white;" href="#" id="dropdown01" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Заявки<span class="sr-only">(current)</span></a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Уведомления</a>
+                        <a class="dropdown-item" href="/petition/getAllPetition">Все заявки</a>
+                        <a class="dropdown-item" href="/petition">Добавить заявку</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-warning" style="color: white;" href="#" id="dropdown02" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                    <div class="dropdown-menu dropdown-menu-right" style="float: left" aria-labelledby="dropdown02">
+                        <a class="dropdown-item" href="/all_users">Все волонтеры</a>
                         <a class="dropdown-item" href="/userinfo">Моя страница</a>
                         <a class="dropdown-item" href="/logout">Выйти</a>
                     </div>

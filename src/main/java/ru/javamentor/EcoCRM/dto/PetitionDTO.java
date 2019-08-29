@@ -25,13 +25,6 @@ public class PetitionDTO {
         this.userList = userList;
     }
 
-    public PetitionDTO(LocalDate data, String adress, String area, Long id) {
-        this.data = data;
-        this.adress = adress;
-        this.area = area;
-        this.id = id;
-    }
-
     public List<User> getUserList() {
         return userList;
     }

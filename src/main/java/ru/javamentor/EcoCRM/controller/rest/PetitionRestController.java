@@ -77,12 +77,9 @@ public class PetitionRestController {
     }
 
     @PutMapping(value = "/addPetitionUser")
-    public void addUserPetition(@RequestParam(value = "id") long id, Authentication authentication){
-        Petition petition = petitionService.get(id);
+    public void addUserPetition(@RequestParam(value = "id") Long id, Authentication authentication){
         User user = (User) authentication.getPrincipal();
-        petition.setStatus(Status.IN_PROGRESS);
-        petition.getUserPetition().add(user);
-        petitionService.update(petition);
+        petitionService.addUserPetition(id, user);
     }
 
     @RequestMapping(value = "/get_by_project_id/{projectid}", method = RequestMethod.GET)
@@ -137,6 +134,16 @@ public class PetitionRestController {
         updatedPetition.setGarbageAvailable(petition.getGarbageAvailable());
         updatedPetition.setExportGarbage(petition.getExportGarbage());
         projectService.update(project);
+    }
+
+    @GetMapping("/all")
+    public List<PetitionDTO> getAllPetitionsWithStatusToDo() {
+        return petitionService.getAllPetition();
+    }
+
+    @GetMapping("/{id}")
+    public Petition getById(@PathVariable("id") Long id) {
+        return petitionService.get(id);
     }
 }
 

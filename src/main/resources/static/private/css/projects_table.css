@@ -1,4 +1,4 @@
-::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar { width: 2px; height: 10px;}
 ::-webkit-scrollbar-track {  background-color: #999;}
 ::-webkit-scrollbar-track-piece { background-color: #F5F5F5;}
 ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
@@ -16,6 +16,13 @@
 .eco-card {
 
 }
+body{
+    overflow-y:hidden;
+    overflow-x: auto;
+    /*height: auto;*/
+
+
+}
 
 .member {
     background-color: #dfe1e6;
@@ -23,10 +30,10 @@
     color: #172b4d;
     cursor: pointer;
     /*display: block;*/
-    /*float: left;*/
-    height: 32px;
-    width: 32px;
-    margin: auto 4px 4px auto;
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin: 0px 0px 4px 16px;
     text-align: center;
     overflow: visible;
     /*position: relative;*/

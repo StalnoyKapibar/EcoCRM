@@ -111,6 +111,16 @@ public class StepsManagementRestController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/add_check_point_comment")
+    public Long saveCheckPointComment(@RequestParam(value = "checkpointid") Long checkPointId,
+                                      @RequestParam(value = "comment") String comment) {
+        CheckPoint checkPoint = checkPointService.getCheckPointById(checkPointId);
+        Comment cpComment = new Comment(comment, LocalDate.now());
+        checkPoint.setComment(cpComment);
+        checkPointService.update(checkPoint);
+        return checkPointId;
+    }
+
     @GetMapping("/all_checked_dates/{projectId}")
     public List<CheckPoint> getAllCheckPoints(@PathVariable(required = false) Long projectId) {
         List<CheckPoint> cp = checkPointService.getAllCheckPoints(projectId);

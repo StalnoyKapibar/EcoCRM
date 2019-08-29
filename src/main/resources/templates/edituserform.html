@@ -64,6 +64,9 @@
             ​
             <div>
                 <div class="form-group">
+                    <input type="hidden"  id="userId" class="form-control" >​
+                </div>
+                <div class="form-group">
                     <label class="font-weight-bold"><h5>Имя:</h5></label>
                     <input type="text"   id ="name" class="form-control"  placeholder="Елена">
                 </div>
@@ -78,13 +81,8 @@
                 <div class="form-group">
                     <label><h5>Адрес электронной почты:</h5></label>
                     <input type="text"  id="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email" readonly>
-                    ​
-                </div>
-                <div class="form-group">
-                    <!--<label><h5>ID:</h5></label>-->
-                    <input type="hidden"  id="userId" class="form-control"   placeholder="Enter id">
-                    ​
-                </div>
+                    ​</div>
+
                 <div class="form-group">
                     <label><h5>Телефон:</h5></label>
                     <input type="text"  id="phone" class="form-control"  placeholder="+7978777777">
@@ -101,10 +99,10 @@
                     <label><h5>Чем я не хотел бы заниматься:</h5></label>
                     <input type="text" id="notToDo" class="form-control"  placeholder="уборка мусора">
                 </div>
-                <div class="form-group" id="status">
-                    <div class="form-check">
+                <div class="form-group "   id="status-form">
+                    <div class="form-check" style="text-align:left;">
                         <h5>Ваш статус:</h5>
-                        <input class="form-check-input" type="radio" value="ACTIVE"
+                        <input class="form-check-input"  type="radio" value="ACTIVE"
                                name="statusHome">
                         <label class="form-check-label"><h4>Активен</h4></label><br>
                         <input class="form-check-input" type="radio" value="NOT_ACTIVE"

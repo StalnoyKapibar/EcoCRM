@@ -80,7 +80,7 @@ public class UserRestController {
     public CurrentUserDTO getCurrentUser(Principal principal){
         User user = (User) userService.loadUserByUsername(principal.getName());
         CurrentUserDTO userDTO = dtoService.convertCurrentUserToDTO(user);
-        return userDTO;git
+        return userDTO;
     }
     @PutMapping("/update")
     public User updateUser(@RequestBody CurrentUserDTO userdto) {

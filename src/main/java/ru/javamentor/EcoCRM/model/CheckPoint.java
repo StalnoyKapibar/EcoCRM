@@ -23,7 +23,7 @@ public class CheckPoint  implements Serializable {
     @Column(name = "check_point_comment")
     private Comment comment;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-M-d")
     @Column(name = "check_point_date")
     private Date date;
 

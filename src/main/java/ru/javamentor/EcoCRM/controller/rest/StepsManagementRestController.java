@@ -16,6 +16,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -73,30 +74,42 @@ public class StepsManagementRestController {
     }
 
     //step 8
-    @PostMapping("/add_check_point")
-    public Long saveCheckPointInfo(@RequestParam(value = "projectid") Long projectid,
-                                  @RequestParam(value = "name") String name,
+    @PostMapping("/add_check_point/{id}")
+    public ResponseEntity saveCheckPointInfo(@PathVariable Long id,
+                                             @RequestParam(value = "name") String name,
                                   @RequestParam(value = "description") String description,
                                   @RequestParam(value = "date") String date) throws ParseException {
 
-        Project project = projectService.get(projectid);
+        Project project = projectService.get(id);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-M-d");
         Date formatedDate = dateFormat.parse(date);
         CheckPoint cp = new CheckPoint(name, description, formatedDate);
         checkPointService.insert(cp);
         project.getCheckPoints().add(cp);
         projectService.update(project);
-        return projectid;
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/add_check_point_comment")
-    public Long saveCheckPointInfo(@RequestParam(value = "checkpointid") Long checkPointId,
+    public Long saveCheckPointComment(@RequestParam(value = "checkpointid") Long checkPointId,
                                    @RequestParam(value = "comment") String comment) {
         CheckPoint checkPoint = checkPointService.getCheckPointById(checkPointId);
         Comment cpComment = new Comment(comment, new Date());
         checkPoint.setComment(cpComment);
         checkPointService.update(checkPoint);
         return checkPointId;
+    }
+
+    @GetMapping("/all_checked_dates/{projectId}")
+    public List<CheckPoint> getAllCheckPoints(@PathVariable(required = false) Long projectId) {
+        List<CheckPoint> cp = checkPointService.getAllCheckPoints(projectId);
+        return cp;
+    }
+
+    @GetMapping("/check_point/{id}")
+    public CheckPoint getCheckPoint(@PathVariable(required = false) Long id) {
+        CheckPoint cp = checkPointService.get(id);
+        return cp;
     }
 }

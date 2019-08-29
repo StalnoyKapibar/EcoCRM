@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.dao.CheckPointDao;
 import ru.javamentor.EcoCRM.model.CheckPoint;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class CheckPointServiceImpl extends AbstractServiceImpl<CheckPoint> implements CheckPointService {
 
@@ -23,5 +26,10 @@ public class CheckPointServiceImpl extends AbstractServiceImpl<CheckPoint> imple
     @Override
     public CheckPoint getCheckPointById(Long id) {
         return checkPointDao.getCheckPointById(id);
+    }
+
+    @Override
+    public List<CheckPoint> getAllCheckPoints(Long id) {
+        return checkPointDao.getAllCheckPoints(id);
     }
 }

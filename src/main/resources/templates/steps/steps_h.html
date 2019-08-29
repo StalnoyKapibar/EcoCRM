@@ -866,7 +866,7 @@
 
 <script th:inline="text">
     var projectId = [[${projectid}]];
-    initSixthStep();
+    initStaticToggles();
     $("#step_6_link").on('click',refreshPage());
     $(document).ready(function () {
         $.ajax({

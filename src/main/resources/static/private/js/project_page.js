@@ -4,6 +4,9 @@ $(function () {
     id = $('#projectId').val();
     let stepCurrentNumber = $('#stepNumber').val();
     getStep(stepCurrentNumber);
+    initStaticToggles();
+    switchToggles();
+    fillToggles();
 });
 
 function getStep(stepNumber) {

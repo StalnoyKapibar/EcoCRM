@@ -1,15 +1,11 @@
 package ru.javamentor.EcoCRM.controller.rest;
 
-import com.google.api.client.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import ru.javamentor.EcoCRM.dto.PetitionDTO;

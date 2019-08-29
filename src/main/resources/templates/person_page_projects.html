@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,10 +15,10 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="/private/js/person_page_projects.js" type="text/javascript"></script>
     <link href="/private/css/common_style.css" rel="stylesheet">
 </head>
 <body>
+<input type="hidden" id="UserId" th:value="${id}">
 <nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
     <a class="navbar-brand" href="/user" style="white-space: pre"><span class="fa fa-leaf"></span> Eco CRM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -33,7 +32,7 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/projects" style="color: white;">Все проекты <span
+                <a class="nav-link" href="/projects/all" style="color: white;">Все проекты <span
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
@@ -61,21 +60,141 @@
     </div>
 </nav>
 <main role="main" class="container-fluid">
-    <!--<h3 style="margin-left: 4%">Мои проекты :</h3>-->
-    <div class="row" style="margin: 3%;">
-        <div class="col-sm-4" th:each="project : ${projects}">
-            <div class="card shadow bg-white rounded" style="margin-top: 15px">
-                <div class="card-header" th:text="${project.area}" style="font-size: medium; color: black">
-                </div>
-                <div class="card-body">
-                    <div>Проект на этапе: <span th:text="${project.number}" class="badge badge-pill text-light" style="font-size: small; background-color: orange"></span></div>
-                    <div>Начало проекта: <span th:text="${project.time}" style="font-size: small"></span></div>
-                    <a th:href="@{/steps/{id}(id=${project.id})}" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Перейти</a>
-                </div>
-            </div>
-        </div>
+    <button class="btn btn-outline-danger" style="margin-left: 5%" disabled>Все проекты в которых я участвую</button>
+    <!--<h3>Мои проекты :</h3>-->
+    <div class="row" style="margin-left: 3%; margin-right: 3%" id="users_petition_area">
     </div>
 </main>
 
+
+<!-- Modal show info-->
+<div id="show_contractor_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light">
+            <div class="modal-body">
+                <form id="show_contactForm" action="" method="post">
+                    <div class="form-group">
+                        <label for="show_name">Название:</label>
+                        <textarea id="show_name" class="form-control" name="name" required type="text" placeholder="Компания" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_rowType">Тип сырья:</label>
+                        <textarea id="show_rowType" class="form-control" name="email" required type="text" placeholder="Тип сырья" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_collectorType">Тип накопителя:</label>
+                        <textarea id="show_collectorType" class="form-control" required name="message" rows="4" placeholder="Тип накопителя" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_link">Сайт компании:</label>
+                        <textarea id="show_link" class="form-control" name="phone" required type="text" placeholder="Сайт компании" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_contactPerson">Имя менеджера:</label>
+                        <textarea id="show_contactPerson" class="form-control" required name="message" rows="4" placeholder="Имя менеджера" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_phoneNumber">Номер телефона:</label>
+                        <textarea id="show_phoneNumber" class="form-control" required name="message" rows="4" placeholder="Номер телефона" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_linkByPerson">Ссылка на соц. сеть:</label>
+                        <textarea id="show_linkByPerson" class="form-control" required name="message" rows="4" placeholder="Ссылка на соц. сеть" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="show_description">Условия вывоза:</label>
+                        <textarea id="show_description" class="form-control" required name="message" rows="4" placeholder="Условия вывоза" disabled></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="show_buttonModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal show info-->
+<div id="show_message" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content card border-light">
+            <div class="modal-body">
+                <h3 style="font: icon; font-size: large">Заявка отпралена на обработку</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let id = $('#UserId').val();
+    $(document).ready(function () {
+        getAllProjects();
+
+    });
+
+    function getAllProjects() {
+        $.ajax({
+            url: "/api/project/manager/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+                $.each(projects, function (key, project) {
+                $('#users_petition_area').append(
+                    '<div class="col-sm-4">' +
+                    '<div class="card shadow bg-white rounded" style="margin-top: 15px">\n' +
+                    '                <div class="card-header" style="background-color: #f1b0b7">Менеджер проекта</div>\n' +
+                    '                <div class="card-body">\n' +
+                    '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.addressHome + '</span></div>\n' +
+                    '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +
+                    '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ project.petition.data + '</span></div></div>\n' +
+                                        '<div class="card-footer" style="font-size: medium; color: black">' +
+                    '                    <a href="/project/' + project.id + '" class="btn" style="float:right; margin-top: 15px; margin-right: 5px; background-color: rgb(52, 152, 219); color: white">Перейти</a>\n' +
+                    '            </div></div>'
+                )
+            })
+        }
+        });
+
+        $.ajax({
+            url: "/api/project/member/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+                $.each(projects, function (key, project) {
+                    $('#users_petition_area').append(
+                        '<div class="col-sm-4">' +
+                        '<div class="card shadow bg-white rounded" style="margin-top: 15px">\n' +
+                        '                <div class="card-header" style="background-color: #9fcdff">Участник проекта</div>\n' +
+                        '                <div class="card-body">\n' +
+                        '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.addressHome + '</span></div>\n' +
+                        '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + project.petition.houseDistrict + '</span></div>\n' +
+                        '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ project.petition.data + '</span></div></div>\n' +
+                        '<div class="card-footer" style="font-size: medium; color: black">' +
+                        '                    <a href="/steps/' + project.id + '" class="btn" style="float:right; margin-top: 15px; margin-right: 5px; background-color: rgb(52, 152, 219); color: white">Перейти</a>\n' +
+                        '            </div></div>'
+                    )
+                })
+            }
+        });
+    }
+
+    function showProject() {
+        $.ajax({
+            url: "/api/project/" + id,
+            type: "GET",
+            async: false,
+            success: function (projects) {
+
+            }})
+    }
+
+</script>
+
 </body>
 </html>
+

@@ -4,6 +4,9 @@ $(function () {
     id = $('#projectId').val();
     let stepCurrentNumber = $('#stepNumber').val();
     getStep(stepCurrentNumber);
+    initStaticToggles();
+    switchToggles();
+    fillToggles();
 });
 
 function getStep(stepNumber) {
@@ -12,6 +15,14 @@ function getStep(stepNumber) {
         type: "GET",
         success: function (stepDto) {
             $('#' + stepNumber + '_link').addClass('active');
+            if(stepDto.status === 'IN_PROGRESS'){
+                $('#' + stepNumber + '_link').nextAll('.nav-link').css({'background-color': '#d2d2d2', 'color': '#a49f9f', 'border': '1px solid', 'border-color':'#8d8787'});
+                $('#' + stepNumber + '_link').prevAll('.nav-link').css({'background-color': '#e0f3df', 'color': '#8fb78d', 'border': '1px solid ', 'border-color':'#7e8c78'});
+                $('#' + stepNumber + '_link').nextAll('.nav-link').addClass('disabled');
+            }
+            if(stepDto.status === 'DONE'){
+                $('#' + stepNumber + '_togle').bootstrapToggle('on');
+            }
             $('#' + stepNumber).addClass('show');
             $('#' + stepNumber).addClass('active');
             stepId = stepDto.id;
@@ -19,6 +30,10 @@ function getStep(stepNumber) {
         }
     });
 }
+
+// function disabledSteps(stepNumber) {
+//     if()
+// }
 
 function getCurrentStep(StepNumber, StepDto) {
     var stn = StepNumber;
@@ -48,6 +63,7 @@ function getCurrentStep(StepNumber, StepDto) {
 
     }
 }
+
 
 function getStepType(stepNumber, stepDto) {
     let tabList = $('#tabList_' + stepNumber + '');

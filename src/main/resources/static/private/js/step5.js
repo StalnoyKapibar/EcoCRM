@@ -3,6 +3,19 @@ $(document).ready(function () {
         format: 'yyyy-mm-dd',
         uiLibrary: 'bootstrap4'
     });
+
+    $('#STEP_5_togle').change(function () {
+        if($(this).prop('checked')===true){
+            $('#STEP_6_link').removeClass('disabled');
+            $('#STEP_6_link').removeAttr('style');
+            $('#STEP_5_link').css({'background-color': '#e0f3df', 'color': '#8fb78d', 'border': '1px solid ', 'border-color':'#7e8c78'});
+        }
+        if($(this).prop('checked')===false){
+            $('#STEP_5_link').nextAll('.nav-link').css({'background-color': '#d2d2d2', 'color': '#a49f9f', 'border': '1px solid', 'border-color':'#8d8787'});
+            $('#STEP_5_link').nextAll('.nav-link').addClass('disabled');
+            $('#STEP_5_link').removeAttr('style');
+        }
+    })
 });
 
 function step5(stepDto) {

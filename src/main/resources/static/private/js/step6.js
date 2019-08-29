@@ -1,3 +1,18 @@
+$(document).ready(function () {
+    $('#STEP_6_togle').change(function () {
+        if($(this).prop('checked')===true){
+            $('#STEP_7_link').removeClass('disabled');
+            $('#STEP_7_link').removeAttr('style');
+            $('#STEP_6_link').css({'background-color': '#e0f3df', 'color': '#8fb78d', 'border': '1px solid ', 'border-color':'#7e8c78'});
+        }
+        if($(this).prop('checked')===false){
+            $('#STEP_6_link').nextAll('.nav-link').css({'background-color': '#d2d2d2', 'color': '#a49f9f', 'border': '1px solid', 'border-color':'#8d8787'});
+            $('#STEP_6_link').nextAll('.nav-link').addClass('disabled');
+            $('#STEP_6_link').removeAttr('style');
+        }
+    })
+});
+
 function step6(stepDto) {
     let tasks = stepDto.tasks;
     for(let i = 0; i<tasks.length; i++){

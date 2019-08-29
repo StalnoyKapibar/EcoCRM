@@ -3,6 +3,18 @@ $(document).ready(function () {
         uiLibrary: 'bootstrap4',
         format: "dd/mm/yyyy"
     });
+
+    $('#STEP_3_togle').change(function () {
+        if($(this).prop('checked')===true){
+            $('#STEP_4_link').removeClass('disabled');
+            $('#STEP_4_link').removeAttr('style');
+            $('#STEP_3_link').css({'background-color': '#e0f3df', 'color': '#8fb78d', 'border': '1px solid ', 'border-color':'#7e8c78'});        }
+        if($(this).prop('checked')===false){
+            $('#STEP_3_link').nextAll('.nav-link').css('.nav-link').css({'background-color': '#d2d2d2', 'color': '#a49f9f', 'border': '1px solid', 'border-color':'#8d8787'});
+            $('#STEP_3_link').nextAll('.nav-link').addClass('disabled');
+            $('#STEP_3_link').removeAttr('style');
+        }
+    })
 });
 
 

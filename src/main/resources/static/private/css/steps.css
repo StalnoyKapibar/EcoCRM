@@ -2,3 +2,13 @@
     border-radius: 20rem;
     float: right;
 }
+
+ .done{
+      background-color: #e0f3df;
+      color: #8fb78d;
+  }
+
+.disabled{
+    background: #d2d2d2;
+    color: #a49f9f;
+}

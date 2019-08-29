@@ -37,16 +37,26 @@ public class ApplicationController {
     PetitionService petitionService;
 
     @GetMapping("/")
-    public String getPersonProjects(Model model, Authentication authentication) {
-        Long id = ((User)authentication.getPrincipal()).getId();
-        model.addAttribute("projects", projectService.getPersonProjectDto(id));
-        return "person_page_projects";
+    public String startPageRedirectRoleDepending() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Authority> roles = (List<Authority>) auth.getAuthorities();
+        for (Authority role : roles) {
+            if (role.getAuthority().contains("ROLE_ADMIN")) {
+                return "redirect:/admin/usersList";
+            }
+        }
+        return "redirect:/userinfo";
+    }
+
+    @GetMapping("/userinfo")
+    public String showUserInfo(Model model) {
+        return "userinfo";
     }
 
     @GetMapping("/user")
     public String showUser(Model model, Authentication authentication) {
-        Long id = ((User)authentication.getPrincipal()).getId();
-        model.addAttribute("projects", projectService.getPersonProjectDto(id));
+        Long id = ((User) authentication.getPrincipal()).getId();
+        model.addAttribute("id", id);
         return "person_page_projects";
     }
 
@@ -61,7 +71,7 @@ public class ApplicationController {
     public ModelAndView showProjects(ModelAndView modelAndView) {
         modelAndView.addObject("stepNumber", StepNumber.values());
         modelAndView.addObject("projects", projectService.getListByStepInProgress());
-        modelAndView.setViewName("admin/projects");
+        modelAndView.setViewName("/projects");
         return modelAndView;
     }
 
@@ -71,12 +81,10 @@ public class ApplicationController {
     }
 
     @GetMapping("/petition/getAllPetition")
-    public ModelAndView allUsers() {
-        List<PetitionDTO> petitionDTOList = petitionService.getAllPetition();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("petitions");
-        modelAndView.addObject("petitionList", petitionDTOList);
-        return modelAndView;
+    public String allUsers(Model model, Authentication authentication) {
+        Long id = ((User) authentication.getPrincipal()).getId();
+        model.addAttribute("id", id);
+        return "all_petitions";
     }
 
     @GetMapping("/petition/getAllAdminPetitionWithUser")
@@ -122,10 +130,7 @@ public class ApplicationController {
         model.addAttribute("all", userService.getAll());
         return "all_users";
     }
-    @GetMapping("/userinfo")
-    public String getuserinfo() {
-        return "userinfo";
-    }
+
     @GetMapping("/useredit")
     public String useredit() {
         return "edituserform";

@@ -5,10 +5,11 @@
       layout:decorate="~{layouts/for_all_pages_layout}"
       lang="en">
 <head>
+    <link href="/public/css/green.css" rel="stylesheet">
 </head>
 <body>
 <main role="main" class="container-fluid" layout:fragment="content">
-    <p style="color: #f71752; font-size: large; margin-left: 5%" >Заявки волонтеров на участие в проекте:</p>
+    <p style="font-size: large; margin-left: 5%">Заявки волонтеров на участие в проекте:</p>
     <div class="row" style="margin-right: 3%; margin-left: 3%" id="cardes">
 
     </div>
@@ -18,7 +19,7 @@
 <div id="show_user_list" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content card border-light">
-            <div class="modal-header">Выберите менеджера</div>
+            <div class="modal-header"><h6>Выберите менеджера</h6></div>
             <div class="modal-body" id="f">
                 <form id="fffff">
 
@@ -45,7 +46,7 @@
                 $.each(petitions, function (key, petition) {
                     $('#cardes').append('<div class="col-sm-3" id="card_' + petition.id + '">' +
                     '<div class="card shadow bg-white rounded" style="margin-top: 15px">' +
-                    '<div  class="card-header" style="background-color: lightblue">Дата поступления заявки:' + '<div style="font-size: large">' +petition.data + '</div></div>' +
+                    '<div  class="card-header" style="background-color: rgba(84,182,137,0.73);">Дата поступления заявки:' + '<div style="font-size: large">' +petition.data + '</div></div>' +
                     '<div class="card-body">' +
                         '<p style="font-size: medium">Адрес:'+ '<span class="badge badge-pill text-light" style="float: right; font-size: small; background-color: #f71752">' + petition.adress + '</span></p>' +
                         '<p style="font: medium;">Район:' + '<span class="badge badge-pill text-light" style="float: right; font-size: small; background-color: #007bff">' + petition.area + '</span></p>' +
@@ -90,7 +91,7 @@
                         '                        <tr>\n' +
 
                         '                            <td><h6></h6></td><td><h6>' +
-                        '<button id="manager_button" class="btn btn-warning" onclick="approvedByAdministrator(' + user.id + ',' + petitionId + '">Выбрать менеджером</button>'+
+                        '<button id="manager_button" class="btn btn-warning" onclick="approvedByAdministrator(' + user.id + ',' + petitionId + ')">Выбрать менеджером</button>'+
                         '</h6></td>\n' +
                         '                        </tr>\n' +
                         '                    </table>\n' +

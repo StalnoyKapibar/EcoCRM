@@ -1,3 +1,19 @@
+$( document ).ready(function() {
+    $('#STEP_1_togle').change(function () {
+        if($(this).prop('checked')===true){
+            $('#STEP_2_link').removeClass('disabled');
+            $('#STEP_2_link').removeAttr('style');
+            $('#STEP_1_link').css({'background-color': '#e0f3df', 'color': '#8fb78d', 'border': '1px solid ', 'border-color':'#7e8c78'});
+        }
+        if($(this).prop('checked')===false){
+            // $('#STEP_2_link').addClass('disabled');
+            $('#STEP_1_link').nextAll('.nav-link').addClass('disabled');
+            $('#STEP_1_link').nextAll('.nav-link').css({'background-color': '#d2d2d2', 'color': '#a49f9f', 'border': '1px solid', 'border-color':'#8d8787'});
+            $('#STEP_1_link').removeAttr('style');
+        }
+    })
+});
+
 function step1(stepDto) {
     let petititon = stepDto.petition;
      $('#fio_petitioner').val(petititon.userName);

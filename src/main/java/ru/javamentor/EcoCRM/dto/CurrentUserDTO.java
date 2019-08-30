@@ -2,6 +2,7 @@ package ru.javamentor.EcoCRM.dto;
 
 
 import ru.javamentor.EcoCRM.model.User;
+import ru.javamentor.EcoCRM.model.embedded.UserStatus;
 
 public class CurrentUserDTO {
     private long id;
@@ -13,6 +14,7 @@ public class CurrentUserDTO {
     private String link;
     private String profession;
     private String notToDo;
+    private UserStatus status;
     private String photo;
 
     public CurrentUserDTO() {
@@ -96,5 +98,13 @@ public class CurrentUserDTO {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 }

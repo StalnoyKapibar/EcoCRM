@@ -23,6 +23,8 @@ function initTextArea() {
     $("#password").val(currentUser.password);
     $("#email").val(currentUser.email);
     $("#phone").val(currentUser.phone);
+    // $("#status").val(currentUser.status);
+    $('#status_list input[value="'+currentUser.status+'"]').attr("checked", true);
     $("#vk").val(currentUser.link);
     $("#profession").val(currentUser.profession);
     var helpTag = document.getElementById('photo');
@@ -39,6 +41,7 @@ function updateUser() {
         'email' : $('#email').val(),
         'phone' : $('#phone').val(),
         'link' : $('#vk').val(),
+        'status' : $('#status_list input:checked').val(),
         'profession' : $('#profession').val(),
         'notToDo' : $('#notToDo').val(),
     };
@@ -73,11 +76,11 @@ function updateUser() {
         data:JSON.stringify(user),
         contentType: 'application/json; charset=utf-8',
         success: function (){
-            alert('Данные обновлены');
+            // alert('Данные обновлены');
             window.location.href = '/userinfo'
         },
         error: function (e) {
-            alert(e.responseText);
+            console.log(e.responseText);
         }
     })
 }
@@ -88,7 +91,7 @@ $(function() {
         $(input.files).each(function(i, el) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('<img height="250px">').attr('src', e.target.result).appendTo('#photo');
+                $('<img height="400px">').attr('src', e.target.result).appendTo('#photo');
             };
             reader.readAsDataURL(input.files[i]);
         });

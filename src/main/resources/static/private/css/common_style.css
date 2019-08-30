@@ -15,13 +15,35 @@ body {
 }
 
 .yellow-btn {
-    background: #ffa500;
+    background: #ffae19;
     border-color: #ffa500;
     color: white;
+    margin: 3px;
 }
 
 .yellow-btn:hover {
     background: #d68900;
+    color: white;
+}
+
+.green-btn {
+    background: #468c66;
+    border-color: #468c66;
+    color: white;
+    margin: 3px;
+}
+
+.green-btn:hover {
+    background: #187851;
+    color: white;
+}
+
+.btn-outline-light {
+    margin: 3px;
+}
+
+.btn-outline-light:hover {
+    background: #59cb9b;
     color: white;
 }
 

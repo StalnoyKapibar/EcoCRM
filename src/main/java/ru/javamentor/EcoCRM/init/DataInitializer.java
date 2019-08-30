@@ -92,8 +92,8 @@ public class DataInitializer {
         User admin = new User();
         admin.setName("Саймон");
         admin.setSurname("Травалгия");
-        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\bofh.jpg")),150,150));
-        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/bofh.jpg")),150,150));
+        admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\bofh.jpg")),150,150));
+        //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/bofh.jpg")),150,150));
         //admin.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/bofh.jpg")),150,150));
         admin.setEmail("admin");
         admin.setPassword(bCryptPasswordEncoder.encode("admin"));
@@ -118,8 +118,8 @@ public class DataInitializer {
         user.setPatronymic("Теодор");
         user.setLink("https://vk.com/cartman");
         user.setNotToDo("Учиться");
-        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/cartman.jpg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\cartman.jpg")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/cartman.jpg")),150,150));
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\cartman.jpg")),150,150));
         //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/cartman.jpg")),150,150));
         user.setPassword(bCryptPasswordEncoder.encode("cartman"));
 
@@ -134,8 +134,8 @@ public class DataInitializer {
         kenny.setPatronymic("Нет");
         kenny.setLink("https://vk.com/kenny");
         kenny.setNotToDo("Учиться");
-        kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/kenny.jpg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\kenny.jpg")),150,150));
+        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/kenny.jpg")),150,150));
+        kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\kenny.jpg")),150,150));
         //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/kenny.jpg")),150,150));
         kenny.setPassword(bCryptPasswordEncoder.encode("kenny"));
         kenny.setAuthorities(userrole);
@@ -149,9 +149,9 @@ public class DataInitializer {
         stan.setPatronymic("Нет");
         stan.setLink("https://vk.com/stan");
         stan.setNotToDo("Учиться");
-        stan.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/stan.jpeg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\stan.jpeg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/stan.jpeg")),150,150));
+        //stan.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/stan.jpeg")),150,150));
+        stan.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\stan.jpeg")),150,150));
+        //stan.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/stan.jpeg")),150,150));
         stan.setPassword(bCryptPasswordEncoder.encode("stan"));
         stan.setAuthorities(userrole);
 
@@ -164,9 +164,9 @@ public class DataInitializer {
         bart.setPatronymic("Нет");
         bart.setLink("https://vk.com/bart");
         bart.setNotToDo("Учиться");
-        bart.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/bart.jpeg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\bart.jpeg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/bart.jpeg")),150,150));
+        //bart.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/bart.jpeg")),150,150));
+        bart.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\bart.jpeg")),150,150));
+        //bart.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/bart.jpeg")),150,150));
         bart.setPassword(bCryptPasswordEncoder.encode("bart"));
         bart.setAuthorities(userrole);
 
@@ -179,9 +179,9 @@ public class DataInitializer {
         emy.setPatronymic("Нет");
         emy.setLink("https://vk.com/emy");
         emy.setNotToDo("Убирать мусор");
-        emy.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/emy.jpg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\emy.jpg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/emy.jpg")),150,150));
+        //emy.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/emy.jpg")),150,150));
+        emy.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\emy.jpg")),150,150));
+        //emy.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/emy.jpg")),150,150));
         emy.setPassword(bCryptPasswordEncoder.encode("emy"));
         emy.setAuthorities(userrole);
 
@@ -194,9 +194,9 @@ public class DataInitializer {
         feynmann.setPatronymic("Нет");
         feynmann.setLink("https://vk.com/feynmann");
         feynmann.setNotToDo("Ходить по учреждениям");
-        feynmann.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/feynmann.jpg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\feynmann.jpg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/feynmann.jpg")),150,150));
+        //feynmann.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/feynmann.jpg")),150,150));
+        feynmann.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\feynmann.jpg")),150,150));
+        //feynmann.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/feynmann.jpg")),150,150));
         feynmann.setPassword(bCryptPasswordEncoder.encode("feynmann"));
         feynmann.setAuthorities(authoritiesService.getAll());
 
@@ -209,9 +209,9 @@ public class DataInitializer {
         albert.setPatronymic("Нет");
         albert.setLink("https://vk.com/albert");
         albert.setNotToDo("Собирать подписи");
-        albert.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/albert.jpg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\albert.jpg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/albert.jpg")),150,150));
+        //albert.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/albert.jpg")),150,150));
+        albert.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\albert.jpg")),150,150));
+        //albert.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/albert.jpg")),150,150));
         albert.setPassword(bCryptPasswordEncoder.encode("albert"));
         albert.setAuthorities(userrole);
 
@@ -224,9 +224,9 @@ public class DataInitializer {
         joanna.setPatronymic("Нет");
         joanna.setLink("https://vk.com/joanna");
         joanna.setNotToDo("Участвовать в собраниях");
-        joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/joanna.jpeg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\johanna.jpeg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/johannay.jpeg")),150,150));
+        //joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/joanna.jpeg")),150,150));
+        joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\johanna.jpeg")),150,150));
+        //joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/johannay.jpeg")),150,150));
         joanna.setPassword(bCryptPasswordEncoder.encode("joanna"));
         joanna.setAuthorities(userrole);
 
@@ -239,9 +239,9 @@ public class DataInitializer {
         kristina.setPatronymic("Нет");
         kristina.setLink("https://vk.com/kristina");
         kristina.setNotToDo("Стоять в очередях");
-        kristina.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/kristina.jpg")),150,150));
-        //kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\kristina.jpg")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/kristina.jpg")),150,150));
+        //kristina.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/kristina.jpg")),150,150));
+        kristina.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\kristina.jpg")),150,150));
+        //kristina.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/kristina.jpg")),150,150));
         kristina.setPassword(bCryptPasswordEncoder.encode("kristina"));
         kristina.setAuthorities(userrole);
 

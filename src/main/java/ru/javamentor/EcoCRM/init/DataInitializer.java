@@ -225,7 +225,7 @@ public class DataInitializer {
         joanna.setLink("https://vk.com/joanna");
         joanna.setNotToDo("Участвовать в собраниях");
         //joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/joanna.jpeg")),150,150));
-        joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\johanna.jpeg")),150,150));
+        joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\joanna.jpeg")),150,150));
         //joanna.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/johannay.jpeg")),150,150));
         joanna.setPassword(bCryptPasswordEncoder.encode("joanna"));
         joanna.setAuthorities(userrole);

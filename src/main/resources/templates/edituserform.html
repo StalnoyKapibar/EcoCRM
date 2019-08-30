@@ -45,79 +45,79 @@
 </nav>
 ​
 <!--конец хидера-->
-
-
+​
+​
 ​
 ​<main role="main" class="container-fluid" layout:fragment="content">​
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        ​<h3 style="text-align: center;">Настройки</h3>
-                        <div>
-                                <div class="form-group">
-                                    <input type="hidden"  id="userId" class="form-control" >​
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    ​<h3 style="text-align: center;">Настройки</h3>
+                    <div>
+                        <div class="form-group">
+                            <input type="hidden"  id="userId" class="form-control" >​
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Фамилия:</h5></label>
+                            <input type="text"  id ="surname" class="form-control"  placeholder="Фамилия">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold"><h5>Имя:</h5></label>
+                            <input type="text"   id ="name" class="form-control"  placeholder="Имя">
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Отчество:</h5></label>
+                            <input type="text"  id ="patronymic" class="form-control"  placeholder="Отчество">
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Адрес электронной почты:</h5></label>
+                            <input type="text"  id="email" class="form-control"  aria-describedby="emailHelp" placeholder="E-mail" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Телефон:</h5></label>
+                            <input type="text"  id="phone" class="form-control"  placeholder="Телефон">
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Ссылка vk.com:</h5></label>
+                            <input type="text" id="vk" class="form-control"  placeholder="ВКонтакте">
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Основной род деятельности:</h5></label>
+                            <input type="text" id="profession"  class="form-control"  placeholder="Профессия">
+                        </div>
+                        <div class="form-group">
+                            <label><h5>Чем я не хотел бы заниматься:</h5></label>
+                            <input type="text" id="notToDo" class="form-control"  placeholder="Чем?">
+                        </div>
+                        <div class="form-group "   id="status-form">
+                            <div class="form-check" style="text-align:left;">
+                                <h5>Ваш статус:</h5>
+                                <div id = "status_list">
+                                    <input id="radio1" class="radio"  type="radio"  value="ACTIVE" name="status">
+                                    <label for="radio1"><h6>Активен</h6></label>
+                                    <br>
+                                    <input id="radio2" class="radio" type="radio"  value="NOT_ACTIVE" name="status">
+                                    <label for="radio2"><h6>Не активен</h6></label>
+                                    <br>
+                                    <input id="radio3" class="radio" type="radio"  value="VACATION" name="status">
+                                    <label for="radio3"><h6>В отпуcке</h6></label>
+                                    <br>
                                 </div>
-                                <div class="form-group">
-                                    <label><h5>Фамилия:</h5></label>
-                                    <input type="text"  id ="surname" class="form-control"  placeholder="Фамилия">
-                                </div>
-                                <div class="form-group">
-                                    <label class="font-weight-bold"><h5>Имя:</h5></label>
-                                    <input type="text"   id ="name" class="form-control"  placeholder="Имя">
-                                </div>
-                                <div class="form-group">
-                                    <label><h5>Отчество:</h5></label>
-                                    <input type="text"  id ="patronymic" class="form-control"  placeholder="Отчество">
-                                </div>
-                                <div class="form-group">
-                                    <label><h5>Адрес электронной почты:</h5></label>
-                                    <input type="text"  id="email" class="form-control"  aria-describedby="emailHelp" placeholder="E-mail" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label><h5>Телефон:</h5></label>
-                                    <input type="text"  id="phone" class="form-control"  placeholder="Телефон">
-                                </div>
-                                <div class="form-group">
-                                    <label><h5>Ссылка vk.com:</h5></label>
-                                    <input type="text" id="vk" class="form-control"  placeholder="ВКонтакте">
-                                </div>
-                                <div class="form-group">
-                                    <label><h5>Основной род деятельности:</h5></label>
-                                    <input type="text" id="profession"  class="form-control"  placeholder="Профессия">
-                                </div>
-                                <div class="form-group">
-                                    <label><h5>Чем я не хотел бы заниматься:</h5></label>
-                                    <input type="text" id="notToDo" class="form-control"  placeholder="Чем?">
-                                </div>
-                                <div class="form-group "   id="status-form">
-                                    <div class="form-check" style="text-align:left;">
-                                        <h5>Ваш статус:</h5>
-                                        <div id = "status_list">
-                                            <input id="radio1" class="radio"  type="radio"  value="ACTIVE" name="status">
-                                            <label for="radio1"><h6>Активен</h6></label>
-                                            <br>
-                                            <input id="radio2" class="radio" type="radio"  value="NOT_ACTIVE" name="status">
-                                            <label for="radio2"><h6>Не активен</h6></label>
-                                            <br>
-                                            <input id="radio3" class="radio" type="radio"  value="VACATION" name="status">
-                                            <label for="radio3"><h6>В отпуcке</h6></label>
-                                            <br>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button  class="btn yellow-btn  ml-4 " onclick="updateUser()">Submit</button>                ​
-                                <button type="reset" class="btn yellow-btn">Reset</button>
-                                <button class="btn yellow-btn " type="button" onclick="location.href = '/userinfo'">Назад</button>
-                                ​
-                                <br><br>
                             </div>
+                        </div>
+                        <button  class="btn yellow-btn  ml-4 " onclick="updateUser()">Submit</button>                ​
+                        <button type="reset" class="btn yellow-btn">Reset</button>
+                        <button class="btn yellow-btn " type="button" onclick="location.href = '/userinfo'">Назад</button>
+                        ​
+                        <br><br>
                     </div>
                 </div>
-                   ​ ​
             </div>
-            <div class="col-5">
+            ​ ​
+        </div>
+        <div class="col-5">
             <div id="photo" class="text-center"></div>
             <form method="POST" enctype="multipart/form-data" id="imageUploadForm" style="width:400px;">
                 <div class="custom-file" >
@@ -126,7 +126,7 @@
                 </div>
             </form>
         </div>
-        </div>
+    </div>
 </main>
 </body>
 </html>

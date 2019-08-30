@@ -1,7 +1,7 @@
 function fillPage(apiUrl){
     jQuery.noConflict();
     var currentUser = getCurrentUser();
-
+    var allSteps = ["1. Заявитель", "2. Управляющая компания", "3. Заготовители", "4. Заключение договора","5. Установка контейнера","6. Работа с жителями","7. Описание кейса","8. Контроль"];
     $.ajax({
         url: apiUrl,
         type: "GET",
@@ -23,7 +23,7 @@ function fillPage(apiUrl){
             $.each(projects, function (key, value) {
                 docVar += '<div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">' +
                     '                <div class="eco-column-header-extras">' +
-                    '                    <p class="text-justify" style="margin-left: 3px;font-weight: bold">Шаг ' + (count + 1) + '</p>' +
+                    '                    <p class="text-justify" style="margin-left: 3px;font-weight: bold">'+allSteps[count] + '</p>' +
                     '                </div>' +
                     '            <div class="eco-col card" id="col_' + count + '" style="max-height:33rem;min-height:4rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {

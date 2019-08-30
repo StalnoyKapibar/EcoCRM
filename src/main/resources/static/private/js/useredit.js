@@ -28,7 +28,7 @@ function initTextArea() {
     $("#vk").val(currentUser.link);
     $("#profession").val(currentUser.profession);
     var helpTag = document.getElementById('photo');
-    helpTag.insertAdjacentHTML('afterend','<img src="data:image/png;base64,' + currentUser.photo + '" class="img-rounded mt-5 mb-3"   height="400" alt="profile image" id = "profile_avatar" >');
+    helpTag.insertAdjacentHTML('afterend','<img src="data:image/png;base64,' + currentUser.photo + '" class="img-rounded  mb-3"   height="400"  width="400px" align="left" alt="profile image" id = "profile_avatar" >');
     $("#notToDo").val(currentUser.notToDo);
     //$('#photo').attr("src","/api/user/photo/" + user.id);
 }
@@ -61,9 +61,7 @@ function updateUser() {
         complete: function () {
             /*
             $('#profile_img').html('<img src="data:image/png;base64,' + image + '" class="img-rounded"' +
-
                 '                                     alt="profile image">');
-
             */
         },
         error: function (e) {
@@ -84,14 +82,12 @@ function updateUser() {
         }
     })
 }
-
-
 $(function() {
     function readURL(input) {
         $(input.files).each(function(i, el) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('<img height="200px">').attr('src', e.target.result).appendTo('#photo');
+                $('<img height="400px" width="400px" align="left"> ').attr('src', e.target.result).appendTo('#photo');
             };
             reader.readAsDataURL(input.files[i]);
         });
@@ -100,7 +96,5 @@ $(function() {
         var photoWas = document.getElementById('profile_avatar');
         photoWas.style.display = 'none';
         readURL(this);
-
-
     });
 });

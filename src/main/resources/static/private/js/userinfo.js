@@ -3,7 +3,6 @@ $(document).ready(function () {
     currentUser = getCurrentUser();
     initTextArea();
 });
-
 function getCurrentUser() {
     let currUser;
     $.ajax({
@@ -16,7 +15,6 @@ function getCurrentUser() {
     });
     return currUser;
 }
-
 function initTextArea() {
     $("#name").text(currentUser.name);
     $("#surname").text(currentUser.surname);

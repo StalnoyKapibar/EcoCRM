@@ -6,10 +6,11 @@
       lang="en">
 <head>
     <link href="/public/css/green.css" rel="stylesheet">
+    <link href="/private/css/fonts_style.css" rel="stylesheet">
 </head>
 <body>
 <main role="main" class="container-fluid" layout:fragment="content">
-    <p style="font-size: large; margin-left: 5%" >Список волонтеров:</p>
+    <h5 style="margin: 20px; margin-left: 100px;">Список волонтеров:</h5>
     <div class="row" style="margin-left: 3%; margin-right: 3%" id="allUserTable">
     </div>
 
@@ -30,7 +31,7 @@
                 </div>
             </div>
             <div class="modal-footer" id="ff">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="buttonModal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="buttonModal">Закрыть</button>
             </div>
             </div>
         </div>
@@ -71,7 +72,7 @@
                         '                        </tr>\n' +
                         '                        <tr>\n' +
                         '                            <td><h6></h6></td><td><h6 id="profession">' +
-                        '<button class="btn btn-warning" data-toggle="modal" data-target="#get_project_info" onclick="getProjects(' + user.id + ')">Проекты</button>'+
+                        '<button class="btn yellow-btn" data-toggle="modal" data-target="#get_project_info" onclick="getProjects(' + user.id + ')">Проекты</button>'+
                         '</h6></td>\n' +
                         '                        </tr>\n' +
                         '                    </table>\n' +

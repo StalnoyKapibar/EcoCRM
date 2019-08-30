@@ -91,7 +91,7 @@ $(function() {
         $(input.files).each(function(i, el) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('<img height="400px">').attr('src', e.target.result).appendTo('#photo');
+                $('<img height="200px">').attr('src', e.target.result).appendTo('#photo');
             };
             reader.readAsDataURL(input.files[i]);
         });

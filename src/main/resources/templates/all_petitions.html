@@ -6,12 +6,13 @@
       lang="en">
 <head>
     <link href="/public/css/green.css" rel="stylesheet">
+    <link href="/private/css/fonts_style.css" rel="stylesheet">
 </head>
 <body>
 
 <main role="main" class="container-fluid" layout:fragment="content">
     <input type="hidden" id="UserId" th:value="${id}">
-    <p style="font-size: large; margin-left: 5%" >Выбери проект для участия: </p>
+    <h5 style="margin: 20px; margin-left: 100px;">Выбери проект для участия: </h5>
     <div class="row" style="margin-left: 3%; margin-right: 3%" id="petitions_area">
 
     </div>
@@ -21,8 +22,12 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content card border-light" style="background-color: white">
-            <div class="modal-body">
-                <button style="float: right" type="button" class="btn btn-default" data-dismiss="modal">X</button>
+            <div class="modal-body" style="text-align: center;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <br>
+                <br>
                 <p style="font: icon; font-size: large">Заявка отправлена на обработку</p>
                 </div>
             </div>
@@ -77,7 +82,7 @@
             success:function () {
                 $('#show_message').modal('show');
                 $('#petition_button_' + id + '').text("Заявка отправлена");
-                $('#petition_button_' + id + '').css({'backgroundColor' : '#f71752', 'cursor': 'not-allowed'});
+                $('#petition_button_' + id + '').css({'backgroundColor':'#FB747B','borderColor' : '#FB747B', 'color': '#ffffff', 'cursor': 'not-allowed'});
                 $('#petition_button_' + id + '').removeAttr("onclick");
             }
         });

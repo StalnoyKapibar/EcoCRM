@@ -46,16 +46,16 @@ function fillPage(apiUrl){
                                 }
                             }
                             if(flag === false){
-                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn yellow-btn btn-sm" onclick="sendRequest('+project.id+')">Учавствовать</button></div>';
+                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn yellow-btn btn-sm" onclick="sendRequest('+project.id+')" style="margin: 10px;">Участвовать</button></div>';
                             } else {
-                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-secondary btn-sm">Отправлено</button></div>';
+                                docVar+='                            <div class="card-text accept-button"><button type="button" class="btn btn-secondary btn-sm" style="margin: 10px;">Отправлено</button></div>';
                             }
 
                         }
 
                         docVar += '                            </div>' +
                             '<div style="display: inline">' +
-                        '<button type="button" class="member" data-toggle="popover" data-placement="bottom" title="Менеджер" data-content="'+project.manager.name+' ' + project.manager.surname +'">' + project.manager.name.charAt(0) + project.manager.surname.charAt(0) + '</button>';
+                        '<button type="button" class="member" style="background-color: rgba(84,182,137,0.74);" data-toggle="popover" data-placement="bottom" title="Менеджер" data-content="'+project.manager.name+' ' + project.manager.surname +'">' + project.manager.name.charAt(0) + project.manager.surname.charAt(0) + '</button>';
                         if(project.users.length > 0){
                             docVar+='<button type="button" class="member" data-toggle="popover" data-placement="bottom" title="Участники" data-content="';
                             for(let i = 0; i < project.users.length;i++){

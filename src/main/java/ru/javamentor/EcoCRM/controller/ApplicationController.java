@@ -3,21 +3,20 @@ package ru.javamentor.EcoCRM.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.javamentor.EcoCRM.dto.PetitionDTO;
 import ru.javamentor.EcoCRM.model.Authority;
 import ru.javamentor.EcoCRM.model.User;
 import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 import ru.javamentor.EcoCRM.service.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ApplicationController {
@@ -70,7 +69,7 @@ public class ApplicationController {
     }
 
     @GetMapping("/petition")
-    public String getPetition(){
+    public String getPetition() {
         return "petition";
     }
 
@@ -104,14 +103,16 @@ public class ApplicationController {
     @GetMapping("/project/{id}")
     public ModelAndView getProject(@PathVariable("id") Long projectId, ModelAndView modelAndView, Authentication authentication) {
         modelAndView.setViewName("project_page");
-        if (!projectService.isManageProject(((User)authentication.getPrincipal()).getId(), projectId)) {
-            return  new ModelAndView("access-denied", HttpStatus.FORBIDDEN);
-        } else {
+        if (projectService.isManageProject(((User) authentication.getPrincipal()).getId(), projectId)
+                || authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).
+                collect(Collectors.toList()).contains("ROLE_ADMIN")) {
             StepNumber stepNumber = stepService.getProgressStepByProjectId(projectId).getStepNumber();
             modelAndView.addObject("id", projectId);
             modelAndView.addObject("stepNumber", stepNumber);
+        } else {
+            return new ModelAndView("access-denied", HttpStatus.FORBIDDEN);
         }
-            return modelAndView;
+        return modelAndView;
     }
 
     @GetMapping("/all_users")

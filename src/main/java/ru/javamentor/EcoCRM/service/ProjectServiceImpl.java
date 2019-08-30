@@ -13,6 +13,7 @@ import ru.javamentor.EcoCRM.model.embedded.StepNumber;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements ProjectService {
@@ -31,7 +32,9 @@ public class ProjectServiceImpl extends AbstractServiceImpl<Project> implements 
 
     @Override
     public Map<StepNumber, List<Project>> getListByStepInProgress() {
-        return projectDao.getListByStepInProgress();
+        Map<StepNumber, List<Project>> mapUnsorted = projectDao.getListByStepInProgress();
+        Map<StepNumber, List<Project>> treeMap = new TreeMap<StepNumber, List<Project>>(mapUnsorted);
+        return treeMap;
     }
 
     @Override

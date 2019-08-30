@@ -108,10 +108,11 @@
                 $.each(projects, function (key, project) {
                     $('#modalManagerProject').append(
                         '<div id="fffff"><div class="to_delete_ card" style="margin-top: 1%">' +
-                        '<div class="card-header"><div style="white-space: pre"><h6>Статус:  <span class="badge badge-pill text-light" style="font-size: medium; background-color: #f71752">' + project.status + '</span></h6></div></div>' +
+                        '<div class="card-header"><div style="white-space: pre"><h6>Статус:  <span class="badge badge-pill text-light" style="font-size: medium; background-color: #f71752">'
+                        + project.status + '</span></h6></div></div>' +
                         '<div class="card-body">' +
                         '<div style="white-space: pre"><h6>Адреc:  ' + project.petition.addressHome + '</h6></div>' +
-                        '<a class="btn btn-warning" href="/steps/' + project.id + '">Перейти</a></div></div></div>'
+                        '</div></div></div>'
                     )
                 }
                 )
@@ -131,11 +132,17 @@
                 }
                 $.each(projects, function (key, project) {
                         $('#modalMemberProject').append(
-                            '<div class="to_delete card" style="margin-top: 2%">' +
+                            // '<div class="to_delete card" style="margin-top: 2%">' +
+                            // '<div class="card-body">' +
+                            // '<div><h6>' + project.petition.addressHome + '</h6></div>' +
+                            // '<div><h6>' + project.status + '</h6></div>' +
+                            // '</div></div>'
+                            '<div class="to_delete_ card" style="margin-top: 2%">' +
+                            '<div class="card-header"><div style="white-space: pre"><h6>Статус:  <span class="badge badge-pill text-light" style="font-size: medium; background-color: #f71752">'
+                            + project.status + '</span></h6></div></div>' +
                             '<div class="card-body">' +
-                            '<div><h6>' + project.petition.addressHome + '</h6></div>' +
-                            '<div><h6>' + project.status + '</h6></div>' +
-                            '<a class="btn btn-warning"  href="/steps/' + project.id + '">Перейти</a></div></div>'
+                            '<div style="white-space: pre"><h6>Адреc:  ' + project.petition.addressHome + '</h6></div>' +
+                            '</div></div>'
                         )
                     }
                 )

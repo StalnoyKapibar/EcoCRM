@@ -23,7 +23,7 @@ function fillPage(apiUrl){
             $.each(projects, function (key, value) {
                 docVar += '<div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-2">' +
                     '                <div class="eco-column-header-extras">' +
-                    '                    <h5 class="text-justify" style="margin-left: 3px">Шаг ' + (count + 1) + '</h5>' +
+                    '                    <p class="text-justify" style="margin-left: 3px;font-weight: bold">Шаг ' + (count + 1) + '</p>' +
                     '                </div>' +
                     '            <div class="eco-col card" id="col_' + count + '" style="max-height:33rem;min-height:4rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {

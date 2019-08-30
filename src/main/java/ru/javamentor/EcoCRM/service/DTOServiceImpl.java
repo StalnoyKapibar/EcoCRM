@@ -19,6 +19,7 @@ public class DTOServiceImpl  implements  DTOService{
         user.setLink(userDTO.getLink());
         user.setProfession(userDTO.getProfession());
         user.setNotToDo(userDTO.getNotToDo());
+        user.setStatus(userDTO.getStatus());
        // user.setPhoto(Base64.getDecoder().decode(userDTO.getPhoto()));
         return user;
     }
@@ -34,6 +35,7 @@ public class DTOServiceImpl  implements  DTOService{
         userDTO.setLink(user.getLink());
         userDTO.setProfession(user.getProfession());
         userDTO.setNotToDo(user.getNotToDo());
+        userDTO.setStatus(user.getStatus());
         userDTO.setPhoto(user.getEncoderPhoto());
         return userDTO;
     }

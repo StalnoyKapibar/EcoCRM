@@ -21,7 +21,6 @@ function initTextArea() {
     $("#name").text(currentUser.name);
     $("#surname").text(currentUser.surname);
     $("#userId").text(currentUser.id);
-    $("#password").text(currentUser.password);
     $("#patronymic").text(currentUser.patronymic);
     $("#email").text(currentUser.email);
     $("#phone").text(currentUser.phone);
@@ -29,6 +28,8 @@ function initTextArea() {
     $("#profession").text(currentUser.profession);
     $("#status").text(currentUser.status);
     $("#notToDo").text(currentUser.notToDo);
+    var helpTag = document.getElementById('photo');
+    helpTag.insertAdjacentHTML('afterend','<img src="data:image/png;base64,' + currentUser.photo + '" style="margin: 20px;" height="300" alt="profile image" id = "profile_avatar" >');
     getProjectsManager(id);
     getProjectsVolunteer(id);
     getPhoto(id);

@@ -13,6 +13,41 @@
 </head>
 ​
 <body>
+​
+​
+<!--Начало хидера-->
+​
+<nav class="navbar navbar-expand-md navbar-dark fixed-top shadow">
+    <a class="navbar-brand" href="#" style="white-space: pre"><span class="fa fa-leaf"></span>   Eco CRM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    ​
+    <div class="collapse navbar-colla5pse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/user" style="color: white;">Мои проекты <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/projects" style="color: white;">Все проекты <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Меню <span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Уведомления</a>
+                    <a class="dropdown-item" href="#">Моя страница</a>
+                    <a class="dropdown-item" href="/logout">Выйти</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+​
+<!--конец хидера-->
+​
+<h1>Добро пожаловать на страницу редактирования Ваших данных!</h1>
+<div class="container mt-1">
+    ​
 ​<main role="main" class="container-fluid" layout:fragment="content">​
 <div class="container mt-4" style="margin-top: 0px">
     ​<h3 class="text-black-50">Добро пожаловать на страницу редактирования Ваших данных!</h3>
@@ -25,6 +60,9 @@
         <div class="col-5">
             ​
             <div>
+                <div class="form-group">
+                    <input type="hidden"  id="userId" class="form-control" >​
+                </div>
                 <div class="form-group">
                     <label class="font-weight-bold"><h5>Имя:</h5></label>
                     <input type="text"   id ="name" class="form-control"  placeholder="Елена">
@@ -40,13 +78,8 @@
                 <div class="form-group">
                     <label><h5>Адрес электронной почты:</h5></label>
                     <input type="text"  id="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email" readonly>
-                    ​
-                </div>
-                <div class="form-group">
-                    <!--<label><h5>ID:</h5></label>-->
-                    <input type="hidden"  id="userId" class="form-control"   placeholder="Enter id">
-                    ​
-                </div>
+                    ​</div>
+
                 <div class="form-group">
                     <label><h5>Телефон:</h5></label>
                     <input type="text"  id="phone" class="form-control"  placeholder="+7978777777">
@@ -63,7 +96,25 @@
                     <label><h5>Чем я не хотел бы заниматься:</h5></label>
                     <input type="text" id="notToDo" class="form-control"  placeholder="уборка мусора">
                 </div>
-                ​
+                <div class="form-group "   id="status-form">
+                    <div class="form-check" style="text-align:left;">
+                        <h5>Ваш статус:</h5>
+                        <div id = "status_list">
+                        <input class="form-check-input"  type="radio"  value="ACTIVE"
+                               name="status">
+                        <label class="form-check-label"><h4>Активен</h4></label><br>
+                        <input class="form-check-input" type="radio"  value="NOT_ACTIVE"
+                               name="status">
+                        <label class="form-check-label"><h4>Не активен</h4></label><br>
+                        <input class="form-check-input" type="radio"  value="VACATION"
+                               name="status">
+                        <label class="form-check-label"><h4>В отпуcке</h4></label><br>
+                        <!--<input class="form-check-input" type="radio"  value="VACATION"-->
+                               <!--name="status">-->
+                        <!--<label class="form-check-label"><h4>Заблокирован</h4></label><br>-->
+                        </div>
+                ​   </div>
+                </div>
                 ​
                 <button  class="btn btn-primary  ml-4 " onclick="updateUser()"  style="float: right;" >Submit</button>
                 <!--//<button class="btn btn-primary pull-right" type="button" style="float: right;">Кнопка</button>-->
@@ -72,14 +123,14 @@
                 ​
                 ​
                 ​
-                <button class="btn btn-primary " style="float: left;" type="button" onclick="sendPhoto()">Назад</button>
+                <button class="btn btn-primary " style="float: left;" type="button" onclick="location.href = '/userinfo'">Назад</button>
                 ​
                 <br><br>
             </div>
             ​
             ​
         </div>
-        <div class="col">
+        <div class="col mt-5">
             <div id="photo" class="text-center"></div>
             ​
             <label>Выберете фото для профиля</label>

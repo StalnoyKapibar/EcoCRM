@@ -51,15 +51,15 @@
                         '                    <div>Адрес: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + petition.adress + '</span></div>\n' +
                         '                    <div>Район: <span class="badge badge-pill text-light" style="font-size: small; background-color: orange">' + petition.area + '</span></div>\n' +
                         '                    <div>Дата поступления заявки: <span  style="font-size: small">'+ petition.data + '</span></div></div>\n' +
-                        '<div class="card-footer" style="font-size: medium; color: black">' +
-                        '                    <a id="petition_button_' + petition.id + '" onclick="addUserToPetition(' + petition.id + ')" class="btn" style="float:right; margin-top: 15px; background-color: rgb(52, 152, 219); color: white">Курировать проект</a></div>\n' +
+                        '<div class="card-footer" style="font-size: medium; color: white">' +
+                        '                    <a id="petition_button_' + petition.id + '" onclick="addUserToPetition(' + petition.id + ')" class="btn green-btn" style="float:right; margin-top: 15px;">Курировать проект</a></div>\n' +
                         '            </div></div>'
                     );
 
                     $.each(petition.userList, function (key, member) {
                         if (member.id == userId) {
                             $('#petition_button_' + petition.id + '').text("Заявка отправлена");
-                            $('#petition_button_' + petition.id + '').css({'backgroundColor':'#f71752', 'cursor': 'not-allowed'});
+                            $('#petition_button_' + petition.id + '').css({'backgroundColor':'#FB747B','borderColor' : '#FB747B', 'color': '#ffffff', 'cursor': 'not-allowed'});
                             $('#petition_button_' + petition.id + '').removeAttr("onclick");
                         }
                     })

@@ -6,6 +6,7 @@
       lang="en">
 <head>
     <link href="/public/css/green.css" rel="stylesheet">
+    <link href="/private/css/fonts_style.css" rel="stylesheet">
     <link href="/private/css/searching_style.css" rel="stylesheet">
     <script type="text/javascript" src="/private/js/userInfoModal.js"></script>
     <script type="text/javascript" src="/private/js/search.js"></script>
@@ -32,7 +33,7 @@
                 <!--   *   -->
             </td>
             <td style="width: 100px;">
-                <button type="button" class="btn orng-btn btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                <button type="button" class="btn yellow-btn btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
                     <b style="color: white;">Пригласить</b>
                 </button>
             </td>
@@ -57,7 +58,7 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phone}"></td>
                     <td th:text="${user.status}" th:id = "${user.id}+'_td_user_stat'"></td>
-                    <td><button type="button" class="btn orng-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><i class="far fa-address-card"></i></button></td>
+                    <td><button type="button" class="btn yellow-btn" data-toggle="modal" data-target="#exampleModalLong" th:onclick="'getUser(\'' +${user.id}+ '\')'"><i class="far fa-address-card"></i></button></td>
                 </tr>
                 </tbody>
             </table>
@@ -83,7 +84,7 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn orng-btn" data-dismiss="modal" onclick="sendReg()">Отправить</button>
+                <button type="button" class="btn yellow-btn" data-dismiss="modal" onclick="sendReg()">Отправить</button>
             </div>
         </div>
     </div>
@@ -99,7 +100,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">
                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" id="block-btn">BLOCK</button>
-                    <button type="button" class="btn orng-btn btn-sm" data-toggle="modal" data-target="#exampleModal1" id="unblock-btn">UNBLOCK</button>
+                    <button type="button" class="btn yellow-btn btn-sm" data-toggle="modal" data-target="#exampleModal1" id="unblock-btn">UNBLOCK</button>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -119,25 +120,25 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><h6> ID: </h6></td><td><h5 id="userId"></h5></td>
+                    <td><h6> ID: </h6></td>         <td><h6 id="userId"></h6></td>
                 </tr>
                 <tr>
-                    <td><h6> Почта: </h6></td><td><h5 id="email"></h5></td>
+                    <td><h6> Почта: </h6></td>      <td><h6 id="email"></h6></td>
                 </tr>
                 <tr>
-                    <td><h6> Телефон: </h6></td><td><h5 id="phone"></h5></td>
+                    <td><h6> Телефон: </h6></td>    <td><h6 id="phone"></h6></td>
                 </tr>
                 <tr>
-                    <td><h6> Ссылка VK: </h6></td><td><a href="#"><h5 id="vk"></h5></a></td>
+                    <td><h6> Ссылка VK: </h6></td>  <td><a href="#"><h6 id="vk"></h6></a></td>
                 </tr>
                 <tr>
-                    <td><h6> Профессия: </h6></td><td><h5 id="profession"></h5></td>
+                    <td><h6> Профессия: </h6></td>  <td><h6 id="profession"></h6></td>
                 </tr>
                 <tr>
-                    <td><h6> Статус: </h6></td><td><h5 id="status"></h5></td>
+                    <td><h6> Статус: </h6></td><td> <h6 id="status"></h6></td>
                 </tr>
                 <tr>
-                    <td><h6> Не хочет заниматься: </h6></td><td><h5 id="notToDo"></h5></td>
+                    <td><h6> Не хочет заниматься: </h6></td>    <td><h6 id="notToDo"></h6></td>
                 </tr>
 
                 </table>
@@ -170,7 +171,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="blockUser()">Подтвердить</button>
+                <button type="button" class="btn yellow-btn" data-dismiss="modal" onclick="blockUser()">Подтвердить</button>
             </div>
         </div>
     </div>
@@ -191,7 +192,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="unblockUser()">Подтвердить</button>
+                <button type="button" class="btn yellow-btn" data-dismiss="modal" onclick="unblockUser()">Подтвердить</button>
             </div>
         </div>
     </div>

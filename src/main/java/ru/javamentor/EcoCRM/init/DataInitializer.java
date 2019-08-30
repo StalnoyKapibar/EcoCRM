@@ -104,24 +104,46 @@ public class DataInitializer {
         admin.setPhone("+7-777-777-77-77");
         admin.setAuthorities(authoritiesService.getAll());
 
+        List<Authority> userrole = new ArrayList<>();
+        userrole.add(authoritiesService.get(2));
+
+
+
         User user = new User();
-        user.setName("Eric");
-        user.setSurname("Cartman");
+        user.setName("Эрик");
+        user.setSurname("Картман");
         user.setProfession("Hippy Destroyer");
         user.setPhone("+9-999-999-99-99");
-        user.setPatronymic("No");
+        user.setPatronymic("Нет");
         user.setLink("https://vk.com/cartman");
-        user.setNotToDo("school learning");
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/avatar.png")),150,150));
-        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
-        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/avatar.png")),150,150));
+        user.setNotToDo("Учиться");
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/cartman.jpg")),150,150));
+        user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\cartman.jpg")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/cartman.jpg")),150,150));
         user.setEmail("user");
         user.setPassword(bCryptPasswordEncoder.encode("user"));
-        List<Authority> roles = new ArrayList<>();
-        roles.add(authoritiesService.get(2));
-        user.setAuthorities(roles);
+
+        user.setAuthorities(userrole);
+
+        User kenny = new User();
+        kenny.setName("Кенни");
+        kenny.setSurname("Маккормик");
+        kenny.setProfession("Школьник");
+        kenny.setPhone("+9-555-555-55-55");
+        kenny.setPatronymic("Нет");
+        kenny.setLink("https://vk.com/kenny");
+        kenny.setNotToDo("Учиться");
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/home/whitenoise/Документы/CRMBootCamp/EcoCRM/src/main/resources/static/private/images/kenny.jpg")),150,150));
+        kenny.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\kenny.jpg")),150,150));
+        //user.setPhoto(imageService.resizeImage(ImageIO.read(new File("/Users/aitalina/Desktop/CRM/src/main/resources/static/private/images/kenny.jpg")),150,150));
+        kenny.setEmail("kenny@gmail.com");
+        kenny.setPassword(bCryptPasswordEncoder.encode("kenny"));
+        kenny.setAuthorities(userrole);
         userService.insert(user);
+        userService.insert(kenny);
         userService.insert(admin);
+
+
     }
 
     private void initUsers() throws IOException {

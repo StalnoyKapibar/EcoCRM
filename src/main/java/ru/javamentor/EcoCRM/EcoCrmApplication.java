@@ -22,8 +22,8 @@ import javax.annotation.PostConstruct;
 		"classpath:properties/application.properties"})
 public class EcoCrmApplication implements WebMvcConfigurer {
 
-//	@PostConstruct
-//	@Bean(initMethod = "init")
+	@PostConstruct
+	@Bean(initMethod = "init")
 	public DataInitializer init() {
 		return new DataInitializer();
 	}

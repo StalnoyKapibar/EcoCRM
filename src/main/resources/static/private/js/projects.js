@@ -25,7 +25,7 @@ function fillPage(apiUrl){
                     '                <div class="eco-column-header-extras">' +
                     '                    <h5 class="text-justify" style="margin-left: 3px">Шаг ' + (count + 1) + '</h5>' +
                     '                </div>' +
-                    '            <div class="eco-col card" id="col_' + count + '" style="height:33rem;overflow:auto;background-color: #F5F5F5">';
+                    '            <div class="eco-col card" id="col_' + count + '" style="max-height:33rem;min-height:4rem;overflow:auto;background-color: #F5F5F5">';
                 $.each(value, function (i, project) {
                     docVar += '<div class="eco-card card m-2" style="min-height:210px;box-shadow:0px 5px 9px -8px #000000;">' +
                         '                            <div class="card-header" style="background-color:rgba(84,182,137,' + rgbaColor + ');font-size:medium">' + project.petition.addressHome + '</div>' +

@@ -15,7 +15,7 @@ public class SchedulerServiceImpl implements  SchedulerService{
     long ServerUptime = 0;
 
     @Override
-    @Scheduled(initialDelayString = "0", fixedDelayString = "${tokenCleanInterval}")
+    @Scheduled(initialDelayString = "0", fixedDelayString = "{$tokenCleanInterval}")
     public void tokenLifeCycle() {
         System.out.println("Token cleaning run...");
         ServerUptime = System.currentTimeMillis() - beginTime;

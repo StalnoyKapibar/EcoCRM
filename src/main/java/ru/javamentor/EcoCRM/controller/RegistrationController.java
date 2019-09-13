@@ -48,7 +48,7 @@ public class RegistrationController {
         user.setEmail(email);
         model.addAttribute("user", user);
         Token dbtoken =  tokenService.loadTokenByEmail(email);
-        String tokenFromDB =dbtoken.getToken();
+        String tokenFromDB =dbtoken.getValue();
 
         if (tokenFromDB.equals(token)) {
             ModelAndView modelAndView = new ModelAndView("registration/registration-form");

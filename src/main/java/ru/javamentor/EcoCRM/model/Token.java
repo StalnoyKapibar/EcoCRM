@@ -1,31 +1,26 @@
 package ru.javamentor.EcoCRM.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "token")
+import javax.persistence.Id;
+
+@Document(collection = "tokens")
 public class Token {
 
     @Id
-    @Column(name = "email")
+    private String id;
+
     private String email;
 
-    @Column(name = "token")
-    private String token;
 
-    @Column(name = "token_create_time")
+    private String value;
+
     private long tokenCreateTime = System.currentTimeMillis();
 
-    public Token() {
 
-    }
-
-    public Token(String email, String token) {
+    public Token(String email, String value) {
         this.email = email;
-        this.token = token;
+        this.value = value;
     }
 
     public String getEmail() {
@@ -36,12 +31,12 @@ public class Token {
         this.email = email;
     }
 
-    public String getToken() {
-        return token;
+    public String getValue() {
+        return value;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setValue(String value) {
+        this.value = value;
     }
 
 
@@ -53,4 +48,13 @@ public class Token {
         this.tokenCreateTime = tokenCreateTime;
     }
 
+    @Override
+    public String toString() {
+        return "Token{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", value='" + value + '\'' +
+                ", tokenCreateTime=" + tokenCreateTime +
+                '}';
+    }
 }

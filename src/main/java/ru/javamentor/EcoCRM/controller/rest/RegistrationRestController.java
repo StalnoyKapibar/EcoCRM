@@ -48,11 +48,17 @@ public class RegistrationRestController {
         User user = (User) userService.loadUserByUsername(email);
         if (img.getSize() != 0) {
             try {
+                ///
                 user.setPhoto(imageService.resizeImage(ImageIO.read(new ByteArrayInputStream(img.getBytes())),150,150));
+                ///
+                ///
+
+                ///
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else{
+            ///
+        } else {
             try {
                 user.setPhoto(imageService.resizeImage(ImageIO.read(new File("src\\main\\resources\\static\\private\\images\\avatar.png")),150,150));
             } catch (IOException e) {

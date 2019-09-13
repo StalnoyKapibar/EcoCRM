@@ -1,12 +1,12 @@
 package ru.javamentor.EcoCRM.service;
 
+import org.springframework.stereotype.Service;
 import ru.javamentor.EcoCRM.model.Token;
-
-public interface TokenService extends AbstractService<Token> {
-
-    String encodeToken();
-
+@Service
+public interface TokenService {
+    
     Token loadTokenByEmail(String email);
     void deleteOldTokens();
-    String loadEmailByToken(String token);
+    String loadEmailByValue(String token);
+    void insert(Token token);
 }
